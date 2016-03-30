@@ -1,0 +1,247 @@
+versão=3 COD_PAIS, NOM_PAIS, DT_INI, DT_FIM
+AD|Andorra|01012009|
+AE|Emirados Árabes Unidos|01012009|
+AF|Afeganistão|01012009|
+AG|Antígua e Barbuda|01012009|
+AI|Anguilla|01012009|
+AL|Albânia|01012009|
+AM|Armênia|01012009|
+AN|Antilhas Holandesas|01012009|
+AO|Angola|01012009|
+AQ|Antártida|01012009|
+AR|Argentina|01012009|
+AS|Samoa Americana|01012009|
+AT|Áustria|01012009|
+AU|Austrália|01012009|
+AW|Aruba|01012009|
+AX|Ilhas Aland|01012009|
+AZ|Azerbaijão|01012009|
+BA|Bósnia-Herzegóvina|01012009|
+BB|Barbados|01012009|
+BD|Bangladesh|01012009|
+BE|Bélgica|01012009|
+BF|Burkina Fasso|01012009|
+BG|Bulgária|01012009|
+BH|Bahrein|01012009|
+BI|Burundi|01012009|
+BJ|Benin|01012009|
+BL|São Bartolomeu|01012009|
+BM|Bermudas|01012009|
+BN|Brunei|01012009|
+BO|Bolívia|01012009|
+BR|Brasil|01012009|
+BS|Bahamas|01012009|
+BT|Butão|01012009|
+BV|Ilha Bouvet (Território da Noruega)|01012009|
+BW|Botsuana|01012009|
+BY|Belarus|01012009|
+BZ|Belize|01012009|
+CA|Canadá|01012009|
+CC|Ilhas Cocos|01012009|
+CD|República Democrática do Congo (ex-Zaire)|01012009|
+CF|República Centro-Africana|01012009|
+CG|Congo|01012009|
+CH|Suíça|01012009|
+CI|Costa do Marfim|01012009|
+CK|Ilhas Cook|01012009|
+CL|Chile|01012009|
+CM|Camarões|01012009|
+CN|China|01012009|
+CO|Colômbia|01012009|
+CR|Costa Rica|01012009|
+CU|Cuba|01012009|
+CV|Cabo Verde|01012009|
+CX|Ilha Natal|01012009|
+CY|Chipre|01012009|
+CZ|República Tcheca|01012009|
+DE|Alemanha|01012009|
+DJ|Djibuti|01012009|
+DK|Dinamarca|01012009|
+DM|Dominica|01012009|
+DO|República Dominicana|01012009|
+DZ|Argélia|01012009|
+EC|Equador|01012009|
+EE|Estônia|01012009|
+EG|Egito|01012009|
+EH|Saara Ocidental (Ex-Spanish Sahara)|01012009|
+ER|Eritréia|01012009|
+ES|Espanha|01012009|
+ET|Etiópia|01012009|
+FI|Finlândia|01012009|
+FJ|Fiji|01012009|
+FK|Ilhas Falkland (Malvinas)|01012009|
+FM|Micronésia|01012009|
+FO|Ilhas Faroes|01012009|
+FR|França|01012009|
+GA|Gabão|01012009|
+GB|Grã-Bretanha (Reino Unido, UK)|01012009|
+GD|Granada|01012009|
+GE|Geórgia|01012009|
+GF|Guiana Francesa|01012009|
+GG|Guernsey|01012009|
+GH|Gana|01012009|
+GI|Gibraltar|01012009|
+GL|Groelândia|01012009|
+GM|Gâmbia|01012009|
+GN|Guiné|01012009|
+GP|Guadalupe|01012009|
+GQ|Guiné Equatorial|01012009|
+GR|Grécia|01012009|
+GS|Ilhas Geórgia do Sul e Sandwich do Sul|01012009|
+GT|Guatemala|01012009|
+GU|Guam (Território dos Estados Unidos)|01012009|
+GW|Guiné-Bissau|01012009|
+GY|Guiana|01012009|
+HK|Hong Kong|01012009|
+HM|Ilhas Heard e McDonald (Território da Austrália)|01012009|
+HN|Honduras|01012009|
+HR|Croácia (Hrvatska)|01012009|
+HT|Haiti|01012009|
+HU|Hungria|01012009|
+ID|Indonésia|01012009|
+IE|Irlanda|01012009|
+IL|Israel|01012009|
+IM|Ilha do Homem|01012009|
+IN|Índia|01012009|
+IO|Território Britânico do Oceano índico|01012009|
+IQ|Iraque|01012009|
+IR|Irã|01012009|
+IS|Islândia|01012009|
+IT|Itália|01012009|
+JE|Jersey|01012009|
+JM|Jamaica|01012009|
+JO|Jordânia|01012009|
+JP|Japão|01012009|
+KE|Kênia|01012009|
+KG|Kyrgyzstan|01012009|
+KH|Camboja|01012009|
+KI|Kiribati|01012009|
+KM|Ilhas Comores|01012009|
+KN|São Cristóvão e Névis|01012009|
+KP|Coréia do Norte|01012009|
+KR|Coréia do Sul|01012009|
+KW|Kuait|01012009|
+KY|Ilhas Cayman|01012009|
+KZ|Cazaquistão|01012009|
+LA|Laos|01012009|
+LB|Líbano|01012009|
+LC|Santa Lúcia|01012009|
+LI|Liechtenstein|01012009|
+LK|Sri Lanka|01012009|
+LR|Libéria|01012009|
+LS|Lesoto|01012009|
+LT|Lituânia|01012009|
+LU|Luxemburgo|01012009|
+LV|Látvia|01012009|
+LY|Líbia|01012009|
+MA|Marrocos|01012009|
+MC|Mônaco|01012009|
+MD|Moldova|01012009|
+ME|Montenegro|01012009|
+MF|São Martim|01012009|
+MG|Madagascar|01012009|
+MH|Ilhas Marshall|01012009|
+MK|Macedônia (República Yugoslava)|01012009|
+ML|Mali|01012009|
+MM|Myanma (Ex-Burma)|01012009|
+MN|Mongólia|01012009|
+MO|Macau|01012009|
+MP|Ilhas Marianas do Norte|01012009|
+MQ|Martinica|01012009|
+MR|Mauritânia|01012009|
+MS|Montserrat|01012009|
+MT|Malta|01012009|
+MU|Maurício|01012009|
+MV|Maldivas|01012009|
+MW|Malaui|01012009|
+MX|Mexico|01012009|
+MY|Malásia|01012009|
+MZ|Moçambique|01012009|
+NA|Namíbia|01012009|
+NC|Nova Caledônia|01012009|
+NE|Níger|01012009|
+NF|Ilhas Norfolk|01012009|
+NG|Nigéria|01012009|
+NI|Nicarágua|01012009|
+NL|Holanda|01012009|
+NO|Noruega|01012009|
+NP|Nepal|01012009|
+NR|Nauru|01012009|
+NU|Niue|01012009|
+NZ|Nova Zelândia|01012009|
+OM|Omã|01012009|
+PA|Panamá|01012009|
+PE|Peru|01012009|
+PF|Polinésia Francesa|01012009|
+PG|Papua-Nova Guiné|01012009|
+PH|Filipinas|01012009|
+PK|Paquistão|01012009|
+PL|Polônia|01012009|
+PM|St. Pierre and Miquelon|01012009|
+PN|Ilha Pitcairn|01012009|
+PR|Porto Rico|01012009|
+PS|Territórios Palestinos Ocupados|01012009|
+PT|Portugal|01012009|
+PW|Palau|01012009|
+PY|Paraguai|01012009|
+QA|Qatar|01012009|
+RE|Ilha Reunião|01012009|
+RO|Romênia|01012009|
+RS|Sérvia|01012009|
+RU|Federação Russa|01012009|
+RW|Ruanda|01012009|
+SA|Arábia Saudita|01012009|
+SB|Ilhas Solomão|01012009|
+SC|Ilhas Seychelles|01012009|
+SD|Sudão|01012009|
+SE|Suécia|01012009|
+SG|Cingapura|01012009|
+SH|Santa Helena|01012009|
+SI|Eslovênia|01012009|
+SJ|Ilhas Svalbard e Jan Mayen|01012009|
+SK|Eslováquia|01012009|
+SL|Serra Leoa|01012009|
+SM|San Marino|01012009|
+SN|Senegal|01012009|
+SO|Somália|01012009|
+SR|Suriname|01012009|
+ST|São Tomé e Príncipe|01012009|
+SV|El Salvador|01012009|
+SY|Síria|01012009|
+SZ|Suazilândia|01012009|
+TC|Ilhas Turks e Caicos|01012009|
+TD|Chade|01012009|
+TF|Territórios do Sul da França|01012009|
+TG|Togo|01012009|
+TH|Tailândia|01012009|
+TJ|Tadjiquistão|01012009|
+TK|Ilhas Tokelau|01012009|
+TL|Timor Leste (Ex-East Timor)|01012009|
+TM|Turcomenistão|01012009|
+TN|Tunísia|01012009|
+TO|Tonga|01012009|
+TR|Turquia|01012009|
+TT|Trinidad and Tobago|01012009|
+TV|Tuvalu|01012009|
+TW|Taiwan|01012009|
+TZ|Tanzânia|01012009|
+UA|Ucrânia|01012009|
+UG|Uganda|01012009|
+UM|Ilhas Menores dos Estados Unidos|01012009|
+US|Estados Unidos|01012009|
+UY|Uruguai|01012009|
+UZ|Uzbequistão|01012009|
+VA|Vaticano|01012009|
+VC|Saint Vincente e Granadinas|01012009|
+VE|Venezuela|01012009|
+VG|Ilhas Virgens (Inglaterra)|01012009|
+VI|Ilhas Virgens (Estados Unidos)|01012009|
+VN|Vietnam|01012009|
+VU|Vanuatu|01012009|
+WF|Ilhas Wallis e Futuna|01012009|
+WS|Samoa Ocidental|01012009|
+YE|Iêmen|01012009|
+YT|Mayotte|01012009|
+ZA|África do Sul|01012009|
+ZM|Zâmbia|01012009|
+ZW|Zimbábue|01012009|

@@ -1,0 +1,6 @@
+versão=1 COD_TIPO, NOM_TIPO, DT_INI, DT_FIM
+OECD601|IBAN (International Bank Account Number)|01012014|
+OECD602|OBAN (Other Bank Account Number)|01012014|
+OECD603|ISIN (International Securities Information Number)|01012014|
+OECD604|OSIN (Other International Securities Information Number)|01012014|
+OECD605|Outros|01012014|

@@ -1,0 +1,9 @@
+versão=1 COD_TIPO, NOM_TIPO, DT_INI, DT_FIM
+FATCA101|IF Proprietária-Identificada com Proprietário(s) Norte-Americano(s) Específico(s)|01012014|
+FATCA102|Pessoa Jurídica Não-Financeira Passiva com Proprietário(s) Substancial(is) Norte-Americano(s)|01012014|
+FATCA103|FFI não participante|01012014|
+FATCA104|Pessoa Norte-Americana Específica|01012014|
+FATCA105|NFFE Informante Direta|01012014|
+CRS101|Pessoa Jurídica Não-Financeira Passiva com Proprietário(s) Substancial(is) Reportável(is)|01012014|
+CRS102|Pessoa Reportável ao CRS|01012014|
+CRS103|Pessoa Jurídica Não-Financeira Passiva Reportável ao CRS|01012014|

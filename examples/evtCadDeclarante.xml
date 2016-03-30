@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eFinanceira xmlns="http://www.eFinanceira.gov.br/schemas/evtCadDeclarante/v1_0_1">
+  <evtCadDeclarante id="ID00000000001">
+    <ideEvento>
+      <indRetificacao>1</indRetificacao>
+      <tpAmb>1</tpAmb>
+      <aplicEmi>2</aplicEmi>
+      <verAplic>00000000000000000001</verAplic>
+    </ideEvento>
+    <ideDeclarante>
+      <cnpjDeclarante>01234567891234</cnpjDeclarante>
+    </ideDeclarante>
+    <infoCadastro>
+      <nome>Razão social da Empresa Declarante 01 Teste ate 100 caracteres</nome>
+      <enderecoLivre>Endereço da Empresa Declarante 01 ate 200 caracteres</enderecoLivre>
+      <municipio>3304557</municipio>
+      <UF>RJ</UF>
+      <Pais>BR</Pais>
+      <paisResidencia>BR</paisResidencia>
+    </infoCadastro>
+  </evtCadDeclarante>
+</eFinanceira>

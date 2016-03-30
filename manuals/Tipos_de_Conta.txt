@@ -1,0 +1,6 @@
+versão=1 COD_TIPO, NOM_TIPO, DT_INI, DT_FIM
+1|Conta de Depósito|01012014|
+2|Conta de Custódia|01012014|
+3|Conta de Investimento|01012014|
+4|Conta de Seguro ou Previdência|01012014|
+5|Consórcio|01012014|

@@ -1,0 +1,10 @@
+versão=2 COD_TIPO, NOM_TIPO, DT_INI, DT_FIM
+FATCA501|Dividendos|01012014|
+FATCA502|Juros|01012014|
+FATCA503|Demais Rendimentos Brutos e Resgates|01012014|
+FATCA504|Outros FATCA|01012014|
+CRS501|Dividendos|01012014|
+CRS502|Juros|01012014|
+CRS503|Demais rendimentos Brutos e Resgates|01012014|
+CRS504|Outros CRS|01012014|
+999|Não existem pagamentos no período|01012014|

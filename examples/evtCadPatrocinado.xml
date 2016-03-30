@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eFinanceira xmlns="http://www.eFinanceira.gov.br/schemas/evtCadPatrocinado/v1_0_1">
+  <evtCadPatrocinado id="ID00000000001">
+    <ideEvento>
+      <indRetificacao>1</indRetificacao>
+      <tpAmb>1</tpAmb>
+      <aplicEmi>2</aplicEmi>
+      <verAplic>00000000000000000001</verAplic>
+    </ideEvento>
+    <ideDeclarante>
+      <cnpjDeclarante>01234567891234</cnpjDeclarante>
+    </ideDeclarante>
+    <infoPatrocinado>
+      <GIIN>0123456789123456789</GIIN>
+	  <CNPJ>01234567891234</CNPJ>
+      <nomePatrocinado>Nome do Patrocinado 01Nome do Patrocinado 01Nome do Patrocinado 01Nome do Patrocinado 01NOME COM 100</nomePatrocinado>
+      <endereco>
+        <enderecoLivre>ENDERECO COM 200 Endereço do Patrocinado 01Endereço do Patrocinado 01Endereço do Patrocinado 01Endereço do Patrocinado 01Endereço do Patrocinado 01Endereço do Patrocinado 01Endereço do Patrocinado7890</enderecoLivre>
+        <municipio>Municipio com 100 Municipio do endereco do patrocinado Municipio com 100 Municipio do e  patrocinado</municipio>
+        <pais>BR</pais>
+      </endereco>
+      <paisResidencia>BR</paisResidencia>
+    </infoPatrocinado>
+  </evtCadPatrocinado>
+</eFinanceira>
