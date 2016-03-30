@@ -1,0 +1,6 @@
+versão=1 COD_TIPO, NOM_TIPO, DT_INI, DT_FIM
+1|Titular|01012014|
+2|Procurador|01012014|
+3|Representante legal|01012014|
+4|Intermediado|01012014|
+5|Beneficiário Final|01012014|

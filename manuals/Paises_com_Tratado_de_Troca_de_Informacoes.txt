@@ -1,0 +1,2 @@
+versão=1 COD_PAIS, NOM_PAIS, DT_INI, DT_FIM
+US|Estados Unidos|01012014|

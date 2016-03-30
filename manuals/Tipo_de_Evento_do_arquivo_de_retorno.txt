@@ -1,0 +1,8 @@
+001|Informações da Empresa Declarante
+002|Abertura
+003|Movimento de Operações Financeiras
+005|Fechamento
+006|Exclusão de Evento Enviado Indevidamente
+007|Cadastro de Intermediário
+008|Cadastro de Patrocinado
+009|Exclusão e-Financeira

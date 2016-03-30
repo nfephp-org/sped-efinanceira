@@ -1,0 +1,9 @@
+versão=3 COD_TIPO, NOM_TIPO, DT_INI, DT_FIM
+1|CPF|01012014|
+2|CNPJ|01012014|
+3|NIF Pessoa Física (Número de Identificação Fiscal Pessoa Física)|01012014|
+4|NIF Pessoa Jurídica (Número de Identificação Fiscal Pessoa Jurídica)|01012014|
+5|Passaporte|01012014|
+6|Número do PIS|01012014|
+7|Identidade Mercosul|01012014|
+99|Sem NI|01012014|

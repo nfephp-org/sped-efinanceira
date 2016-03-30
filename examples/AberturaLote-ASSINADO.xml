@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<eFinanceira xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.eFinanceira.gov.br/schemas/envioLoteEventos/v1_0_1">
+  <loteEventos>
+    <evento id="ID0">
+      <eFinanceira xmlns="http://www.eFinanceira.gov.br/schemas/evtAberturaeFinanceira/v1_0_1">
+        <evtAberturaeFinanceira id="ID00000000002">
+          <ideEvento>
+            <indRetificacao>1</indRetificacao>
+            <tpAmb>1</tpAmb>
+            <aplicEmi>2</aplicEmi>
+            <verAplic>00000000000000000001</verAplic>
+          </ideEvento>
+          <ideDeclarante>
+            <cnpjDeclarante>01234567891234</cnpjDeclarante>
+          </ideDeclarante>
+          <infoAbertura>
+            <dtInicio>2014-01-01</dtInicio>
+            <dtFim>2014-06-30</dtFim>
+          </infoAbertura>
+          <AberturaMovOpFin>
+            <ResponsavelRMF>
+              <CPF>01234567891</CPF>
+              <Nome>NOME DE TESTE QUE DEVE TER 100 POSICOES XXXXXXXXXXNOME DE TESTE QUE DEVE TER 100 POSICOES XXXXXXXXXX</Nome>
+              <Setor>SETOR DE TESTE REPRESENTANTE LEGAL COMSETOR DE TESTE REPRESENTANTE LEGAL COMXXXXXXXXXXXXXX</Setor>
+              <Telefone>
+                <DDD>031</DDD>
+                <Numero>32257028  </Numero>
+              </Telefone>
+              <Endereco>
+                <Logradouro>Endereco da Empresa Declarante 01 ate 100 caracteres       Endereco da Empresa Declarante 01        </Logradouro>
+                <Numero>12345678901234567890</Numero>
+                <Bairro>Bairro da   Empresa Declarante 01       Endereco da Empresa Declarante 01       XXXXXXXXXXXXXXXXXXXX</Bairro>
+                <CEP>30330130</CEP>
+                <Municipio>Municipio  Empresa  Declarante 01       Endereço da Empresa Declarante 01       XXXXXXXXXXXXXXXXXXXX</Municipio>
+                <UF>MG</UF>
+              </Endereco>
+            </ResponsavelRMF>
+            <RepresLegal>
+              <CPF>01234567891</CPF>
+              <Setor>SETOR DE TESTE REPRESENTANTE LEGAL QUE DEVE TER 90 POSICOES SETOR DE TESTE QUE DEVE TER X</Setor>
+              <Telefone>
+                <DDD>031</DDD>
+                <Numero>25145885  </Numero>
+              </Telefone>
+            </RepresLegal>
+          </AberturaMovOpFin>
+        </evtAberturaeFinanceira>
+        <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+          <SignedInfo>
+            <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+            <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+            <Reference URI="#ID00000000002">
+              <Transforms>
+                <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+                <Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+              </Transforms>
+              <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+              <DigestValue>+D34G8HDK/DL4sU5aP7GFXQdPqQ=</DigestValue>
+            </Reference>
+          </SignedInfo>
+          <SignatureValue>S0K/3o6yphWvY1wqw/I8o5RHdMM3SRBAhyoR/hFU3hk1iAiNRBIYqHbp8THW44e8kZYq6ygTlG/dTpky3C12FNx/AXliWfGIG/dz90ibLdGfjc9zxZkYlvs6GT22A0BHbInhgT8rN8wgTmJdTNtuZBSzKGBecvPR7uinLUcKYhMW7YGOpB9+H9468xGqMSsmi11kBbFtk/xA+XotPfY5PIZxL1YBd9zOu8zGx2NcPlK8H5++JBBVb4xGR3K8JoqvNy2fchY6N4nLbLnLdxgpbedGDhPRXiaIaxs0fIHFEhxqZRYuIhw4JrRUQfB0b8RicskcdfM8zqXHAN/F6/u6xQ==</SignatureValue>
+          <KeyInfo>
+            <X509Data>
+              <X509Certificate>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</X509Certificate>
+            </X509Data>
+          </KeyInfo>
+        </Signature>
+      </eFinanceira>
+    </evento>
+  </loteEventos>
+</eFinanceira>

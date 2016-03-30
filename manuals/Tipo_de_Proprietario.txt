@@ -1,0 +1,22 @@
+versão=1 COD_TIPO, NOM_TIPO, DT_INI, DT_FIM
+FATCA101|IF Proprietária-Identificada com Proprietário(s) Norte-Americano(s) Específico(s)|01012014|
+FATCA102|Pessoa Jurídica Não-Financeira Passiva com Proprietário(s) Substancial(is) Norte-Americano(s)|01012014|
+FATCA103|FFI não participante|01012014|
+FATCA104|Pessoa Norte-Americana Específica|01012014|
+FATCA105|NFFE Informante Direta|01012014|
+CRS101|Pessoa Jurídica Não-Financeira Passiva com Proprietário(s) Substancial(is) Reportável(is)|01012014|
+CRS102|Pessoa Reportável ao CRS|01012014|
+CRS103|Pessoa Jurídica Não-Financeira Passiva Reportável ao CRS|01012014|
+CRS801|Proprietário de Pessoa Jurídica - Propriedade|01012014|
+CRS802|Proprietário de Pessoa Jurídica - Outros Meios|01012014|
+CRS803|Proprietário de Pessoa Jurídica - Diretor|01012014|
+CRS804|Proprietário de Entidade - Trust - Instituidor|01012014|
+CRS805|Proprietário de Entidade - Trust - Fideicomissário|01012014|
+CRS806|Proprietário de Entidade - Trust - Protetor|01012014|
+CRS807|Proprietário de Entidade - Trust - Beneficiário|01012014|
+CRS808|Proprietário de Entidade - Trust - Outros|01012014|
+CRS809|Proprietário de Entidade - Outras - Equivalente a Instituidor|01012014|
+CRS810|Proprietário de Entidade - Outras - Equivalente a Fideicomissário|01012014|
+CRS811|Proprietário de Entidade - Outras - Equivalente a Protetor|01012014|
+CRS812|Proprietário de Entidade - Outras - Equivalente a Beneficiário|01012014|
+CRS813|Proprietário de Entidade - Outras - Equivalente Outros|01012014|

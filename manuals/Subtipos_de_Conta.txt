@@ -1,0 +1,17 @@
+versão=2 COD_TIPO, NOM_TIPO, DT_INI, DT_FIM
+101|Conta Corrente|01012014|
+102|Conta Poupança|01012014|
+103|Conta de Caução|01012014|
+104|Conta de Consignação em Pagamento|01012014|
+198|FGTS|01012014|
+199|Demais Contas de Depósito|01012014|
+201|Custódia em Ações|01012014|
+202|Debêntures|01012014|
+203|Derivativos|01012014|
+299|Demais Contas de Custódia|01012014|
+301|Fundos de Investimento|01012014|
+302|Clube de Investimento|01012014|
+303|Fundo de Investimento por Conta e Ordem ou Intermediário|01012014|
+399|Demais Contas de Investimento|01012014|
+499|Seguro Previdência ou Assemelhados|01012014|
+599|Consórcio de Bens ou Serviços|01012014|
