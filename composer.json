@@ -13,7 +13,8 @@
         }
     ],
     "require": {
-        "php" : "~5.5|~7.0"
+        "php" : "~5.5|~7.0",
+        "nfephp-org/sped-common" : "4.*"
     },
     "require-dev": {
 	"phpunit/phpunit": "4.*",
@@ -22,12 +23,12 @@
     },
     "autoload": {
         "psr-4": {
-          "NFePHP\\eFinanceira\\": "src/"
+          "NFePHP\\eFinanc\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "NFePHP\\eFinanceira\\": "tests"
+            "NFePHP\\eFinanc\\": "tests"
         }
     },
     "scripts": {

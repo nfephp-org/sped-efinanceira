@@ -1,0 +1,480 @@
+/* ======== Geral ====================== */
+html {
+background: #F8F8F8 url(../imagens/background_cinza.png) repeat-x left top;
+height: 100%;
+}
+
+body {
+margin: 0;
+padding: 0;
+font-family: Arial;
+font-size: 11px;
+}
+
+a { text-decoration: none; }
+
+img { border: 0; }
+
+
+/* ======== Estrutura ================== */
+
+#container-barra-governo {
+width: 995px;
+margin: 0 auto;
+}
+
+#container {
+width: 995px;
+margin: 0 auto;
+position: relative;
+background: white url(../imagens/fundo_branco.png) repeat-y;
+-moz-box-shadow: 0 1px 15px 1px #A0A0A0;
+-webkit-box-shadow: #A0A0A0 0px 1px 15px 1px;
+.border: solid 1px #A0A0A0;
+}
+
+/* ======== Header ===================== */
+#header {
+background: white url(../imagens/cabecalho.png) no-repeat;
+height: 160px;
+}
+
+#header img {
+padding-top: 36px;
+padding-left: 45px;
+}
+
+#menu-auxiliar {
+color: #4A4533;
+float: right;
+list-style: none;
+margin-top: 3px;
+padding-right: 25px;
+position: relative;
+font-size:.9em;
+}
+
+#menu-auxiliar li { display: inline; }
+#menu-auxiliar span { padding-left: 4px; }
+#menu-auxiliar a { color: #4a4533; }
+
+
+/* ======== Breadcrumbs ================ */
+
+#breadcrumbs {
+float: left;
+width:650px;
+font-size:.9em;
+}
+
+#breadcrumbs span {
+background-color: #C3B8A8;
+padding: 1px 3px 1px 7px;
+margin-right: 7px;
+color:#fff;
+}
+
+#breadcrumbs .itens {
+background: none;
+padding: 0;
+color: #B27235;
+font-family: Trebuchet MS;
+}
+
+#breadcrumbs .itensold {
+background: none;
+padding: 0;
+color: #414042;
+font-family: Trebuchet MS;
+}
+
+/* ======== Tamanho Fonte ============== */
+
+#tamanho-fonte {
+float: right;
+padding-right: 35px;
+}
+
+#tamanho-fonte #reduzir {
+background: transparent url(../imagens/acessibilidade_reduzir_Off.png) no-repeat;
+display: inline-block;
+height: 25px;
+width: 29px;
+}
+
+#tamanho-fonte #reduzir:hover {
+background: transparent url(../imagens/acessibilidade_reduzir_On.png) no-repeat;
+cursor:pointer;
+}
+
+#tamanho-fonte #ampliar {
+background: transparent url(../imagens/acessibilidade_ampliar_off.png) no-repeat;
+display: inline-block;
+height: 28px;
+width: 31px;
+}
+
+#tamanho-fonte #ampliar:hover {
+background: transparent url(../imagens/acessibilidade_ampliar_on.png) no-repeat;
+cursor:pointer;
+}
+
+/* ======== Conteudo =================== */
+
+#conteudo {
+padding-top: 20px;
+/*width: 100%;*/
+}
+
+#conteudo-pagina {
+clear: left;
+min-height: 610px;
+padding-top:10px;
+width: 760px;
+/*font-size:11px;*/
+margin:0;
+margin-bottom: 30px;
+}
+
+#area-titulo {
+width:740px;
+clear:left;
+float:left;
+margin-top:2em;
+}
+
+#conteudo h1 {
+background-color: #E6AE67;
+color:#fff;
+font-size: 1.3em;
+padding: 3px 15px 3px 83px;
+float:left;
+margin:0;
+}
+
+#conteudo-pagina p,
+#conteudo-pagina ol,
+#conteudo-pagina ul {
+margin:1em 40px;
+clear:left;
+color:#6d6e71;
+text-align:justify;
+}
+
+#conteudo-pagina ul {
+list-style-image:url(/imagens/bullet_redondo.png);
+}
+
+#conteudo-pagina ul li {
+margin-bottom:.5em;
+}
+
+#conteudo-pagina ol {
+color:#6d6e71;
+text-align:justify;
+font-family: Arial;
+/*font-size: 10px;*/
+padding:0 0 0 3em;
+}
+
+#conteudo-pagina ul.lista-links span.texto-destaque
+{
+color: #B27235;
+}
+
+#conteudo-pagina ul.lista-links {
+list-style:none;
+padding:0;
+}
+
+#conteudo-pagina ul.lista-links li {
+background: url(/imagens/sped_divisoria_grande.png) no-repeat scroll center bottom transparent;
+color: #6D6E71;
+padding:8px 15px;
+text-align: justify;
+}
+
+#conteudo-pagina a { color:#B27235; }
+
+#conteudo-pagina h2 { 
+padding: 0px 40px;
+color:#b27235;
+font-size:1.1em;
+margin:1em 0 1em;
+}
+
+#conteudo-pagina table {
+border:1px solid #dfad6c;
+border-collapse:collapse;
+margin-left:40px;
+margin-right:40px;
+}
+
+#conteudo-pagina table th,
+#conteudo-pagina table td {
+background-color: #FFFFFF;
+border: 1px solid #F7E2C2;
+color: #6D6E71;
+vertical-align: middle;
+padding:.3em .7em;
+}
+
+#conteudo-pagina table tr.lt {background-color:#d9d9d9;}
+#conteudo-pagina table tr.lc {background-color:#ffffff;}
+#conteudo-pagina table tr.le {background-color:#e4e4e4;}
+
+
+#conteudo-pagina table th {
+color: #B27235;
+font-weight: bold;
+text-align: center;
+}
+
+#conteudo-pagina tr.par td { background-color: #F6F0E2; }
+
+#conteudo-pagina table p[align="center"] { text-align:center; }
+
+#conteudo-pagina table p { padding: 0px 5px; }
+
+#conteudo-pagina p.mais {
+background:transparent url(/imagens/seta_dupla_mais.gif) no-repeat left center;
+padding-left:15px;
+font-weight:bold;
+float:right;
+margin-top:1.5em;
+margin-right:40px;
+}
+
+#conteudo-pagina p.mais a {
+color:#da9740;
+text-decoration:none;
+clear:both;
+border:none;
+}
+
+#conteudo-pagina p.mais a:hover {
+text-decoration:underline;
+border:none;
+background-color:transparent;
+}
+
+
+/* ==== Rodape */
+
+#rodape {
+background-color: #EEEEEE;
+height: 32px;
+vertical-align: middle;
+width: 994px;
+margin-top: -15px;
+color: #414042;
+clear:both;
+}
+
+#rodape #sombra-rodape {
+background: transparent url(../imagens/sombra_rodape.png) no-repeat;
+background-position: center top;
+border: 0 none;
+height: 2px;
+}
+
+#menu-rodape {
+color: #b27235;
+float: left;
+list-style: none;
+padding: 0 0 0 15px;
+margin-top: 7px;
+margin-left:0;
+}
+
+#menu-rodape li { display: inline; }
+#menu-rodape a { color: #b27235; }
+#menu-rodape span { padding-left: 4px; }
+
+#rodape > div > a {
+padding-right: 10px;
+padding-top: 3px;
+float: right;
+}
+
+#rodape > div > span {
+padding-right: 135px;
+padding-top: 7px;
+float: right;
+}
+
+/*===== Barra Lateral*/
+
+#barra-lateral {
+width: 231px;
+font-family:Trebuchet MS;
+color:#a56c2b;
+float:right;
+margin-top:-130px;
+}
+
+#barra-lateral #pesquisa-sped {
+color: White;
+font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+font-size: 1.4em;
+font-weight: bold;
+padding-left: 25px;
+padding-top: 13px;
+height: 97px;
+}
+#barra-lateral input { margin-top:20px; }
+#barra-lateral #txtBusca { width:130px; }
+
+#barra-lateral #botao-buscar {
+background: transparent url(../imagens/botao_buscar_off_completo.png) no-repeat;
+height: 29px;
+width: 53px;
+border:none;
+cursor:pointer;
+padding-top: 7px;
+}
+
+#barra-lateral #perguntas-frequentes {
+background: transparent url(../imagens/perguntas_Off.png) no-repeat;
+height: 24px;
+padding-top: 3px;
+}
+
+#barra-lateral #validadores {
+background: transparent url(../imagens/validadores.png) no-repeat;
+margin-bottom: 10px;
+margin-top: 10px;
+}
+
+#barra-lateral #validadores a {
+padding-left: 25px;
+color: #414042;
+padding-top: 5px;
+background: transparent url(../imagens/baixarValidadorOff.png) no-repeat;
+background-position:left;
+margin-left: -17px;
+}
+
+#barra-lateral #validadores a:hover {
+background: transparent url(../imagens/baixarValidadorOn.png) no-repeat;
+}
+
+#barra-lateral #validadores a > span {
+font-weight: bold;
+}
+
+#barra-lateral .separador {
+background: transparent url(../imagens/sped_divisoria_lateral.png) no-repeat;
+height: 1px;
+margin: 10px 3px 10px -25px;
+width: 229px;
+}
+
+#barra-lateral #portais {
+background: transparent url(../imagens/portais_secretarias.png) no-repeat;
+margin-bottom: 10px;
+}
+
+#barra-lateral #portais select {
+width:-;
+
+}
+
+#barra-lateral #portais .separador {
+margin-top:10px;
+margin-bottom:10px;
+}
+
+#barra-lateral #portais #site-nfe {
+background: transparent url(../imagens/banners_Visite_Nfe.png) no-repeat;
+display: inline-block;
+height: 85px;
+width: 175px;
+margin-left: 6px;
+margin-top: 10px;
+}
+
+#barra-lateral #portais #site-nfe:hover {
+background: transparent url(../imagens/banners_visite_nfe_On.png) no-repeat;
+cursor:pointer;
+}
+
+#barra-lateral #portais #site-rnetbx {
+background: transparent url(../imagens/banners_rnetbx_Off.png) no-repeat;
+display: inline-block;
+height: 85px;
+width: 175px;
+margin-left: 6px;
+margin-top: 10px;
+}
+
+#barra-lateral #portais #site-rnetbx:hover {
+background: transparent url(../imagens/banners_rnetbx_On.png) no-repeat;
+cursor:pointer;
+}
+
+#barra-lateral #outros-programas {
+background: transparent url(../imagens/outros-programas.png) no-repeat;
+margin-bottom: 10px;
+}
+
+#barra-lateral #outros-programas #baixar-emissor {
+background: transparent url(../imagens/banners_Emissor_CTe.png) no-repeat;
+display: inline-block;
+height: 85px;
+width: 175px;
+margin-left: 6px;
+}
+
+#barra-lateral #outros-programas #baixar-emissor:hover {
+background: transparent url(../imagens/banners_Emissor_CTe_On.png) no-repeat;
+cursor:pointer;
+}
+
+#barra-lateral #outros-programas #baixar-visualizador {
+background: transparent url(../imagens/banners_Visualizador_Sped.png) no-repeat;
+display: inline-block;
+height: 85px;
+width: 175px;
+margin-left: 6px;
+}
+
+#barra-lateral #outros-programas #baixar-visualizador:hover {
+background: transparent url(../imagens/banners_Visualizador_Sped_On.png) no-repeat;
+cursor:pointer;
+}
+
+#barra-lateral #outros-programas #baixar-programa {
+background: transparent url(../imagens/banners_rnetbx_Off.png) no-repeat;
+display: inline-block;
+height: 85px;
+width: 175px;
+margin-left: 6px;
+}
+
+#barra-lateral #outros-programas #baixar-programa:hover {
+background: transparent url(../imagens/banners_rnetbx_On.png) no-repeat;
+cursor:pointer;
+}
+
+#barra-lateral > div > div {
+background-color: #f9f5ea;
+border-bottom: solid 1px #f6e7cd;
+border-left: solid 1px #f6e7cd;
+padding: 20px 25px 10px;
+}
+
+#barra-lateral .titulo {
+padding-left: 65px;
+padding-top: 4px;
+color: #414042;
+font-family: Trebuchet MS;
+font-size: 1.1em;
+margin: 0;
+height:20px;
+}
+
+#barra-lateral #perguntas-frequentes:hover {
+cursor: pointer;
+background: transparent url(../imagens/perguntas_On.png) no-repeat;
+}
