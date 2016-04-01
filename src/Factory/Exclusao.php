@@ -13,7 +13,7 @@
  */
 class Exclusao
 {
-   public function exclusao()
+    public function exclusao()
     {
         /**
          *
@@ -52,5 +52,4 @@ class Exclusao
         </evtExclusaoeFinanceira>
          */
     }
-    
 }

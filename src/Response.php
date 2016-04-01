@@ -4,7 +4,7 @@ namespace NFePHP\eFinanc;
 
 /**
  * Classe auxiliar que le e trata todos os retornos do webservice
- * 
+ *
  * @category   NFePHP
  * @package    NFePHP\eFinanc
  * @copyright  Copyright (c) 2016

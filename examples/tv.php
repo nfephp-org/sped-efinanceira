@@ -1,28 +1,48 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 'On');
+include_once '../bootstrap.php';
 
-$filexsd = '../schemes/envioLoteEventos-v1_0_1.xsd';
-$filename = 'AberturaLote-ASSINADO.xml';
+use NFePHP\eFinanc\Factory\Abertura;
 
-//$filexsd = '../schemes/evtAberturaeFinanceira-v1_0_1.xsd';
-//$filename = 'evtAberturaeFinanceira.xml';
+$evt = new Abertura('../config/config.json');
 
-$xsd = file_get_contents($filexsd);
-$xml = file_get_contents($filename);
-//header("Content-Type:text/xml");
-//echo $xml;
+$id = '000000000000000001';
+// 1 - para arquivo original
+// 2 - para arquivo de retificação espontânea
+// 3 – para arquivo de retificação a pedido
+$indRetificacao = 1; 
+$tpAmb = 2;
 
+$evt->tagAbertura($id, $indRetificacao, $tpAmb);
 
-libxml_use_internal_errors(true);
-libxml_clear_errors();
-$dom = new \DOMDocument('1.0', 'utf-8');
-$dom->preserveWhiteSpace = false;
-$dom->formatOutput = false;
-$dom->loadXML($xml, LIBXML_NOBLANKS | LIBXML_NOEMPTYTAG);
-libxml_clear_errors();
+$cnpj = '99999090910270';
+$evt->tagDeclarante($cnpj);
+$evt->tagInfo('2016-03-01', '2016-04-01');
 
-if (! $dom->schemaValidate($xsd)) {
-    $aIntErrors = libxml_get_errors();
-    foreach ($aIntErrors as $intError) {
-        echo $intError->message . "<br>";
-    }
-}
+$cpf = '9999999999999';
+$nome = 'Fulano de Tal';
+$setor = 'SETOR XXXX';
+$ddd = '11';
+$telefone = '50734858';
+$ramal = '';
+$logradouro = 'Rua Cel Silverio Magalhaes';
+$numero = '346';
+$complemento = '';
+$bairro = 'Jardim da Saude';
+$cep = '04154000';
+$municipio = 'Sao Paulo';
+$uf = 'SP';
+$evt->tagResponsavelRMF($cpf, $nome, $setor, $ddd, $telefone, $ramal, $logradouro, $numero, $complemento, $bairro, $cep, $municipio, $uf);
+
+$cpf = '11111111111111';
+$setor = 'SEILA ';
+$ddd = '11';
+$telefone = '11111111';
+$evt->tagRepresLegal($cpf, $setor, $ddd, $telefone);
+
+$evt->monta();
+$evt->assina();
+
+header('Content-type: text/xml; charset=UTF-8');
+echo $evt->getXML();
