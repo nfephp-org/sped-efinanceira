@@ -13,7 +13,7 @@
  */
 class CadPatrocinado
 {
-       public function cadPatrocinado()
+    public function cadPatrocinado()
     {
         /**
          *  <evtCadPatrocinado id="ID00000000001">
@@ -40,5 +40,4 @@ class CadPatrocinado
         </evtCadPatrocinado>
          */
     }
-
 }

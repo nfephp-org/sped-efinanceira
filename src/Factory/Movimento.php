@@ -13,7 +13,7 @@
  */
 class Movimento
 {
-        public function movFin()
+    public function movFin()
     {
         /**
          *
@@ -99,5 +99,4 @@ class Movimento
         </evtMovOpFin>
          */
     }
-
 }
