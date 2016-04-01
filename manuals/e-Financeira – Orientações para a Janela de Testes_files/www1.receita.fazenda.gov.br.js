@@ -1,0 +1,1 @@
+__srp_est.Grupos.grupos = {'sobre-o-projeto':{$:[1833]},sistemas:{'sped-contabil':{$:[1834]},'sped-fiscal':{$:[1835]},cte:{$:[1836]},nfe:{$:[1837]},fcont:{$:[1838]},nfse:{$:[1839]},'sped-fiscal-pis-cofins':{$:[1840]}},faq:{$:[1841]},noticias:{$:[1842]}}; __srp_est.RequisicaoGIFEstatisticas.agendarGeracaoImagem();
