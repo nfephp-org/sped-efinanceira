@@ -181,7 +181,7 @@ abstract class Factory extends BaseMake
         $this->dom->appChild($this->eFinanceira, $this->evt, 'Falta DOMDocument');
         $this->dom->appChild($this->dom, $this->eFinanceira, 'Falta DOMDocument');
         $this->xml = $this->dom->saveXML();
-    }    
+    }
     
     /**
      * preConstrutor do XML

@@ -46,7 +46,6 @@ class Fechamento extends Factory
      */
     protected function premonta()
     {
-        
         $fechamentoMovOpFin = $this->dom->createElement("FechamentoMovOpFin");
         $this->dom->appChild($fechamentoMovOpFin, $this->reportavel);
         foreach ($this->aFech as $fech) {
@@ -128,6 +127,7 @@ class Fechamento extends Factory
      */
     public function tagFechamentoMes($anomes, $qtd)
     {
+        $identificador = 'tag FechamentoMes ';
         $fech = $this->dom->createElement("FechamentoMes");
         $this->dom->addChild(
             $fech,

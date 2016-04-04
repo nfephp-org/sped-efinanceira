@@ -35,13 +35,14 @@ class CadDeclarante extends Factory
      * Faz a premontagem se necessário
      * @return
      */
-    protected function premonta() {
+    protected function premonta()
+    {
         return;
     }
     
     /**
      * Cria a tag InfoCadastro
-     * 
+     *
      * @param string $nome
      * @param string $endereco
      * @param string $municipio
