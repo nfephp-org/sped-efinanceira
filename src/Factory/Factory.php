@@ -16,9 +16,13 @@ namespace NFePHP\eFinanc\Factory;
 use NFePHP\Common\Base\BaseMake;
 use NFePHP\Common\Certificate\Pkcs12;
 use NFePHP\Common\Files\FilesFolders;
+use NFePHP\Common\Dom\ValidXsd;
 
 abstract class Factory extends BaseMake
 {
+    
+    public $errors = array();
+    
     /**
      * Objeto stdClass convertido do Json config
      * @var stdClass
@@ -93,7 +97,7 @@ abstract class Factory extends BaseMake
         $identificador = 'tag raiz ';
         $this->evt = $this->dom->createElement($this->signTag);
         //importante a identificação "Id" deve estar grafada assim
-        $this->evt->setAttribute("Id", $id);
+        $this->evt->setAttribute("id", $id);
         $ide = $this->dom->createElement("ideEvento");
         $this->dom->addChild(
             $ide,
@@ -162,7 +166,7 @@ abstract class Factory extends BaseMake
      */
     public function assina()
     {
-        $this->xml = $this->pkcs->signXML($this->xml, $this->signTag);
+        $this->xml = $this->pkcs->signXML($this->xml, $this->signTag, 'id');
     }
 
     /**
@@ -181,6 +185,17 @@ abstract class Factory extends BaseMake
         $this->dom->appChild($this->eFinanceira, $this->evt, 'Falta DOMDocument');
         $this->dom->appChild($this->dom, $this->eFinanceira, 'Falta DOMDocument');
         $this->xml = $this->dom->saveXML();
+    }
+    
+    public function valida()
+    {
+        $xsdfile = dirname(dirname(dirname(__FILE__))).DIRECTORY_SEPARATOR.'schemes'.DIRECTORY_SEPARATOR.$this->objConfig->schemes.DIRECTORY_SEPARATOR.$this->signTag.'-'.$this->objConfig->schemes.'.xsd';
+        //$xsd = FilesFolders::readFile($xsdfile);
+        if (!ValidXsd::validar($this->xml, $xsdfile)) {
+            $this->errors = ValidXsd::$errors;
+            return false;
+        }
+        return true;
     }
     
     /**
