@@ -22,7 +22,7 @@ $evt->tagDeclarante($cnpj);
 //########################################################################
 $nome = 'Fulano de Tal';
 $endereco = 'Rua Cel Silverio Magalhaes';
-$municipio = 'Sao Paulo';
+$municipio = '3304557';
 $uf = 'SP';
 $pais = 'BR';
 $paisResidencia = 'BR';
@@ -30,8 +30,15 @@ $evt->tagInfoCadastro($nome, $endereco, $municipio, $uf, $pais, $paisResidencia)
 
 //########################################################################
 $evt->monta();
+
+//########################################################################
 $evt->assina();
 
+//########################################################################
+if (! $evt->valida()) {
+    var_dump($evt->errors);
+    exit();
+}
 //########################################################################
 header('Content-type: text/xml; charset=UTF-8');
 echo $evt->getXML();

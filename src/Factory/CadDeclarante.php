@@ -78,14 +78,14 @@ class CadDeclarante extends Factory
         );
         $this->dom->addChild(
             $info,
-            "uf",
+            "UF",
             $uf,
             true,
             $identificador . "UF da Empresa Declarante"
         );
         $this->dom->addChild(
             $info,
-            "pais",
+            "Pais",
             $pais,
             true,
             $identificador . "Sigla do pais da Empresa Declarante"

@@ -59,7 +59,11 @@ class Fechamento extends Factory
      *
      * @param string $dtInicio
      * @param string $dtFim
-     * @param string $sitEspecial
+     * @param string $sitEspecial  0 = Não se aplica
+     *                             1 = Extinção
+     *                             2 = Fusão
+     *                             3 = Incorporação/Incorporada
+     *                             5 = Cisão Total
      * @return Dom
      */
     public function tagInfo($dtInicio, $dtFim, $sitEspecial)
@@ -94,7 +98,8 @@ class Fechamento extends Factory
     /**
      * Cria a tag de reportavelExterior
      * @param string $pais
-     * @param string $reportavel
+     * @param string $reportavel 0-Não
+     *                           1-Sim
      * @return Dom
      */
     public function reportavelExterior($pais, $reportavel)
