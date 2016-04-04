@@ -11,7 +11,7 @@
     "siglaUF":"SP",
     "cnpj":"99999999999999",
     "certPfxName":"seu_certificado.pfx",
-    "certPassword":"sua_senhafima",
+    "certPassword":"sua_senha",
     "certPhrase":"",
     "aProxyConf":{
         "proxyIp":"",

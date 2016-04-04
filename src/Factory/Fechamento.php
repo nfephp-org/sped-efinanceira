@@ -1,68 +1,149 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+namespace NFePHP\eFinanc\Factory;
 
 /**
- * Description of Fechamento
+ * Classe construtora do evento de fechamento
  *
- * @author administrador
+ * @category   NFePHP
+ * @package    NFePHP\eFinanc\Factory\Fechamento
+ * @copyright  Copyright (c) 2016
+ * @license    http://www.gnu.org/licenses/lesser.html LGPL v3
+ * @author     Roberto L. Machado <linux.rlm at gmail dot com>
+ * @link       http://github.com/nfephp-org/sped-efinanceira for the canonical source repository
  */
-class Fechamento
+
+use NFePHP\eFinanc\Factory\Factory;
+
+class Fechamento extends Factory
 {
-    public function fechamentoFin()
+
+    /**
+     * Objeto Dom::class Tag infoCadastro
+     * @var Dom
+     */
+    protected $info;
+    /**
+     * Objeto Dom::class Tag ReportavelExterior
+     * @var Dom
+     */
+    protected $reportavel;
+
+    /**
+     * Array de Objetos Dom::class
+     * @var array
+     */
+    protected $aFech = array();
+    
+    /**
+     * estabelece qual a tag será assinada
+     * @var string
+     */
+    protected $signTag = 'evtFechamentoeFinanceira';
+
+    /**
+     * preconstrutor do xml
+     */
+    protected function premonta()
     {
-        /**
-         *
-        <evtFechamentoeFinanceira id="ID00000000001">
-            <ideEvento>
-                <indRetificacao>1</indRetificacao>
-                <tpAmb>1</tpAmb>
-                <aplicEmi>2</aplicEmi>
-                <verAplic>00000000000000000001</verAplic>
-            </ideEvento>
-            <ideDeclarante>
-                <cnpjDeclarante>01234567891234</cnpjDeclarante>
-            </ideDeclarante>
-            <infoFechamento>
-                <dtInicio>2014-01-01</dtInicio>
-                <dtFim>2014-06-30</dtFim>
-                <sitEspecial>0</sitEspecial>
-            </infoFechamento>
-            <FechamentoMovOpFin>
-                <ReportavelExterior>
-                    <pais>US</pais>
-                    <reportavel>0</reportavel>
-                </ReportavelExterior>
-                <FechamentoMes>
-                    <anoMesCaixa>201401</anoMesCaixa>
-                    <quantArqTrans>1</quantArqTrans>
-                </FechamentoMes>
-                <FechamentoMes>
-                    <anoMesCaixa>201402</anoMesCaixa>
-                    <quantArqTrans>1</quantArqTrans>
-                </FechamentoMes>
-                <FechamentoMes>
-                    <anoMesCaixa>201403</anoMesCaixa>
-                    <quantArqTrans>1</quantArqTrans>
-                </FechamentoMes>
-                <FechamentoMes>
-                    <anoMesCaixa>201404</anoMesCaixa>
-                    <quantArqTrans>1</quantArqTrans>
-                </FechamentoMes>
-                <FechamentoMes>
-                    <anoMesCaixa>201405</anoMesCaixa>
-                    <quantArqTrans>1</quantArqTrans>
-                </FechamentoMes>
-                <FechamentoMes>
-                    <anoMesCaixa>201406</anoMesCaixa>
-                    <quantArqTrans>1</quantArqTrans>
-                </FechamentoMes>
-            </FechamentoMovOpFin>
-        </evtFechamentoeFinanceira>
-         */
+        
+        $fechamentoMovOpFin = $this->dom->createElement("FechamentoMovOpFin");
+        $this->dom->appChild($fechamentoMovOpFin, $this->reportavel);
+        foreach ($this->aFech as $fech) {
+            $this->dom->appChild($fechamentoMovOpFin, $fech);
+        }
+        $this->dom->appChild($this->evt, $fechamentoMovOpFin);
+    }
+    
+    /**
+     * Cria a tag Info
+     *
+     * @param string $dtInicio
+     * @param string $dtFim
+     * @param string $sitEspecial
+     * @return Dom
+     */
+    public function tagInfo($dtInicio, $dtFim, $sitEspecial)
+    {
+        $identificador = 'tag infoFechamento ';
+        $info = $this->dom->createElement("infoFechamento");
+        $this->dom->addChild(
+            $info,
+            "dtInicio",
+            $dtInicio,
+            true,
+            $identificador . " "
+        );
+        $this->dom->addChild(
+            $info,
+            "dtFim",
+            $dtFim,
+            true,
+            $identificador . " "
+        );
+        $this->dom->addChild(
+            $info,
+            "sitEspecial",
+            $sitEspecial,
+            true,
+            $identificador . "sitEspecial "
+        );
+        $this->info = $info;
+        return $info;
+    }
+    
+    /**
+     * Cria a tag de reportavelExterior
+     * @param string $pais
+     * @param string $reportavel
+     * @return Dom
+     */
+    public function reportavelExterior($pais, $reportavel)
+    {
+        $identificador = 'tag reportavelExterior ';
+        $info = $this->dom->createElement("ReportavelExterior");
+        $this->dom->addChild(
+            $info,
+            "pais",
+            $pais,
+            true,
+            $identificador . " "
+        );
+        $this->dom->addChild(
+            $info,
+            "reportavel",
+            $reportavel,
+            true,
+            $identificador . " "
+        );
+        $this->reportavel = $info;
+        return $info;
+    }
+    
+    /**
+     * Dados de fechamento do anomes
+     * @param string $anomes
+     * @param string $qtd
+     * @return Dom
+     */
+    public function tagFechamentoMes($anomes, $qtd)
+    {
+        $fech = $this->dom->createElement("FechamentoMes");
+        $this->dom->addChild(
+            $fech,
+            "anoMesCaixa",
+            $anomes,
+            true,
+            $identificador . "Ano e mes"
+        );
+        $this->dom->addChild(
+            $fech,
+            "quantArqTrans",
+            $qtd,
+            true,
+            $identificador . "Quantidade arq transf"
+        );
+        $this->aFech[] = $fech;
+        return $fech;
     }
 }

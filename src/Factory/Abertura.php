@@ -13,28 +13,26 @@ namespace NFePHP\eFinanc\Factory;
  * @link       http://github.com/nfephp-org/sped-efinanceira for the canonical source repository
  */
 
+use NFePHP\eFinanc\Factory\Factory;
+
 class Abertura extends Factory
 {
-    /**
-     * Objeto Dom::class Tag evtAberturaeFinanceira
-     * @var Dom
-     */
-    private $evtAberturaeFinanceira;
-    /**
-     * Objeto Dom::class Tag aberturaMovOpFin
-     * @var Dom
-     */
-    private $aberturaMovOpFin;
+
     /**
      * Objeto Dom::class Tag ResponsavelRMF
      * @var Dom
      */
-    private $respRMF;
+    protected $respRMF;
     /**
      * Objeto Dom::class Tag RepresLegal
      * @var Dom
      */
-    private $replegal;
+    protected $replegal;
+    /**
+     * Objeto Dom::class Tag info
+     * @var Dom
+     */
+    protected $info;
     /**
      * estabelece qual a tag será assinada
      * @var string
@@ -42,99 +40,14 @@ class Abertura extends Factory
     protected $signTag = 'evtAberturaeFinanceira';
     
     /**
-     * Construtor do XML
+     * preConstrutor do XML
      */
-    public function monta()
+    protected function premonta()
     {
-        $this->eFinanceira = $this->dom->createElement("eFinanceira");
-        $this->eFinanceira->setAttribute("xmlns", "http://www.eFinanceira.gov.br/schemas/evtAberturaeFinanceira/".$this->objConfig->schemes);
-        $this->aberturaMovOpFin = $this->dom->createElement("AberturaMovOpFin");
-        $this->dom->appChild($this->aberturaMovOpFin, $this->respRMF, 'Falta DOMDocument');
-        $this->dom->appChild($this->aberturaMovOpFin, $this->replegal, 'Falta DOMDocument');
-        $this->dom->appChild($this->evtAberturaeFinanceira, $this->aberturaMovOpFin, 'Falta DOMDocument');
-        $this->dom->appChild($this->eFinanceira, $this->evtAberturaeFinanceira, 'Falta DOMDocument');
-        $this->dom->appChild($this->dom, $this->eFinanceira, 'Falta DOMDocument');
-        $this->xml = $this->dom->saveXML();
-    }
-    
-    
-    /**
-     * Cria a tag evtAberturaeFinanceira/ideEvento
-     *
-     * @param string $id
-     * @param int $indRetificacao
-     * @param int $tpAmb
-     * @param string $nrRecibo
-     * @return Dom
-     */
-    public function tagAbertura($id, $indRetificacao, $tpAmb, $nrRecibo = '')
-    {
-        $id = "ID".str_pad($id, 18, '0', STR_PAD_LEFT);
-        $identificador = 'tag raiz ';
-        $this->evtAberturaeFinanceira = $this->dom->createElement("evtAberturaeFinanceira");
-        //importante a identificação "Id" deve estar grafada assim
-        $this->evtAberturaeFinanceira->setAttribute("Id", $id);
-        $ide = $this->dom->createElement("ideEvento");
-        $this->dom->addChild(
-            $ide,
-            "indRetificacao",
-            $indRetificacao,
-            true,
-            $identificador . "Indicador de retificação"
-        );
-        if ($indRetificacao > 1) {
-            $this->dom->addChild(
-                $ide,
-                "nrRecibo",
-                $nrRecibo,
-                true,
-                $identificador . "Numero do recibo quando for retificador"
-            );
-        }
-        $this->dom->addChild(
-            $ide,
-            "tpAmb",
-            $tpAmb,
-            true,
-            $identificador . "Indicador de retificação"
-        );
-        $this->dom->addChild(
-            $ide,
-            "aplicEmi",
-            $this->objConfig->aplicEmi,
-            true,
-            $identificador . "Aplicativo de emissão do evento"
-        );
-        $this->dom->addChild(
-            $ide,
-            "verAplic",
-            $this->objConfig->verAplic,
-            true,
-            $identificador . "Versão do aplicativo de emissão do evento"
-        );
-        $this->dom->appChild($this->evtAberturaeFinanceira, $ide);
-        return $this->evtAberturaeFinanceira;
-    }
-    
-    /**
-     * Cria a tag ideDeclarante
-     *
-     * @param string $cnpj
-     * @return Dom
-     */
-    public function tagDeclarante($cnpj)
-    {
-        $identificador = 'tag ideDeclarante ';
-        $ide = $this->dom->createElement("ideDeclarante");
-        $this->dom->addChild(
-            $ide,
-            "cnpjDeclarante",
-            $cnpj,
-            true,
-            $identificador . "Informar CNPJ da Empresa Declarante"
-        );
-        $this->dom->appChild($this->evtAberturaeFinanceira, $ide);
-        return $ide;
+        $aberturaMovOpFin = $this->dom->createElement("AberturaMovOpFin");
+        $this->dom->appChild($aberturaMovOpFin, $this->respRMF, 'Falta DOMDocument');
+        $this->dom->appChild($aberturaMovOpFin, $this->replegal, 'Falta DOMDocument');
+        $this->dom->appChild($this->evt, $aberturaMovOpFin, 'Falta DOMDocument');
     }
     
     /**
@@ -162,7 +75,7 @@ class Abertura extends Factory
             true,
             $identificador . " "
         );
-        $this->dom->appChild($this->evtAberturaeFinanceira, $info);
+        $this->info = $info;
         return $info;
     }
     
