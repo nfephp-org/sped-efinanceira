@@ -51,7 +51,7 @@ class CadDeclarante extends Factory
      * @param string $paisResidencia
      * @return Dom
      */
-    public function tagInfoCadastro($nome, $endereco, $municipio, $uf, $pais, $paisResidencia)
+    public function tagInfo($nome, $endereco, $municipio, $uf, $pais, $paisResidencia)
     {
         $identificador = 'tag infoCadastro ';
         $info = $this->dom->createElement("infoCadastro");

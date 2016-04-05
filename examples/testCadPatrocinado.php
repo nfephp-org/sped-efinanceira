@@ -3,11 +3,11 @@ error_reporting(E_ALL);
 ini_set('display_errors', 'On');
 include_once '../bootstrap.php';
 
-use NFePHP\eFinanc\Factory\CadDeclarante;
+use NFePHP\eFinanc\Factory\CadPatrocinado;
 
 //########################################################################
 //instancia a classe e passa o arquivo de configuração
-$evt = new CadDeclarante('../config/config.json');
+$evt = new CadPatrocinado('../config/config.json');
 
 //########################################################################
 $id = '000000000000000001';
@@ -20,13 +20,14 @@ $cnpj = '99999090910270';
 $evt->tagDeclarante($cnpj);
 
 //########################################################################
+$giin = "0123456789123456789";
+$cnpj = "11119090910270";
 $nome = 'Fulano de Tal';
 $endereco = 'Rua Cel Silverio Magalhaes';
 $municipio = '3304557';
-$uf = 'SP';
 $pais = 'BR';
 $paisResidencia = 'BR';
-$evt->tagInfo($nome, $endereco, $municipio, $uf, $pais, $paisResidencia);
+$evt->tagInfo($giin, $cnpj, $nome, $endereco, $municipio, $pais, $paisResidencia);
 
 //########################################################################
 $evt->monta();
