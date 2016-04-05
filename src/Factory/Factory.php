@@ -17,6 +17,7 @@ use NFePHP\Common\Base\BaseMake;
 use NFePHP\Common\Certificate\Pkcs12;
 use NFePHP\Common\Files\FilesFolders;
 use NFePHP\Common\Dom\ValidXsd;
+use InvalidArgumentException;
 
 abstract class Factory extends BaseMake
 {
@@ -57,19 +58,19 @@ abstract class Factory extends BaseMake
      *
      * @param string $config
      */
-    public function __construct($config)
+    public function __construct($config = '')
     {
         parent::__construct();
         $this->loadConfig($config);
     }
     
     /**
-     * Execura a leitura do arquivo de configuração e
+     * Executa a leitura do arquivo de configuração e
      * carrega o certificado
      *
      * @param string $config
      */
-    protected function loadConfig($config)
+    protected function loadConfig($config = '')
     {
         if (is_file($config)) {
             $config = FilesFolders::readFile($config);
@@ -77,6 +78,9 @@ abstract class Factory extends BaseMake
         $result = json_decode($config);
         if (json_last_error() === JSON_ERROR_NONE) {
             $this->objConfig = $result;
+        }
+        if (! is_object($this->objConfig)) {
+            throw new InvalidArgumentException("Uma configuração valida deve ser passada!");
         }
         $this->pkcs = new Pkcs12($this->objConfig->pathCertsFiles, $this->objConfig->cnpj);
         $this->pkcs->loadPfxFile($this->objConfig->pathCertsFiles.$this->objConfig->certPfxName, $this->objConfig->certPassword, true, false, false);

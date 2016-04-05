@@ -1,0 +1,23 @@
+{
+    "atualizacao":"2016-04-01 09:00:17",
+    "tpAmb":2,
+    "pathFiles":"\/tmp\/eFinanc\/",
+    "pathCertsFiles":"\/var\/www\/sped\/sped-efinanceira\/certs\/",
+    "siteUrl":"http:\/\/localhost\/sped\/sped-efinanceira\/",
+    "schemes":"v1_0_1",
+    "verAplic":"001",
+    "aplicEmi":"1",
+    "razaosocial":"Sua empresa Ltda",
+    "siglaUF":"SP",
+    "cnpj":"99999999999999",
+    "certPfxName":"certificado.pfx",
+    "certPassword":"secreto",
+    "certPhrase":"",
+    "aProxyConf":{
+        "proxyIp":"",
+        "proxyPort":"",
+        "proxyUser":"",
+        "proxyPass":""
+    }
+}
+

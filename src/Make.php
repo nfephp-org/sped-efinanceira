@@ -2,7 +2,6 @@
 
 namespace NFePHP\eFinanc;
 
-
 class Make
 {
     
