@@ -1,17 +1,57 @@
 <?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+namespace NFePHP\eFinanc\Tests\Factory;
 
 /**
- * Description of AberturaTest
+ * Unit Tests for Abertura::class
  *
- * @author administrador
+ * @author Roberto L. Machado <linux dot rlm at gmail dot com>
  */
-class AberturaTest
+use NFePHP\eFinanc\Factory\Abertura;
+
+class AberturaTest extends \PHPUnit_Framework_TestCase
 {
-    //put your code here
+    public $config = '{"atualizacao":"2016-04-01 09:00:17","tpAmb":2,
+        "pathFiles":"\/tmp\/eFinanc\/",
+        "pathCertsFiles":"..\/fixtures\/certs\/",
+        "siteUrl":"http:\/\/localhost\/sped-efinanceira\/",
+        "schemes":"v1_0_1",
+        "verAplic":"001",
+        "aplicEmi":"1",
+        "razaosocial":"Sua empresa Ltda",
+        "siglaUF":"SP",
+        "cnpj":"99999999999999",
+        "certPfxName":"certificado.pfx",
+        "certPassword":"secreto",
+        "certPhrase":"",
+        "aProxyConf":{
+            "proxyIp":"",
+            "proxyPort":"",
+            "proxyUser":"",
+            "proxyPass":""
+        }
+    }';
+    
+    /**
+     * @covers NFePHP\eFinanc\Factory\Abertura::__construct
+     * @covers NFePHP\eFinanc\Factory\Factory::__construct
+     * @covers NFePHP\eFinanc\Factory\Factory::loadConfig
+     * @expectedException InvalidArgumentException
+     * @expectedExceptionMessage Uma configuração valida deve ser passada!
+     */
+    public function testInstantiableFail()
+    {
+        $evtr = new Abertura();
+        $this->assertInstanceOf(Abertura::class, $evt);
+    }
+    
+    /**
+     * @covers NFePHP\eFinanc\Factory\Abertura::__construct
+     * @covers NFePHP\eFinanc\Factory\Factory::__construct
+     * @covers NFePHP\eFinanc\Factory\Factory::loadConfig
+     */
+    public function testInstantiable()
+    {
+        $evtr = new Abertura($this->config);
+        $this->assertInstanceOf(Abertura::class, $evt);
+    }
 }

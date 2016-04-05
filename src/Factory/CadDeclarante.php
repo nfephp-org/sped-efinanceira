@@ -1,43 +1,103 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+namespace NFePHP\eFinanc\Factory;
 
 /**
- * Description of CadDeclarante
+ * Classe construtora do evento de Cadastro do Declarante
  *
- * @author administrador
+ * @category   NFePHP
+ * @package    NFePHP\eFinanc\Factory\CadDeclarante
+ * @copyright  Copyright (c) 2016
+ * @license    http://www.gnu.org/licenses/lesser.html LGPL v3
+ * @author     Roberto L. Machado <linux.rlm at gmail dot com>
+ * @link       http://github.com/nfephp-org/sped-efinanceira for the canonical source repository
  */
-class CadDeclarante
+
+use NFePHP\eFinanc\Factory\Factory;
+
+class CadDeclarante extends Factory
 {
-    public function cadDeclarante()
+
+    /**
+     * Objeto Dom::class Tag infoCadastro
+     * @var Dom
+     */
+    protected $info;
+    
+    
+    /**
+     * estabelece qual a tag será assinada
+     * @var string
+     */
+    protected $signTag = 'evtCadDeclarante';
+   
+    /**
+     * Faz a premontagem se necessário
+     * @return
+     */
+    protected function premonta()
     {
-        //cada tipo de evento deve ser controlado por um numero sequenciar de 18 digitos
-        //sem repetição para o mesmo tipo de evento, mas inicia uma outra sequencia para outros tipos de enventos
-        /**
-        <evtCadDeclarante id="ID00000000001">
-            <ideEvento>
-               <indRetificacao>1</indRetificacao>
-               <tpAmb>1</tpAmb>
-               <aplicEmi>2</aplicEmi>
-               <verAplic>00000000000000000001</verAplic>
-            </ideEvento>
-            <ideDeclarante>
-                <cnpjDeclarante>01234567891234</cnpjDeclarante>
-            </ideDeclarante>
-            <infoCadastro>
-                <nome>Razão social da Empresa Declarante 01 Teste ate 100 caracteres</nome>
-                <enderecoLivre>Endereço da Empresa Declarante 01 ate 200 caracteres</enderecoLivre>
-                <municipio>3304557</municipio>
-                <UF>RJ</UF>
-                <Pais>BR</Pais>
-                <paisResidencia>BR</paisResidencia>
-            </infoCadastro>
-        </evtCadDeclarante>
-         */
-        
+        return;
+    }
+    
+    /**
+     * Cria a tag InfoCadastro
+     *
+     * @param string $nome
+     * @param string $endereco
+     * @param string $municipio
+     * @param string $uf
+     * @param string $pais
+     * @param string $paisResidencia
+     * @return Dom
+     */
+    public function tagInfo($nome, $endereco, $municipio, $uf, $pais, $paisResidencia)
+    {
+        $identificador = 'tag infoCadastro ';
+        $info = $this->dom->createElement("infoCadastro");
+        $this->dom->addChild(
+            $info,
+            "nome",
+            $nome,
+            true,
+            $identificador . "Nome da Empresa Declarante"
+        );
+        $this->dom->addChild(
+            $info,
+            "enderecoLivre",
+            $endereco,
+            true,
+            $identificador . "Endereco da Empresa Declarante"
+        );
+        $this->dom->addChild(
+            $info,
+            "municipio",
+            $municipio,
+            true,
+            $identificador . "Municipio da Empresa Declarante"
+        );
+        $this->dom->addChild(
+            $info,
+            "UF",
+            $uf,
+            true,
+            $identificador . "UF da Empresa Declarante"
+        );
+        $this->dom->addChild(
+            $info,
+            "Pais",
+            $pais,
+            true,
+            $identificador . "Sigla do pais da Empresa Declarante"
+        );
+        $this->dom->addChild(
+            $info,
+            "paisResidencia",
+            $paisResidencia,
+            true,
+            $identificador . "Sigla do pais residencia da Empresa Declarante"
+        );
+        $this->info = $info;
+        return $info;
     }
 }

@@ -3,11 +3,11 @@ error_reporting(E_ALL);
 ini_set('display_errors', 'On');
 include_once '../bootstrap.php';
 
-use NFePHP\eFinanc\Factory\Abertura;
+use NFePHP\eFinanc\Factory\Fechamento;
 
 //########################################################################
 //instancia a classe e passa o arquivo de configuração
-$evt = new Abertura('../config/config.json');
+$evt = new Fechamento('../config/config.json');
 
 //########################################################################
 $id = '000000000000000001';
@@ -18,31 +18,30 @@ $evt->tagEvento($id, $indRetificacao, $tpAmb);
 //########################################################################
 $cnpj = '99999090910270';
 $evt->tagDeclarante($cnpj);
-$evt->tagInfo('2016-03-01', '2016-04-01');
 
 //########################################################################
-$cpf = '00431733813';
-$nome = 'Fulano de Tal';
-$setor = 'SETOR XXXX';
-$ddd = '11';
-$telefone = '50734858';
-$ramal = '';
-$logradouro = 'Rua Cel Silverio Magalhaes';
-$numero = '346';
-$complemento = '';
-$bairro = 'Jardim da Saude';
-$cep = '04154000';
-$municipio = 'Sao Paulo';
-$uf = 'SP';
-$evt->tagResponsavelRMF($cpf, $nome, $setor, $ddd, $telefone, $ramal, $logradouro, $numero, $complemento, $bairro, $cep, $municipio, $uf);
+$dtInicio = '2016-01-01';
+$dtFim = '2016-06-30';
+$sitEspecial = '0';
+$evt->tagInfo($dtInicio, $dtFim, $sitEspecial);
 
 //########################################################################
-$cpf = '00431733813';
-$setor = 'SEILA ';
-$ddd = '11';
-$telefone = '11111111';
-$ramal = '';
-$evt->tagRepresLegal($cpf, $setor, $ddd, $telefone, $ramal);
+$pais = 'US';
+$reportavel = '0';
+$evt->reportavelExterior($pais, $reportavel);
+
+//########################################################################
+$aFech = [
+    ['201601', '1'],
+    ['201602', '1'],
+    ['201603', '1'],
+    ['201604', '1'],
+    ['201605', '1'],
+    ['201606', '1']
+];
+foreach ($aFech as $fech) {
+    $evt->tagFechamentoMes($fech[0], $fech[1]);
+}
 
 //########################################################################
 $evt->monta();
