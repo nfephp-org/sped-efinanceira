@@ -90,7 +90,7 @@ abstract class Factory extends BaseMake
      * Cria a tag evt????
      *
      * @param string $id
-     * @param int $indRetificacao
+     * @param string $indRetificacao
      * @param int $tpAmb
      * @param string $nrRecibo
      * @return Dom
@@ -107,7 +107,7 @@ abstract class Factory extends BaseMake
             $ide,
             "indRetificacao",
             $indRetificacao,
-            true,
+            false,
             $identificador . "Indicador de retificação"
         );
         if ($indRetificacao > 1) {

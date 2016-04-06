@@ -1,55 +1,60 @@
 <?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+namespace NFePHP\eFinanc\Factory;
 
 /**
- * Description of Exclusao
+ * Classe construtora do evento de exclusao
  *
- * @author administrador
+ * @category   NFePHP
+ * @package    NFePHP\eFinanc\Factory\Exclusao
+ * @copyright  Copyright (c) 2016
+ * @license    http://www.gnu.org/licenses/lesser.html LGPL v3
+ * @author     Roberto L. Machado <linux.rlm at gmail dot com>
+ * @link       http://github.com/nfephp-org/sped-efinanceira for the canonical source repository
  */
-class Exclusao
+
+use NFePHP\eFinanc\Factory\Factory;
+
+class Exclusao extends Factory
 {
-    public function exclusao()
+    
+     /**
+     * Objeto Dom::class Tag info
+     * @var Dom
+     */
+    protected $info;
+    /**
+     * estabelece qual a tag será assinada
+     * @var string
+     */
+    protected $signTag = 'evtExclusao';
+    
+    /**
+     * Faz a premontagem se necessário
+     * @return
+     */
+    protected function premonta()
     {
-        /**
-         *
-        <evtExclusao id="ID00000000001">
-            <ideEvento>
-                <tpAmb>1</tpAmb>
-                <aplicEmi>2</aplicEmi>
-                <verAplic>00000000000000000001</verAplic>
-            </ideEvento>
-            <ideDeclarante>
-                <cnpjDeclarante>01234567891234</cnpjDeclarante>
-            </ideDeclarante>
-            <infoExclusao>
-                <nrReciboEvento>{valor_nrRecibo_retorno}</nrReciboEvento>
-            </infoExclusao>
-        </evtExclusao>
-         */
+        return;
     }
     
-    public function exclusaoFin()
+    /**
+     * Cria a tag info
+     * 
+     * @param string $nrReciboEvento
+     * @return Dom
+     */
+    public function tagInfo($nrReciboEvento)
     {
-        /**
-         *
-        <evtExclusaoeFinanceira id="ID00000000001">
-            <ideEvento>
-                <tpAmb>1</tpAmb>
-                <aplicEmi>2</aplicEmi>
-                <verAplic>00000000000000000001</verAplic>
-                </ideEvento>
-            <ideDeclarante>
-                <cnpjDeclarante>01234567891234</cnpjDeclarante>
-            </ideDeclarante>
-            <infoExclusaoeFinanceira>
-                <nrReciboEvento>{valor_nrRecibo_retorno}</nrReciboEvento>
-            </infoExclusaoeFinanceira>
-        </evtExclusaoeFinanceira>
-         */
+        $identificador = 'tag infoExclusao ';
+        $info = $this->dom->createElement("infoExclusao");
+        $this->dom->addChild(
+            $info,
+            "nrReciboEvento",
+            $nrReciboEvento,
+            true,
+            $identificador . "Numero do recibo do evento que se quer excluir"
+        );
+        $this->info = $info;
+        return $info;
     }
 }
