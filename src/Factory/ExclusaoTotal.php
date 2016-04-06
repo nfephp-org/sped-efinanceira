@@ -39,18 +39,18 @@ class ExclusaoTotal extends Factory
     
     /**
      * Cria a tag info
-     * 
-     * @param string $nrReciboEvento
+     *
+     * @param string $nrReciboEventoAbertura
      * @return Dom
      */
-    public function tagInfo($nrReciboEvento)
+    public function tagInfo($nrReciboEventoAbertura)
     {
         $identificador = 'tag infoExclusao ';
         $info = $this->dom->createElement("infoExclusaoeFinanceira");
         $this->dom->addChild(
             $info,
             "nrReciboEvento",
-            $nrReciboEvento,
+            $nrReciboEventoAbertura,
             true,
             $identificador . "Numero do recibo do evento de abertura da eFinanceira que se quer excluir"
         );
