@@ -16,6 +16,10 @@ $tpAmb = 2;
 $recibo = '';
 $evt->tagEvento($id, $indRetificacao, $tpAmb, $recibo);
 
+header('Content-type: text/xml; charset=UTF-8');
+$evt->monta();
+echo $evt->getXML();
+exit();
 //########################################################################
 $cnpj = '99999090910270';
 $evt->tagDeclarante($cnpj);

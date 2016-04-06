@@ -18,6 +18,28 @@ use NFePHP\eFinanc\Factory\Factory;
 class Movimento extends Factory
 {
     /**
+     * Conjunto de proprietários 
+     * Array de objetos Dom
+     * 
+     * @var array
+     */
+    protected $aProp;
+
+    /**
+     * Conjunto de movimentos
+     * Array de objetos Dom
+     *
+     * @var array
+     */
+    protected $aMov;
+    
+    /**
+     * Objeto Dom::class Tag ideDeclarado
+     * @var Dom
+     */
+    protected $ideDeclarado;
+
+    /**
      * estabelece qual a tag será assinada
      * @var string
      */

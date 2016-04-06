@@ -48,7 +48,12 @@ Caso você encntre algum problema relativo a segurança, por favor envie um emai
 
 ## Credits
 
-- em breve
+- Rodrigo Traleski <rodrigo@actuary.com.br>
+- Ademilson Santana da Silva <ademilsonssilva1@gmail.com>
+- Roberto L. MAchado <linux.rlm@gmail.com>
+
+O desenvolvimento desse pacote somente foi possivel devido a contribuição e colaboração da 
+[ACTUARY Ltda](http://www.actuary.com.br/v2/informatica/index.php) 
 
 ## License
 
