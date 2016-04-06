@@ -4,45 +4,121 @@ namespace NFePHP\eFinanc;
 
 class Tools
 {
+    public $tpAmb = 2;
+    public $url = [
+        1 => [
+            ['recepcao'=>'https://efinanc.receita.fazenda.gov.br/WsEFinanceira/WsRecepcao.asmx'],
+            ['consulta'=>'https://efinanc.receita.fazenda.gov.br/WsEFinanceira/WsConsulta.asmx']
+        ],
+        2 => [
+            ['recepcao'=>'https://preprod-efinanc.receita.fazenda.gov.br/WsEFinanceira/WsRecepcao.asmx'],
+            ['consulta'=>'https://preprod-efinanc.receita.fazenda.gov.br/WsEFinanceira/WsConsulta.asmx']
+        ]
+    ];
+    
     public function __construct()
     {
         
     }
     
-    public function consultarInformacoesCadastrais()
+    /**
+     * Consulta informações cadastrais do Declarante
+     *
+     * @param string $cnpjDeclarante
+     * @param array $aResp variável passada como referencia irá conter os retornos
+     *                     em um array
+     * @return string será retornado o xml de resposta do webservice
+     */
+    public function consultarInformacoesCadastrais($cnpjDeclarante, &$aResp)
     {
-        
+        return '';
     }
     
-    public function consultarInformacoesIntermediario()
+    /**
+     * Consulta Lista EFinanceira
+     *
+     * @param string $cnpjDeclarante
+     * @param string $sitInfo
+     * @param string $dtInicio
+     * @param string $dtFim
+     * @param array $aResp variável passada como referencia irá conter os retornos
+     *                     em um array
+     * @return string será retornado o xml de resposta do webservice
+     */
+    public function consultarListaEFinanceira($cnpjDeclarante, $sitInfo, $dtInicio, $dtFim, &$aResp)
     {
-        
+        return '';
     }
     
-    public function consultarInformacoesPatrocinado()
-    {
-        
+    /**
+     * Consulta INformações de Movimento
+     *
+     * @param string $cnpjDeclarante
+     * @param string $sitInfo
+     * @param string $anomesIni
+     * @param string $anomesFim
+     * @param string $tpMov
+     * @param string $tpNI
+     * @param string $numNI
+     * @param array $aResp variável passada como referencia irá conter os retornos
+     *                     em um array
+     * @return string será retornado o xml de resposta do webservice
+     */
+    public function consultarInformacoesMovimento(
+        $cnpjDeclarante,
+        $sitInfo,
+        $anomesIni,
+        $anomesFim,
+        $tpMov,
+        $tpNI,
+        $numNI,
+        &$aResp
+    ) {
+        return '';
     }
     
-    public function consultarListaEFinanceira()
+    /**
+     * Consulta informações do Intermediário
+     *
+     * @param string $cnpjDeclarante
+     * @param string $gIIN
+     * @param string $tpNI
+     * @param string $numNI
+     * @param array $aResp variável passada como referencia irá conter os retornos
+     *                     em um array
+     * @return string será retornado o xml de resposta do webservice
+     */
+    public function consultarInformacoesIntermediario($cnpjDeclarante, $gIIN, $tpNI, $numNI, &$aResp)
     {
-        
+        return '';
     }
     
-    public function consultarInformacoesMovimento()
+    /**
+     * Consulta informações do Patrocinado
+     *
+     * @param string $cnpjDeclarante
+     * @param string $cnpjPatrocinado
+     * @param string $gIIN
+     * @param array $aResp variável passada como referencia irá conter os retornos
+     *                     em um array
+     * @return string será retornado o xml de resposta do webservice
+     */
+    public function consultarInformacoesPatrocinado($cnpjDeclarante, $cnpjPatrocinado, $gIIN, &$aResp)
     {
-        
+        return '';
     }
-    
    
     /**
      * Monta lote de eventos para envio
      * se os eventos não estiverem assinados assina antes de montar o lote
+     *
      * @param array $aEv xml dos eventos a colocar no lote
      * @param array $aResp variável passada como referencia irá conter os retornos
      *                     em um array
-     * @return string
+     * @return string será retornado o xml de resposta do webservice
+     * @throws InvalidArgumentException
      */
+    
     public function enviaLote($aEv, &$aResp)
     {
         if (empty($aEv)) {
@@ -65,11 +141,6 @@ class Tools
         }
         $lote .= "</loteEventos>";
         $lote .= "</eFinanceira>";
-        return $response;
-    }
-    
-    protected function checkSignature($evt)
-    {
-        
+        return '';
     }
 }
