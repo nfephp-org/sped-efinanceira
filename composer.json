@@ -2,7 +2,7 @@
     "name": "nfephp-org/sped-efinanceira",
     "type": "library",
     "description": "e-Financeira library",
-    "homepage": "https://github.com/nfephp/posprint",
+    "homepage": "https://github.com/nfephp-org/sped-efinanceira",
     "keywords": ["Sped", "e-Financeira"],
     "license": ["LGPLv3+", "GPLv3+", "MIT"],
     "authors": [
@@ -24,7 +24,7 @@
     ],
     "require": {
         "php" : "~5.5|~7.0",
-        "nfephp-org/sped-common" : "4.1-dev"
+        "nfephp-org/sped-common" : "^4.1"
     },
     "require-dev": {
 	"phpunit/phpunit": "4.*",
