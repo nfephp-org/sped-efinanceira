@@ -19,9 +19,9 @@ class AberturaTest extends \PHPUnit_Framework_TestCase
         "aplicEmi":"1",
         "razaosocial":"Sua empresa Ltda",
         "siglaUF":"SP",
-        "cnpj":"99999999999999",
+        "cnpj":"99999090910270",
         "certPfxName":"certificado.pfx",
-        "certPassword":"secreto",
+        "certPassword":"associacao",
         "certPhrase":"",
         "aProxyConf":{
             "proxyIp":"",

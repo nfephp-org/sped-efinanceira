@@ -2,10 +2,10 @@
 namespace NFePHP\eFinanc\Factory;
 
 /**
- * Classe construtora do evento de exclusao
+ * Classe construtora do evento de exclusao total da eFinanceira
  *
  * @category   NFePHP
- * @package    NFePHP\eFinanc\Factory\Exclusao
+ * @package    NFePHP\eFinanc\Factory\ExclusaoTotal
  * @copyright  Copyright (c) 2016
  * @license    http://www.gnu.org/licenses/lesser.html LGPL v3
  * @author     Roberto L. Machado <linux.rlm at gmail dot com>
@@ -14,7 +14,7 @@ namespace NFePHP\eFinanc\Factory;
 
 use NFePHP\eFinanc\Factory\Factory;
 
-class Exclusao extends Factory
+class ExclusaoTotal extends Factory
 {
     
      /**
@@ -26,7 +26,7 @@ class Exclusao extends Factory
      * estabelece qual a tag será assinada
      * @var string
      */
-    protected $signTag = 'evtExclusao';
+    protected $signTag = 'evtExclusaoeFinanceira';
     
     /**
      * Faz a premontagem se necessário
@@ -46,13 +46,13 @@ class Exclusao extends Factory
     public function tagInfo($nrReciboEvento)
     {
         $identificador = 'tag infoExclusao ';
-        $info = $this->dom->createElement("infoExclusao");
+        $info = $this->dom->createElement("infoExclusaoeFinanceira");
         $this->dom->addChild(
             $info,
             "nrReciboEvento",
             $nrReciboEvento,
             true,
-            $identificador . "Numero do recibo do evento que se quer excluir"
+            $identificador . "Numero do recibo do evento de abertura da eFinanceira que se quer excluir"
         );
         $this->info = $info;
         return $info;

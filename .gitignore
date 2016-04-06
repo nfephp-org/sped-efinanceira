@@ -8,4 +8,4 @@ composer.lock
 docs
 /certs/*.pem
 /certs/*.pfx
-/config/config.json
+config.json
