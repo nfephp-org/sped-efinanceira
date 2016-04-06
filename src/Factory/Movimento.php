@@ -18,9 +18,9 @@ use NFePHP\eFinanc\Factory\Factory;
 class Movimento extends Factory
 {
     /**
-     * Conjunto de proprietários 
+     * Conjunto de proprietários
      * Array de objetos Dom
-     * 
+     *
      * @var array
      */
     protected $aProp;
@@ -54,13 +54,13 @@ class Movimento extends Factory
         $tpNI,
         $tpDeclarado,
         $nIDeclarado,
-        $nIIF,    
+        $nIIF,
         $nomeDeclarado,
-        $dataNasc,    
+        $dataNasc,
         $enderecoLivre,
         $pais,
         $paisResid,
-        $paisNacionalidade    
+        $paisNacionalidade
     ) {
         
     }
@@ -71,7 +71,7 @@ class Movimento extends Factory
         $nIProprietario,
         $nIIF,
         $nome,
-        $dataNasc,            
+        $dataNasc,
         $endereco,
         $pais,
         $paisResid,
