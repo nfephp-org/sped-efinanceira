@@ -1,4 +1,5 @@
 <?php
+
 namespace NFePHP\eFinanc\Tests\Factory;
 
 /**
@@ -7,41 +8,10 @@ namespace NFePHP\eFinanc\Tests\Factory;
  * @author Roberto L. Machado <linux dot rlm at gmail dot com>
  */
 use NFePHP\eFinanc\Factory\Abertura;
+use NFePHP\eFinanc\Tests\Factory\FactoryTest;
 
-class AberturaTest extends \PHPUnit_Framework_TestCase
-{
-    public $config = '';
-    public $pathFixtures;
-    public $evtAberturaIde = '<eFinanceira xmlns="http://www.eFinanceira.gov.br/schemas/evtAberturaeFinanceira/v1_0_1"><evtAberturaeFinanceira id="ID000000000000000001"><ideEvento><indRetificacao>1</indRetificacao><tpAmb>2</tpAmb><aplicEmi>1</aplicEmi><verAplic>001</verAplic></ideEvento><AberturaMovOpFin/></evtAberturaeFinanceira></eFinanceira>';
-    
-    public function __construct()
-    {
-        $this->pathFixtures = dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR."fixtures".DIRECTORY_SEPARATOR;
-        $path = $this->pathFixtures."certs".DIRECTORY_SEPARATOR;
-        $this->config = "{
-            \"atualizacao\":\"2016-04-01 09:00:17\",
-            \"tpAmb\":2,
-            \"pathFiles\":\"\/tmp\/eFinanc\/\",
-            \"pathCertsFiles\":\"$path\",
-            \"siteUrl\":\"http:\/\/localhost\/sped-efinanceira\/\",
-            \"schemes\":\"v1_0_1\",
-            \"verAplic\":\"001\",
-            \"aplicEmi\":\"1\",
-            \"razaosocial\":\"Sua empresa Ltda\",
-            \"siglaUF\":\"SP\",
-            \"cnpj\":\"99999090910270\",
-            \"certPfxName\":\"certificado.pfx\",
-            \"certPassword\":\"associacao\",
-            \"certPhrase\":\"\",
-            \"aProxyConf\":{
-                \"proxyIp\":\"\",
-                \"proxyPort\":\"\",
-                \"proxyUser\":\"\",
-                \"proxyPass\":\"\"
-            }
-        }";
-    }
-
+class AberturaTest extends FactoryTest
+{    
     /**
      * @covers NFePHP\eFinanc\Factory\Abertura::__construct
      * @covers NFePHP\eFinanc\Factory\Factory::__construct
