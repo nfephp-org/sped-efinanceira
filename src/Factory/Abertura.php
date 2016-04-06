@@ -97,8 +97,21 @@ class Abertura extends Factory
      * @param string $uf
      * @return Dom
      */
-    public function tagResponsavelRMF($cpf, $nome, $setor, $ddd, $telefone, $ramal, $logradouro, $numero, $complemento, $bairro, $cep, $municipio, $uf)
-    {
+    public function tagResponsavelRMF(
+        $cpf,
+        $nome,
+        $setor,
+        $ddd,
+        $telefone,
+        $ramal,
+        $logradouro,
+        $numero,
+        $complemento,
+        $bairro,
+        $cep,
+        $municipio,
+        $uf
+    ) {
         $identificador = 'tag ResponsavelRMF ';
         $this->respRMF = $this->dom->createElement("ResponsavelRMF");
         $this->dom->addChild(

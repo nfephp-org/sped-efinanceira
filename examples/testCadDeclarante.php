@@ -10,10 +10,11 @@ use NFePHP\eFinanc\Factory\CadDeclarante;
 $evt = new CadDeclarante('../config/config.json');
 
 //########################################################################
-$id = '000000000000000001';
-$indRetificacao = 1; // 1 - para arquivo original 2 - para arquivo de retificação espontânea 3 – para arquivo de retificação a pedido
+$id = '000000000000000002';
+$indRetificacao = 2; // 1 - para arquivo original 2 - para arquivo de retificação espontânea 3 – para arquivo de retificação a pedido
 $tpAmb = 2;
-$evt->tagEvento($id, $indRetificacao, $tpAmb);
+$recibo = '111-11-1111-11';
+$evt->tagEvento($id, $indRetificacao, $tpAmb, $recibo);
 
 //########################################################################
 $cnpj = '99999090910270';

@@ -85,8 +85,21 @@ abstract class Factory extends BaseMake
             throw new InvalidArgumentException("Uma configuração valida deve ser passada!");
         }
         
-        $this->pkcs = new Pkcs12($this->objConfig->pathCertsFiles, $this->objConfig->cnpj, '', '', '', $ignore);
-        $this->pkcs->loadPfxFile($this->objConfig->pathCertsFiles.$this->objConfig->certPfxName, $this->objConfig->certPassword, true, $ignore, false);
+        $this->pkcs = new Pkcs12(
+            $this->objConfig->pathCertsFiles,
+            $this->objConfig->cnpj,
+            '',
+            '',
+            '',
+            $ignore
+        );
+        $this->pkcs->loadPfxFile(
+            $this->objConfig->pathCertsFiles.$this->objConfig->certPfxName,
+            $this->objConfig->certPassword,
+            true,
+            $ignore,
+            false
+        );
     }
     
     /**
@@ -183,7 +196,13 @@ abstract class Factory extends BaseMake
     public function monta()
     {
         $this->eFinanceira = $this->dom->createElement("eFinanceira");
-        $this->eFinanceira->setAttribute("xmlns", "http://www.eFinanceira.gov.br/schemas/".$this->signTag."/".$this->objConfig->schemes);
+        $this->eFinanceira->setAttribute(
+            "xmlns",
+            "http://www.eFinanceira.gov.br/schemas/"
+                . $this->signTag
+                . "/"
+            . $this->objConfig->schemes
+        );
         $this->dom->appChild($this->evt, $this->ide, "Falta CadDeclarante");
         $this->dom->appChild($this->evt, $this->info, "Falta CadDeclarante");
         
@@ -205,7 +224,16 @@ abstract class Factory extends BaseMake
         if (empty($xml)) {
             $xml = $this->xml;
         }
-        $xsdfile = dirname(dirname(dirname(__FILE__))).DIRECTORY_SEPARATOR.'schemes'.DIRECTORY_SEPARATOR.$this->objConfig->schemes.DIRECTORY_SEPARATOR.$this->signTag.'-'.$this->objConfig->schemes.'.xsd';
+        $xsdfile = dirname(dirname(dirname(__FILE__)))
+            . DIRECTORY_SEPARATOR
+            . 'schemes'
+            . DIRECTORY_SEPARATOR
+            . $this->objConfig->schemes
+            . DIRECTORY_SEPARATOR
+            . $this->signTag
+            . '-'
+            . $this->objConfig->schemes
+            . '.xsd';
         if (! ValidXsd::validar($xml, $xsdfile)) {
             $this->errors = ValidXsd::$errors;
             return false;
