@@ -198,7 +198,32 @@ $reportavel = [];
 //esse método irá gerar um conjunto de proprietários com 1 ou mais registros
 $evt->proprietarios($tpNI, $nIProprietario, $nIIF, $nome, $dataNasc, $endereco, $pais, $paisResid, $paisNacionalidade, $reportavel);
 
+//########################################################################
+//Este campo deve ser preenchido com o ano e o mês a que se referem as informações do Evento, no formato AAAAMM. Deve
+//ser considerado o “regime de caixa” para a referência das informações sobre débitos, créditos e pagamentos acumulados, ou seja,
+//o mês a ser considerado é aquele no qual os valores foram efetivamente debitados, creditados ou pagos. Exceção: é admitido o
+//preenchimento com MM=13 exclusivamente nos casos de planos de previdência que possuem pagamentos referentes à
+//competência 13 (abono anual).
+$anomes = '';
 
+
+$tpConta = '';
+$subTpConta = '';
+$tpNumConta = '';
+$numConta = '';
+$tpRelacaoDeclarado = '';
+$noTitulares = '';
+$totCreditos = '';
+$totDebitos = '';
+$totCreditosMesmaTitularidade = '';
+$totDebitosMesmaTitularidade = '';
+$tpPgto = '';
+$totPgtosAcum = '';
+$totCompras = '';
+$totVendas = '';
+$totTransferencias = '';
+
+$evt->movFin($anomes, $tpConta, $subTpConta, $tpNumConta, $numConta, $tpRelacaoDeclarado, $noTitulares, $totCreditos, $totDebitos, $totCreditosMesmaTitularidade, $totDebitosMesmaTitularidade, $tpPgto, $totPgtosAcum, $totCompras, $totVendas, $totTransferencias)
 
 //########################################################################
 $evt->monta();

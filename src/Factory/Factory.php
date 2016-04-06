@@ -57,11 +57,12 @@ abstract class Factory extends BaseMake
      * Recebe o arquivo de configuração em uma string json ou em um path de arquivo
      *
      * @param string $config
+     * @param bool $ignore
      */
-    public function __construct($config = '')
+    public function __construct($config = '', $ignore = false)
     {
         parent::__construct();
-        $this->loadConfig($config);
+        $this->loadConfig($config, $ignore);
     }
     
     /**
@@ -69,8 +70,9 @@ abstract class Factory extends BaseMake
      * carrega o certificado
      *
      * @param string $config
+     * @param bool $ignore
      */
-    protected function loadConfig($config = '')
+    protected function loadConfig($config = '', $ignore = false)
     {
         if (is_file($config)) {
             $config = FilesFolders::readFile($config);
@@ -82,8 +84,9 @@ abstract class Factory extends BaseMake
         if (! is_object($this->objConfig)) {
             throw new InvalidArgumentException("Uma configuração valida deve ser passada!");
         }
-        $this->pkcs = new Pkcs12($this->objConfig->pathCertsFiles, $this->objConfig->cnpj);
-        $this->pkcs->loadPfxFile($this->objConfig->pathCertsFiles.$this->objConfig->certPfxName, $this->objConfig->certPassword, true, false, false);
+        
+        $this->pkcs = new Pkcs12($this->objConfig->pathCertsFiles, $this->objConfig->cnpj, '', '','', $ignore);
+        $this->pkcs->loadPfxFile($this->objConfig->pathCertsFiles.$this->objConfig->certPfxName, $this->objConfig->certPassword, true, $ignore, false);
     }
     
     /**
@@ -191,11 +194,19 @@ abstract class Factory extends BaseMake
         $this->xml = $this->dom->saveXML();
     }
     
-    public function valida()
+    /**
+     * Valida o xml contra o xsd
+     * 
+     * @param string $xml
+     * @return boolean
+     */
+    public function valida($xml = '')
     {
+        if (empty($xml)) {
+            $xml = $this->xml;
+        }
         $xsdfile = dirname(dirname(dirname(__FILE__))).DIRECTORY_SEPARATOR.'schemes'.DIRECTORY_SEPARATOR.$this->objConfig->schemes.DIRECTORY_SEPARATOR.$this->signTag.'-'.$this->objConfig->schemes.'.xsd';
-        //$xsd = FilesFolders::readFile($xsdfile);
-        if (!ValidXsd::validar($this->xml, $xsdfile)) {
+        if (! ValidXsd::validar($xml, $xsdfile)) {
             $this->errors = ValidXsd::$errors;
             return false;
         }
