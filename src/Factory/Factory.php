@@ -85,7 +85,7 @@ abstract class Factory extends BaseMake
             throw new InvalidArgumentException("Uma configuração valida deve ser passada!");
         }
         
-        $this->pkcs = new Pkcs12($this->objConfig->pathCertsFiles, $this->objConfig->cnpj, '', '','', $ignore);
+        $this->pkcs = new Pkcs12($this->objConfig->pathCertsFiles, $this->objConfig->cnpj, '', '', '', $ignore);
         $this->pkcs->loadPfxFile($this->objConfig->pathCertsFiles.$this->objConfig->certPfxName, $this->objConfig->certPassword, true, $ignore, false);
     }
     
@@ -196,7 +196,7 @@ abstract class Factory extends BaseMake
     
     /**
      * Valida o xml contra o xsd
-     * 
+     *
      * @param string $xml
      * @return boolean
      */
