@@ -39,7 +39,7 @@ class Exclusao extends Factory
     
     /**
      * Cria a tag info
-     * 
+     *
      * @param string $nrReciboEvento
      * @return Dom
      */

@@ -30,35 +30,27 @@ class Movimento extends Factory
 
     public function ideDeclarado(
         $tpNI,
-        //1|CPF
-        //2|CNPJ
-        //3|NIF Pessoa Fisica
-        //4|NIF Pessoa Jurddica
-        //5|Passaporte
-        //6|Numero do PIS
-        //7|Identidade Mercosul
-        //99|Sem NI
         $tpDeclarado,
         $nIDeclarado,
+        $nIIF,    
         $nomeDeclarado,
+        $dataNasc,    
         $enderecoLivre,
-        $pais
+        $pais,
+        $paisResid,
+        $paisNacionalidade    
     ) {
         
     }
     
-    public function nifDeclarado($numeroNIF, $paisEmissaoNIF)
-    {
-        
-    }
 
     public function proprietarios(
         $tpNI,
         $nIProprietario,
-        $numeroNIF,
-        $paisEmissaoNIF,
+        $nIIF,
         $nome,
-        $enderecoLivre,
+        $dataNasc,            
+        $endereco,
         $pais,
         $paisResid,
         $paisNacionalidade,

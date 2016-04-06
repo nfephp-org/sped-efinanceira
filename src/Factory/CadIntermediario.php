@@ -3,10 +3,10 @@
 namespace NFePHP\eFinanc\Factory;
 
 /**
- * Classe construtora do evento de Cadastro do Patrocinado
+ * Classe construtora do evento de Cadastro dos Intermediarios
  *
  * @category   NFePHP
- * @package    NFePHP\eFinanc\Factory\CadPatrocinado
+ * @package    NFePHP\eFinanc\Factory\CadIntermediario
  * @copyright  Copyright (c) 2016
  * @license    http://www.gnu.org/licenses/lesser.html LGPL v3
  * @author     Roberto L. Machado <linux.rlm at gmail dot com>
@@ -15,7 +15,7 @@ namespace NFePHP\eFinanc\Factory;
 
 use NFePHP\eFinanc\Factory\Factory;
 
-class CadPatrocinado extends Factory
+class CadIntermediario extends Factory
 {
 
     /**
@@ -29,7 +29,7 @@ class CadPatrocinado extends Factory
      * estabelece qual a tag será assinada
      * @var string
      */
-    protected $signTag = 'evtCadPatrocinado';
+    protected $signTag = 'evtCadIntermediario';
    
     /**
      * Faz a premontagem se necessário
@@ -44,38 +44,45 @@ class CadPatrocinado extends Factory
      * Cria a tag Info
      *
      * @param string $giin
+     * @param string $tpNI
+     * @param string $nIIntermediario
      * @param string $nome
      * @param string $endereco
-     * @param string $municipio
-     * @param string $uf
      * @param string $pais
      * @param string $paisResidencia
      * @return Dom
      */
-    public function tagInfo($giin, $cnpj, $nome, $endereco, $municipio, $pais, $paisResidencia)
+    public function tagInfo($giin, $tpNI, $nIIntermediario, $nome, $endereco, $pais, $paisResidencia)
     {
-        $identificador = 'tag infoPatrocinado ';
-        $info = $this->dom->createElement("infoPatrocinado");
+        $identificador = 'tag infoIntermediario ';
+        $info = $this->dom->createElement("infoIntermediario");
         $this->dom->addChild(
             $info,
             "GIIN",
             $giin,
             true,
-            $identificador . ""
+            $identificador . "Informar GIIN (Global Intermediary Identification Number)"
         );
         $this->dom->addChild(
             $info,
-            "CNPJ",
-            $cnpj,
+            "tpNI",
+            $tpNI,
             true,
-            $identificador . ""
+            $identificador . "Tipo de NI do intermediário"
         );
         $this->dom->addChild(
             $info,
-            "nomePatrocinado",
+            "NIIntermediario",
+            $nIIntermediario,
+            true,
+            $identificador . "Número de identificação do Intermediário"
+        );
+        $this->dom->addChild(
+            $info,
+            "nomeIntermediario",
             $nome,
             true,
-            $identificador . "Nome do patrocinado"
+            $identificador . "Informar a razão social do Intermediário"
         );
         
         $infoadress = $this->dom->createElement("endereco");
@@ -84,21 +91,14 @@ class CadPatrocinado extends Factory
             "enderecoLivre",
             $endereco,
             true,
-            $identificador . "Endereco do patrocinado"
-        );
-        $this->dom->addChild(
-            $infoadress,
-            "municipio",
-            $municipio,
-            true,
-            $identificador . "Municipio do patrocinado"
+            $identificador . "Endereço do Intermediário"
         );
         $this->dom->addChild(
             $infoadress,
             "pais",
             $pais,
             true,
-            $identificador . "Sigla do pais do Patrocinado"
+            $identificador . "Sigla do pais"
         );
         $this->dom->appChild($info, $infoadress);
         
@@ -107,7 +107,7 @@ class CadPatrocinado extends Factory
             "paisResidencia",
             $paisResidencia,
             true,
-            $identificador . "Sigla do pais residencia do Patrocinado"
+            $identificador . "Sigla do pais residencia"
         );
         $this->info = $info;
         return $info;
