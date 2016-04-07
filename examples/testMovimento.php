@@ -223,7 +223,7 @@ $totCompras = '';
 $totVendas = '';
 $totTransferencias = '';
 
-$evt->movFin($anomes, $tpConta, $subTpConta, $tpNumConta, $numConta, $tpRelacaoDeclarado, $noTitulares, $totCreditos, $totDebitos, $totCreditosMesmaTitularidade, $totDebitosMesmaTitularidade, $tpPgto, $totPgtosAcum, $totCompras, $totVendas, $totTransferencias)
+$evt->movFin($anomes, $tpConta, $subTpConta, $tpNumConta, $numConta, $tpRelacaoDeclarado, $noTitulares, $totCreditos, $totDebitos, $totCreditosMesmaTitularidade, $totDebitosMesmaTitularidade, $tpPgto, $totPgtosAcum, $totCompras, $totVendas, $totTransferencias);
 
 //########################################################################
 $evt->monta();
