@@ -2,8 +2,22 @@
 
 namespace NFePHP\eFinanc;
 
-class Tools
+/**
+ * Classe Tools, executa a comunicação com o webservice do e-Financeira
+ *
+ * @category   NFePHP
+ * @package    NFePHP\eFinanc\Factory\Tools
+ * @copyright  Copyright (c) 2016
+ * @license    http://www.gnu.org/licenses/lesser.html LGPL v3
+ * @author     Roberto L. Machado <linux.rlm at gmail dot com>
+ * @link       http://github.com/nfephp-org/sped-efinanceira for the canonical source repository
+ */
+
+use NFePHP\Common\Base\BaseTools;
+
+class Tools extends BaseTools
 {
+    
     public $tpAmb = 2;
     public $url = [
         1 => [
@@ -16,11 +30,9 @@ class Tools
         ]
     ];
     
-    public function __construct()
-    {
-        
-    }
-    
+    protected $xmlns = "http://sped.fazenda.gov.br/";
+
+   
     /**
      * Consulta informações cadastrais do Declarante
      *
@@ -31,6 +43,8 @@ class Tools
      */
     public function consultarInformacoesCadastrais($cnpjDeclarante, &$aResp)
     {
+        
+        $msg = "<ConsultarInformacoesCadastrais><cnpj>$cnpjDeclarante</cnpj></ConsultarInformacoesCadastrais>";
         return '';
     }
     
@@ -47,6 +61,12 @@ class Tools
      */
     public function consultarListaEFinanceira($cnpjDeclarante, $sitInfo, $dtInicio, $dtFim, &$aResp)
     {
+        $msg = "<ConsultarListaEFinanceira>"
+            . "<cnpj>$cnpjDeclarante</cnpj>"
+            . "<situacaoEFinanceira>$sitInfo</situacaoEFinanceira>"
+            . "<dataInicio>$dtInicio</dataInicio>"
+            . "<dataFim>$dtFim</dataFim>"
+            . "</ConsultarListaEFinanceira>";
         return '';
     }
     
@@ -74,6 +94,15 @@ class Tools
         $numNI,
         &$aResp
     ) {
+        $msg = "<ConsultarInformacoesMovimento>"
+            . "<cnpj>$cnpjDeclarante</cnpj>"
+            . "<situacaoInformacao>$sitInfo</situacaoInformacao>"
+            . "<anoMesInicioVigencia>$anomesIni</anoMesInicioVigencia>"
+            . "<anoMesTerminoVigencia>$anomesFim</anoMesTerminoVigencia>"
+            . "<tipoMovimento>$tpMov</tipoMovimento>"
+            . "<tipoIdentificacao>$tpNI</tipoIdentificacao>"
+            . "<identificacao>$numNI</identificacao>"
+            . "</ConsultarInformacoesMovimento>";
         return '';
     }
     
@@ -90,6 +119,12 @@ class Tools
      */
     public function consultarInformacoesIntermediario($cnpjDeclarante, $gIIN, $tpNI, $numNI, &$aResp)
     {
+        $msg = "<ConsultarInformacoesIntermediario>"
+            . "<cnpj>$cnpjDeclarante</cnpj>"
+            . "<GINN>$gIIN</GINN>"
+            . "<TipoNI>$tpNI</TipoNI>"
+            . "<NumeroIdentificacao>$numNI</NumeroIdentificacao>"
+            . "</ConsultarInformacoesIntermediario>";
         return '';
     }
     
@@ -105,6 +140,11 @@ class Tools
      */
     public function consultarInformacoesPatrocinado($cnpjDeclarante, $cnpjPatrocinado, $gIIN, &$aResp)
     {
+        $msg = "<ConsultarInformacoesPatrocinado>"
+            . "<cnpj>$cnpjDeclarante</cnpj>"
+            . "<GINN>$gIIN</GINN>"
+            . "<NumeroIdentificacao>$cnpjPatrocinado</NumeroIdentificacao>"
+            . "</ConsultarInformacoesPatrocinado>";
         return '';
     }
    
@@ -141,6 +181,7 @@ class Tools
         }
         $lote .= "</loteEventos>";
         $lote .= "</eFinanceira>";
+        
         return '';
     }
 }
