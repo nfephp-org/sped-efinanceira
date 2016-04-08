@@ -13,25 +13,23 @@ namespace NFePHP\eFinanc\Factory;
  * @link       http://github.com/nfephp-org/sped-efinanceira for the canonical source repository
  */
 
-use NFePHP\eFinanc\Factory\Factory;
+use NFePHP\eFinanc\Factory\MovProprietario;
 
-class Movimento extends Factory
+class Movimento extends MovProprietario
 {
-    /**
-     * Conjunto de proprietários
-     * Array de objetos Dom
-     *
-     * @var array
-     */
-    protected $aProp;
-
     /**
      * Conjunto de movimentos
      * Array de objetos Dom
      *
      * @var array
      */
-    protected $aMov;
+    protected $aConta = array();
+    
+    /**
+     * 
+     * @var Dom
+     */
+    protected $mesCaixa;
     /**
      * Conjunto de Medidas Judiciais de Contas
      * para cada conta
@@ -40,14 +38,7 @@ class Movimento extends Factory
      * @var array
      */
     protected $aContaMedJudic = array();
-    /**
-     * Conjunto de Medidas Judiciais de Cambio de Contas
-     * para cada conta
-     * Array de objetos Dom
-     *
-     * @var array
-     */
-    protected $aCambioMedJudic = array();
+ 
     
     /**
      * Conjunto de Paises Reportáveis
@@ -56,35 +47,28 @@ class Movimento extends Factory
      *
      * @var array
      */
-    protected $aMovRep = array();
+    protected $aContaRep = array();
+    
+    protected $aContaIntermediario = array();
+
+    protected $aContaFundo = array();
+    
+    protected $aContaBalanco = array();
+
+    protected $aContaPgtosAcum = array();
+    
+    protected $cambio = array();
+
     /**
-     * Conjunto de identificadores NIIF do declarado
+     * Conjunto de Medidas Judiciais de Cambio de Contas
+     * para cada conta
      * Array de objetos Dom
      *
      * @var array
      */
-    protected $aDeclaradoNIF = array();
+    protected $aCambioMedJudic = array();   
     
-    protected $aDeclaradoPaisResid = array();
-    
-    protected $aDeclaradoPaisNac = array();
-    
-    protected $aTpdeclarado = array();
-    
-    protected $aProprietarioNIF = array();
-
-    protected $aProprietarioPaisResid = array();
-    
-    protected $aProprietarioPaisNac = array();
-
-    protected $aProprietarioReportavel = array();
-
-    /**
-     * Objeto Dom::class Tag ideDeclarado
-     * @var Dom
-     */
-    protected $ideDeclarado;
-
+     
     /**
      * estabelece qual a tag será assinada
      * @var string
@@ -93,288 +77,38 @@ class Movimento extends Factory
 
     protected function premonta()
     {
-        return;
-    }
-    
-    /**
-     * Cria as tags NIF do declarado
-     * podem existir ZERO ou mais
-     *
-     * @param string $numeroNIF
-     * @param string $paisEmissao
-     * @return Dom tag NIF
-     */
-    public function declaradoNIF($numeroNIF, $paisEmissao)
-    {
-        $nif = $this->zNIF($numeroNIF, $paisEmissao);
-        $this->aDeclaradoNIF[] = $nif;
-        return $nif;
-    }
-
-    /**
-     * Cria as tags NIF do proprietario
-     * podem existir ZERO ou mais
-     *
-     * @param string $nIProprietario identificação do proprietário
-     * @param string $numeroNIF
-     * @param string $paisEmissao
-     * @return Dom tag NIF
-     */
-    public function proprietarioNIF($nIProprietario, $numeroNIF, $paisEmissao)
-    {
-        $nif = $this->zNIF($numeroNIF, $paisEmissao);
-        $this->aProprietarioNIF[$nIProprietario][] = $nif;
-        return $nif;
-    }
-    
-    /**
-     * Crias as tags PaisResid do declarado
-     * podem existir ZERO ou mais
-     *
-     * @param string $pais
-     * @return Dom tag PaisResid
-     */
-    public function declaradoPaisResid($pais)
-    {
-        $tpais = $this->zPais($pais, 'PaisResid');
-        $this->aPaisResidDeclarado[] = $tpais;
-        return $tpais;
-    }
-    /**
-     * Crias as tags PaisNacionalidade do declarado
-     * podem existir ZERO ou mais
-     *
-     * @param string $pais
-     * @return Dom tag PaisResid
-     */
-    public function declaradoPaisNac($pais)
-    {
-        $tpais = $this->zPais($pais, 'PaisNacionalidade');
-        $this->aPaisNacDeclarado[] = $tpais;
-        return $tpais;
-    }
-    
-    /**
-     * Crias as tags PaisResid do declarado
-     * podem existir ZERO ou mais
-     *
-     * @param string $nIProprietario identificação do proprietário
-     * @param string $pais
-     * @return Dom tag PaisResid
-     */
-    public function proprietarioPaisResid($nIProprietario, $pais)
-    {
-        $tpais = $this->zPais($pais, 'PaisResid');
-        $this->aPaisResidProprietario[$nIProprietario][] = $tpais;
-        return $tpais;
-    }
-    /**
-     * Crias as tags PaisNacionalidade do declarado
-     * podem existir ZERO ou mais
-     *
-     * @param string $nIProprietario identificação do proprietário
-     * @param string $pais
-     * @return Dom tag PaisResid
-     */
-    public function proprietarioPaisNac($nIProprietario, $pais)
-    {
-        $tpais = $this->zPais($pais, 'PaisNacionalidade');
-        $this->aPaisNacProprietario[$nIProprietario][] = $tpais;
-        return $tpais;
-    }
-    
-    /**
-     * Cria as tags Pais
-     * podem existir ZERO ou mais
-     *
-     * @param string $pais
-     * @param string $tag  PaisNacionalidade ou PaisResid
-     * @return Dom tag PaisNacionalidade ou PaisResid
-     */
-    protected function zPais($pais, $tag)
-    {
-        $paisNac = $this->dom->createElement($tag);
-        $this->dom->addChild(
-            $paisNac,
-            "Pais",
-            $pais,
-            true,
-            $identificador . "Pais $tag do Declarado"
-        );
-        return $paisNac;
-    }
-    
-    /**
-     * Cria array com os tipos de declarado
-     * podem ser ZERO ou mais
-     *
-     * @param string $tpDeclarado
-     * @return string
-     */
-    public function declaradoTipo($tpDeclarado)
-    {
-        $this->aTpdeclarado[] = $tpDeclarado;
-        return $tpDeclarado;
-    }
-    
-    /**
-     * Cria a tag ideDeclarado
-     *
-     * @param string $tpNI          Obrigatorio
-     * @param string $nIDeclarado   Obrigatorio
-     * @param string $nomeDeclarado Obrigatorio
-     * @param string $dataNasc      Obrigatorio
-     * @param string $enderecoLivre se não exisitr deixar uma string vazia
-     * @param string $pais          Obrigatorio
-     * @return Dom
-     */
-    public function declarado(
-        $tpNI,
-        $tpDeclarado,
-        $nIDeclarado,
-        $nomeDeclarado,
-        $dataNasc,
-        $enderecoLivre,
-        $pais
-    ) {
-        $identificador = 'tag ideDeclarado ';
-        $this->ideDeclarado = $this->dom->createElement("ideDeclarado");
-        $this->dom->addChild(
-            $this->ideDeclarado,
-            "tpNI",
-            $tpNI,
-            true,
-            $identificador . "tipo de NI "
-        );
-        $this->dom->addChild(
-            $this->ideDeclarado,
-            "NIDeclarado",
-            $nIDeclarado,
-            true,
-            $identificador . "NI do declarado "
-        );
-        $this->dom->addChild(
-            $this->ideDeclarado,
-            "NomeDeclarado",
-            $nomeDeclarado,
-            true,
-            $identificador . "Nome do Declarado"
-        );
-        $this->dom->addChild(
-            $this->ideDeclarado,
-            "DataNasc",
-            $dataNasc,
-            false,
-            $identificador . "Nome do Declarado"
-        );
-        $this->dom->addChild(
-            $this->ideDeclarado,
-            "EnderecoLivre",
-            $enderecoLivre,
-            false,
-            $identificador . "Endereco Livre do Declarado"
-        );
-        $pais = $this->dom->createElement("PaisEndereco");
-        $this->dom->addChild(
-            $pais,
-            "Pais",
-            $pais,
-            true,
-            $identificador . "Pais Endereco do Declarado"
-        );
-        $this->dom->appChild($this->ideDeclarado, $pais);
-        return $this->ideDeclarado;
-    }
-    
-    /**
-     * Cria o conjunto de paises reportaveis para o proprietario
-     *
-     * @param string $nIProprietario identificação do proprietário
-     * @param string $pais
-     * @return Dom tag Reportavel
-     */
-    public function proprietarioReportavel($nIProprietario, $pais)
-    {
-        $reportPais = $this->dom->createElement("Reportavel");
-        $this->dom->addChild(
-            $reportPais,
-            "Pais",
-            $pais,
-            true,
-            $identificador . "Pais Nacionalidade do Declarado"
-        );
-        $this->aReportavelProprietario[$nIProprietario][] = $reportPais;
-        return $reportPais;
-    }
-    
-    /**
-     * Cria o conjunto de tag de proprietarios
-     *
-     * @param string $tpNI
-     * @param string $nIProprietario
-     * @param string $nome
-     * @param string $dataNasc
-     * @param string $endereco
-     * @param string $pais
-     * @return Dom tag proprietario
-     */
-    public function proprietario(
-        $tpNI,
-        $nIProprietario,
-        $nome,
-        $dataNasc,
-        $endereco,
-        $pais,
-        $reportavel
-    ) {
-        $identificador = 'tag Proprietarios ';
-        $proprietario = $this->dom->createElement("Proprietarios");
-        $this->dom->addChild(
-            $proprietario,
-            "tpNI",
-            $tpNI,
-            true,
-            $identificador . "tipo de NI "
-        );
-        $this->dom->addChild(
-            $proprietario,
-            "NIProprietario",
-            $nIProprietario,
-            true,
-            $identificador . "NI do proprietário"
-        );
-        $this->dom->addChild(
-            $proprietario,
-            "Nome",
-            $nome,
-            true,
-            $identificador . "Nome do Proprietário"
-        );
-        $this->dom->addChild(
-            $proprietario,
-            "EnderecoLivre",
-            $enderecoLivre,
-            false,
-            $identificador . "Endereco Livre do Proprietario"
-        );
-        $pais = $this->dom->createElement("PaisEndereco");
-        $this->dom->addChild(
-            $pais,
-            "Pais",
-            $pais,
-            true,
-            $identificador . "Pais Endereco do Declarado"
-        );
-        $this->dom->appChild($proprietario, $pais);
-        $this->dom->addChild(
-            $proprietario,
-            "DataNasc",
-            $dataNasc,
-            false,
-            $identificador . "Nome do Proprietário"
-        );
-        $this->aProp[$nIProprietario] = $proprietario;
-        return $proprietario;
+        parent::premonta();
+        if (empty($this->mesCaixa)) {
+            return;
+        }
+        //listar os numeros das contas registradas
+        $aCT = array_keys($this->aConta);
+        foreach ($aCT as $num) {
+            //verificar se existem paises reportáveis na conta
+            if (array_key_exists($num, $this->aContaRep)) {
+                foreach($this->aContaRep[$num] as $rep) {
+                    $this->dom->appChildBefore($this->aConta[$num], $rep, "tpConta");
+                }    
+            }
+            //verificar se existem balancos na conta
+            if (array_key_exists($num, $this->aContaBalanco)) {
+                $this->dom->appChild($this->aConta[$num], $this->aContaBalanco[$num]);
+            }
+            //verificar se existem pagamentos acumulados
+            if (array_key_exists($num, $this->aContaPgtosAcum)) {
+                foreach($this->aContaPgtosAcum[$num] as $pag) {
+                    $this->dom->appChild($this->aConta[$num], $pag);
+                }
+            }
+            $conta = $this->dom->createElement("Conta");
+            $this->dom->appChild($conta, $this->aConta[$num]);
+            $this->dom->appChild($this->mesCaixa, $conta);
+            $conta = null;
+        }
+        if (!empty($this->cambio)) {
+            $this->dom->appChild($this->mesCaixa, $this->cambio);
+        }
+        $this->dom->appChild($this->evt, $this->mesCaixa);
     }
     
     /**
@@ -400,7 +134,7 @@ class Movimento extends Factory
         $dtCassacao
     ) {
         $medJudic = $this->zMedJudic($numProcJud, $vara, $secJud, $subSecJud, $dtConcessao, $dtCassacao);
-        $this->aMovMed[$numConta] = $medJudic;
+        $this->aContaMovMed[$numConta][] = $medJudic;
         return $medJudic;
     }
     
@@ -414,15 +148,8 @@ class Movimento extends Factory
      */
     public function contaReportavel($numConta, $pais)
     {
-        $reportavel = $this->dom->createElement("Reportavel");
-        $this->dom->addChild(
-            $reportavel,
-            "Pais",
-            $pais,
-            true,
-            $identificador . "Pais  "
-        );
-        $this->aMovRep[$numConta] = $reportavel;
+        $reportavel = $this->zPais($pais, "Reportavel");
+        $this->aContaRep[$numConta][] = $reportavel;
         return $reportavel;
     }
     
@@ -480,7 +207,7 @@ class Movimento extends Factory
             false,
             $identificador . "NI "
         );
-        $this->aIntermediarioConta[$numConta][] = $intermediario;
+        $this->aContaIntermediario[$numConta][] = $intermediario;
         return $intermediario;
     }
     
@@ -509,10 +236,22 @@ class Movimento extends Factory
             true,
             $identificador . "CNPJ do fundo "
         );
-        $this->aFundoConta[$numConta][] = $fundo;
+        $this->aContaFundo[$numConta][] = $fundo;
         return $fundo;
     }
     
+    /**
+     * Cria o conjunto de contas
+     * 
+     * @param string $numConta
+     * @param string $tpConta
+     * @param string $subTpConta
+     * @param string $tpNumConta
+     * @param string $tpRelacaoDeclarado
+     * @param string $noTitulares
+     * @param string $dtEncerramentoConta se não estiver encerrada seixe uma string vazia
+     * @return Dom
+     */
     public function conta(
         $numConta,
         $tpConta,
@@ -655,7 +394,7 @@ class Movimento extends Factory
                 "tpPgto",
                 $tpp,
                 true,
-                $identificador . "tipode pagamento"
+                $identificador . "tipo de pagamento"
             );
         }
         $this->dom->addChild(
@@ -665,13 +404,48 @@ class Movimento extends Factory
             true,
             $identificador . "Total de pagamentos acumulados"
         );
-        $this->aContaPgtosAcum[$numConta] = $pgtos;
+        $this->aContaPgtosAcum[$numConta][] = $pgtos;
         return $pgtos;
     }
     
-    public function contaCambio($numConta, $totCompras, $totVendas, $totTransferencias)
-    {
-        
+    /**
+     * Cria a tag Cambio
+     * 
+     * @param string $totCompras
+     * @param string $totVendas
+     * @param string $totTransferencias
+     * @return Dom
+     */
+    public function cambio(
+        $totCompras,
+        $totVendas,
+        $totTransferencias
+    ) {
+        $identificador = 'tag Cambio';
+        $cambio = $this->dom->createElement("Cambio");
+        $this->dom->addChild(
+            $cambio,
+            "totCompras",
+            $totCompras,
+            true,
+            $identificador . "Total de compras"
+        );
+        $this->dom->addChild(
+            $cambio,
+            "totVendas",
+            $totVendas,
+            true,
+            $identificador . "Total de vendas"
+        );
+        $this->dom->addChild(
+            $cambio,
+            "totTransferencias",
+            $totTransferencias,
+            true,
+            $identificador . "Total de transferencias"
+        );
+        $this->cambio = $cambio;
+        return $cambio;
     }
     
      /**
@@ -697,101 +471,7 @@ class Movimento extends Factory
         $dtCassacao
     ) {
         $medJudic = $this->zMedJudic($numProcJud, $vara, $secJud, $subSecJud, $dtConcessao, $dtCassacao);
-        $this->aCambioMedJudic[$numConta] = $medJudic;
-        return $medJudic;
-    }
-    
-    /**
-     * Cria as tags NIF do declarado e proprietario
-     * podem existir ZERO ou mais
-     *
-     * @param string $numeroNIF
-     * @param string $paisEmissao
-     * @return Dom tag NIF
-     */
-    protected function zNIF($numeroNIF, $paisEmissao)
-    {
-        $nif = $this->dom->createElement("NIF");
-        $this->dom->addChild(
-            $nif,
-            "NumeroNIF",
-            $numeroNIF,
-            true,
-            $identificador . "numero NIF "
-        );
-        $this->dom->addChild(
-            $nif,
-            "PaisEmissaoNIF",
-            $paisEmissao,
-            true,
-            $identificador . "Pais de Emissao do NIF "
-        );
-        return $nif;
-    }
-    
-    /**
-     * Cria o conjunto de tags  MedJudic
-     * Podem existir ZERO ou mais desse tipo
-     *
-     * @param string $numProcJud  Obrigatorio
-     * @param string $vara        Obrigatorio
-     * @param string $secJud      Obrigatorio
-     * @param string $subSecJud   Obrigatorio
-     * @param string $dtConcessao Obrigatorio
-     * @param string $dtCassacao  caso não exista deixe uma string vazia
-     * @return Dom tag MedJudic
-     */
-    protected function zMedJudic(
-        $numProcJud,
-        $vara,
-        $secJud,
-        $subSecJud,
-        $dtConcessao,
-        $dtCassacao
-    ) {
-        $medJudic = $this->dom->createElement("MedJudic");
-        $this->dom->addChild(
-            $medJudic,
-            "NumProcJud",
-            $numProcJud,
-            true,
-            $identificador . "Número do Processo Judicial "
-        );
-        $this->dom->addChild(
-            $medJudic,
-            "Vara",
-            $vara,
-            true,
-            $identificador . "Vara de Tramitação "
-        );
-        $this->dom->addChild(
-            $medJudic,
-            "SecJud",
-            $secJud,
-            true,
-            $identificador . "Seção judiciária "
-        );
-        $this->dom->addChild(
-            $medJudic,
-            "SubSecJud",
-            $subSecJud,
-            true,
-            $identificador . "SubSeção judiciária "
-        );
-        $this->dom->addChild(
-            $medJudic,
-            "dtConcessao",
-            $dtConcessao,
-            true,
-            $identificador . "Data da Concessão "
-        );
-        $this->dom->addChild(
-            $medJudic,
-            "dtCassacao",
-            $dtCassacao,
-            false,
-            $identificador . "Data da Data da Cassação "
-        );
+        $this->aContaCambioMedJudic[$numConta][] = $medJudic;
         return $medJudic;
     }
 }
