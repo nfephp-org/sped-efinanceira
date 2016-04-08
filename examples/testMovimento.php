@@ -189,5 +189,12 @@ $evt->monta();
 $evt->assina();
 
 //########################################################################
+//NÃO TEM XSD DISPONÍVEL
+//if (! $evt->valida()) {
+//    var_dump($evt->errors);
+//    exit();
+//}
+
+//########################################################################
 header('Content-type: text/xml; charset=UTF-8');
 echo $evt->getXML();

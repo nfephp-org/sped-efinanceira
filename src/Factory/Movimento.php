@@ -131,7 +131,11 @@ class Movimento extends MovProprietario
                 } else {
                     $notit = $this->aConta[$num]->getElementsByTagName('dtEncerramentoContas')->item(0);
                     if (! empty($notit)) {
-                        $this->dom->appChildBefore($this->aConta[$num], $this->aContaIntermediario[$num], 'dtEncerramentoContas');
+                        $this->dom->appChildBefore(
+                            $this->aConta[$num],
+                            $this->aContaIntermediario[$num],
+                            'dtEncerramentoContas'
+                        );
                     } else {
                         $this->dom->appChild($this->aConta[$num], $this->aContaIntermediario[$num]);
                     }
