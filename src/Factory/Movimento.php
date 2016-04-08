@@ -24,9 +24,8 @@ class Movimento extends MovProprietario
      * @var array
      */
     protected $aConta = array();
-    
     /**
-     * 
+     * Objeto Dom tag mesCaixa
      * @var Dom
      */
     protected $mesCaixa;
@@ -38,27 +37,52 @@ class Movimento extends MovProprietario
      * @var array
      */
     protected $aContaMedJudic = array();
- 
-    
     /**
      * Conjunto de Paises Reportáveis
-     * para cada anomes e conta
+     * para cada conta
      * Array de objetos Dom
      *
      * @var array
      */
     protected $aContaRep = array();
-    
+    /**
+     * Conjunto de Intermediarios
+     * para cada conta
+     * Array de objetos Dom
+     * 
+     * @var array
+     */
     protected $aContaIntermediario = array();
-
+    /**
+     * Conjunto de Fundos
+     * para cada conta
+     * Array de objetos Dom
+     * 
+     * @var array
+     */
     protected $aContaFundo = array();
-    
+    /**
+     * Conjunto de Balanços
+     * para cada conta
+     * Array de objetos Dom
+     * 
+     * @var array
+     */
     protected $aContaBalanco = array();
-
+    /**
+     * Conjunto de Pagamentos acumulados
+     * para cada conta
+     * Array de objetos Dom
+     * 
+     * @var array
+     */
     protected $aContaPgtosAcum = array();
     
-    protected $cambio = array();
-
+    /**
+     * Objeto Dom tag Cambio
+     * @var Dom
+     */
+    protected $cambio;
     /**
      * Conjunto de Medidas Judiciais de Cambio de Contas
      * para cada conta
@@ -67,14 +91,16 @@ class Movimento extends MovProprietario
      * @var array
      */
     protected $aCambioMedJudic = array();   
-    
-     
     /**
      * estabelece qual a tag será assinada
      * @var string
      */
     protected $signTag = 'evtMovOpFin';
-
+    
+    /**
+     * Premonta os objetos dessa classe 
+     * @return none
+     */
     protected function premonta()
     {
         parent::premonta();
@@ -85,11 +111,35 @@ class Movimento extends MovProprietario
         //listar os numeros das contas registradas
         $aCT = array_keys($this->aConta);
         foreach ($aCT as $num) {
+            //verificar se existem medidas judiciais para a conta
+            if (array_key_exists($num, $this->aContaMedJudic)) {
+                foreach($this->aContaMedJudic[$num] as $med) {
+                    $this->dom->appChildBefore($this->aConta[$num], $med, "tpConta");
+                }
+            }
             //verificar se existem paises reportáveis na conta
             if (array_key_exists($num, $this->aContaRep)) {
                 foreach($this->aContaRep[$num] as $rep) {
                     $this->dom->appChildBefore($this->aConta[$num], $rep, "tpConta");
                 }    
+            }
+            //verificar se existem intermediarios
+            if (array_key_exists($num, $this->aContaIntermediario)) {
+                $notit = $this->aConta[$num]->getElementsByTagName('NoTitulares')->item(0);
+                if (!empty($notit)) {
+                    $this->dom->appChildBefore($this->aConta[$num], $this->aContaIntermediario[$num], 'NoTitulares');
+                } else {
+                    $notit = $this->aConta[$num]->getElementsByTagName('dtEncerramentoContas')->item(0);    
+                    if (! empty($notit)) {
+                        $this->dom->appChildBefore($this->aConta[$num], $this->aContaIntermediario[$num], 'dtEncerramentoContas');
+                    } else {
+                        $this->dom->appChild($this->aConta[$num], $this->aContaIntermediario[$num]);
+                    }
+                }
+            }
+            //verificar se existem Fundos de insvestimento na conta
+            if (array_key_exists($num, $this->aContaFundo)) {
+                $this->dom->appChild($this->aConta[$num], $this->aContaFundo[$num]);
             }
             //verificar se existem balancos na conta
             if (array_key_exists($num, $this->aContaBalanco)) {
@@ -141,7 +191,7 @@ class Movimento extends MovProprietario
         $dtCassacao
     ) {
         $medJudic = $this->zMedJudic($numProcJud, $vara, $secJud, $subSecJud, $dtConcessao, $dtCassacao);
-        $this->aContaMovMed[$numConta][] = $medJudic;
+        $this->aContaMedJudic[$numConta][] = $medJudic;
         return $medJudic;
     }
     
@@ -198,23 +248,23 @@ class Movimento extends MovProprietario
             "GIIN",
             $giin,
             true,
-            $identificador . "GIIN (Global Intermediary Identification Number) "
+            "GIIN (Global Intermediary Identification Number) "
         );
         $this->dom->addChild(
             $intermediario,
             "tpNI",
             $tpNI,
             true,
-            $identificador . "Tipo de NI "
+            "Tipo de NI "
         );
         $this->dom->addChild(
             $intermediario,
             "NIIntermediario",
             $nIIntermediario,
             false,
-            $identificador . "NI "
+            "NI "
         );
-        $this->aContaIntermediario[$numConta][] = $intermediario;
+        $this->aContaIntermediario[$numConta] = $intermediario;
         return $intermediario;
     }
     
@@ -234,16 +284,16 @@ class Movimento extends MovProprietario
             "GIIN",
             $giin,
             true,
-            $identificador . "GIIN do fundo "
+            "GIIN do fundo "
         );
         $this->dom->addChild(
             $fundo,
             "CNPJ",
             $cnpj,
             true,
-            $identificador . "CNPJ do fundo "
+            "CNPJ do fundo "
         );
-        $this->aContaFundo[$numConta][] = $fundo;
+        $this->aContaFundo[$numConta] = $fundo;
         return $fundo;
     }
     

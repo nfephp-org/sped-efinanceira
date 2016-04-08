@@ -119,6 +119,27 @@ $tpPgto = ['FATCA503','FATCA502','FATCA501'];
 $totPgtosAcum = '15487,88';
 $evt->contaPgtosAcum($numConta, $tpPgto, $totPgtosAcum);
 
+$giin = '16546546879887878999';
+$tpNI = '1';
+$nIIntermediario = '514789154'; 
+$evt->contaIntermediario($numConta, $giin, $tpNI, $nIIntermediario);
+
+$numProcJud = '123456789';
+$vara = '111';
+$secJud = '11';
+$subSecJud = '1111';
+$dtConcessao = '2011-11-11';
+$dtCassacao = '';
+$evt->contaMedJudic($numConta,$numProcJud,$vara,$secJud,$subSecJud,$dtConcessao,$dtCassacao);
+
+$numProcJud = '222222222';
+$vara = '222';
+$secJud = '22';
+$subSecJud = '22222';
+$dtConcessao = '2012-12-12';
+$dtCassacao = '';
+$evt->contaMedJudic($numConta,$numProcJud,$vara,$secJud,$subSecJud,$dtConcessao,$dtCassacao);
+
 
 //DADOS DA CONTA 2
 $numConta = 'ABD12345';
@@ -141,6 +162,11 @@ $tpPgto = ['FATCA111'];
 $totPgtosAcum = '90,00';
 $evt->contaPgtosAcum($numConta, $tpPgto, $totPgtosAcum);
 
+$giin = '656598984544444';
+$cnpj = '55512325469841';
+$evt->contaFundo($numConta, $giin, $cnpj);
+
+
 //OPERAÇÕES DE CAMBIO
 $totCompras = '1508745,66';
 $totVendas = '58987,01';
@@ -154,6 +180,7 @@ $subSecJud = '23';
 $dtConcessao = '2015-12-31';
 $dtCassacao = '';
 $evt->cambioMedJudic($totTransferencias, $totVendas, $totCompras, $totPgtosAcum, $vlrUltDia, $totDebitosMesmaTitularidade);
+
 
 //########################################################################
 $evt->monta();
