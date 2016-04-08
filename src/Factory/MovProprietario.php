@@ -23,21 +23,45 @@ class MovProprietario extends MovDeclarado
      * @var array
      */
     protected $aProp;
-    
+    /**
+     * Conjunto de NIF dos proprietários
+     * Array de objetos Dom
+     *
+     * @var array
+     */
     protected $aProprietarioNIF = array();
-
+    /**
+     * Conjunto de Peises de residencia do proprietario
+     * Array de objetos Dom
+     *
+     * @var array
+     */
     protected $aProprietarioPaisResid = array();
-    
+    /**
+     * Conjunto de Peises de Nacionalidade do proprietario
+     * Array de objetos Dom
+     *
+     * @var array
+     */
     protected $aProprietarioPaisNac = array();
-
+    /**
+     * Conjunto de Peises de reportavies do proprietario
+     * Array de objetos Dom
+     *
+     * @var array
+     */
     protected $aProprietarioReportavel = array();
-
+    
+    /**
+     * Faz a premontagem dos dados dos proprietários
+     * @return none
+     */
     protected function premonta()
     {
         parent::premonta();
         if (empty($this->aProp)) {
             return;
-        }    
+        }
         //listar os numeros dos proprietários registrados
         $aPr = array_keys($this->aProp);
         foreach ($aPr as $num) {
@@ -53,13 +77,13 @@ class MovProprietario extends MovDeclarado
                 foreach ($this->aProprietarioPaisResid[$num] as $pais) {
                     $this->dom->appChild($this->aProp[$num], $pais);
                 }
-            }    
+            }
             //verificar se existem dados de nacionalidade
             if (array_key_exists($num, $this->aProprietarioPaisNac)) {
                 foreach ($this->aProprietarioPaisNac[$num] as $pais) {
                     $this->dom->appChild($this->aProp[$num], $pais);
                 }
-            }    
+            }
             //verificar se existem dados de reportaveis
             if (array_key_exists($num, $this->aProprietarioReportavel)) {
                 foreach ($this->aProprietarioReportavel[$num] as $pais) {
@@ -68,7 +92,7 @@ class MovProprietario extends MovDeclarado
             }
         }
         foreach ($this->aProp as $proprietario) {
-            $this->dom->appChild($this->evt, $proprietario);   
+            $this->dom->appChild($this->evt, $proprietario);
         }
     }
 
@@ -87,7 +111,6 @@ class MovProprietario extends MovDeclarado
         $this->aProprietarioNIF[$nIProprietario][] = $nif;
         return $nif;
     }
-    
  
     /**
      * Crias as tags PaisResid do declarado

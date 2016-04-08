@@ -49,7 +49,7 @@ class Movimento extends MovProprietario
      * Conjunto de Intermediarios
      * para cada conta
      * Array de objetos Dom
-     * 
+     *
      * @var array
      */
     protected $aContaIntermediario = array();
@@ -57,7 +57,7 @@ class Movimento extends MovProprietario
      * Conjunto de Fundos
      * para cada conta
      * Array de objetos Dom
-     * 
+     *
      * @var array
      */
     protected $aContaFundo = array();
@@ -65,7 +65,7 @@ class Movimento extends MovProprietario
      * Conjunto de Balanços
      * para cada conta
      * Array de objetos Dom
-     * 
+     *
      * @var array
      */
     protected $aContaBalanco = array();
@@ -73,7 +73,7 @@ class Movimento extends MovProprietario
      * Conjunto de Pagamentos acumulados
      * para cada conta
      * Array de objetos Dom
-     * 
+     *
      * @var array
      */
     protected $aContaPgtosAcum = array();
@@ -90,7 +90,7 @@ class Movimento extends MovProprietario
      *
      * @var array
      */
-    protected $aCambioMedJudic = array();   
+    protected $aCambioMedJudic = array();
     /**
      * estabelece qual a tag será assinada
      * @var string
@@ -98,7 +98,7 @@ class Movimento extends MovProprietario
     protected $signTag = 'evtMovOpFin';
     
     /**
-     * Premonta os objetos dessa classe 
+     * Premonta os objetos dessa classe
      * @return none
      */
     protected function premonta()
@@ -113,15 +113,15 @@ class Movimento extends MovProprietario
         foreach ($aCT as $num) {
             //verificar se existem medidas judiciais para a conta
             if (array_key_exists($num, $this->aContaMedJudic)) {
-                foreach($this->aContaMedJudic[$num] as $med) {
+                foreach ($this->aContaMedJudic[$num] as $med) {
                     $this->dom->appChildBefore($this->aConta[$num], $med, "tpConta");
                 }
             }
             //verificar se existem paises reportáveis na conta
             if (array_key_exists($num, $this->aContaRep)) {
-                foreach($this->aContaRep[$num] as $rep) {
+                foreach ($this->aContaRep[$num] as $rep) {
                     $this->dom->appChildBefore($this->aConta[$num], $rep, "tpConta");
-                }    
+                }
             }
             //verificar se existem intermediarios
             if (array_key_exists($num, $this->aContaIntermediario)) {
@@ -129,7 +129,7 @@ class Movimento extends MovProprietario
                 if (!empty($notit)) {
                     $this->dom->appChildBefore($this->aConta[$num], $this->aContaIntermediario[$num], 'NoTitulares');
                 } else {
-                    $notit = $this->aConta[$num]->getElementsByTagName('dtEncerramentoContas')->item(0);    
+                    $notit = $this->aConta[$num]->getElementsByTagName('dtEncerramentoContas')->item(0);
                     if (! empty($notit)) {
                         $this->dom->appChildBefore($this->aConta[$num], $this->aContaIntermediario[$num], 'dtEncerramentoContas');
                     } else {
@@ -147,7 +147,7 @@ class Movimento extends MovProprietario
             }
             //verificar se existem pagamentos acumulados
             if (array_key_exists($num, $this->aContaPgtosAcum)) {
-                foreach($this->aContaPgtosAcum[$num] as $pag) {
+                foreach ($this->aContaPgtosAcum[$num] as $pag) {
                     $this->dom->appChild($this->aConta[$num], $pag);
                 }
             }
@@ -159,7 +159,7 @@ class Movimento extends MovProprietario
         //carrega dados de cambio
         if (!empty($this->cambio)) {
             //insere medidas judiciais se existirem
-            foreach($this->aCambioMedJudic as $med) {
+            foreach ($this->aCambioMedJudic as $med) {
                 $this->dom->appChildBefore($this->cambio, $med, 'totCompras');
             }
             $this->dom->appChild($movOpFin, $this->cambio);
@@ -299,7 +299,7 @@ class Movimento extends MovProprietario
     
     /**
      * Cria o conjunto de contas
-     * 
+     *
      * @param string $numConta
      * @param string $tpConta
      * @param string $subTpConta
@@ -467,7 +467,7 @@ class Movimento extends MovProprietario
     
     /**
      * Cria a tag Cambio
-     * 
+     *
      * @param string $totCompras
      * @param string $totVendas
      * @param string $totTransferencias
