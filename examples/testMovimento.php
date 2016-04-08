@@ -147,6 +147,14 @@ $totVendas = '58987,01';
 $totTransferencias = '122879,11';
 $evt->cambio($totCompras, $totVendas, $totTransferencias);
 
+$numProcJud = '1234567890';
+$vara = '111';
+$secJud = '0202';
+$subSecJud = '23';
+$dtConcessao = '2015-12-31';
+$dtCassacao = '';
+$evt->cambioMedJudic($totTransferencias, $totVendas, $totCompras, $totPgtosAcum, $vlrUltDia, $totDebitosMesmaTitularidade);
+
 //########################################################################
 $evt->monta();
 

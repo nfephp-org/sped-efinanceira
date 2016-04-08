@@ -81,6 +81,7 @@ class Movimento extends MovProprietario
         if (empty($this->mesCaixa)) {
             return;
         }
+        $movOpFin = $this->dom->createElement("movOpFin");
         //listar os numeros das contas registradas
         $aCT = array_keys($this->aConta);
         foreach ($aCT as $num) {
@@ -102,12 +103,18 @@ class Movimento extends MovProprietario
             }
             $conta = $this->dom->createElement("Conta");
             $this->dom->appChild($conta, $this->aConta[$num]);
-            $this->dom->appChild($this->mesCaixa, $conta);
+            $this->dom->appChild($movOpFin, $conta);
             $conta = null;
         }
+        //carrega dados de cambio
         if (!empty($this->cambio)) {
-            $this->dom->appChild($this->mesCaixa, $this->cambio);
+            //insere medidas judiciais se existirem
+            foreach($this->aCambioMedJudic as $med) {
+                $this->dom->appChildBefore($this->cambio, $med, 'totCompras');
+            }
+            $this->dom->appChild($movOpFin, $this->cambio);
         }
+        $this->dom->appChild($this->mesCaixa, $movOpFin);
         $this->dom->appChild($this->evt, $this->mesCaixa);
     }
     
@@ -449,10 +456,9 @@ class Movimento extends MovProprietario
     }
     
      /**
-     * Cria o conjunto de tags Conta Cambio MedJudic
+     * Cria o conjunto de tags Cambio MedJudic
      * Podem existir ZERO ou mais desse tipo
      *
-     * @param string $numConta    Obrigatorio
      * @param string $numProcJud  Obrigatorio
      * @param string $vara        Obrigatorio
      * @param string $secJud      Obrigatorio
@@ -461,8 +467,7 @@ class Movimento extends MovProprietario
      * @param string $dtCassacao  caso não exista deixe uma string vazia
      * @return Dom tag MedJudic
      */
-    public function contaCambioMedJudic(
-        $numConta,
+    public function cambioMedJudic(
         $numProcJud,
         $vara,
         $secJud,
@@ -471,7 +476,7 @@ class Movimento extends MovProprietario
         $dtCassacao
     ) {
         $medJudic = $this->zMedJudic($numProcJud, $vara, $secJud, $subSecJud, $dtConcessao, $dtCassacao);
-        $this->aContaCambioMedJudic[$numConta][] = $medJudic;
+        $this->aCambioMedJudic[] = $medJudic;
         return $medJudic;
     }
 }
