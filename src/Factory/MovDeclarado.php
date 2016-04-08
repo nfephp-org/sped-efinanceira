@@ -17,22 +17,45 @@ use NFePHP\eFinanc\Factory\Factory;
 
 class MovDeclarado extends Factory
 {
+    /**
+     * Conjunto de NIF do declarado
+     * Array de objetos Dom
+     *
+     * @var array
+     */
     protected $aDeclaradoNIF = array();
-    
+    /**
+     * Conjunto de paises de residencia do declarado
+     * Array de objetos Dom
+     *
+     * @var array
+     */
     protected $aDeclaradoPaisResid = array();
-    
+    /**
+     * Conjunto de Nacionalidades do declarado
+     * Array de objetos Dom
+     *
+     * @var array
+     */
     protected $aDeclaradoPaisNac = array();
-    
+    /**
+     * Array de tipo de declarado como strings
+     *
+     * @var array
+     */
     protected $aTpdeclarado = array();
-    
+    /**
+     * Simulacro pois não existe info no movimento
+     *
+     * @var string
+     */
     protected $info = '';
-    
     /**
      * Objeto Dom::class Tag ideDeclarado
+     *
      * @var Dom
      */
     protected $ideDeclarado;
-
     /**
      * estabelece qual a tag será assinada
      * @var string
@@ -59,7 +82,7 @@ class MovDeclarado extends Factory
                 $this->dom->appChild($this->ideDeclarado, $pais);
             }
             $this->dom->appChild($this->evt, $this->ideDeclarado);
-        }    
+        }
     }
     
     /**
