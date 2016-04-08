@@ -204,8 +204,9 @@ abstract class Factory extends BaseMake
             . $this->objConfig->schemes
         );
         $this->dom->appChild($this->evt, $this->ide, "Falta CadDeclarante");
-        $this->dom->appChild($this->evt, $this->info, "Falta CadDeclarante");
-        
+        if (!empty($this->info)) {
+            $this->dom->appChild($this->evt, $this->info, "Falta CadDeclarante");
+        }
         $this->premonta();
         
         $this->dom->appChild($this->eFinanceira, $this->evt, 'Falta DOMDocument');
