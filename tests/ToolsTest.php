@@ -1,17 +1,24 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+namespace NFePHP\eFinanc\Tests;
 
 /**
- * Description of ToolsTest
+ * Unit Tests for Tools::class
  *
- * @author administrador
+ * @author Roberto L. Machado <linux dot rlm at gmail dot com>
  */
-class ToolsTest
+use NFePHP\eFinanc\Tests\Factory\FactoryTest;
+use NFePHP\eFinanc\Tools;
+
+class ToolsTest extends FactoryTest
 {
-    //put your code here
+    /**
+     * @covers NFePHP\eFinanc\Tools::__construct
+     */
+    public function testInstantiable()
+    {
+        //$evt = new Tools($this->config, true);
+        //$this->assertInstanceOf(Tools::class, $evt);
+        $this->assertTrue(true);
+    }
 }

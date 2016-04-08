@@ -15,5 +15,8 @@ namespace NFePHP\eFinanc;
 
 class Response
 {
-    //put your code here
+    public function __construct()
+    {
+        
+    }
 }
