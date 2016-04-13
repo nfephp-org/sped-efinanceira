@@ -5,12 +5,12 @@ namespace NFePHP\eFinanc\Factory;
 /**
  * Classe construtora do evento de Movimento
  *
- * @category   NFePHP
- * @package    NFePHP\eFinanc\Factory\Movimento
- * @copyright  Copyright (c) 2016
- * @license    http://www.gnu.org/licenses/lesser.html LGPL v3
- * @author     Roberto L. Machado <linux.rlm at gmail dot com>
- * @link       http://github.com/nfephp-org/sped-efinanceira for the canonical source repository
+ * @category  NFePHP
+ * @package   NFePHP\eFinanc\Factory\Movimento
+ * @copyright Copyright (c) 2016
+ * @license   http://www.gnu.org/licenses/lesser.html LGPL v3
+ * @author    Roberto L. Machado <linux.rlm at gmail dot com>
+ * @link      http://github.com/nfephp-org/sped-efinanceira for the canonical source repository
  */
 
 use NFePHP\eFinanc\Factory\MovProprietario;
@@ -26,6 +26,7 @@ class Movimento extends MovProprietario
     protected $aConta = array();
     /**
      * Objeto Dom tag mesCaixa
+     *
      * @var Dom
      */
     protected $mesCaixa;
@@ -80,6 +81,7 @@ class Movimento extends MovProprietario
     
     /**
      * Objeto Dom tag Cambio
+     *
      * @var Dom
      */
     protected $cambio;
@@ -93,12 +95,14 @@ class Movimento extends MovProprietario
     protected $aCambioMedJudic = array();
     /**
      * estabelece qual a tag será assinada
+     *
      * @var string
      */
     protected $signTag = 'evtMovOpFin';
     
     /**
      * Premonta os objetos dessa classe
+     *
      * @return none
      */
     protected function premonta()
@@ -176,13 +180,13 @@ class Movimento extends MovProprietario
      * Cria o conjunto de tags Conta MedJudic
      * Podem existir ZERO ou mais desse tipo
      *
-     * @param string $numConta    Obrigatorio
-     * @param string $numProcJud  Obrigatorio
-     * @param string $vara        Obrigatorio
-     * @param string $secJud      Obrigatorio
-     * @param string $subSecJud   Obrigatorio
-     * @param string $dtConcessao Obrigatorio
-     * @param string $dtCassacao  caso não exista deixe uma string vazia
+     * @param  string $numConta    Obrigatorio
+     * @param  string $numProcJud  Obrigatorio
+     * @param  string $vara        Obrigatorio
+     * @param  string $secJud      Obrigatorio
+     * @param  string $subSecJud   Obrigatorio
+     * @param  string $dtConcessao Obrigatorio
+     * @param  string $dtCassacao  caso não exista deixe uma string vazia
      * @return Dom tag MedJudic
      */
     public function contaMedJudic(
@@ -203,8 +207,8 @@ class Movimento extends MovProprietario
      * Cria a tag Conta Reportavel
      * Deve existir pelo menos um registro desse tipo
      *
-     * @param string $numConta
-     * @param string $pais
+     * @param  string $numConta
+     * @param  string $pais
      * @return Dom tag Reportavel
      */
     public function contaReportavel($numConta, $pais)
@@ -217,7 +221,7 @@ class Movimento extends MovProprietario
     /**
      * Cria a tag mesCaixa
      *
-     * @param string $anomes
+     * @param  string $anomes
      * @return Dom tag mesCaixa
      */
     public function movAnoMes($anomes)
@@ -238,10 +242,10 @@ class Movimento extends MovProprietario
     /**
      * Cria as tags conta intermediário
      *
-     * @param string $numConta
-     * @param string $giin
-     * @param string $tpNI
-     * @param string $nIIntermediario
+     * @param  string $numConta
+     * @param  string $giin
+     * @param  string $tpNI
+     * @param  string $nIIntermediario
      * @return Dom tag conta intermediario
      */
     public function contaIntermediario($numConta, $giin, $tpNI, $nIIntermediario)
@@ -275,9 +279,9 @@ class Movimento extends MovProprietario
     /**
      * Cria a tag conta fundo
      *
-     * @param string $numConta
-     * @param string $giin
-     * @param string $cnpj
+     * @param  string $numConta
+     * @param  string $giin
+     * @param  string $cnpj
      * @return Dom tag fundo de investimento da conta
      */
     public function contaFundo($numConta, $giin, $cnpj)
@@ -304,13 +308,13 @@ class Movimento extends MovProprietario
     /**
      * Cria o conjunto de contas
      *
-     * @param string $numConta
-     * @param string $tpConta
-     * @param string $subTpConta
-     * @param string $tpNumConta
-     * @param string $tpRelacaoDeclarado
-     * @param string $noTitulares
-     * @param string $dtEncerramentoConta se não estiver encerrada seixe uma string vazia
+     * @param  string $numConta
+     * @param  string $tpConta
+     * @param  string $subTpConta
+     * @param  string $tpNumConta
+     * @param  string $tpRelacaoDeclarado
+     * @param  string $noTitulares
+     * @param  string $dtEncerramentoConta se não estiver encerrada seixe uma string vazia
      * @return Dom
      */
     public function conta(
@@ -380,12 +384,12 @@ class Movimento extends MovProprietario
     /**
      * Cria a tag contaBalanco
      *
-     * @param string $numConta
-     * @param string $totCreditos
-     * @param string $totDebitos
-     * @param string $totCreditosMesmaTitularidade
-     * @param string $totDebitosMesmaTitularidade
-     * @param string $vlrUltDia
+     * @param  string $numConta
+     * @param  string $totCreditos
+     * @param  string $totDebitos
+     * @param  string $totCreditosMesmaTitularidade
+     * @param  string $totDebitosMesmaTitularidade
+     * @param  string $vlrUltDia
      * @return Dom tag balanco
      */
     public function contaBalanco(
@@ -440,9 +444,9 @@ class Movimento extends MovProprietario
     /**
      * Cria a tag PgtosAcum
      *
-     * @param string $numConta
-     * @param array $tpPgto
-     * @param string$totPgtosAcum
+     * @param  string $numConta
+     * @param  array  $tpPgto
+     * @param  string $totPgtosAcum
      * @return Dom tag PgtosAcum
      */
     public function contaPgtosAcum($numConta, $tpPgto, $totPgtosAcum)
@@ -472,9 +476,9 @@ class Movimento extends MovProprietario
     /**
      * Cria a tag Cambio
      *
-     * @param string $totCompras
-     * @param string $totVendas
-     * @param string $totTransferencias
+     * @param  string $totCompras
+     * @param  string $totVendas
+     * @param  string $totTransferencias
      * @return Dom
      */
     public function cambio(
@@ -513,12 +517,12 @@ class Movimento extends MovProprietario
      * Cria o conjunto de tags Cambio MedJudic
      * Podem existir ZERO ou mais desse tipo
      *
-     * @param string $numProcJud  Obrigatorio
-     * @param string $vara        Obrigatorio
-     * @param string $secJud      Obrigatorio
-     * @param string $subSecJud   Obrigatorio
-     * @param string $dtConcessao Obrigatorio
-     * @param string $dtCassacao  caso não exista deixe uma string vazia
+     * @param  string $numProcJud  Obrigatorio
+     * @param  string $vara        Obrigatorio
+     * @param  string $secJud      Obrigatorio
+     * @param  string $subSecJud   Obrigatorio
+     * @param  string $dtConcessao Obrigatorio
+     * @param  string $dtCassacao  caso não exista deixe uma string vazia
      * @return Dom tag MedJudic
      */
     public function cambioMedJudic(

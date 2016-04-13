@@ -4,12 +4,12 @@ namespace NFePHP\eFinanc\Factory;
 /**
  * Classe construtora do evento de Movimento Proprietario
  *
- * @category   NFePHP
- * @package    NFePHP\eFinanc\Factory\MovProprietario
- * @copyright  Copyright (c) 2016
- * @license    http://www.gnu.org/licenses/lesser.html LGPL v3
- * @author     Roberto L. Machado <linux.rlm at gmail dot com>
- * @link       http://github.com/nfephp-org/sped-efinanceira for the canonical source repository
+ * @category  NFePHP
+ * @package   NFePHP\eFinanc\Factory\MovProprietario
+ * @copyright Copyright (c) 2016
+ * @license   http://www.gnu.org/licenses/lesser.html LGPL v3
+ * @author    Roberto L. Machado <linux.rlm at gmail dot com>
+ * @link      http://github.com/nfephp-org/sped-efinanceira for the canonical source repository
  */
 
 use NFePHP\eFinanc\Factory\MovDeclarado;
@@ -54,6 +54,7 @@ class MovProprietario extends MovDeclarado
     
     /**
      * Faz a premontagem dos dados dos proprietários
+     *
      * @return none
      */
     protected function premonta()
@@ -100,9 +101,9 @@ class MovProprietario extends MovDeclarado
      * Cria as tags NIF do proprietario
      * podem existir ZERO ou mais
      *
-     * @param string $nIProprietario identificação do proprietário
-     * @param string $numeroNIF
-     * @param string $paisEmissao
+     * @param  string $nIProprietario identificação do proprietário
+     * @param  string $numeroNIF
+     * @param  string $paisEmissao
      * @return Dom tag NIF
      */
     public function proprietarioNIF($nIProprietario, $numeroNIF, $paisEmissao)
@@ -116,8 +117,8 @@ class MovProprietario extends MovDeclarado
      * Crias as tags PaisResid do declarado
      * podem existir ZERO ou mais
      *
-     * @param string $nIProprietario identificação do proprietário
-     * @param string $pais
+     * @param  string $nIProprietario identificação do proprietário
+     * @param  string $pais
      * @return Dom tag PaisResid
      */
     public function proprietarioPaisResid($nIProprietario, $pais)
@@ -131,8 +132,8 @@ class MovProprietario extends MovDeclarado
      * Crias as tags PaisNacionalidade do declarado
      * podem existir ZERO ou mais
      *
-     * @param string $nIProprietario identificação do proprietário
-     * @param string $pais
+     * @param  string $nIProprietario identificação do proprietário
+     * @param  string $pais
      * @return Dom tag PaisResid
      */
     public function proprietarioPaisNac($nIProprietario, $pais)
@@ -145,8 +146,8 @@ class MovProprietario extends MovDeclarado
     /**
      * Cria o conjunto de paises reportaveis para o proprietario
      *
-     * @param string $nIProprietario identificação do proprietário
-     * @param string $pais
+     * @param  string $nIProprietario identificação do proprietário
+     * @param  string $pais
      * @return Dom tag Reportavel
      */
     public function proprietarioReportavel($nIProprietario, $pais)
@@ -159,12 +160,12 @@ class MovProprietario extends MovDeclarado
     /**
      * Cria o conjunto de tag de proprietarios
      *
-     * @param string $tpNI
-     * @param string $nIProprietario
-     * @param string $nome
-     * @param string $dataNasc
-     * @param string $endereco
-     * @param string $pais
+     * @param  string $tpNI
+     * @param  string $nIProprietario
+     * @param  string $nome
+     * @param  string $dataNasc
+     * @param  string $endereco
+     * @param  string $pais
      * @return Dom tag proprietario
      */
     public function proprietario(

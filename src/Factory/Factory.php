@@ -5,12 +5,12 @@ namespace NFePHP\eFinanc\Factory;
 /**
  * Classe abstrata construtora dos eventos
  *
- * @category   NFePHP
- * @package    NFePHP\eFinanc\Factory\Factory
- * @copyright  Copyright (c) 2016
- * @license    http://www.gnu.org/licenses/lesser.html LGPL v3
- * @author     Roberto L. Machado <linux.rlm at gmail dot com>
- * @link       http://github.com/nfephp-org/sped-efinanceira for the canonical source repository
+ * @category  NFePHP
+ * @package   NFePHP\eFinanc\Factory\Factory
+ * @copyright Copyright (c) 2016
+ * @license   http://www.gnu.org/licenses/lesser.html LGPL v3
+ * @author    Roberto L. Machado <linux.rlm at gmail dot com>
+ * @link      http://github.com/nfephp-org/sped-efinanceira for the canonical source repository
  */
 
 use NFePHP\Common\Base\BaseMake;
@@ -26,28 +26,33 @@ abstract class Factory extends BaseMake
     
     /**
      * Objeto stdClass convertido do Json config
+     *
      * @var stdClass
      */
     protected $objConfig;
     /**
      * estabelece qual a tag será assinada
      * deve estar preenchido nas classes derivadas
+     *
      * @var string
      */
     protected $signTag = '';
     /**
      * Objeto Dom::class Tag ideDeclarante
+     *
      * @var Dom
      */
     protected $ide;
     /**
      * Objeto Dom::class Tag evt???
+     *
      * @var Dom
      */
     protected $evt;
     /**
      * Instancia da classe que lida com os certificados
      * será usada na assinatura do xml dos eventos
+     *
      * @var Pkcs12
      */
     protected $pkcs;
@@ -57,7 +62,7 @@ abstract class Factory extends BaseMake
      * Recebe o arquivo de configuração em uma string json ou em um path de arquivo
      *
      * @param string $config
-     * @param bool $ignore
+     * @param bool   $ignore
      */
     public function __construct($config = '', $ignore = false)
     {
@@ -70,7 +75,7 @@ abstract class Factory extends BaseMake
      * carrega o certificado
      *
      * @param string $config
-     * @param bool $ignore
+     * @param bool   $ignore
      */
     protected function loadConfig($config = '', $ignore = false)
     {
@@ -105,10 +110,10 @@ abstract class Factory extends BaseMake
     /**
      * Cria a tag evt????
      *
-     * @param string $id
-     * @param string $indRetificacao
-     * @param int $tpAmb
-     * @param string $nrRecibo
+     * @param  string $id
+     * @param  string $indRetificacao
+     * @param  int    $tpAmb
+     * @param  string $nrRecibo
      * @return Dom
      */
     public function tagEvento($id, $indRetificacao, $tpAmb, $nrRecibo = '')
@@ -163,7 +168,7 @@ abstract class Factory extends BaseMake
     /**
      * Cria a tag ideDeclarante
      *
-     * @param string $cnpj
+     * @param  string $cnpj
      * @return Dom
      */
     public function tagDeclarante($cnpj)
@@ -217,7 +222,7 @@ abstract class Factory extends BaseMake
     /**
      * Valida o xml contra o xsd
      *
-     * @param string $xml
+     * @param  string $xml
      * @return boolean
      */
     public function valida($xml = '')

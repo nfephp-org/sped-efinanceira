@@ -5,12 +5,12 @@ namespace NFePHP\eFinanc\Factory;
 /**
  * Classe construtora do evento de Movimento Declarado
  *
- * @category   NFePHP
- * @package    NFePHP\eFinanc\Factory\MovDeclarado
- * @copyright  Copyright (c) 2016
- * @license    http://www.gnu.org/licenses/lesser.html LGPL v3
- * @author     Roberto L. Machado <linux.rlm at gmail dot com>
- * @link       http://github.com/nfephp-org/sped-efinanceira for the canonical source repository
+ * @category  NFePHP
+ * @package   NFePHP\eFinanc\Factory\MovDeclarado
+ * @copyright Copyright (c) 2016
+ * @license   http://www.gnu.org/licenses/lesser.html LGPL v3
+ * @author    Roberto L. Machado <linux.rlm at gmail dot com>
+ * @link      http://github.com/nfephp-org/sped-efinanceira for the canonical source repository
  */
 
 use NFePHP\eFinanc\Factory\Factory;
@@ -58,6 +58,7 @@ class MovDeclarado extends Factory
     protected $ideDeclarado;
     /**
      * estabelece qual a tag será assinada
+     *
      * @var string
      */
     protected $signTag = 'evtMovOpFin';
@@ -89,8 +90,8 @@ class MovDeclarado extends Factory
      * Cria as tags NIF do declarado
      * podem existir ZERO ou mais
      *
-     * @param string $numeroNIF
-     * @param string $paisEmissao
+     * @param  string $numeroNIF
+     * @param  string $paisEmissao
      * @return Dom tag NIF
      */
     public function declaradoNIF($numeroNIF, $paisEmissao)
@@ -104,7 +105,7 @@ class MovDeclarado extends Factory
      * Crias as tags PaisResid do declarado
      * podem existir ZERO ou mais
      *
-     * @param string $pais
+     * @param  string $pais
      * @return Dom tag PaisResid
      */
     public function declaradoPaisResid($pais)
@@ -118,7 +119,7 @@ class MovDeclarado extends Factory
      * Crias as tags PaisNacionalidade do declarado
      * podem existir ZERO ou mais
      *
-     * @param string $pais
+     * @param  string $pais
      * @return Dom tag PaisResid
      */
     public function declaradoPaisNac($pais)
@@ -132,7 +133,7 @@ class MovDeclarado extends Factory
      * Cria array com os tipos de declarado
      * podem ser ZERO ou mais
      *
-     * @param string $tpDeclarado
+     * @param  string $tpDeclarado
      * @return string
      */
     public function declaradoTipo($tpDeclarado)
@@ -144,12 +145,12 @@ class MovDeclarado extends Factory
     /**
      * Cria a tag ideDeclarado
      *
-     * @param string $tpNI          Obrigatorio
-     * @param string $nIDeclarado   Obrigatorio
-     * @param string $nomeDeclarado Obrigatorio
-     * @param string $dataNasc      Obrigatorio
-     * @param string $enderecoLivre se não exisitr deixar uma string vazia
-     * @param string $pais          Obrigatorio
+     * @param  string $tpNI          Obrigatorio
+     * @param  string $nIDeclarado   Obrigatorio
+     * @param  string $nomeDeclarado Obrigatorio
+     * @param  string $dataNasc      Obrigatorio
+     * @param  string $enderecoLivre se não exisitr deixar uma string vazia
+     * @param  string $pais          Obrigatorio
      * @return Dom
      */
     public function declarado(
@@ -213,8 +214,8 @@ class MovDeclarado extends Factory
      * Cria as tags NIF do declarado e proprietario
      * podem existir ZERO ou mais
      *
-     * @param string $numeroNIF
-     * @param string $paisEmissao
+     * @param  string $numeroNIF
+     * @param  string $paisEmissao
      * @return Dom tag NIF
      */
     protected function zNIF($numeroNIF, $paisEmissao)
@@ -241,12 +242,12 @@ class MovDeclarado extends Factory
      * Cria o conjunto de tags  MedJudic
      * Podem existir ZERO ou mais desse tipo
      *
-     * @param string $numProcJud  Obrigatorio
-     * @param string $vara        Obrigatorio
-     * @param string $secJud      Obrigatorio
-     * @param string $subSecJud   Obrigatorio
-     * @param string $dtConcessao Obrigatorio
-     * @param string $dtCassacao  caso não exista deixe uma string vazia
+     * @param  string $numProcJud  Obrigatorio
+     * @param  string $vara        Obrigatorio
+     * @param  string $secJud      Obrigatorio
+     * @param  string $subSecJud   Obrigatorio
+     * @param  string $dtConcessao Obrigatorio
+     * @param  string $dtCassacao  caso não exista deixe uma string vazia
      * @return Dom tag MedJudic
      */
     protected function zMedJudic(
@@ -307,8 +308,8 @@ class MovDeclarado extends Factory
      * Cria as tags Pais
      * podem existir ZERO ou mais
      *
-     * @param string $pais
-     * @param string $tag  PaisNacionalidade ou PaisResid
+     * @param  string $pais
+     * @param  string $tag  PaisNacionalidade ou PaisResid
      * @return Dom tag PaisNacionalidade ou PaisResid
      */
     protected function zPais($pais, $tag)
