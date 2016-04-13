@@ -5,12 +5,12 @@ namespace NFePHP\eFinanc\Factory;
 /**
  * Classe construtora do evento de abertura financeira
  *
- * @category   NFePHP
- * @package    NFePHP\eFinanc\Factory\Abertura
- * @copyright  Copyright (c) 2016
- * @license    http://www.gnu.org/licenses/lesser.html LGPL v3
- * @author     Roberto L. Machado <linux.rlm at gmail dot com>
- * @link       http://github.com/nfephp-org/sped-efinanceira for the canonical source repository
+ * @category  NFePHP
+ * @package   NFePHP\eFinanc\Factory\Abertura
+ * @copyright Copyright (c) 2016
+ * @license   http://www.gnu.org/licenses/lesser.html LGPL v3
+ * @author    Roberto L. Machado <linux.rlm at gmail dot com>
+ * @link      http://github.com/nfephp-org/sped-efinanceira for the canonical source repository
  */
 
 use NFePHP\eFinanc\Factory\Factory;
@@ -20,21 +20,25 @@ class Abertura extends Factory
 
     /**
      * Objeto Dom::class Tag ResponsavelRMF
+     *
      * @var Dom
      */
     protected $respRMF;
     /**
      * Objeto Dom::class Tag RepresLegal
+     *
      * @var Dom
      */
     protected $replegal;
     /**
      * Objeto Dom::class Tag info
+     *
      * @var Dom
      */
     protected $info;
     /**
      * estabelece qual a tag será assinada
+     *
      * @var string
      */
     protected $signTag = 'evtAberturaeFinanceira';
@@ -53,8 +57,8 @@ class Abertura extends Factory
     /**
      * Cria a tag Info
      *
-     * @param string $dtInicio
-     * @param strinf $dtFim           ultimo dia do semestre de ref
+     * @param  string $dtInicio
+     * @param  strinf $dtFim    ultimo dia do semestre de ref
      * @return Dom
      */
     public function tagInfo($dtInicio, $dtFim)
@@ -82,19 +86,19 @@ class Abertura extends Factory
     /**
      * Cria a tag ResponsavelRMF
      *
-     * @param string $cpf
-     * @param string $nome
-     * @param string $setor
-     * @param string $ddd
-     * @param string $telefone
-     * @param string $ramal
-     * @param string $logradouro
-     * @param string $numero
-     * @param string $complemento
-     * @param string $bairro
-     * @param string $cep
-     * @param string $municipio
-     * @param string $uf
+     * @param  string $cpf
+     * @param  string $nome
+     * @param  string $setor
+     * @param  string $ddd
+     * @param  string $telefone
+     * @param  string $ramal
+     * @param  string $logradouro
+     * @param  string $numero
+     * @param  string $complemento
+     * @param  string $bairro
+     * @param  string $cep
+     * @param  string $municipio
+     * @param  string $uf
      * @return Dom
      */
     public function tagResponsavelRMF(
@@ -217,11 +221,11 @@ class Abertura extends Factory
     /**
      * Cria a tag RepresLegal
      *
-     * @param string $cpf
-     * @param string $setor
-     * @param string $ddd
-     * @param string $telefone
-     * @param string $ramal
+     * @param  string $cpf
+     * @param  string $setor
+     * @param  string $ddd
+     * @param  string $telefone
+     * @param  string $ramal
      * @return Dom
      */
     public function tagRepresLegal($cpf, $setor, $ddd, $telefone, $ramal)

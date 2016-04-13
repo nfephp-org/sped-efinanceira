@@ -5,12 +5,12 @@ namespace NFePHP\eFinanc\Factory;
 /**
  * Classe construtora do evento de fechamento
  *
- * @category   NFePHP
- * @package    NFePHP\eFinanc\Factory\Fechamento
- * @copyright  Copyright (c) 2016
- * @license    http://www.gnu.org/licenses/lesser.html LGPL v3
- * @author     Roberto L. Machado <linux.rlm at gmail dot com>
- * @link       http://github.com/nfephp-org/sped-efinanceira for the canonical source repository
+ * @category  NFePHP
+ * @package   NFePHP\eFinanc\Factory\Fechamento
+ * @copyright Copyright (c) 2016
+ * @license   http://www.gnu.org/licenses/lesser.html LGPL v3
+ * @author    Roberto L. Machado <linux.rlm at gmail dot com>
+ * @link      http://github.com/nfephp-org/sped-efinanceira for the canonical source repository
  */
 
 use NFePHP\eFinanc\Factory\Factory;
@@ -20,23 +20,27 @@ class Fechamento extends Factory
 
     /**
      * Objeto Dom::class Tag infoCadastro
+     *
      * @var Dom
      */
     protected $info;
     /**
      * Objeto Dom::class Tag ReportavelExterior
+     *
      * @var Dom
      */
     protected $reportavel;
 
     /**
      * Array de Objetos Dom::class
+     *
      * @var array
      */
     protected $aFech = array();
     
     /**
      * estabelece qual a tag será assinada
+     *
      * @var string
      */
     protected $signTag = 'evtFechamentoeFinanceira';
@@ -57,9 +61,9 @@ class Fechamento extends Factory
     /**
      * Cria a tag Info
      *
-     * @param string $dtInicio
-     * @param string $dtFim
-     * @param string $sitEspecial  0 = Não se aplica
+     * @param  string $dtInicio
+     * @param  string $dtFim
+     * @param  string $sitEspecial 0 = Não se aplica 1 = Extinção 2 = Fusão 3 = Incorporação/Incorporada 5 = Cisão Total
      *                             1 = Extinção
      *                             2 = Fusão
      *                             3 = Incorporação/Incorporada
@@ -97,8 +101,9 @@ class Fechamento extends Factory
     
     /**
      * Cria a tag de reportavelExterior
-     * @param string $pais
-     * @param string $reportavel 0-Não
+     *
+     * @param  string $pais
+     * @param  string $reportavel 0-Não
      *                           1-Sim
      * @return Dom
      */
@@ -126,8 +131,9 @@ class Fechamento extends Factory
     
     /**
      * Dados de fechamento do anomes
-     * @param string $anomes
-     * @param string $qtd
+     *
+     * @param  string $anomes
+     * @param  string $qtd
      * @return Dom
      */
     public function tagFechamentoMes($anomes, $qtd)

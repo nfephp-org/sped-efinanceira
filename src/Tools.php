@@ -5,12 +5,12 @@ namespace NFePHP\eFinanc;
 /**
  * Classe Tools, executa a comunicação com o webservice do e-Financeira
  *
- * @category   NFePHP
- * @package    NFePHP\eFinanc\Factory\Tools
- * @copyright  Copyright (c) 2016
- * @license    http://www.gnu.org/licenses/lesser.html LGPL v3
- * @author     Roberto L. Machado <linux.rlm at gmail dot com>
- * @link       http://github.com/nfephp-org/sped-efinanceira for the canonical source repository
+ * @category  NFePHP
+ * @package   NFePHP\eFinanc\Factory\Tools
+ * @copyright Copyright (c) 2016
+ * @license   http://www.gnu.org/licenses/lesser.html LGPL v3
+ * @author    Roberto L. Machado <linux.rlm at gmail dot com>
+ * @link      http://github.com/nfephp-org/sped-efinanceira for the canonical source repository
  */
 
 use NFePHP\Common\Base\BaseTools;
@@ -36,8 +36,8 @@ class Tools extends BaseTools
     /**
      * Consulta informações cadastrais do Declarante
      *
-     * @param string $cnpjDeclarante
-     * @param array $aResp variável passada como referencia irá conter os retornos
+     * @param  string $cnpjDeclarante
+     * @param  array  $aResp          variável passada como referencia irá conter os retornos em um array em um array
      *                     em um array
      * @return string será retornado o xml de resposta do webservice
      */
@@ -51,11 +51,11 @@ class Tools extends BaseTools
     /**
      * Consulta Lista EFinanceira
      *
-     * @param string $cnpjDeclarante
-     * @param string $sitInfo
-     * @param string $dtInicio
-     * @param string $dtFim
-     * @param array $aResp variável passada como referencia irá conter os retornos
+     * @param  string $cnpjDeclarante
+     * @param  string $sitInfo
+     * @param  string $dtInicio
+     * @param  string $dtFim
+     * @param  array  $aResp          variável passada como referencia irá conter os retornos em um array em um array
      *                     em um array
      * @return string será retornado o xml de resposta do webservice
      */
@@ -73,14 +73,14 @@ class Tools extends BaseTools
     /**
      * Consulta INformações de Movimento
      *
-     * @param string $cnpjDeclarante
-     * @param string $sitInfo
-     * @param string $anomesIni
-     * @param string $anomesFim
-     * @param string $tpMov
-     * @param string $tpNI
-     * @param string $numNI
-     * @param array $aResp variável passada como referencia irá conter os retornos
+     * @param  string $cnpjDeclarante
+     * @param  string $sitInfo
+     * @param  string $anomesIni
+     * @param  string $anomesFim
+     * @param  string $tpMov
+     * @param  string $tpNI
+     * @param  string $numNI
+     * @param  array  $aResp          variável passada como referencia irá conter os retornos em um array em um array
      *                     em um array
      * @return string será retornado o xml de resposta do webservice
      */
@@ -109,11 +109,11 @@ class Tools extends BaseTools
     /**
      * Consulta informações do Intermediário
      *
-     * @param string $cnpjDeclarante
-     * @param string $gIIN
-     * @param string $tpNI
-     * @param string $numNI
-     * @param array $aResp variável passada como referencia irá conter os retornos
+     * @param  string $cnpjDeclarante
+     * @param  string $gIIN
+     * @param  string $tpNI
+     * @param  string $numNI
+     * @param  array  $aResp          variável passada como referencia irá conter os retornos em um array em um array
      *                     em um array
      * @return string será retornado o xml de resposta do webservice
      */
@@ -131,10 +131,10 @@ class Tools extends BaseTools
     /**
      * Consulta informações do Patrocinado
      *
-     * @param string $cnpjDeclarante
-     * @param string $cnpjPatrocinado
-     * @param string $gIIN
-     * @param array $aResp variável passada como referencia irá conter os retornos
+     * @param  string $cnpjDeclarante
+     * @param  string $cnpjPatrocinado
+     * @param  string $gIIN
+     * @param  array  $aResp           variável passada como referencia irá conter os retornos em um array em um array
      *                     em um array
      * @return string será retornado o xml de resposta do webservice
      */
@@ -152,8 +152,8 @@ class Tools extends BaseTools
      * Monta lote de eventos para envio
      * se os eventos não estiverem assinados assina antes de montar o lote
      *
-     * @param array $aEv xml dos eventos a colocar no lote
-     * @param array $aResp variável passada como referencia irá conter os retornos
+     * @param  array $aEv   xml dos eventos a colocar no lote
+     * @param  array $aResp variável passada como referencia irá conter os retornos
      *                     em um array
      * @return string será retornado o xml de resposta do webservice
      * @throws InvalidArgumentException
