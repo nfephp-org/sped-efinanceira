@@ -63,7 +63,7 @@ class Fechamento extends Factory
      *
      * @param  string $dtInicio
      * @param  string $dtFim
-     * @param  string $sitEspecial 0 = Não se aplica 1 = Extinção 2 = Fusão 3 = Incorporação/Incorporada 5 = Cisão Total
+     * @param  string $sitEspecial 0 = Não se aplica
      *                             1 = Extinção
      *                             2 = Fusão
      *                             3 = Incorporação/Incorporada
