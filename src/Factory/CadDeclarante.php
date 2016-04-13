@@ -43,6 +43,7 @@ class CadDeclarante extends Factory
     /**
      * Cria a tag InfoCadastro
      *
+     * @param string $giin
      * @param string $nome
      * @param string $endereco
      * @param string $municipio
@@ -51,10 +52,17 @@ class CadDeclarante extends Factory
      * @param string $paisResidencia
      * @return Dom
      */
-    public function tagInfo($nome, $endereco, $municipio, $uf, $pais, $paisResidencia)
+    public function tagInfo($giin, $nome, $endereco, $municipio, $uf, $pais, $paisResidencia)
     {
         $identificador = 'tag infoCadastro ';
         $info = $this->dom->createElement("infoCadastro");
+        $this->dom->addChild(
+            $info,
+            "GIIN",
+            $giin,
+            false,
+            $identificador . "GIIN Declarante"
+        );
         $this->dom->addChild(
             $info,
             "nome",

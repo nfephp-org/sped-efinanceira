@@ -21,13 +21,14 @@ $cnpj = '99999090910270';
 $evt->tagDeclarante($cnpj);
 
 //########################################################################
+$giin = '';//caso não exista deixe em branco
 $nome = 'Fulano de Tal';
 $endereco = 'Rua Cel Silverio Magalhaes';
 $municipio = '3304557';
 $uf = 'SP';
 $pais = 'BR';
 $paisResidencia = 'BR';
-$evt->tagInfo($nome, $endereco, $municipio, $uf, $pais, $paisResidencia);
+$evt->tagInfo($giin, $nome, $endereco, $municipio, $uf, $pais, $paisResidencia);
 
 //########################################################################
 $evt->monta();
