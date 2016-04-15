@@ -12,9 +12,6 @@ use NFePHP\eFinanc\Tests\Factory\FactoryTest;
 
 class ResponseTest extends FactoryTest
 {
-    /**
-     * @covers NFePHP\eFinanc\Response::__construct
-     */
     public function testInstantiable()
     {
         //$evt = new Tools($this->config, true);
