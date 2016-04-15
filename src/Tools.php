@@ -71,12 +71,12 @@ class Tools
      * oCertificate
      * @var Object Class
      */
-    protected $oCertificate;
+    public $oCertificate;
     /**
      * oSoap
      * @var Object Class
      */
-    protected $oSoap;
+    public $oSoap;
     /**
      * soapDebug
      * @var string
@@ -86,7 +86,7 @@ class Tools
      * XMLNS namespace
      * @var string
      */
-    protected $xmlns = "http://sped.fazenda.gov.br/";
+    public $xmlns = "http://sped.fazenda.gov.br/";
     /**
      * URL dos webservices
      * @var array
@@ -206,13 +206,19 @@ class Tools
     
     /**
      * getSSLProtocol
-     * Retrona o protocolo que está setado
-     * @return string
+     * Retorna o protocolo que está setado
+     * Se for indicada qualquer opção no parametro será retornada as possiveis
+     * opções para o protocolo SSL 
+     * 
+     * @return string | array protocolo setado ou array de opções
      */
-    public function getSSLProtocol()
+    public function getSSLProtocol($opt = '')
     {
-        $aPr = array('default','TLSv1','SSLv2','SSLv3','TLSv1.0','TLSv1.1','TLSv1.2');
-        return $aPr[$this->sslProtocol];
+        $aPr = array('automatic','TLSv1','SSLv2','SSLv3','TLSv1.0','TLSv1.1','TLSv1.2');
+        if ($opt == '') {
+            return $aPr[$this->sslProtocol];
+        }
+        return $aPr;
     }
     
     /**
