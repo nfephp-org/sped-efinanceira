@@ -1,7 +1,7 @@
 {
     "atualizacao":"2016-04-01 09:00:17",
     "tpAmb":2,
-    "pathFiles":"\/tmp\/eFinanc\/",
+    "pathFiles":"\/var\/eFinanc\/",
     "pathCertsFiles":"\/var\/www\/sped/sped-efinanceira\/certs\/",
     "siteUrl":"http:\/\/localhost\/sped\/sped-efinanceira\/",
     "schemes":"v1_0_1",

@@ -10,22 +10,22 @@ use NFePHP\eFinanc\Factory\CadDeclarante;
 $evt = new CadDeclarante('../config/config.json');
 
 //########################################################################
-$id = '000000000000000002';
-$indRetificacao = 2; // 1 - para arquivo original 2 - para arquivo de retificação espontânea 3 – para arquivo de retificação a pedido
+$id = '000000000000000001';
+$indRetificacao = 1; // 1 - para arquivo original 2 - para arquivo de retificação espontânea 3 – para arquivo de retificação a pedido
 $tpAmb = 2;
-$recibo = '111-11-1111-11';
+$recibo = '';
 $evt->tagEvento($id, $indRetificacao, $tpAmb, $recibo);
 
 //########################################################################
-$cnpj = '99999090910270';
+$cnpj = '07959165700012';
 $evt->tagDeclarante($cnpj);
 
 //########################################################################
 $giin = '';//caso não exista deixe em branco
-$nome = 'Fulano de Tal';
-$endereco = 'Rua Cel Silverio Magalhaes';
-$municipio = '3304557';
-$uf = 'SP';
+$nome = 'Actuary Corretora de seguros e consult atuarial';
+$endereco = 'Av. Pres. Kennedy, 2999';
+$municipio = '4106902';
+$uf = 'PR';
 $pais = 'BR';
 $paisResidencia = 'BR';
 $evt->tagInfo($giin, $nome, $endereco, $municipio, $uf, $pais, $paisResidencia);

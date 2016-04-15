@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Document created with online XML Editor http://xmlgrid.net 2016/04/14 16:18:41  -->
+   <eFinanceira>
+         <retornoConsultaListaEFinanceira>
+               <dhProcessamento>test string</dhProcessamento>
+               <status>
+                     <cdRetorno>test string</cdRetorno>
+                     <descRetorno>test string</descRetorno>
+                     <dadosRegistroOcorrenciaEvento>
+                           <ocorrencias>
+                                 <tipo>test string</tipo>
+                                 <localizacaoErroAviso>test string</localizacaoErroAviso>
+                                 <codigo>test string</codigo>
+                                 <descricao>test string</descricao>
+                           </ocorrencias>
+                           <ocorrencias>
+                                 <tipo>test string</tipo>
+                                 <localizacaoErroAviso>test string</localizacaoErroAviso>
+                                 <codigo>test string</codigo>
+                                 <descricao>test string</descricao>
+                           </ocorrencias>
+                           <ocorrencias>
+                                 <tipo>test string</tipo>
+                                 <localizacaoErroAviso>test string</localizacaoErroAviso>
+                                 <codigo>test string</codigo>
+                                 <descricao>test string</descricao>
+                           </ocorrencias>
+                     </dadosRegistroOcorrenciaEvento>
+                     <dadosRegistroOcorrenciaEvento>
+                           <ocorrencias>
+                                 <tipo>test string</tipo>
+                                 <localizacaoErroAviso>test string</localizacaoErroAviso>
+                                 <codigo>test string</codigo>
+                                 <descricao>test string</descricao>
+                           </ocorrencias>
+                           <ocorrencias>
+                                 <tipo>test string</tipo>
+                                 <localizacaoErroAviso>test string</localizacaoErroAviso>
+                                 <codigo>test string</codigo>
+                                 <descricao>test string</descricao>
+                           </ocorrencias>
+                           <ocorrencias>
+                                 <tipo>test string</tipo>
+                                 <localizacaoErroAviso>test string</localizacaoErroAviso>
+                                 <codigo>test string</codigo>
+                                 <descricao>test string</descricao>
+                           </ocorrencias>
+                     </dadosRegistroOcorrenciaEvento>
+                     <dadosRegistroOcorrenciaEvento>
+                           <ocorrencias>
+                                 <tipo>test string</tipo>
+                                 <localizacaoErroAviso>test string</localizacaoErroAviso>
+                                 <codigo>test string</codigo>
+                                 <descricao>test string</descricao>
+                           </ocorrencias>
+                           <ocorrencias>
+                                 <tipo>test string</tipo>
+                                 <localizacaoErroAviso>test string</localizacaoErroAviso>
+                                 <codigo>test string</codigo>
+                                 <descricao>test string</descricao>
+                           </ocorrencias>
+                           <ocorrencias>
+                                 <tipo>test string</tipo>
+                                 <localizacaoErroAviso>test string</localizacaoErroAviso>
+                                 <codigo>test string</codigo>
+                                 <descricao>test string</descricao>
+                           </ocorrencias>
+                     </dadosRegistroOcorrenciaEvento>
+               </status>
+               <identificacaoEmpresaDeclarante>
+                     <cnpjEmpresaDeclarante>test string</cnpjEmpresaDeclarante>
+               </identificacaoEmpresaDeclarante>
+               <identificacaoEmpresaDeclarante>
+                     <cnpjEmpresaDeclarante>test string</cnpjEmpresaDeclarante>
+               </identificacaoEmpresaDeclarante>
+               <identificacaoEmpresaDeclarante>
+                     <cnpjEmpresaDeclarante>test string</cnpjEmpresaDeclarante>
+               </identificacaoEmpresaDeclarante>
+               <informacoesEFinanceira>
+                     <dhInicial>test string</dhInicial>
+                     <dhFinal>test string</dhFinal>
+                     <situacaoEFinanceira>test string</situacaoEFinanceira>
+                     <numeroReciboAbertura>test string</numeroReciboAbertura>
+                     <idAbertura>test string</idAbertura>
+                     <numeroReciboFechamento>test string</numeroReciboFechamento>
+                     <idFechamento>test string</idFechamento>
+               </informacoesEFinanceira>
+               <informacoesEFinanceira>
+                     <dhInicial>test string</dhInicial>
+                     <dhFinal>test string</dhFinal>
+                     <situacaoEFinanceira>test string</situacaoEFinanceira>
+                     <numeroReciboAbertura>test string</numeroReciboAbertura>
+                     <idAbertura>test string</idAbertura>
+                     <numeroReciboFechamento>test string</numeroReciboFechamento>
+                     <idFechamento>test string</idFechamento>
+               </informacoesEFinanceira>
+               <informacoesEFinanceira>
+                     <dhInicial>test string</dhInicial>
+                     <dhFinal>test string</dhFinal>
+                     <situacaoEFinanceira>test string</situacaoEFinanceira>
+                     <numeroReciboAbertura>test string</numeroReciboAbertura>
+                     <idAbertura>test string</idAbertura>
+                     <numeroReciboFechamento>test string</numeroReciboFechamento>
+                     <idFechamento>test string</idFechamento>
+               </informacoesEFinanceira>
+         </retornoConsultaListaEFinanceira>
+         <retornoConsultaListaEFinanceira>
+               <dhProcessamento>test string</dhProcessamento>
+               <status>
+                     <cdRetorno>test string</cdRetorno>
+                     <descRetorno>test string</descRetorno>
+                     <dadosRegistroOcorrenciaEvento>
+                           <ocorrencias>
+                                 <tipo>test string</tipo>
+                                 <localizacaoErroAviso>test string</localizacaoErroAviso>
+                                 <codigo>test string</codigo>
+                                 <descricao>test string</descricao>
+                           </ocorrencias>
+                           <ocorrencias>
+                                 <tipo>test string</tipo>
+                                 <localizacaoErroAviso>test string</localizacaoErroAviso>
+                                 <codigo>test string</codigo>
+                                 <descricao>test string</descricao>
+                           </ocorrencias>
+                           <ocorrencias>
+                                 <tipo>test string</tipo>
+                                 <localizacaoErroAviso>test string</localizacaoErroAviso>
+                                 <codigo>test string</codigo>
+                                 <descricao>test string</descricao>
+                           </ocorrencias>
+                     </dadosRegistroOcorrenciaEvento>
+                     <dadosRegistroOcorrenciaEvento>
+                           <ocorrencias>
+                                 <tipo>test string</tipo>
+                                 <localizacaoErroAviso>test string</localizacaoErroAviso>
+                                 <codigo>test string</codigo>
+                                 <descricao>test string</descricao>
+                           </ocorrencias>
+                           <ocorrencias>
+                                 <tipo>test string</tipo>
+                                 <localizacaoErroAviso>test string</localizacaoErroAviso>
+                                 <codigo>test string</codigo>
+                                 <descricao>test string</descricao>
+                           </ocorrencias>
+                           <ocorrencias>
+                                 <tipo>test string</tipo>
+                                 <localizacaoErroAviso>test string</localizacaoErroAviso>
+                                 <codigo>test string</codigo>
+                                 <descricao>test string</descricao>
+                           </ocorrencias>
+                     </dadosRegistroOcorrenciaEvento>
+                     <dadosRegistroOcorrenciaEvento>
+                           <ocorrencias>
+                                 <tipo>test string</tipo>
+                                 <localizacaoErroAviso>test string</localizacaoErroAviso>
+                                 <codigo>test string</codigo>
+                                 <descricao>test string</descricao>
+                           </ocorrencias>
+                           <ocorrencias>
+                                 <tipo>test string</tipo>
+                                 <localizacaoErroAviso>test string</localizacaoErroAviso>
+                                 <codigo>test string</codigo>
+                                 <descricao>test string</descricao>
+                           </ocorrencias>
+                           <ocorrencias>
+                                 <tipo>test string</tipo>
+                                 <localizacaoErroAviso>test string</localizacaoErroAviso>
+                                 <codigo>test string</codigo>
+                                 <descricao>test string</descricao>
+                           </ocorrencias>
+                     </dadosRegistroOcorrenciaEvento>
+               </status>
+               <identificacaoEmpresaDeclarante>
+                     <cnpjEmpresaDeclarante>test string</cnpjEmpresaDeclarante>
+               </identificacaoEmpresaDeclarante>
+               <identificacaoEmpresaDeclarante>
+                     <cnpjEmpresaDeclarante>test string</cnpjEmpresaDeclarante>
+               </identificacaoEmpresaDeclarante>
+               <identificacaoEmpresaDeclarante>
+                     <cnpjEmpresaDeclarante>test string</cnpjEmpresaDeclarante>
+               </identificacaoEmpresaDeclarante>
+               <informacoesEFinanceira>
+                     <dhInicial>test string</dhInicial>
+                     <dhFinal>test string</dhFinal>
+                     <situacaoEFinanceira>test string</situacaoEFinanceira>
+                     <numeroReciboAbertura>test string</numeroReciboAbertura>
+                     <idAbertura>test string</idAbertura>
+                     <numeroReciboFechamento>test string</numeroReciboFechamento>
+                     <idFechamento>test string</idFechamento>
+               </informacoesEFinanceira>
+               <informacoesEFinanceira>
+                     <dhInicial>test string</dhInicial>
+                     <dhFinal>test string</dhFinal>
+                     <situacaoEFinanceira>test string</situacaoEFinanceira>
+                     <numeroReciboAbertura>test string</numeroReciboAbertura>
+                     <idAbertura>test string</idAbertura>
+                     <numeroReciboFechamento>test string</numeroReciboFechamento>
+                     <idFechamento>test string</idFechamento>
+               </informacoesEFinanceira>
+               <informacoesEFinanceira>
+                     <dhInicial>test string</dhInicial>
+                     <dhFinal>test string</dhFinal>
+                     <situacaoEFinanceira>test string</situacaoEFinanceira>
+                     <numeroReciboAbertura>test string</numeroReciboAbertura>
+                     <idAbertura>test string</idAbertura>
+                     <numeroReciboFechamento>test string</numeroReciboFechamento>
+                     <idFechamento>test string</idFechamento>
+               </informacoesEFinanceira>
+         </retornoConsultaListaEFinanceira>
+         <retornoConsultaListaEFinanceira>
+               <dhProcessamento>test string</dhProcessamento>
+               <status>
+                     <cdRetorno>test string</cdRetorno>
+                     <descRetorno>test string</descRetorno>
+                     <dadosRegistroOcorrenciaEvento>
+                           <ocorrencias>
+                                 <tipo>test string</tipo>
+                                 <localizacaoErroAviso>test string</localizacaoErroAviso>
+                                 <codigo>test string</codigo>
+                                 <descricao>test string</descricao>
+                           </ocorrencias>
+                           <ocorrencias>
+                                 <tipo>test string</tipo>
+                                 <localizacaoErroAviso>test string</localizacaoErroAviso>
+                                 <codigo>test string</codigo>
+                                 <descricao>test string</descricao>
+                           </ocorrencias>
+                           <ocorrencias>
+                                 <tipo>test string</tipo>
+                                 <localizacaoErroAviso>test string</localizacaoErroAviso>
+                                 <codigo>test string</codigo>
+                                 <descricao>test string</descricao>
+                           </ocorrencias>
+                     </dadosRegistroOcorrenciaEvento>
+                     <dadosRegistroOcorrenciaEvento>
+                           <ocorrencias>
+                                 <tipo>test string</tipo>
+                                 <localizacaoErroAviso>test string</localizacaoErroAviso>
+                                 <codigo>test string</codigo>
+                                 <descricao>test string</descricao>
+                           </ocorrencias>
+                           <ocorrencias>
+                                 <tipo>test string</tipo>
+                                 <localizacaoErroAviso>test string</localizacaoErroAviso>
+                                 <codigo>test string</codigo>
+                                 <descricao>test string</descricao>
+                           </ocorrencias>
+                           <ocorrencias>
+                                 <tipo>test string</tipo>
+                                 <localizacaoErroAviso>test string</localizacaoErroAviso>
+                                 <codigo>test string</codigo>
+                                 <descricao>test string</descricao>
+                           </ocorrencias>
+                     </dadosRegistroOcorrenciaEvento>
+                     <dadosRegistroOcorrenciaEvento>
+                           <ocorrencias>
+                                 <tipo>test string</tipo>
+                                 <localizacaoErroAviso>test string</localizacaoErroAviso>
+                                 <codigo>test string</codigo>
+                                 <descricao>test string</descricao>
+                           </ocorrencias>
+                           <ocorrencias>
+                                 <tipo>test string</tipo>
+                                 <localizacaoErroAviso>test string</localizacaoErroAviso>
+                                 <codigo>test string</codigo>
+                                 <descricao>test string</descricao>
+                           </ocorrencias>
+                           <ocorrencias>
+                                 <tipo>test string</tipo>
+                                 <localizacaoErroAviso>test string</localizacaoErroAviso>
+                                 <codigo>test string</codigo>
+                                 <descricao>test string</descricao>
+                           </ocorrencias>
+                     </dadosRegistroOcorrenciaEvento>
+               </status>
+               <identificacaoEmpresaDeclarante>
+                     <cnpjEmpresaDeclarante>test string</cnpjEmpresaDeclarante>
+               </identificacaoEmpresaDeclarante>
+               <identificacaoEmpresaDeclarante>
+                     <cnpjEmpresaDeclarante>test string</cnpjEmpresaDeclarante>
+               </identificacaoEmpresaDeclarante>
+               <identificacaoEmpresaDeclarante>
+                     <cnpjEmpresaDeclarante>test string</cnpjEmpresaDeclarante>
+               </identificacaoEmpresaDeclarante>
+               <informacoesEFinanceira>
+                     <dhInicial>test string</dhInicial>
+                     <dhFinal>test string</dhFinal>
+                     <situacaoEFinanceira>test string</situacaoEFinanceira>
+                     <numeroReciboAbertura>test string</numeroReciboAbertura>
+                     <idAbertura>test string</idAbertura>
+                     <numeroReciboFechamento>test string</numeroReciboFechamento>
+                     <idFechamento>test string</idFechamento>
+               </informacoesEFinanceira>
+               <informacoesEFinanceira>
+                     <dhInicial>test string</dhInicial>
+                     <dhFinal>test string</dhFinal>
+                     <situacaoEFinanceira>test string</situacaoEFinanceira>
+                     <numeroReciboAbertura>test string</numeroReciboAbertura>
+                     <idAbertura>test string</idAbertura>
+                     <numeroReciboFechamento>test string</numeroReciboFechamento>
+                     <idFechamento>test string</idFechamento>
+               </informacoesEFinanceira>
+               <informacoesEFinanceira>
+                     <dhInicial>test string</dhInicial>
+                     <dhFinal>test string</dhFinal>
+                     <situacaoEFinanceira>test string</situacaoEFinanceira>
+                     <numeroReciboAbertura>test string</numeroReciboAbertura>
+                     <idAbertura>test string</idAbertura>
+                     <numeroReciboFechamento>test string</numeroReciboFechamento>
+                     <idFechamento>test string</idFechamento>
+               </informacoesEFinanceira>
+         </retornoConsultaListaEFinanceira>
+   </eFinanceira>
+ 
