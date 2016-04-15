@@ -208,8 +208,8 @@ class Tools
      * getSSLProtocol
      * Retorna o protocolo que está setado
      * Se for indicada qualquer opção no parametro será retornada as possiveis
-     * opções para o protocolo SSL 
-     * 
+     * opções para o protocolo SSL
+     *
      * @return string | array protocolo setado ou array de opções
      */
     public function getSSLProtocol($opt = '')
