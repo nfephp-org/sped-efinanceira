@@ -57,10 +57,10 @@
   </wsdl:binding>
   <wsdl:service name="WsRecepcao">
     <wsdl:port name="WsRecepcaoSoap" binding="tns:WsRecepcaoSoap">
-      <soap:address location="https://efinanc.receita.fazenda.gov.br/WsEFinanceira/WsRecepcao.asmx" />
+      <soap:address location="https://preprod-efinanc.receita.fazenda.gov.br/WsEFinanceira/WsRecepcao.asmx" />
     </wsdl:port>
     <wsdl:port name="WsRecepcaoSoap12" binding="tns:WsRecepcaoSoap12">
-      <soap12:address location="https://efinanc.receita.fazenda.gov.br/WsEFinanceira/WsRecepcao.asmx" />
+      <soap12:address location="https://preprod-efinanc.receita.fazenda.gov.br/WsEFinanceira/WsRecepcao.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

@@ -16,11 +16,12 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function __construct()
     {
         $this->pathFixtures = dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR."fixtures".DIRECTORY_SEPARATOR;
+        $pathFiles  = dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR."fixtures".DIRECTORY_SEPARATOR."eFinanc".DIRECTORY_SEPARATOR;
         $path = $this->pathFixtures."certs".DIRECTORY_SEPARATOR;
         $this->config = "{
             \"atualizacao\":\"2016-04-01 09:00:17\",
             \"tpAmb\":2,
-            \"pathFiles\":\"\/tmp\/eFinanc\/\",
+            \"pathFiles\":\"$pathFiles\",
             \"pathCertsFiles\":\"$path\",
             \"siteUrl\":\"http:\/\/localhost\/sped-efinanceira\/\",
             \"schemes\":\"v1_0_1\",

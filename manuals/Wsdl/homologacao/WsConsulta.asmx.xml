@@ -170,7 +170,7 @@
       <wsdl:output message="tns:ConsultarListaEFinanceiraSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="ConsultarInformacoesMovimento">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Servico destinado a Consulta de informacoes de movimento</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Servico destinado a Consulta de informacoes de Movimento</wsdl:documentation>
       <wsdl:input message="tns:ConsultarInformacoesMovimentoSoapIn" />
       <wsdl:output message="tns:ConsultarInformacoesMovimentoSoapOut" />
     </wsdl:operation>
@@ -273,10 +273,10 @@
   </wsdl:binding>
   <wsdl:service name="WsConsulta">
     <wsdl:port name="WsConsultaSoap" binding="tns:WsConsultaSoap">
-      <soap:address location="https://efinanc.receita.fazenda.gov.br/WsEFinanceira/WsConsulta.asmx" />
+      <soap:address location="https://preprod-efinanc.receita.fazenda.gov.br/WsEFinanceira/WsConsulta.asmx" />
     </wsdl:port>
     <wsdl:port name="WsConsultaSoap12" binding="tns:WsConsultaSoap12">
-      <soap12:address location="https://efinanc.receita.fazenda.gov.br/WsEFinanceira/WsConsulta.asmx" />
+      <soap12:address location="https://preprod-efinanc.receita.fazenda.gov.br/WsEFinanceira/WsConsulta.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

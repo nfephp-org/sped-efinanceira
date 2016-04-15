@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.eFinanceira.gov.br/schemas/envioLoteEventos/v1_0_0" targetNamespace="http://www.eFinanceira.gov.br/schemas/envioLoteEventos/v1_0_0" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:element name="eFinanceira">
+    <xs:annotation>
+      <xs:documentation>Elemento raiz do lote de eFinanceira.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="loteEventos">
+          <xs:annotation>
+            <xs:documentation>Contém a relação de eventos que compõe o lote.</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence minOccurs="1" maxOccurs="100">
+              <xs:element name="evento" type="TArquivoeFinanceira"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+     </xs:complexType>
+  </xs:element>
+  <xs:complexType name="TArquivoeFinanceira">
+    <xs:annotation>
+      <xs:documentation>
+        Define os dados de um arquivo de eFinanceira (evento).
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:any processContents="skip">
+        <xs:annotation>
+          <xs:documentation>
+            Contém xml com o retorno do processamento do evento. (conforme Xsd retornoEvento)
+          </xs:documentation>
+        </xs:annotation>
+      </xs:any>
+    </xs:sequence>
+    <xs:attribute name="id" use="required" type="xs:ID">
+      <xs:annotation>
+        <xs:documentation>
+          Contém chave de acesso do evento.
+          Esta informação é importante para que o próprio XSD consiga detectar se existe
+          mais de um evento com mesmo ID no lote e, caso exista, negue sua recepção.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+</xs:schema>
+
