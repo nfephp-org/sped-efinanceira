@@ -303,9 +303,8 @@ class Tools
         $body = "<ConsultarInformacoesCadastrais xmlns=\"$this->xmlns\">"
                 . "<cnpj>$cnpj</cnpj>"
                 . "</ConsultarInformacoesCadastrais>";
-        $retorno = $this->oSoap->send($urlService, '', '', $body, $method);
-        $lastMsg = $this->oSoap->lastMsg;
-        $this->soapDebug = $this->oSoap->soapDebug;
+        $lastMsg = '';
+        $retorno = $this->zSend($body, $body, $method, $lastMsg);
         //salva comunicações para log
         $mark = $this->generateMark();
         $filename = "$mark-consultaCad.xml";
@@ -355,9 +354,8 @@ class Tools
             $body .= "<dataFim>$dtFim</dataFim>";
         }
         $body .= "</ConsultarListaEFinanceira>";
-        $retorno = $this->oSoap->send($urlService, '', '', $body, $method);
-        $lastMsg = $this->oSoap->lastMsg;
-        $this->soapDebug = $this->oSoap->soapDebug;
+        $lastMsg = '';
+        $retorno = $this->zSend($body, $body, $method, $lastMsg);
         //salva comunicações para log
         $mark = $this->generateMark();
         $filename = "$mark-consultaLista.xml";
@@ -423,9 +421,8 @@ class Tools
             $body .= "<identificacao>$numni</identificacao>";
         }
         $body .= "</ConsultarInformacoesMovimento>";
-        $retorno = $this->oSoap->send($urlService, '', '', $body, $method);
-        $lastMsg = $this->oSoap->lastMsg;
-        $this->soapDebug = $this->oSoap->soapDebug;
+        $lastMsg = '';
+        $retorno = $this->zSend($body, $body, $method, $lastMsg);
         //salva comunicações para log
         $mark = $this->generateMark();
         $filename = "$mark-consultaMovimento.xml";
@@ -477,9 +474,8 @@ class Tools
             $body .= "<NumeroIdentificacao>$identificacao</NumeroIdentificacao>";
         }
         $body .= "</ConsultarInformacoesIntermediario>";
-        $retorno = $this->oSoap->send($urlService, '', '', $body, $method);
-        $lastMsg = $this->oSoap->lastMsg;
-        $this->soapDebug = $this->oSoap->soapDebug;
+        $lastMsg = '';
+        $retorno = $this->zSend($body, $body, $method, $lastMsg);
         //salva comunicações para log
         $mark = $this->generateMark();
         $filename = "$mark-consultaIntermediario.xml";
@@ -522,9 +518,8 @@ class Tools
             $body .= "<NumeroIdentificacao>$identificacao</NumeroIdentificacao>";
         }
         $body .= "</ConsultarInformacoesPatrocinado>";
-        $retorno = $this->oSoap->send($urlService, '', '', $body, $method);
-        $lastMsg = $this->oSoap->lastMsg;
-        $this->soapDebug = $this->oSoap->soapDebug;
+        $lastMsg = '';
+        $retorno = $this->zSend($body, $body, $method, $lastMsg);
         //salva comunicações para log
         $mark = $this->generateMark();
         $filename = "$mark-consultaPatrocinado.xml";
@@ -579,9 +574,8 @@ class Tools
         }
         $body .= "</loteEventos>";
         $body .= "</eFinanceira>";
-        $retorno = $this->oSoap->send($urlService, '', '', $body, $method);
-        $lastMsg = $this->oSoap->lastMsg;
-        $this->soapDebug = $this->oSoap->soapDebug;
+        $lastMsg = '';
+        $retorno = $this->zSend($body, $body, $method, $lastMsg);
         //salva comunicações para log
         $mark = $this->generateMark();
         $filename = "$mark-enviaLote.xml";
@@ -644,5 +638,22 @@ class Tools
     protected function generateMark()
     {
         return date('YmdHis');
+    }
+    
+    /**
+     * Envia a mensagem para o webservice
+     *
+     * @param string $urlService
+     * @param strting $body
+     * @param string $method
+     * @param string $lastMsg
+     * @return string
+     */
+    public function zSend($urlService, $body, $method, &$lastMsg)
+    {
+        $retorno = $this->oSoap->send($urlService, '', '', $body, $method);
+        $lastMsg = $this->oSoap->lastMsg;
+        $this->soapDebug = $this->oSoap->soapDebug;
+        return $retorno;
     }
 }
