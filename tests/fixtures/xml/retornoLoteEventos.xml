@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eFinanceira>
+    <retornoLoteEventos id="test attribute">
+        <ideTransmissor>
+            <IdTransmissor>test string</IdTransmissor>
+        </ideTransmissor>
+        <status>
+            <cdStatus>test string</cdStatus>
+            <descRetorno>test string</descRetorno>
+            <dadosRegistroOcorrenciaLote>
+                <ocorrencias>
+                    <tipo>test string</tipo>
+                    <localizacaoErroAviso>test string</localizacaoErroAviso>
+                    <codigo>test string</codigo>
+                    <descricao>test string</descricao>
+                </ocorrencias>
+                <ocorrencias>
+                    <tipo>test string</tipo>
+                    <localizacaoErroAviso>test string</localizacaoErroAviso>
+                    <codigo>test string</codigo>
+                    <descricao>test string</descricao>
+                </ocorrencias>
+                <ocorrencias>
+                    <tipo>test string</tipo>
+                    <localizacaoErroAviso>test string</localizacaoErroAviso>
+                    <codigo>test string</codigo>
+                    <descricao>test string</descricao>
+                </ocorrencias>
+            </dadosRegistroOcorrenciaLote>
+        </status>
+        <retornoEventos>
+            <evento>
+                <retornoEvento id="test attribute">
+                    <identificacaoEmpresaDeclarante>
+                        <cnpjEmpresaDeclarante>test string</cnpjEmpresaDeclarante>
+                    </identificacaoEmpresaDeclarante>
+                    <dadosRecepcaoEvento>
+                        <dhProcessamento>test string</dhProcessamento>
+                        <tipoEvento>test string</tipoEvento>
+                        <idEvento>test string</idEvento>
+                        <hash>test string</hash>
+                        <nrRecibo>test string</nrRecibo>
+                    </dadosRecepcaoEvento>
+                    <status>
+                        <cdRetorno>test string</cdRetorno>
+                        <descRetorno>test string</descRetorno>
+                        <dadosRegistroOcorrenciaEvento>
+                            <ocorrencias>
+                                <tipo>test string</tipo>
+                                <localizacaoErroAviso>test string</localizacaoErroAviso>
+                                <codigo>test string</codigo>
+                                <descricao>test string</descricao>
+                            </ocorrencias>
+                            <ocorrencias>
+                                <tipo>test string</tipo>
+                                <localizacaoErroAviso>test string</localizacaoErroAviso>
+                                <descricao>test string</descricao>
+                            </ocorrencias>
+                            <ocorrencias>
+                                <tipo>test string</tipo>
+                                <localizacaoErroAviso>test string</localizacaoErroAviso>
+                                <codigo>test string</codigo>
+                                <descricao>test string</descricao>
+                            </ocorrencias>
+                        </dadosRegistroOcorrenciaEvento>
+                    </status>
+                    <dadosReciboEntrega>
+                        <numeroRecibo>test string</numeroRecibo>
+                    </dadosReciboEntrega>
+                </retornoEvento>
+            </evento>
+            <evento>
+                <retornoEvento id="test attribute">
+                    <identificacaoEmpresaDeclarante>
+                        <cnpjEmpresaDeclarante>test string</cnpjEmpresaDeclarante>
+                    </identificacaoEmpresaDeclarante>
+                    <dadosRecepcaoEvento>
+                        <dhProcessamento>test string</dhProcessamento>
+                        <tipoEvento>test string</tipoEvento>
+                        <idEvento>test string</idEvento>
+                        <hash>test string</hash>
+                        <nrRecibo>test string</nrRecibo>
+                    </dadosRecepcaoEvento>
+                    <status>
+                        <cdRetorno>test string</cdRetorno>
+                        <descRetorno>test string</descRetorno>
+                        <dadosRegistroOcorrenciaEvento>
+                            <ocorrencias>
+                                <tipo>test string</tipo>
+                                <localizacaoErroAviso>test string</localizacaoErroAviso>
+                                <codigo>test string</codigo>
+                                <descricao>test string</descricao>
+                            </ocorrencias>
+                            <ocorrencias>
+                                <tipo>test string</tipo>
+                                <localizacaoErroAviso>test string</localizacaoErroAviso>
+                                <codigo>test string</codigo>
+                                <descricao>test string</descricao>
+                            </ocorrencias>
+                            <ocorrencias>
+                                <tipo>test string</tipo>
+                                <localizacaoErroAviso>test string</localizacaoErroAviso>
+                                <codigo>test string</codigo>
+                                <descricao>test string</descricao>
+                            </ocorrencias>
+                        </dadosRegistroOcorrenciaEvento>
+                    </status>
+                    <dadosReciboEntrega>
+                        <numeroRecibo>test string</numeroRecibo>
+                    </dadosReciboEntrega>
+                </retornoEvento>
+            </evento>
+        </retornoEventos>
+    </retornoLoteEventos>
+</eFinanceira>

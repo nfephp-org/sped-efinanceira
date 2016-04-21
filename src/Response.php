@@ -110,7 +110,7 @@ class Response
         //busca a data e hora do processamento
         $aResposta['dataHoraProcessamento'] = self::retDataHora($node);
         //busca dados declarante
-        $aResposta['cnpjEmpresaDeclarante'] = self::retDeclarante($node);
+        $aResposta['cnpjEmpresaDeclarante'] = self::retDeclarante($node)['cnpj'];
         //busca o status
         $aResposta['status'] = self::retStatus($node);
         $aResposta['numeroRecibo'] =
@@ -172,7 +172,7 @@ class Response
         //busca a data e hora do processamento
         $aResposta['dataHoraProcessamento'] = self::retDataHora($node);
         //busca dados declarante
-        $aResposta['cnpjEmpresaDeclarante'] = self::retDeclarante($node);
+        $aResposta['cnpjEmpresaDeclarante'] = self::retDeclarante($node)['cnpj'];
         //busca o status
         $aResposta['status'] = self::retStatus($node);
         //informacoesEFinanceira
@@ -191,7 +191,7 @@ class Response
                 $aInfo['situacaoEFinanceira'] =
                     !empty($info->item($n)->getElementsByTagName('situacaoEFinanceira')->item(0)->nodeValue) ?
                     $info->item($n)->getElementsByTagName('situacaoEFinanceira')->item(0)->nodeValue :
-                    '';
+                    '0';
                 $aInfo['numeroReciboAbertura'] =
                     !empty($info->item($n)->getElementsByTagName('numeroReciboAbertura')->item(0)->nodeValue) ?
                     $info->item($n)->getElementsByTagName('numeroReciboAbertura')->item(0)->nodeValue :
@@ -253,7 +253,7 @@ class Response
         //busca a data e hora do processamento
         $aResposta['dataHoraProcessamento'] = self::retDataHora($node);
         //busca dados declarante
-        $aResposta['cnpjEmpresaDeclarante'] = self::retDeclarante($node);
+        $aResposta['cnpjEmpresaDeclarante'] = self::retDeclarante($node)['cnpj'];
         //busca o status
         $aResposta['status'] = self::retStatus($node);
         //informacoesEFinanceira
@@ -332,7 +332,7 @@ class Response
         //busca a data e hora do processamento
         $aResposta['dataHoraProcessamento'] = self::retDataHora($node);
         //busca dados declarante
-        $aResposta['cnpjEmpresaDeclarante'] = self::retDeclarante($node);
+        $aResposta['cnpjEmpresaDeclarante'] = self::retDeclarante($node)['cnpj'];
         //busca o status
         $aResposta['status'] = self::retStatus($node);
         //informacoesEFinanceira
@@ -379,7 +379,8 @@ class Response
         $aResposta = [
             'bStat' => false,
             'cnpjEmpresaDeclarante' => '',
-            'dhProcessamento' => '',
+            'giinEmpresaDeclarante' => '',
+            'dataHoraProcessamento' => '',
             'status' => array(),
             'identificacaoPatrocinado' => array()
         ];
@@ -402,7 +403,8 @@ class Response
         //busca a data e hora do processamento
         $aResposta['dataHoraProcessamento'] = self::retDataHora($node);
         //busca dados declarante
-        $aResposta['cnpjEmpresaDeclarante'] = self::retDeclarante($node);
+        $aResposta['cnpjEmpresaDeclarante'] = self::retDeclarante($node)['cnpj'];
+        $aResposta['giinEmpresaDeclarante'] = self::retDeclarante($node)['giin'];
         //busca o status
         $aResposta['status'] = self::retStatus($node);
         //informacoesEFinanceira
@@ -463,7 +465,7 @@ class Response
             $recepcao = $ret->getElementsByTagName('dadosRecepcaoEvento')->item(0);
             $dadosReciboEntrega = $ret->getElementsByTagName('dadosReciboEntrega')->item(0);
             $aEvento['id'] = $ret->getAttribute('id');
-            $aEvento['cnpjDeclarante'] = self::retDeclarante($ret);
+            $aEvento['cnpjDeclarante'] = self::retDeclarante($ret)['cnpj'];
             $aEvento['dhProcessamento'] = $recepcao->getElementsByTagName('dhProcessamento')->item(0)->nodeValue;
             $aEvento['tipoEvento'] = $recepcao->getElementsByTagName('tipoEvento')->item(0)->nodeValue;
             $aEvento['idEvento'] = $recepcao->getElementsByTagName('idEvento')->item(0)->nodeValue;
@@ -487,11 +489,15 @@ class Response
     protected static function retDataHora($node)
     {
         $data = '';
-        $dtHora = $node->getElementsByTagName('dataHoraProcessamento')->item(0)->nodeValue;
-        if (!isset($dtHora)) {
-            $dtHora = $node->getElementsByTagName('dhProcessamento')->item(0)->nodeValue;
+        $dtHora = !empty($node->getElementsByTagName('dataHoraProcessamento')->item(0)->nodeValue) ?
+            $node->getElementsByTagName('dataHoraProcessamento')->item(0)->nodeValue :
+            '';
+        if (empty($dtHora)) {
+            $dtHora = !empty($node->getElementsByTagName('dhProcessamento')->item(0)->nodeValue) ?
+                $node->getElementsByTagName('dhProcessamento')->item(0)->nodeValue :
+                '';
         }
-        if (isset($dtHora)) {
+        if (! empty($dtHora)) {
             $data = date('d/m/Y H:i:s', DateTime::convertSefazTimeToTimestamp($dtHora));
         }
         return $data;
@@ -508,7 +514,10 @@ class Response
         //declarante 1 - 1
         $nodeDeclarante = $node->getElementsByTagName('identificacaoEmpresaDeclarante')->item(0);
         $cnpj = $nodeDeclarante->getElementsByTagName('cnpjEmpresaDeclarante')->item(0)->nodeValue;
-        return $cnpj;
+        $giin = !empty($nodeDeclarante->getElementsByTagName('GIIN')->item(0)->nodeValue) ?
+            $nodeDeclarante->getElementsByTagName('GIIN')->item(0)->nodeValue :
+            '';
+        return array('cnpj'=>$cnpj, "giin"=>$giin);
     }
     
     /**
@@ -535,7 +544,7 @@ class Response
         $nodestatus = $node->getElementsByTagName('status')->item(0);
         $aStatus['cdRetorno'] = !empty($nodestatus->getElementsByTagName('cdRetorno')->item(0)->nodeValue) ?
             $nodestatus->getElementsByTagName('cdRetorno')->item(0)->nodeValue :
-            '';
+            '0';
         $aStatus['descRetorno'] = !empty($nodestatus->getElementsByTagName('descRetorno')->item(0)->nodeValue) ?
             $nodestatus->getElementsByTagName('descRetorno')->item(0)->nodeValue :
             '';
@@ -562,7 +571,9 @@ class Response
                             $nodeocor->item($x)->getElementsByTagName('descricao')->item(0)->nodeValue :
                             '';
                         $aOcorr['localizacaoErroAviso'] =
-                            !empty($nodeocor->item($x)->getElementsByTagName('localizacaoErroAviso')->item(0)->nodeValue) ?
+                            !empty($nodeocor->item($x)
+                                ->getElementsByTagName('localizacaoErroAviso')
+                                ->item(0)->nodeValue) ?
                             $nodeocor->item($x)->getElementsByTagName('localizacaoErroAviso')->item(0)->nodeValue :
                             '';
                     }

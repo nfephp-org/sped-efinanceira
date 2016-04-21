@@ -1,0 +1,1 @@
+{"bStat":true,"cnpjEmpresaDeclarante":"99999999999999","dhProcessamento":"","status":{"cdRetorno":"0","descRetorno":"SUCESSO","ocorrencias":[]},"identificacaoIntermediario":[{"GIIN":"XXXXXX.XXXXX.XX.XXX","tpNI":"1","NIIntermediario":"12345678901234","numeroRecibo":"fgtre-27763-yydttyd-3838","id":"123456"}],"dataHoraProcessamento":"13\/04\/2016 15:19:21"}

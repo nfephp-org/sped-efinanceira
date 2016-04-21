@@ -191,7 +191,7 @@ abstract class Factory extends BaseMake
      */
     public function assina()
     {
-        $this->xml = $this->pkcs->signXML($this->xml, $this->signTag, 'id');
+        $this->xml = $this->pkcs->signXML($this->xml, $this->signTag, 'id', $this->objConfig->signAlgorithm);
     }
 
     /**

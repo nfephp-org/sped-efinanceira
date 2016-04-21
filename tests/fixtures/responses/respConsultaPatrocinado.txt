@@ -1,0 +1,1 @@
+{"bStat":true,"cnpjEmpresaDeclarante":"99999999999999","giinEmpresaDeclarante":"XXXXXX.XXXXX.XX.XXX","dataHoraProcessamento":"13\/04\/2016 15:19:21","status":{"cdRetorno":"0","descRetorno":"SUCESSO","ocorrencias":[]},"identificacaoPatrocinado":[{"GIIN":"XXXXXX.XXXXX.XX.XXX","CNPJ":"12345678901234","numeroRecibo":"111111111111111111","id":"aaaa.wwww.eeee.eeee.1111"}]}

@@ -25,6 +25,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
             \"pathCertsFiles\":\"$path\",
             \"siteUrl\":\"http:\/\/localhost\/sped-efinanceira\/\",
             \"schemes\":\"v1_0_1\",
+            \"signAlgorithm\":\"SHA1\",
             \"verAplic\":\"001\",
             \"aplicEmi\":\"1\",
             \"razaosocial\":\"Sua empresa Ltda\",
