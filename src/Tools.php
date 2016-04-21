@@ -104,6 +104,7 @@ class Tools
 
     /**
      * __construct
+     *
      * @param string $configJson
      * @throws InvalidArgumentException
      * @throws RuntimeException
@@ -321,10 +322,10 @@ class Tools
      *
      * @param  string $cnpj CNPJ do Declarante
      * @param  string $sit Situacao EFinanceira 0 – Todas
-                                                    1 – Em Andamento
-                                                    2 – Ativa
-                                                    3 - Retificada
-                                                    4 - Excluída
+     *                                          1 – Em Andamento
+     *                                          2 – Ativa
+     *                                          3 - Retificada
+     *                                          4 - Excluída
      * @param  string $dtInicio     data valida formato ???
      * @param  string $dtFim        data valida formato ???
      * @param  array  $aResp variável passada como referencia irá conter
@@ -372,10 +373,10 @@ class Tools
      *
      * @param  string $cnpj CNPJ da empresa declarante
      * @param  string $sit  Situacao    0 - Todas
-                                        1 - Em Andamento
-                                        2 - Ativa
-                                        3 - Retificada
-                                        4 - Excluída
+     *                                  1 - Em Andamento
+     *                                  2 - Ativa
+     *                                  3 - Retificada
+     *                                  4 - Excluída
      * @param  string $anomesIni Ano/Mês inicial das informações AAAA/MM
      * @param  string $anomesFim Ano/Mês final das informações AAAA/MM
      * @param  string $tpmov Tipo de Movimento 1 - Previdência Privada
@@ -588,6 +589,7 @@ class Tools
     }
     
     /**
+     * Grava as mensagens em disco
      *
      * @param string $data conteudo a ser gravado
      * @param string $filename
