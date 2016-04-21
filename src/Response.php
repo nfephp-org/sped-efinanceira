@@ -442,11 +442,39 @@ class Response
      */
     public static function readEnviarLoteEvento($dom)
     {
-        $aResposta = [];
+        $aResposta = [
+            'bStat' => false,
+            'IdTransmissor' => '',
+            'status' => array(),
+            'retornoEventos' => array()
+        ];
+        $aEventos = [];
         $tag = $dom->getElementsByTagName('retornoLoteEventos')->item(0);
         if (! isset($tag)) {
             return $aResposta;
         }
+        //busca o status
+        $aResposta['status'] = self::retStatus($tag);
+        $tag = $dom->getElementsByTagName('retornoEventos')->item(0);
+        $eventos = $tag->getElementsByTagName('evento');
+        $i = 0;
+        foreach ($eventos as $evento) {
+            $ret = $eventos->item($i)->getElementsByTagName('retornoEvento')->item(0);
+            $recepcao = $ret->getElementsByTagName('dadosRecepcaoEvento')->item(0);
+            $dadosReciboEntrega = $ret->getElementsByTagName('dadosReciboEntrega')->item(0);
+            $aEvento['id'] = $ret->getAttribute('id');
+            $aEvento['cnpjDeclarante'] = self::retDeclarante($ret);
+            $aEvento['dhProcessamento'] = $recepcao->getElementsByTagName('dhProcessamento')->item(0)->nodeValue;
+            $aEvento['tipoEvento'] = $recepcao->getElementsByTagName('tipoEvento')->item(0)->nodeValue;
+            $aEvento['idEvento'] = $recepcao->getElementsByTagName('idEvento')->item(0)->nodeValue;
+            $aEvento['hash'] = $recepcao->getElementsByTagName('hash')->item(0)->nodeValue;
+            $aEvento['nrRecibo'] = $recepcao->getElementsByTagName('nrRecibo')->item(0)->nodeValue;
+            $aEvento['status'] = self::retStatus($ret);
+            $aEvento['numeroRecibo'] = $dadosReciboEntrega->getElementsByTagName('numeroRecibo')->item(0)->nodeValue;
+            $aEventos[] = $aEvento;
+            $i++;
+        }
+        $aResposta['retornoEventos'] = $aEventos;
         return $aResposta;
     }
     
@@ -505,8 +533,12 @@ class Response
         ];
         //status 1 - 1
         $nodestatus = $node->getElementsByTagName('status')->item(0);
-        $aStatus['cdRetorno'] = $nodestatus->getElementsByTagName('cdRetorno')->item(0)->nodeValue;
-        $aStatus['descRetorno'] = $nodestatus->getElementsByTagName('descRetorno')->item(0)->nodeValue;
+        $aStatus['cdRetorno'] = !empty($nodestatus->getElementsByTagName('cdRetorno')->item(0)->nodeValue) ?
+            $nodestatus->getElementsByTagName('cdRetorno')->item(0)->nodeValue :
+            '';
+        $aStatus['descRetorno'] = !empty($nodestatus->getElementsByTagName('descRetorno')->item(0)->nodeValue) ?
+            $nodestatus->getElementsByTagName('descRetorno')->item(0)->nodeValue :
+            '';
         //status/dadosRegistroOcorrenciaEvento 0 -> N
         $nodedados = $nodestatus->getElementsByTagName('dadosRegistroOcorrenciaEvento');
         if (isset($nodedados)) {
