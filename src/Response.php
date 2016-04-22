@@ -50,7 +50,7 @@ class Response
             case 'ConsultarInformacoesPatrocinado':
                 return self::readConsultarInformacoesPatrocinado($dom);
                 break;
-            case 'EnviarLoteEvento':
+            case 'ReceberLoteEvento':
                 return self::readEnviarLoteEvento($dom);
                 break;
         }
@@ -125,7 +125,9 @@ class Response
         $info = $node->getElementsByTagName('informacoesCadastrais')->item(0);
         if (!empty($info)) {
             $aInfo['cnpj'] = $info->getElementsByTagName('cnpj')->item(0)->nodeValue;
-            $aInfo['giin'] = $info->getElementsByTagName('giin')->item(0)->nodeValue;
+            $aInfo['giin'] = !empty($info->getElementsByTagName('giin')->item(0)->nodeValue) ?
+                $info->getElementsByTagName('giin')->item(0)->nodeValue :
+                '';
             $aInfo['nome'] = $info->getElementsByTagName('nome')->item(0)->nodeValue;
             $aInfo['endereco'] = $info->getElementsByTagName('endereco')->item(0)->nodeValue;
             $aInfo['municipio'] = $info->getElementsByTagName('municipio')->item(0)->nodeValue;

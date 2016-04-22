@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <soap:Header>
+      <WSCorIDSOAPHeader CorID="3F4AB567BD094366034EBEB20804AAAA,1:1,0,0,,,AgAAAj1IQgAAAAFGAAAAAQAAABFqYXZhLnV0aWwuSGFzaE1hcAAAAAhIQgAAAAJGAAAAAgAAABBqYXZhLmxhbmcuU3RyaW5nABBBcHBNYXBDYWxsZXJIb3N0SEIAAAADRQAAAAIADFNQQ0RTUlZWMjEwNEhCAAAABEUAAAACABBBcHBNYXBDYWxsZXJUeXBlSEIAAAAFRQAAAAIAB1NlcnZsZXRIQgAAAAZFAAAAAgAKVHhuVHJhY2VJZEhCAAAAB0UAAAACACEzRjRBQjUyOUJEMDk0MzY2MDM0RUJFQjI1MDdENjZBNjBIQgAAAAhFAAAAAgARQXBwTWFwQ2FsbGVyQWdlbnRIQ0hCAAAACUUAAAACAA5BcHBNYXBBcHBOYW1lc0hCAAAACkYAAAADAAAAE2phdmEudXRpbC5BcnJheUxpc3QAAAACSEIAAAALRQAAAAIADVdzZUZpbmFuY2VpcmFIQgAAAAxFAAAAAgANV3NlRmluYW5jZWlyYUhCAAAADUUAAAACABZBcHBNYXBDYWxsZXJNZXRob2ROYW1lSEIAAAAORQAAAAIAJVN5bmNTZXNzaW9ubGVzc0hhbmRsZXJ8UHJvY2Vzc1JlcXVlc3RIQgAAAA9FAAAAAgATQXBwTWFwQ2FsbGVyUHJvY2Vzc0hCAAAAEEUAAAACAAwuTkVUIFByb2Nlc3NIQgAAABFFAAAAAgAPQ2FsbGVyVGltZXN0YW1wSEIAAAASRQAAAAIADTE0NjEzNTA3NDEzNTE=" xmlns="http://www.wilytech.com/"/>
+   </soap:Header>
+   <soap:Body>
+      <soap:Fault>
+         <soap:Code>
+            <soap:Value>soap:Receiver</soap:Value>
+         </soap:Code>
+         <soap:Reason>
+            <soap:Text xml:lang="en">System.Web.Services.Protocols.SoapException: Server was unable to process request. ---> System.ArgumentNullException: Value cannot be null.
+Parameter name: node
+   at System.Xml.XmlNodeReader..ctor(XmlNode node)
+   at Serpro.Sped.eFinanceira.WsInternet.WsRecepcao.ReceberLoteEvento(XmlDocument loteEventos)
+   --- End of inner exception stack trace ---</soap:Text>
+         </soap:Reason>
+         <soap:Detail/>
+      </soap:Fault>
+   </soap:Body>
+</soap:Envelope>
