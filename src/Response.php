@@ -146,7 +146,7 @@ class Response
         $aResposta = [
             'bStat' => false,
             'cnpjEmpresaDeclarante' => '',
-            'dhProcessamento' => '',
+            'dataHoraProcessamento' => '',
             'status' => array(),
             'informacoesEFinanceira' => array()
         ];

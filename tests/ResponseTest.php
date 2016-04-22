@@ -55,4 +55,15 @@ class ResponseTest extends FactoryTest
         $expected = str_replace("\n", "", file_get_contents($this->pathFixtures."responses".DIRECTORY_SEPARATOR."respConsultaPatrocinado.txt"));
         $this->assertEquals($expected, $jsonR);
     }
+    
+    public function testConsultaMovimento()
+    {
+        $xml = str_replace("\n", "", file_get_contents($this->pathFixtures."xml".DIRECTORY_SEPARATOR."retornoConsultaMovimento.xml"));
+        $method = 'ConsultarInformacoesMovimento';
+        $resp = Response::readReturn($method, $xml);
+        $jsonR = json_encode($resp);
+        //file_put_contents($this->pathFixtures."responses".DIRECTORY_SEPARATOR."respConsultaMovimento.txt", $jsonR);
+        $expected = str_replace("\n", "", file_get_contents($this->pathFixtures."responses".DIRECTORY_SEPARATOR."respConsultaMovimento.txt"));
+        $this->assertEquals($expected, $jsonR);
+    }
 }
