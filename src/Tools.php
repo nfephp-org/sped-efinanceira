@@ -32,6 +32,16 @@ class Tools extends BaseTools
             'consulta'=>'https://preprod-efinanc.receita.fazenda.gov.br/WsEFinanceira/WsConsulta.asmx'
         ]
     ];
+    
+    /**
+     * Construtor da classe
+     * @param type $config config json
+     * @param bool $ignore usado apenas para testes
+     */
+    public function __construct($config = '', $ignore = false)
+    {
+        parent::__construct($config, $ignore);
+    }
        
     /**
      * Consulta informações cadastrais do Declarante
@@ -54,7 +64,10 @@ class Tools extends BaseTools
                 . "<cnpj>$cnpj</cnpj>"
                 . "</ConsultarInformacoesCadastrais>";
         $lastMsg = '';
-        $retorno = $this->zSend($urlService, $body, $method, $lastMsg);
+        $aRet = $this->zSend($urlService, $body, $method);
+        $lastMsg = $aRet['lastMsg'];
+        $retorno = $aRet['retorno'];
+        $this->soapDebug = $aRet['soapDebug'];
         //salva comunicações para log
         $mark = $this->generateMark();
         $filename = "$mark-consultaCad.xml";
@@ -88,7 +101,7 @@ class Tools extends BaseTools
         $dtFim = '',
         &$aResp = array()
     ) {
-        if ($cnpj == '' || $sitInfo == '') {
+        if ($cnpj == '' || $sit == '') {
             $msg = 'Os primeiros dois parametros são obrigatórios.';
             throw new InvalidArgumentException($msg);
         }
@@ -105,7 +118,10 @@ class Tools extends BaseTools
         }
         $body .= "</ConsultarListaEFinanceira>";
         $lastMsg = '';
-        $retorno = $this->zSend($urlService, $body, $method, $lastMsg);
+        $aRet = $this->zSend($urlService, $body, $method);
+        $lastMsg = $aRet['lastMsg'];
+        $retorno = $aRet['retorno'];
+        $this->soapDebug = $aRet['soapDebug'];
         //salva comunicações para log
         $mark = $this->generateMark();
         $filename = "$mark-consultaLista.xml";
@@ -171,8 +187,10 @@ class Tools extends BaseTools
             $body .= "<identificacao>$numni</identificacao>";
         }
         $body .= "</ConsultarInformacoesMovimento>";
-        $lastMsg = '';
-        $retorno = $this->zSend($urlService, $body, $method, $lastMsg);
+        $aRet = $this->zSend($urlService, $body, $method);
+        $lastMsg = $aRet['lastMsg'];
+        $retorno = $aRet['retorno'];
+        $this->soapDebug = $aRet['soapDebug'];
         //salva comunicações para log
         $mark = $this->generateMark();
         $filename = "$mark-consultaMovimento.xml";
@@ -195,6 +213,7 @@ class Tools extends BaseTools
      *         3 - NIF Pessoa Física (Número de Identificação Fiscal Pessoa Física)
      *         4 - NIF Pessoa Jurídica (Número de Identificação Fiscal Pessoa Jurídica)
      *         5 - Passaporte
+     * @param  string $numni  Identificação do Intermediário
      * @param  array  $aResp variável passada como referencia irá conter
      *                       os retornos em um array
      * @return string será retornado o xml de resposta do webservice
@@ -203,10 +222,10 @@ class Tools extends BaseTools
         $cnpj = '',
         $ginn = '',
         $tpni = '',
-        $identificacao = '',
+        $numni = '',
         &$aResp = array()
     ) {
-        if ($cnpj == '' && $ginn == '' && $tpni == '' && $identificacao == '') {
+        if ($cnpj == '' && $tpni == '' && $identificacao == '') {
             $msg = 'Algum dos parametros deve ser passado.';
             throw new InvalidArgumentException($msg);
         }
@@ -220,12 +239,14 @@ class Tools extends BaseTools
         //se existe tpni tem que existir numni e vice-versa
         if ($tpni != '') {
             $body .= "<TipoNI>$tpni</TipoNI>";
-            $body .= "<NumeroIdentificacao>$identificacao</NumeroIdentificacao>";
+            $body .= "<NumeroIdentificacao>$numni</NumeroIdentificacao>";
         }
         $body .= "</ConsultarInformacoesIntermediario>";
-        $lastMsg = '';
-        $retorno = $this->zSend($urlService, $body, $method, $lastMsg);
-        //salva comunicações para log
+        $aRet = $this->zSend($urlService, $body, $method);
+        $lastMsg = $aRet['lastMsg'];
+        $retorno = $aRet['retorno'];
+        $this->soapDebug = $aRet['soapDebug'];
+      //salva comunicações para log
         $mark = $this->generateMark();
         $filename = "$mark-consultaIntermediario.xml";
         $this->gravaFile($lastMsg, $filename, $this->tpAmb, $this->aConfig['pathFiles'], 'temporarias');
@@ -267,8 +288,10 @@ class Tools extends BaseTools
             $body .= "<NumeroIdentificacao>$identificacao</NumeroIdentificacao>";
         }
         $body .= "</ConsultarInformacoesPatrocinado>";
-        $lastMsg = '';
-        $retorno = $this->zSend($urlService, $body, $method, $lastMsg);
+        $aRet = $this->zSend($urlService, $body, $method);
+        $lastMsg = $aRet['lastMsg'];
+        $retorno = $aRet['retorno'];
+        $this->soapDebug = $aRet['soapDebug'];
         //salva comunicações para log
         $mark = $this->generateMark();
         $filename = "$mark-consultaPatrocinado.xml";
@@ -327,7 +350,10 @@ class Tools extends BaseTools
         $body .= "</eFinanceira>";
         $body .= "</loteEventos>";
         $lastMsg = '';
-        $retorno = $this->zSend($urlService, $body, $method, $lastMsg);
+        $aRet = $this->zSend($urlService, $body, $method);
+        $lastMsg = $aRet['lastMsg'];
+        $retorno = $aRet['retorno'];
+        $this->soapDebug = $aRet['soapDebug'];
         if (! $retorno) {
             return $this->errors;
         }

@@ -1,115 +1,66 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<eFinanceira>
-    <retornoLoteEventos id="test attribute">
-        <ideTransmissor>
-            <IdTransmissor>test string</IdTransmissor>
-        </ideTransmissor>
-        <status>
-            <cdStatus>test string</cdStatus>
-            <descRetorno>test string</descRetorno>
-            <dadosRegistroOcorrenciaLote>
-                <ocorrencias>
-                    <tipo>test string</tipo>
-                    <localizacaoErroAviso>test string</localizacaoErroAviso>
-                    <codigo>test string</codigo>
-                    <descricao>test string</descricao>
-                </ocorrencias>
-                <ocorrencias>
-                    <tipo>test string</tipo>
-                    <localizacaoErroAviso>test string</localizacaoErroAviso>
-                    <codigo>test string</codigo>
-                    <descricao>test string</descricao>
-                </ocorrencias>
-                <ocorrencias>
-                    <tipo>test string</tipo>
-                    <localizacaoErroAviso>test string</localizacaoErroAviso>
-                    <codigo>test string</codigo>
-                    <descricao>test string</descricao>
-                </ocorrencias>
-            </dadosRegistroOcorrenciaLote>
-        </status>
-        <retornoEventos>
-            <evento>
-                <retornoEvento id="test attribute">
-                    <identificacaoEmpresaDeclarante>
-                        <cnpjEmpresaDeclarante>test string</cnpjEmpresaDeclarante>
-                    </identificacaoEmpresaDeclarante>
-                    <dadosRecepcaoEvento>
-                        <dhProcessamento>test string</dhProcessamento>
-                        <tipoEvento>test string</tipoEvento>
-                        <idEvento>test string</idEvento>
-                        <hash>test string</hash>
-                        <nrRecibo>test string</nrRecibo>
-                    </dadosRecepcaoEvento>
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <soap:Header>
+        <WSCorIDSOAPHeader CorID="580B4E3DBD094366034EBEB225B6113A,1:2,0,0,,,AgAAAj1IQgAAAAFGAAAAAQAAABFqYXZhLnV0aWwuSGFzaE1hcAAAAAhIQgAAAAJGAAAAAgAAABBqYXZhLmxhbmcuU3RyaW5nABBBcHBNYXBDYWxsZXJIb3N0SEIAAAADRQAAAAIADFNQQ0RTUlZWMjEwNEhCAAAABEUAAAACABBBcHBNYXBDYWxsZXJUeXBlSEIAAAAFRQAAAAIAB1NlcnZsZXRIQgAAAAZFAAAAAgAKVHhuVHJhY2VJZEhCAAAAB0UAAAACACE1ODBCNEUyRUJEMDk0MzY2MDM0RUJFQjIyNjM3Mjc3RDBIQgAAAAhFAAAAAgARQXBwTWFwQ2FsbGVyQWdlbnRIQ0hCAAAACUUAAAACAA5BcHBNYXBBcHBOYW1lc0hCAAAACkYAAAADAAAAE2phdmEudXRpbC5BcnJheUxpc3QAAAACSEIAAAALRQAAAAIADVdzZUZpbmFuY2VpcmFIQgAAAAxFAAAAAgANV3NlRmluYW5jZWlyYUhCAAAADUUAAAACABZBcHBNYXBDYWxsZXJNZXRob2ROYW1lSEIAAAAORQAAAAIAJVN5bmNTZXNzaW9ubGVzc0hhbmRsZXJ8UHJvY2Vzc1JlcXVlc3RIQgAAAA9FAAAAAgATQXBwTWFwQ2FsbGVyUHJvY2Vzc0hCAAAAEEUAAAACAAwuTkVUIFByb2Nlc3NIQgAAABFFAAAAAgAPQ2FsbGVyVGltZXN0YW1wSEIAAAASRQAAAAIADTE0NjE3NjYwMTcxOTg=" xmlns="http://www.wilytech.com/" />
+    </soap:Header>
+    <soap:Body>
+        <ReceberLoteEventoResult xmlns="http://sped.fazenda.gov.br/">
+            <eFinanceira xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.eFinanceira.gov.br/schemas/retornoLoteEventos/v1_0_1">
+                <retornoLoteEventos id="3789BE9D9B6A81FB7D3B193210E1328F">
+                    <ideTransmissor>
+                        <IdTransmissor>99999999000199</IdTransmissor>
+                    </ideTransmissor>
                     <status>
-                        <cdRetorno>test string</cdRetorno>
-                        <descRetorno>test string</descRetorno>
-                        <dadosRegistroOcorrenciaEvento>
-                            <ocorrencias>
-                                <tipo>test string</tipo>
-                                <localizacaoErroAviso>test string</localizacaoErroAviso>
-                                <codigo>test string</codigo>
-                                <descricao>test string</descricao>
-                            </ocorrencias>
-                            <ocorrencias>
-                                <tipo>test string</tipo>
-                                <localizacaoErroAviso>test string</localizacaoErroAviso>
-                                <descricao>test string</descricao>
-                            </ocorrencias>
-                            <ocorrencias>
-                                <tipo>test string</tipo>
-                                <localizacaoErroAviso>test string</localizacaoErroAviso>
-                                <codigo>test string</codigo>
-                                <descricao>test string</descricao>
-                            </ocorrencias>
-                        </dadosRegistroOcorrenciaEvento>
+                        <cdStatus>0</cdStatus>
+                        <descRetorno>SUCESSO</descRetorno>
                     </status>
-                    <dadosReciboEntrega>
-                        <numeroRecibo>test string</numeroRecibo>
-                    </dadosReciboEntrega>
-                </retornoEvento>
-            </evento>
-            <evento>
-                <retornoEvento id="test attribute">
-                    <identificacaoEmpresaDeclarante>
-                        <cnpjEmpresaDeclarante>test string</cnpjEmpresaDeclarante>
-                    </identificacaoEmpresaDeclarante>
-                    <dadosRecepcaoEvento>
-                        <dhProcessamento>test string</dhProcessamento>
-                        <tipoEvento>test string</tipoEvento>
-                        <idEvento>test string</idEvento>
-                        <hash>test string</hash>
-                        <nrRecibo>test string</nrRecibo>
-                    </dadosRecepcaoEvento>
-                    <status>
-                        <cdRetorno>test string</cdRetorno>
-                        <descRetorno>test string</descRetorno>
-                        <dadosRegistroOcorrenciaEvento>
-                            <ocorrencias>
-                                <tipo>test string</tipo>
-                                <localizacaoErroAviso>test string</localizacaoErroAviso>
-                                <codigo>test string</codigo>
-                                <descricao>test string</descricao>
-                            </ocorrencias>
-                            <ocorrencias>
-                                <tipo>test string</tipo>
-                                <localizacaoErroAviso>test string</localizacaoErroAviso>
-                                <codigo>test string</codigo>
-                                <descricao>test string</descricao>
-                            </ocorrencias>
-                            <ocorrencias>
-                                <tipo>test string</tipo>
-                                <localizacaoErroAviso>test string</localizacaoErroAviso>
-                                <codigo>test string</codigo>
-                                <descricao>test string</descricao>
-                            </ocorrencias>
-                        </dadosRegistroOcorrenciaEvento>
-                    </status>
-                    <dadosReciboEntrega>
-                        <numeroRecibo>test string</numeroRecibo>
-                    </dadosReciboEntrega>
-                </retornoEvento>
-            </evento>
-        </retornoEventos>
-    </retornoLoteEventos>
-</eFinanceira>
+                    <retornoEventos>
+                        <evento id="ID0">
+                            <eFinanceira xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.eFinanceira.gov.br/schemas/retornoEvento/v1_0_1">
+                                <retornoEvento id="ID000000000000000003">
+                                    <identificacaoEmpresaDeclarante>
+                                        <cnpjEmpresaDeclarante>99999999000199</cnpjEmpresaDeclarante>
+                                    </identificacaoEmpresaDeclarante>
+                                    <dadosRecepcaoEvento>
+                                        <dhProcessamento>2016-04-27T11:06:57.1153026-03:00</dhProcessamento>
+                                        <tipoEvento>001</tipoEvento>
+                                        <idEvento>ID000000000000000003</idEvento>
+                                        <hash>eZFzKevgULnLrJZ0RiCaGl4p75MFmZID3Tgn6ijz6vc=</hash>
+                                        <nrRecibo>21-09-001-1604-21</nrRecibo>
+                                    </dadosRecepcaoEvento>
+                                    <status>
+                                        <cdRetorno>0</cdRetorno>
+                                        <descRetorno>SUCESSO</descRetorno>
+                                    </status>
+                                    <dadosReciboEntrega>
+                                        <numeroRecibo>53-09-001-1604-21</numeroRecibo>
+                                    </dadosReciboEntrega>
+                                </retornoEvento>
+                                <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+                                    <SignedInfo>
+                                        <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+                                        <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig-more#rsa-sha256" />
+                                        <Reference URI="#ID000000000000000003">
+                                            <Transforms>
+                                                <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+                                                <Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+                                            </Transforms>
+                                            <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256" />
+                                            <DigestValue>VtAAmBz5uzTubdHFmwLHZ556V/GNUNBRrvhBWDhRAco=</DigestValue>
+                                        </Reference>
+                                    </SignedInfo>
+                                    <SignatureValue>U0bU5RWijkNTT9uyKvJV0398HudYC9L2XQYizqrNis/gR36ySjtc0mBHUmLIzN959H95VlSwI8Ka7P2aFGr8l8yXGwE3BfGhSPcJVSRx8i9DH9WA7t/t8+DjbBz5CPQZbU+6tRS7j3RJFnq5lVhIM8siWOlW6pCMmZLYNBQ6lJxQ6UALWhYg5MvzB/pSXkTG2mvs3cQq/JcpdZGOb7rccN5CIMjqupkw9BvFC2FGSx3hqlkzk7pDnb60M4AJems5qE0G0G2NI/cma+DGM1zVKXEJ04ROYCZoMgtISYt1uVWVKvDvAIWb9uxtUr1+N8b94Z9D0Lq9GAUHbXTWaowRDw==</SignatureValue>
+                                    <KeyInfo>
+                                        <X509Data>
+                                            <X509Certificate>MIIHmjC</X509Certificate>
+                                        </X509Data>
+                                    </KeyInfo>
+                                </Signature>
+                            </eFinanceira>
+                        </evento>
+                    </retornoEventos>
+                </retornoLoteEventos>
+            </eFinanceira>
+        </ReceberLoteEventoResult>
+    </soap:Body>
+</soap:Envelope>
