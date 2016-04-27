@@ -6,7 +6,7 @@ include_once '../bootstrap.php';
 use NFePHP\eFinanc\Response;
 
 $xml = file_get_contents('xml_retornos/retornoLoteEventos.xml');
-$method = 'EnviarLoteEvento';
+$method = 'ReceberLoteEvento';
 $resp = Response::readReturn($method, $xml);
 
 var_dump($resp);

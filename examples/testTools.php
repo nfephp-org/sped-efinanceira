@@ -15,15 +15,15 @@ $tools = new Tools('../config/config.json');
 //apenas chame o metodo sem passar nenhum parametro
 $tools->setSSLProtocol('SSLv3');
 
-//esse método retorna o protocolo de segurança usado na comunicação SSL
-//o default é automático
-echo "Protocolo SSL: ".$tools->getSSLProtocol()."<BR>";
-
 //se for passada qualquer parametro será retornadas as possiveis opções 
 echo "O protocolos aplicáveis são:<br>";
 foreach($tools->getSSLProtocol('1') as $opt) {
     echo $opt."<BR>";
 }
+
+//esse método retorna o protocolo de segurança usado na comunicação SSL
+//o default é automático
+echo "Protocolo SSL definido é : ".$tools->getSSLProtocol()."<BR>";
 
 //em geral não é necessário alterar o tempo de espera para uma resposta
 //do servidor durante a cominicação SOAP, mas em alguns casos o servidor

@@ -50,6 +50,7 @@ class AberturaTest extends FactoryTest
         $recibo = '';
         $evt->tagEvento($id, $indRetificacao, $tpAmb, $recibo);
         $evt->monta();
+        //file_put_contents($this->pathFixtures."xml".DIRECTORY_SEPARATOR."evtAberturaIde.xml", $evt->getXML());
         $result = str_replace("\n", "", $evt->getXML());
         $expected = str_replace("\n", "", file_get_contents($this->pathFixtures."xml".DIRECTORY_SEPARATOR."evtAberturaIde.xml"));
         $this->assertEquals($expected, $result);
@@ -72,6 +73,7 @@ class AberturaTest extends FactoryTest
         $cnpj = '99999090910270';
         $evt->tagDeclarante($cnpj);
         $evt->monta();
+        //file_put_contents($this->pathFixtures."xml".DIRECTORY_SEPARATOR."evtAberturaDec.xml", $evt->getXML());
         $result = str_replace("\n", "", $evt->getXML());
         $expected = str_replace("\n", "", file_get_contents($this->pathFixtures."xml".DIRECTORY_SEPARATOR."evtAberturaDec.xml"));
         $this->assertEquals($expected, $result);
@@ -97,6 +99,7 @@ class AberturaTest extends FactoryTest
         $evt->tagDeclarante($cnpj);
         $evt->tagInfo('2016-03-01', '2016-04-01');
         $evt->monta();
+        //file_put_contents($this->pathFixtures."xml".DIRECTORY_SEPARATOR."evtAberturaInfo.xml", $evt->getXML());
         $result = str_replace("\n", "", $evt->getXML());
         $expected = str_replace("\n", "", file_get_contents($this->pathFixtures."xml".DIRECTORY_SEPARATOR."evtAberturaInfo.xml"));
         $this->assertEquals($expected, $result);

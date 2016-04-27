@@ -94,10 +94,11 @@ class BaseTools
      * __construct
      *
      * @param string $configJson
+     * @param bool   $ignore default false usado para testes apenas
      * @throws InvalidArgumentException
      * @throws RuntimeException
      */
-    public function __construct($configJson = '')
+    public function __construct($configJson = '', $ignore = false)
     {
         if ($configJson == '') {
             $msg = 'O arquivo de configuração no formato JSON deve ser passado para a classe.';
@@ -115,7 +116,11 @@ class BaseTools
         //carrega os certificados
         $this->oCertificate = new Pkcs12(
             $this->aConfig['pathCertsFiles'],
-            $this->aConfig['cnpj']
+            $this->aConfig['cnpj'],
+            '',
+            '',
+            '',
+            $ignore
         );
         if ($this->oCertificate->priKey == '') {
             //tentar carregar novo certificado
@@ -332,10 +337,9 @@ class BaseTools
      * @param string $urlService
      * @param strting $body
      * @param string $method
-     * @param string $lastMsg
      * @return string
      */
-    public function zSend($urlService, $body, $method, &$lastMsg)
+    public function zSend($urlService, $body, $method)
     {
         try {
             $retorno = $this->oSoap->send($urlService, '', '', $body, $this->xmlns.$method);
@@ -343,8 +347,11 @@ class BaseTools
             $this->errors .= $e->getMessage();
             return false;
         }
-        $lastMsg = $this->oSoap->lastMsg;
-        $this->soapDebug = $this->oSoap->soapDebug;
-        return $retorno;
+        $aRet = [
+            'retorno'=>$retorno,
+            'lastMsg' => $this->oSoap->lastMsg,
+            'soapDebug' => $this->oSoap->soapDebug
+        ];
+        return $aRet;
     }
 }
