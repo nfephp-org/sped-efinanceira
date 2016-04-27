@@ -113,41 +113,17 @@ class Response
         $aResposta['cnpjEmpresaDeclarante'] = self::retDeclarante($node)['cnpj'];
         //busca o status
         $aResposta['status'] = self::retStatus($node);
-        $aResposta['numeroRecibo'] =
-            !empty($node->getElementsByTagName('numeroRecibo')->item(0)->nodeValue) ?
-            $node->getElementsByTagName('numeroRecibo')->item(0)->nodeValue :
-            '';
-        $aResposta['idEvento'] =
-            !empty($node->getElementsByTagName('id')->item(0)->nodeValue) ?
-            $node->getElementsByTagName('id')->item(0)->nodeValue :
-            '';
+        $aResposta['numeroRecibo'] = self::retValue($node, 'numeroRecibo');
+        $aResposta['idEvento'] = self::retValue($node, 'id');
         //informaçṍes cadastrais
         $info = $node->getElementsByTagName('informacoesCadastrais')->item(0);
         if (!empty($info)) {
-            $aInfo['cnpj'] =
-                !empty($info->getElementsByTagName('cnpj')->item(0)->nodeValue) ?
-                $info->getElementsByTagName('cnpj')->item(0)->nodeValue :
-                '';
-            $aInfo['giin'] =
-                !empty($info->getElementsByTagName('giin')->item(0)->nodeValue) ?
-                $info->getElementsByTagName('giin')->item(0)->nodeValue :
-                '';
-            $aInfo['nome'] =
-                !empty($info->getElementsByTagName('nome')->item(0)->nodeValue) ?
-                $info->getElementsByTagName('nome')->item(0)->nodeValue :
-                '';
-            $aInfo['endereco'] =
-                !empty($info->getElementsByTagName('endereco')->item(0)->nodeValue) ?
-                $info->getElementsByTagName('endereco')->item(0)->nodeValue :
-                '';
-            $aInfo['municipio'] =
-                !empty($info->getElementsByTagName('municipio')->item(0)->nodeValue) ?
-                $info->getElementsByTagName('municipio')->item(0)->nodeValue :
-                '';
-            $aInfo['uf'] =
-                !empty($info->getElementsByTagName('uf')->item(0)->nodeValue) ?
-                $info->getElementsByTagName('uf')->item(0)->nodeValue :
-                '';
+            $aInfo['cnpj'] = self::retValue($info, 'cnpj'); 
+            $aInfo['giin'] = self::retValue($info, 'giin'); 
+            $aInfo['nome'] =  self::retValue($info, 'nome'); 
+            $aInfo['endereco'] =  self::retValue($info, 'endereco'); 
+            $aInfo['municipio'] =  self::retValue($info, 'municipio'); 
+            $aInfo['uf'] =  self::retValue($info, 'uf'); 
         }
         $aResposta['informacoesCadastrais'] = $aInfo;
         return $aResposta;
@@ -198,34 +174,14 @@ class Response
         if (isset($info)) {
             $n = 0;
             foreach ($info as $inform) {
-                $aInfo['dhInicial'] =
-                    !empty($info->item($n)->getElementsByTagName('dhInicial')->item(0)->nodeValue) ?
-                    $info->item($n)->getElementsByTagName('dhInicial')->item(0)->nodeValue :
-                    '';
-                $aInfo['dhFinal'] =
-                    !empty($info->item($n)->getElementsByTagName('dhFinal')->item(0)->nodeValue) ?
-                    $info->item($n)->getElementsByTagName('dhFinal')->item(0)->nodeValue :
-                    '';
-                $aInfo['situacaoEFinanceira'] =
-                    !empty($info->item($n)->getElementsByTagName('situacaoEFinanceira')->item(0)->nodeValue) ?
-                    $info->item($n)->getElementsByTagName('situacaoEFinanceira')->item(0)->nodeValue :
-                    '0';
-                $aInfo['numeroReciboAbertura'] =
-                    !empty($info->item($n)->getElementsByTagName('numeroReciboAbertura')->item(0)->nodeValue) ?
-                    $info->item($n)->getElementsByTagName('numeroReciboAbertura')->item(0)->nodeValue :
-                    '';
-                $aInfo['idAbertura'] =
-                    !empty($info->item($n)->getElementsByTagName('idAbertura')->item(0)->nodeValue) ?
-                    $info->item($n)->getElementsByTagName('idAbertura')->item(0)->nodeValue :
-                    '';
-                $aInfo['numeroReciboFechamento'] =
-                    !empty($info->item($n)->getElementsByTagName('numeroReciboFechamento')->item(0)->nodeValue) ?
-                    $info->item($n)->getElementsByTagName('numeroReciboFechamento')->item(0)->nodeValue :
-                    '';
-                $aInfo['idFechamento'] =
-                    !empty($info->item($n)->getElementsByTagName('idFechamento')->item(0)->nodeValue) ?
-                    $info->item($n)->getElementsByTagName('idFechamento')->item(0)->nodeValue :
-                    '';
+                $node = $info->item($n);
+                $aInfo['dhInicial'] = self::retValue($node, 'dhInicial'); 
+                $aInfo['dhFinal'] = self::retValue($node, 'dhFinal'); 
+                $aInfo['situacaoEFinanceira'] = self::retValue($node, 'situacaoEFinanceira', '0'); 
+                $aInfo['numeroReciboAbertura'] = self::retValue($node, 'numeroReciboAbertura');
+                $aInfo['idAbertura'] = self::retValue($node, 'idAbertura');
+                $aInfo['numeroReciboFechamento'] = self::retValue($node, 'numeroReciboFechamento');
+                $aInfo['idFechamento'] = self::retValue($node, 'idFechamento');
                 $aInfos[] = $aInfo;
                 $n++;
             }
@@ -279,34 +235,14 @@ class Response
         if (isset($info)) {
             $n = 0;
             foreach ($info as $inform) {
-                $aInfo['tipoMovimento'] =
-                    !empty($info->item($n)->getElementsByTagName('tipoMovimento')->item(0)->nodeValue) ?
-                    $info->item($n)->getElementsByTagName('tipoMovimento')->item(0)->nodeValue :
-                    '';
-                $aInfo['tipoNI'] =
-                    !empty($info->item($n)->getElementsByTagName('tipoNI')->item(0)->nodeValue) ?
-                    $info->item($n)->getElementsByTagName('tipoNI')->item(0)->nodeValue :
-                    '';
-                $aInfo['NI'] =
-                    !empty($info->item($n)->getElementsByTagName('NI')->item(0)->nodeValue) ?
-                    $info->item($n)->getElementsByTagName('NI')->item(0)->nodeValue :
-                    '';
-                $aInfo['anoMesCaixa'] =
-                    !empty($info->item($n)->getElementsByTagName('anoMesCaixa')->item(0)->nodeValue) ?
-                    $info->item($n)->getElementsByTagName('anoMesCaixa')->item(0)->nodeValue :
-                    '';
-                $aInfo['situacao'] =
-                    !empty($info->item($n)->getElementsByTagName('situacao')->item(0)->nodeValue) ?
-                    $info->item($n)->getElementsByTagName('situacao')->item(0)->nodeValue :
-                    '';
-                $aInfo['numeroRecibo'] =
-                    !empty($info->item($n)->getElementsByTagName('numeroRecibo')->item(0)->nodeValue) ?
-                    $info->item($n)->getElementsByTagName('numeroRecibo')->item(0)->nodeValue :
-                    '';
-                $aInfo['id'] =
-                    !empty($info->item($n)->getElementsByTagName('id')->item(0)->nodeValue) ?
-                    $info->item($n)->getElementsByTagName('id')->item(0)->nodeValue :
-                    '';
+                $node = $info->item($n);
+                $aInfo['tipoMovimento'] = self::retValue($node, 'tipoMovimento');
+                $aInfo['tipoNI'] = self::retValue($node, 'tipoNI');
+                $aInfo['NI'] = self::retValue($node, 'NI');
+                $aInfo['anoMesCaixa'] = self::retValue($node, 'anoMesCaixa'); 
+                $aInfo['situacao'] = self::retValue($node, 'situacao');
+                $aInfo['numeroRecibo'] = self::retValue($node, 'numeroRecibo');
+                $aInfo['id'] = self::retValue($node, 'id');
                 $aInfos[] = $aInfo;
                 $n++;
             }
@@ -358,26 +294,12 @@ class Response
         if (isset($info)) {
             $n = 0;
             foreach ($info as $inform) {
-                $aInfo['GIIN'] =
-                    !empty($info->item($n)->getElementsByTagName('GIIN')->item(0)->nodeValue) ?
-                    $info->item($n)->getElementsByTagName('GIIN')->item(0)->nodeValue :
-                    '';
-                $aInfo['tpNI'] =
-                    !empty($info->item($n)->getElementsByTagName('tpNI')->item(0)->nodeValue) ?
-                    $info->item($n)->getElementsByTagName('tpNI')->item(0)->nodeValue :
-                    '';
-                $aInfo['NIIntermediario'] =
-                    !empty($info->item($n)->getElementsByTagName('NIIntermediario')->item(0)->nodeValue) ?
-                    $info->item($n)->getElementsByTagName('NIIntermediario')->item(0)->nodeValue :
-                    '';
-                $aInfo['numeroRecibo'] =
-                    !empty($info->item($n)->getElementsByTagName('numeroRecibo')->item(0)->nodeValue) ?
-                    $info->item($n)->getElementsByTagName('numeroRecibo')->item(0)->nodeValue :
-                    '';
-                $aInfo['id'] =
-                    !empty($info->item($n)->getElementsByTagName('id')->item(0)->nodeValue) ?
-                    $info->item($n)->getElementsByTagName('id')->item(0)->nodeValue :
-                    '';
+                $node = $info->item($n);
+                $aInfo['GIIN'] = self::retValue($node, 'GIIN');
+                $aInfo['tpNI'] = self::retValue($node, 'tpNI');
+                $aInfo['NIIntermediario'] = self::retValue($node, 'NIIntermediario');
+                $aInfo['numeroRecibo'] = self::retValue($node, 'numeroRecibo');
+                $aInfo['id'] = self::retValue($node, 'id');
                 $aInfos[] = $aInfo;
                 $n++;
             }
@@ -430,22 +352,11 @@ class Response
         if (isset($info)) {
             $n = 0;
             foreach ($info as $inform) {
-                $aInfo['GIIN'] =
-                    !empty($info->item($n)->getElementsByTagName('GIIN')->item(0)->nodeValue) ?
-                    $info->item($n)->getElementsByTagName('GIIN')->item(0)->nodeValue :
-                    '';
-                $aInfo['CNPJ'] =
-                    !empty($info->item($n)->getElementsByTagName('CNPJ')->item(0)->nodeValue) ?
-                    $info->item($n)->getElementsByTagName('CNPJ')->item(0)->nodeValue :
-                    '';
-                $aInfo['numeroRecibo'] =
-                    !empty($info->item($n)->getElementsByTagName('numeroRecibo')->item(0)->nodeValue) ?
-                    $info->item($n)->getElementsByTagName('numeroRecibo')->item(0)->nodeValue :
-                    '';
-                $aInfo['id'] =
-                    !empty($info->item($n)->getElementsByTagName('id')->item(0)->nodeValue) ?
-                    $info->item($n)->getElementsByTagName('id')->item(0)->nodeValue :
-                    '';
+                $node = $info->item($n);
+                $aInfo['GIIN'] = self::retValue($node, 'GIIN');
+                $aInfo['CNPJ'] = self::retValue($node, 'CNPJ');
+                $aInfo['numeroRecibo'] = self::retValue($node, 'numeroRecibo');
+                $aInfo['id'] = self::retValue($node, 'id');
                 $aInfos[] = $aInfo;
                 $n++;
             }
@@ -484,30 +395,13 @@ class Response
             $dadosReciboEntrega = $ret->getElementsByTagName('dadosReciboEntrega')->item(0);
             $aEvento['id'] = $ret->getAttribute('id');
             $aEvento['cnpjDeclarante'] = self::retDeclarante($ret)['cnpj'];
-            $aEvento['dhProcessamento'] =
-                    !empty($recepcao->getElementsByTagName('dhProcessamento')->item(0)->nodeValue) ?
-                    $recepcao->getElementsByTagName('dhProcessamento')->item(0)->nodeValue :
-                    '';
-            $aEvento['tipoEvento'] =
-                    !empty($recepcao->getElementsByTagName('tipoEvento')->item(0)->nodeValue) ?
-                    $recepcao->getElementsByTagName('tipoEvento')->item(0)->nodeValue :
-                    '';
-            $aEvento['idEvento'] =
-                    !empty($recepcao->getElementsByTagName('idEvento')->item(0)->nodeValue) ?
-                    $recepcao->getElementsByTagName('idEvento')->item(0)->nodeValue :
-                    '';
-            $aEvento['hash'] =
-                    !empty($recepcao->getElementsByTagName('hash')->item(0)->nodeValue) ?
-                    $recepcao->getElementsByTagName('hash')->item(0)->nodeValue :
-                    '';
-            $aEvento['nrRecibo'] =
-                    !empty($recepcao->getElementsByTagName('nrRecibo')->item(0)->nodeValue) ?
-                    $recepcao->getElementsByTagName('nrRecibo')->item(0)->nodeValue :
-                    '';
+            $aEvento['dhProcessamento'] = self::retValue($recepcao, 'dhProcessamento');
+            $aEvento['tipoEvento'] = self::retValue($recepcao, 'tipoEvento');
+            $aEvento['idEvento'] = self::retValue($recepcao, 'idEvento');
+            $aEvento['hash'] = self::retValue($recepcao, 'hash');
+            $aEvento['nrRecibo'] = self::retValue($recepcao, 'nrRecibo');
             $aEvento['status'] = self::retStatus($ret);
-            $aEvento['numeroRecibo'] =
-                    !empty($dadosReciboEntrega->getElementsByTagName('numeroRecibo')->item(0)->nodeValue) ?
-                    $dadosReciboEntrega->getElementsByTagName('numeroRecibo')->item(0)->nodeValue : '';
+            $aEvento['numeroRecibo'] = self::retValue($dadosReciboEntrega, 'numeroRecibo');
             $aEventos[] = $aEvento;
             $i++;
         }
@@ -524,13 +418,9 @@ class Response
     protected static function retDataHora($node)
     {
         $data = '';
-        $dtHora = !empty($node->getElementsByTagName('dataHoraProcessamento')->item(0)->nodeValue) ?
-            $node->getElementsByTagName('dataHoraProcessamento')->item(0)->nodeValue :
-            '';
+        $dtHora = self::retValue($node, 'dataHoraProcessamento');
         if (empty($dtHora)) {
-            $dtHora = !empty($node->getElementsByTagName('dhProcessamento')->item(0)->nodeValue) ?
-                $node->getElementsByTagName('dhProcessamento')->item(0)->nodeValue :
-                '';
+            $dtHora = self::retValue($node, 'dhProcessamento');
         }
         if (! empty($dtHora)) {
             $data = date('d/m/Y H:i:s', DateTime::convertSefazTimeToTimestamp($dtHora));
@@ -548,10 +438,8 @@ class Response
     {
         //declarante 1 - 1
         $nodeDeclarante = $node->getElementsByTagName('identificacaoEmpresaDeclarante')->item(0);
-        $cnpj = $nodeDeclarante->getElementsByTagName('cnpjEmpresaDeclarante')->item(0)->nodeValue;
-        $giin = !empty($nodeDeclarante->getElementsByTagName('GIIN')->item(0)->nodeValue) ?
-            $nodeDeclarante->getElementsByTagName('GIIN')->item(0)->nodeValue :
-            '';
+        $cnpj = self::retValue($nodeDeclarante, 'cnpjEmpresaDeclarante');
+        $giin = self::retValue($nodeDeclarante, 'GIIN');
         return array('cnpj'=>$cnpj, "giin"=>$giin);
     }
     
@@ -577,14 +465,8 @@ class Response
         ];
         //status 1 - 1
         $nodestatus = $node->getElementsByTagName('status')->item(0);
-        $aStatus['cdRetorno'] =
-            !empty($nodestatus->getElementsByTagName('cdRetorno')->item(0)->nodeValue) ?
-            $nodestatus->getElementsByTagName('cdRetorno')->item(0)->nodeValue :
-            '0';
-        $aStatus['descRetorno'] =
-            !empty($nodestatus->getElementsByTagName('descRetorno')->item(0)->nodeValue) ?
-            $nodestatus->getElementsByTagName('descRetorno')->item(0)->nodeValue :
-            '';
+        $aStatus['cdRetorno'] = self::retValue($nodestatus, 'cdRetorno', '0');
+        $aStatus['descRetorno'] = self::retValue($nodestatus, 'descRetorno');
         //status/dadosRegistroOcorrenciaEvento 0 -> N
         $nodedados = $nodestatus->getElementsByTagName('dadosRegistroOcorrenciaEvento');
         if (isset($nodedados)) {
@@ -595,24 +477,11 @@ class Response
                 if (isset($nodeocor)) {
                     $x = 0;
                     foreach ($nodeocor as $ocor) {
-                        $aOcorr['tipo'] =
-                            !empty($nodeocor->item($x)->getElementsByTagName('tipo')->item(0)->nodeValue) ?
-                            $nodeocor->item($x)->getElementsByTagName('tipo')->item(0)->nodeValue :
-                            '';
-                        $aOcorr['codigo'] =
-                            !empty($nodeocor->item($x)->getElementsByTagName('codigo')->item(0)->nodeValue) ?
-                            $nodeocor->item($x)->getElementsByTagName('codigo')->item(0)->nodeValue :
-                            '' ;
-                        $aOcorr['descricao'] =
-                            !empty($nodeocor->item($x)->getElementsByTagName('descricao')->item(0)->nodeValue) ?
-                            $nodeocor->item($x)->getElementsByTagName('descricao')->item(0)->nodeValue :
-                            '';
-                        $aOcorr['localizacaoErroAviso'] =
-                            !empty($nodeocor->item($x)
-                                ->getElementsByTagName('localizacaoErroAviso')
-                                ->item(0)->nodeValue) ?
-                            $nodeocor->item($x)->getElementsByTagName('localizacaoErroAviso')->item(0)->nodeValue :
-                            '';
+                        $dnode = $nodeocor->item($x);
+                        $aOcorr['tipo'] = self::retValue($dnode, 'tipo');
+                        $aOcorr['codigo'] = self::retValue($dnode, 'codigo');
+                        $aOcorr['descricao'] = self::retValue($dnode, 'descricao');
+                        $aOcorr['localizacaoErroAviso'] = self::retValue($dnode, 'localizacaoErroAviso');
                     }
                     $aOcorrencias[] = $aOcorr;
                 }
@@ -621,5 +490,20 @@ class Response
         }
         $aStatus['ocorrencias'] = $aOcorrencias;
         return $aStatus;
+    }
+    
+    /**
+     * Extrai o valor de uma tag
+     * 
+     * @param DOMElement $node
+     * @param string $tag
+     * @param string $expected
+     * @return string
+     */
+    private static function retValue($node, $tag, $expected = '')
+    {
+        return !empty($node->getElementsByTagName($tag)->item(0)->nodeValue) ?
+            $node->getElementsByTagName($tag)->item(0)->nodeValue :
+            $expected;
     }
 }
