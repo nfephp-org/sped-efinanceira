@@ -124,14 +124,30 @@ class Response
         //informaçṍes cadastrais
         $info = $node->getElementsByTagName('informacoesCadastrais')->item(0);
         if (!empty($info)) {
-            $aInfo['cnpj'] = $info->getElementsByTagName('cnpj')->item(0)->nodeValue;
-            $aInfo['giin'] = !empty($info->getElementsByTagName('giin')->item(0)->nodeValue) ?
+            $aInfo['cnpj'] =
+                !empty($info->getElementsByTagName('cnpj')->item(0)->nodeValue) ?
+                $info->getElementsByTagName('cnpj')->item(0)->nodeValue :
+                '';
+            $aInfo['giin'] =
+                !empty($info->getElementsByTagName('giin')->item(0)->nodeValue) ?
                 $info->getElementsByTagName('giin')->item(0)->nodeValue :
                 '';
-            $aInfo['nome'] = $info->getElementsByTagName('nome')->item(0)->nodeValue;
-            $aInfo['endereco'] = $info->getElementsByTagName('endereco')->item(0)->nodeValue;
-            $aInfo['municipio'] = $info->getElementsByTagName('municipio')->item(0)->nodeValue;
-            $aInfo['uf'] = $info->getElementsByTagName('uf')->item(0)->nodeValue;
+            $aInfo['nome'] =
+                !empty($info->getElementsByTagName('nome')->item(0)->nodeValue) ?
+                $info->getElementsByTagName('nome')->item(0)->nodeValue :
+                '';
+            $aInfo['endereco'] =
+                !empty($info->getElementsByTagName('endereco')->item(0)->nodeValue) ?
+                $info->getElementsByTagName('endereco')->item(0)->nodeValue :
+                '';
+            $aInfo['municipio'] =
+                !empty($info->getElementsByTagName('municipio')->item(0)->nodeValue) ?
+                $info->getElementsByTagName('municipio')->item(0)->nodeValue :
+                '';
+            $aInfo['uf'] =
+                !empty($info->getElementsByTagName('uf')->item(0)->nodeValue) ?
+                $info->getElementsByTagName('uf')->item(0)->nodeValue :
+                '';
         }
         $aResposta['informacoesCadastrais'] = $aInfo;
         return $aResposta;
@@ -468,13 +484,30 @@ class Response
             $dadosReciboEntrega = $ret->getElementsByTagName('dadosReciboEntrega')->item(0);
             $aEvento['id'] = $ret->getAttribute('id');
             $aEvento['cnpjDeclarante'] = self::retDeclarante($ret)['cnpj'];
-            $aEvento['dhProcessamento'] = $recepcao->getElementsByTagName('dhProcessamento')->item(0)->nodeValue;
-            $aEvento['tipoEvento'] = $recepcao->getElementsByTagName('tipoEvento')->item(0)->nodeValue;
-            $aEvento['idEvento'] = $recepcao->getElementsByTagName('idEvento')->item(0)->nodeValue;
-            $aEvento['hash'] = $recepcao->getElementsByTagName('hash')->item(0)->nodeValue;
-            $aEvento['nrRecibo'] = $recepcao->getElementsByTagName('nrRecibo')->item(0)->nodeValue;
+            $aEvento['dhProcessamento'] =
+                    !empty($recepcao->getElementsByTagName('dhProcessamento')->item(0)->nodeValue) ?
+                    $recepcao->getElementsByTagName('dhProcessamento')->item(0)->nodeValue :
+                    '';
+            $aEvento['tipoEvento'] =
+                    !empty($recepcao->getElementsByTagName('tipoEvento')->item(0)->nodeValue) ?
+                    $recepcao->getElementsByTagName('tipoEvento')->item(0)->nodeValue :
+                    '';
+            $aEvento['idEvento'] =
+                    !empty($recepcao->getElementsByTagName('idEvento')->item(0)->nodeValue) ?
+                    $recepcao->getElementsByTagName('idEvento')->item(0)->nodeValue :
+                    '';
+            $aEvento['hash'] =
+                    !empty($recepcao->getElementsByTagName('hash')->item(0)->nodeValue) ?
+                    $recepcao->getElementsByTagName('hash')->item(0)->nodeValue :
+                    '';
+            $aEvento['nrRecibo'] =
+                    !empty($recepcao->getElementsByTagName('nrRecibo')->item(0)->nodeValue) ?
+                    $recepcao->getElementsByTagName('nrRecibo')->item(0)->nodeValue :
+                    '';
             $aEvento['status'] = self::retStatus($ret);
-            $aEvento['numeroRecibo'] = $dadosReciboEntrega->getElementsByTagName('numeroRecibo')->item(0)->nodeValue;
+            $aEvento['numeroRecibo'] =
+                    !empty($dadosReciboEntrega->getElementsByTagName('numeroRecibo')->item(0)->nodeValue) ?
+                    $dadosReciboEntrega->getElementsByTagName('numeroRecibo')->item(0)->nodeValue : '';
             $aEventos[] = $aEvento;
             $i++;
         }
@@ -544,10 +577,12 @@ class Response
         ];
         //status 1 - 1
         $nodestatus = $node->getElementsByTagName('status')->item(0);
-        $aStatus['cdRetorno'] = !empty($nodestatus->getElementsByTagName('cdRetorno')->item(0)->nodeValue) ?
+        $aStatus['cdRetorno'] =
+            !empty($nodestatus->getElementsByTagName('cdRetorno')->item(0)->nodeValue) ?
             $nodestatus->getElementsByTagName('cdRetorno')->item(0)->nodeValue :
             '0';
-        $aStatus['descRetorno'] = !empty($nodestatus->getElementsByTagName('descRetorno')->item(0)->nodeValue) ?
+        $aStatus['descRetorno'] =
+            !empty($nodestatus->getElementsByTagName('descRetorno')->item(0)->nodeValue) ?
             $nodestatus->getElementsByTagName('descRetorno')->item(0)->nodeValue :
             '';
         //status/dadosRegistroOcorrenciaEvento 0 -> N

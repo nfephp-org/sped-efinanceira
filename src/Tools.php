@@ -14,7 +14,6 @@ namespace NFePHP\eFinanc;
  */
 
 use NFePHP\eFinanc\BaseTools;
-use NFePHP\Common\Soap\NatSoap;
 
 class Tools extends BaseTools
 {
@@ -63,7 +62,6 @@ class Tools extends BaseTools
         $body = "<ConsultarInformacoesCadastrais xmlns=\"$this->xmlns\">"
                 . "<cnpj>$cnpj</cnpj>"
                 . "</ConsultarInformacoesCadastrais>";
-        $lastMsg = '';
         $aRet = $this->zSend($urlService, $body, $method);
         $lastMsg = $aRet['lastMsg'];
         $retorno = $aRet['retorno'];
@@ -117,7 +115,6 @@ class Tools extends BaseTools
             $body .= "<dataFim>$dtFim</dataFim>";
         }
         $body .= "</ConsultarListaEFinanceira>";
-        $lastMsg = '';
         $aRet = $this->zSend($urlService, $body, $method);
         $lastMsg = $aRet['lastMsg'];
         $retorno = $aRet['retorno'];
@@ -349,7 +346,6 @@ class Tools extends BaseTools
         }
         $body .= "</eFinanceira>";
         $body .= "</loteEventos>";
-        $lastMsg = '';
         $aRet = $this->zSend($urlService, $body, $method);
         $lastMsg = $aRet['lastMsg'];
         $retorno = $aRet['retorno'];
