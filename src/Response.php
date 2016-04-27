@@ -118,12 +118,12 @@ class Response
         //informaçṍes cadastrais
         $info = $node->getElementsByTagName('informacoesCadastrais')->item(0);
         if (!empty($info)) {
-            $aInfo['cnpj'] = self::retValue($info, 'cnpj'); 
-            $aInfo['giin'] = self::retValue($info, 'giin'); 
-            $aInfo['nome'] =  self::retValue($info, 'nome'); 
-            $aInfo['endereco'] =  self::retValue($info, 'endereco'); 
-            $aInfo['municipio'] =  self::retValue($info, 'municipio'); 
-            $aInfo['uf'] =  self::retValue($info, 'uf'); 
+            $aInfo['cnpj'] = self::retValue($info, 'cnpj');
+            $aInfo['giin'] = self::retValue($info, 'giin');
+            $aInfo['nome'] =  self::retValue($info, 'nome');
+            $aInfo['endereco'] =  self::retValue($info, 'endereco');
+            $aInfo['municipio'] =  self::retValue($info, 'municipio');
+            $aInfo['uf'] =  self::retValue($info, 'uf');
         }
         $aResposta['informacoesCadastrais'] = $aInfo;
         return $aResposta;
@@ -175,9 +175,9 @@ class Response
             $n = 0;
             foreach ($info as $inform) {
                 $node = $info->item($n);
-                $aInfo['dhInicial'] = self::retValue($node, 'dhInicial'); 
-                $aInfo['dhFinal'] = self::retValue($node, 'dhFinal'); 
-                $aInfo['situacaoEFinanceira'] = self::retValue($node, 'situacaoEFinanceira', '0'); 
+                $aInfo['dhInicial'] = self::retValue($node, 'dhInicial');
+                $aInfo['dhFinal'] = self::retValue($node, 'dhFinal');
+                $aInfo['situacaoEFinanceira'] = self::retValue($node, 'situacaoEFinanceira', '0');
                 $aInfo['numeroReciboAbertura'] = self::retValue($node, 'numeroReciboAbertura');
                 $aInfo['idAbertura'] = self::retValue($node, 'idAbertura');
                 $aInfo['numeroReciboFechamento'] = self::retValue($node, 'numeroReciboFechamento');
@@ -239,7 +239,7 @@ class Response
                 $aInfo['tipoMovimento'] = self::retValue($node, 'tipoMovimento');
                 $aInfo['tipoNI'] = self::retValue($node, 'tipoNI');
                 $aInfo['NI'] = self::retValue($node, 'NI');
-                $aInfo['anoMesCaixa'] = self::retValue($node, 'anoMesCaixa'); 
+                $aInfo['anoMesCaixa'] = self::retValue($node, 'anoMesCaixa');
                 $aInfo['situacao'] = self::retValue($node, 'situacao');
                 $aInfo['numeroRecibo'] = self::retValue($node, 'numeroRecibo');
                 $aInfo['id'] = self::retValue($node, 'id');
@@ -494,7 +494,7 @@ class Response
     
     /**
      * Extrai o valor de uma tag
-     * 
+     *
      * @param DOMElement $node
      * @param string $tag
      * @param string $expected
