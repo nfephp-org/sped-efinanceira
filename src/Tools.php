@@ -167,7 +167,7 @@ class Tools extends BaseTools
         $numni = '',
         &$aResp = array()
     ) {
-        if ($cnpj == '' || $sit == '' || $anomesIni = '' || $anomesFim == '') {
+        if ($cnpj == '' || $sit == '' || $anomesIni == '' || $anomesFim == '') {
             $msg = 'Os primeiros quatro parametros são obrigatórios.';
             throw new InvalidArgumentException($msg);
         }
