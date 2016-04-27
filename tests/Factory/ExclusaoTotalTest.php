@@ -47,8 +47,21 @@ class ExclusaoTotalTest extends FactoryTest
         $evt->tagInfo($nrRecibo);
         $evt->monta();
         $evt->assina();
+        //file_put_contents($this->pathFixtures."xml".DIRECTORY_SEPARATOR."evtExclusaoTotalSigned.xml", $evt->getXML());
         $result = str_replace("\n", "", $evt->getXML());
         $expected = str_replace("\n", "", file_get_contents($this->pathFixtures."xml".DIRECTORY_SEPARATOR."evtExclusaoTotalSigned.xml"));
         $this->assertEquals($expected, $result);
+    }
+    
+    /**
+     * @depends testInstantiable
+     * @covers NFePHP\eFinanc\Factory\Factory::valida
+     */
+    public function testValida()
+    {
+        $xml = file_get_contents($this->pathFixtures."xml".DIRECTORY_SEPARATOR."evtExclusaoTotalSigned.xml");
+        $evt = new ExclusaoTotal($this->config, true);
+        $result = $evt->valida($xml);
+        $this->assertTrue($result);
     }
 }

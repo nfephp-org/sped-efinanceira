@@ -316,7 +316,6 @@ class MovimentoTest extends FactoryTest
         $giin = '656598984544444';
         $cnpj = '55512325469841';
         $evt->contaFundo($numConta, $giin, $cnpj);
-        
 
         //OPERAÇÕES DE CAMBIO
         $totCompras = '1508745,66';
@@ -334,8 +333,11 @@ class MovimentoTest extends FactoryTest
 
         $evt->monta();
         $evt->assina();
+        //file_put_contents($this->pathFixtures."xml".DIRECTORY_SEPARATOR."evtMovOpFinSigned.xml", $evt->getXML());
         $result = str_replace("\n", "", $evt->getXML());
         $expected = str_replace("\n", "", file_get_contents($this->pathFixtures."xml".DIRECTORY_SEPARATOR."evtMovOpFinSigned.xml"));
         $this->assertEquals($expected, $result);
     }
+    
+    //NOTA: Não temos o xsd para esse evento !!
 }   

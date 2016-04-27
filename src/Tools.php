@@ -13,72 +13,11 @@ namespace NFePHP\eFinanc;
  * @link      http://github.com/nfephp-org/sped-efinanceira for the canonical source repository
  */
 
+use NFePHP\eFinanc\BaseTools;
+use NFePHP\Common\Soap\NatSoap;
+
 class Tools extends BaseTools
 {
-    /**
-     * verAplic
-     * Versão da aplicação
-     * @var string
-     */
-    public $verAplic = '';
-    /**
-     * certExpireTimestamp
-     * TimeStamp com a data de vencimento do certificado
-     * @var double
-     */
-    public $certExpireTimestamp = 0;
-    /**
-     * String com a data de expiração da validade
-     * do certificado digital no9 formato dd/mm/aaaa
-     *
-     * @var string
-     */
-    public $certExpireDate = '';
-    /**
-     * tpAmb
-     * @var int
-     */
-    public $tpAmb = 2;
-    /**
-     * ambiente
-     * @var string
-     */
-    public $ambiente = 'homologacao';
-    /**
-     * aConfig
-     * @var array
-     */
-    public $aConfig = array();
-    /**
-     * sslProtocol
-     * @var int
-     */
-    public $sslProtocol = 0;
-    /**
-     * soapTimeout
-     * @var int
-     */
-    public $soapTimeout = 10;
-    /**
-     * oCertificate
-     * @var Object Class
-     */
-    public $oCertificate;
-    /**
-     * oSoap
-     * @var Object Class
-     */
-    public $oSoap;
-    /**
-     * soapDebug
-     * @var string
-     */
-    public $soapDebug = '';
-    /**
-     * XMLNS namespace
-     * @var string
-     */
-    public $xmlns = "http://sped.fazenda.gov.br/";
     /**
      * URL dos webservices
      * @var array
@@ -369,25 +308,29 @@ class Tools extends BaseTools
         }
         $urlService = $this->url[$this->tpAmb]['recepcao'];
         $method = 'ReceberLoteEvento';
-        $body = "<eFinanceira "
+        $body = "<loteEventos xmlns=\"$this->xmlns\">";
+        $body .= "<eFinanceira "
                 . "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" "
                 . "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
                 . "xmlns=\"http://www.eFinanceira.gov.br/schemas/envioLoteEventos/v1_0_1\">";
-        $body .= "<loteEventos>";
+        
         $iCount = 0;
         foreach ($aEv as $evento) {
-            $body .= "<evento id=\"ID$iCount\">";
-            $evento = str_replace('<?xml version="1.0" encoding="utf-8"?>', '', $evento);
-            $body .= $evento;
+            $body .= "<loteEventos>";
+            $eventol = str_replace('<?xml version="1.0" encoding="utf-8"?>', '', $evento);
+            $body .= "<evento id=\"ID".$iCount."\">";
+            $body .= $eventol;
             $body .= "</evento>";
+            $body .= "</loteEventos>";
             $iCount++;
         }
-        $body .= "</loteEventos>";
         $body .= "</eFinanceira>";
-        file_put_contents('/var/www/sped/sped-efinanceira/local/lote.xml',$body);
-        exit();
+        $body .= "</loteEventos>";
         $lastMsg = '';
         $retorno = $this->zSend($urlService, $body, $method, $lastMsg);
+        if (! $retorno) {
+            return $this->errors;
+        }
         //salva comunicações para log
         $mark = $this->generateMark();
         $filename = "$mark-enviaLote.xml";

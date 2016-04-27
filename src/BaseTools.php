@@ -23,6 +23,73 @@ use InvalidArgumentException;
 
 class BaseTools
 {
+    public $errors;
+    
+        /**
+     * verAplic
+     * Versão da aplicação
+     * @var string
+     */
+    public $verAplic = '';
+    /**
+     * certExpireTimestamp
+     * TimeStamp com a data de vencimento do certificado
+     * @var double
+     */
+    public $certExpireTimestamp = 0;
+    /**
+     * String com a data de expiração da validade
+     * do certificado digital no9 formato dd/mm/aaaa
+     *
+     * @var string
+     */
+    public $certExpireDate = '';
+    /**
+     * tpAmb
+     * @var int
+     */
+    public $tpAmb = 2;
+    /**
+     * ambiente
+     * @var string
+     */
+    public $ambiente = 'homologacao';
+    /**
+     * aConfig
+     * @var array
+     */
+    public $aConfig = array();
+    /**
+     * sslProtocol
+     * @var int
+     */
+    public $sslProtocol = 0;
+    /**
+     * soapTimeout
+     * @var int
+     */
+    public $soapTimeout = 10;
+    /**
+     * oCertificate
+     * @var Object Class
+     */
+    public $oCertificate;
+    /**
+     * oSoap
+     * @var Object Class
+     */
+    public $oSoap;
+    /**
+     * soapDebug
+     * @var string
+     */
+    public $soapDebug = '';
+    /**
+     * XMLNS namespace
+     * @var string
+     */
+    public $xmlns = "http://sped.fazenda.gov.br/";
+    
     /**
      * __construct
      *
@@ -40,7 +107,7 @@ class BaseTools
             $configJson = Files\FilesFolders::readFile($configJson);
         }
         //carrega os dados de configuração
-        $this->aConfig      = (array) json_decode($configJson);
+        $this->aConfig      = (array) json_decode($configJson, true);
         $this->aProxyConf   = (array) $this->aConfig['aProxyConf'];
         $this->verAplic     = $this->aConfig['verAplic'];
         //seta o timezone
@@ -270,10 +337,14 @@ class BaseTools
      */
     public function zSend($urlService, $body, $method, &$lastMsg)
     {
-        $retorno = $this->oSoap->send($urlService, '', '', $body, $method);
+        try {
+            $retorno = $this->oSoap->send($urlService, '', '', $body, $this->xmlns.$method);
+        } catch (\NFePHP\Common\Exception\RuntimeException $e) {
+            $this->errors .= $e->getMessage();
+            return false;
+        }
         $lastMsg = $this->oSoap->lastMsg;
         $this->soapDebug = $this->oSoap->soapDebug;
         return $retorno;
     }
-    
 }
