@@ -401,7 +401,10 @@ class Response
             $aEvento['hash'] = self::retValue($recepcao, 'hash');
             $aEvento['nrRecibo'] = self::retValue($recepcao, 'nrRecibo');
             $aEvento['status'] = self::retStatus($ret);
-            $aEvento['numeroRecibo'] = self::retValue($dadosReciboEntrega, 'numeroRecibo');
+            $aEvento['numeroRecibo'] = '';
+            if (!empty($dadosReciboEntrega)) {
+                $aEvento['numeroRecibo'] = self::retValue($dadosReciboEntrega, 'numeroRecibo');
+            }
             $aEventos[] = $aEvento;
             $i++;
         }
