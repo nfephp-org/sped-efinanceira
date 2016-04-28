@@ -333,19 +333,25 @@ class Tools extends BaseTools
                 . "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" "
                 . "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
                 . "xmlns=\"http://www.eFinanceira.gov.br/schemas/envioLoteEventos/v1_0_1\">";
-        
         $iCount = 0;
+        $body .= "<loteEventos>";
         foreach ($aEv as $evento) {
-            $body .= "<loteEventos>";
-            $eventol = str_replace('<?xml version="1.0" encoding="utf-8"?>', '', $evento);
-            $body .= "<evento id=\"ID".$iCount."\">";
-            $body .= $eventol;
-            $body .= "</evento>";
-            $body .= "</loteEventos>";
-            $iCount++;
+            $eventol = str_replace(
+                array('<?xml version="1.0" encoding="UTF-8"?>',
+                    '<?xml version="1.0" encoding="utf-8"?>'),
+                '',
+                $evento
+            );
+                $body .= "<evento id=\"ID".$iCount."\">";
+                $body .= $eventol;
+                $body .= "</evento>";
+                $iCount++;
         }
+        $body .= "</loteEventos>";
         $body .= "</eFinanceira>";
         $body .= "</loteEventos>";
+        //file_put_contents('lote.xml', $body);
+        //exit();
         $aRet = $this->zSend($urlService, $body, $method);
         $lastMsg = $aRet['lastMsg'];
         $retorno = $aRet['retorno'];
