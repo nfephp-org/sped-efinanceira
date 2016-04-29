@@ -402,9 +402,7 @@ class Response
             $aEvento['nrRecibo'] = self::retValue($recepcao, 'nrRecibo');
             $aEvento['status'] = self::retStatus($ret);
             $aEvento['numeroRecibo'] = '';
-            if (!empty($dadosReciboEntrega)) {
-                $aEvento['numeroRecibo'] = self::retValue($dadosReciboEntrega, 'numeroRecibo');
-            }
+            $aEvento['numeroRecibo'] = self::retValue($dadosReciboEntrega, 'numeroRecibo');
             $aEventos[] = $aEvento;
             $i++;
         }
@@ -505,6 +503,9 @@ class Response
      */
     private static function retValue($node, $tag, $expected = '')
     {
+        if (empty($node) || empty($tag)) {
+            return '';
+        }
         return !empty($node->getElementsByTagName($tag)->item(0)->nodeValue) ?
             $node->getElementsByTagName($tag)->item(0)->nodeValue :
             $expected;
