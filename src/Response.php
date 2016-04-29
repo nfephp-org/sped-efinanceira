@@ -384,6 +384,7 @@ class Response
         if (! isset($tag)) {
             return $aResposta;
         }
+        $aResposta['bStat'] = true;
         //busca o status
         $aResposta['status'] = self::retStatus($tag);
         $tag = $dom->getElementsByTagName('retornoEventos')->item(0);

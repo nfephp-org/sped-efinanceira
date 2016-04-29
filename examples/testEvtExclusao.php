@@ -4,6 +4,7 @@ ini_set('display_errors', 'On');
 include_once '../bootstrap.php';
 
 use NFePHP\eFinanc\Factory\Exclusao;
+use NFePHP\eFinanc\Tools;
 
 //########################################################################
 //instancia a classe e passa o arquivo de configuração
@@ -35,5 +36,19 @@ if (! $evt->valida()) {
     exit();
 }
 //########################################################################
-header('Content-type: text/xml; charset=UTF-8');
-echo $evt->getXML();
+//header('Content-type: text/xml; charset=UTF-8');
+$xml = $evt->getXML();
+
+
+$tools = new Tools('../config/config.json');
+
+$aEv = array($xml);
+
+
+
+$aResp = array();
+$retorno = $tools->enviaLote($aEv, $aResp);
+
+var_dump($retorno);
+var_dump($aResp);
+
