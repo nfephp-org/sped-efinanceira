@@ -53,7 +53,7 @@ class CadPatrocinadoTest extends FactoryTest
         $evt->tagInfo($giin, $cnpj, $nome, $endereco, $municipio, $pais, $paisResidencia);
         $evt->monta();
         $evt->assina();
-        //file_put_contents($this->pathFixtures."xml".DIRECTORY_SEPARATOR."evtCadPatrocinadoSigned.xml", $evt->getXML());
+        file_put_contents($this->pathFixtures."xml".DIRECTORY_SEPARATOR."evtCadPatrocinadoSigned.xml", $evt->getXML());
         $result = str_replace("\n", "", $evt->getXML());
         $expected = str_replace("\n", "", file_get_contents($this->pathFixtures."xml".DIRECTORY_SEPARATOR."evtCadPatrocinadoSigned.xml"));
         $this->assertEquals($expected, $result);

@@ -69,9 +69,9 @@ class Tools extends BaseTools
         //salva comunicações para log
         $mark = $this->generateMark();
         $filename = "$mark-consultaCad.xml";
-        $this->gravaFile($lastMsg, $filename, $this->tpAmb, $this->aConfig['pathFiles'], 'temporarias');
+        $this->gravaFile($lastMsg, $filename, $this->tpAmb, $this->aConfig['pathFiles'], $this->aConfig['cnpj']);
         $filename = "$mark-retConsultaCad.xml";
-        $this->gravaFile($retorno, $filename, $this->tpAmb, $this->aConfig['pathFiles'], 'temporarias');
+        $this->gravaFile($retorno, $filename, $this->tpAmb, $this->aConfig['pathFiles'], $this->aConfig['cnpj']);
         //tratar dados de retorno
         $aResp = Response::readReturn($method, $retorno);
         return (string) $retorno;
@@ -122,9 +122,9 @@ class Tools extends BaseTools
         //salva comunicações para log
         $mark = $this->generateMark();
         $filename = "$mark-consultaLista.xml";
-        $this->gravaFile($lastMsg, $filename, $this->tpAmb, $this->aConfig['pathFiles'], 'temporarias');
+        $this->gravaFile($lastMsg, $filename, $this->tpAmb, $this->aConfig['pathFiles'], $this->aConfig['cnpj']);
         $filename = "$mark-retConsultaLista.xml";
-        $this->gravaFile($retorno, $filename, $this->tpAmb, $this->aConfig['pathFiles'], 'temporarias');
+        $this->gravaFile($retorno, $filename, $this->tpAmb, $this->aConfig['pathFiles'], $this->aConfig['cnpj']);
         //tratar dados de retorno
         $aResp = Response::readReturn($method, $retorno);
         return (string) $retorno;
@@ -191,9 +191,9 @@ class Tools extends BaseTools
         //salva comunicações para log
         $mark = $this->generateMark();
         $filename = "$mark-consultaMovimento.xml";
-        $this->gravaFile($lastMsg, $filename, $this->tpAmb, $this->aConfig['pathFiles'], 'temporarias');
+        $this->gravaFile($lastMsg, $filename, $this->tpAmb, $this->aConfig['pathFiles'], $this->aConfig['cnpj']);
         $filename = "$mark-retConsultaMovimento.xml";
-        $this->gravaFile($retorno, $filename, $this->tpAmb, $this->aConfig['pathFiles'], 'temporarias');
+        $this->gravaFile($retorno, $filename, $this->tpAmb, $this->aConfig['pathFiles'], $this->aConfig['cnpj']);
         //tratar dados de retorno
         $aResp = Response::readReturn($method, $retorno);
         return (string) $retorno;
@@ -246,9 +246,9 @@ class Tools extends BaseTools
       //salva comunicações para log
         $mark = $this->generateMark();
         $filename = "$mark-consultaIntermediario.xml";
-        $this->gravaFile($lastMsg, $filename, $this->tpAmb, $this->aConfig['pathFiles'], 'temporarias');
+        $this->gravaFile($lastMsg, $filename, $this->tpAmb, $this->aConfig['pathFiles'], $this->aConfig['cnpj']);
         $filename = "$mark-retConsultaIntermediario.xml";
-        $this->gravaFile($retorno, $filename, $this->tpAmb, $this->aConfig['pathFiles'], 'temporarias');
+        $this->gravaFile($retorno, $filename, $this->tpAmb, $this->aConfig['pathFiles'], $this->aConfig['cnpj']);
         //tratar dados de retorno
         $aResp = Response::readReturn($method, $retorno);
         return (string) $retorno;
@@ -292,9 +292,9 @@ class Tools extends BaseTools
         //salva comunicações para log
         $mark = $this->generateMark();
         $filename = "$mark-consultaPatrocinado.xml";
-        $this->gravaFile($lastMsg, $filename, $this->tpAmb, $this->aConfig['pathFiles'], 'temporarias');
+        $this->gravaFile($lastMsg, $filename, $this->tpAmb, $this->aConfig['pathFiles'], $this->aConfig['cnpj']);
         $filename = "$mark-retConsultaPatrocinado.xml";
-        $this->gravaFile($retorno, $filename, $this->tpAmb, $this->aConfig['pathFiles'], 'temporarias');
+        $this->gravaFile($retorno, $filename, $this->tpAmb, $this->aConfig['pathFiles'], $this->aConfig['cnpj']);
         //tratar dados de retorno
         $aResp = Response::readReturn($method, $retorno);
         return (string) $retorno;
@@ -362,9 +362,9 @@ class Tools extends BaseTools
         //salva comunicações para log
         $mark = $this->generateMark();
         $filename = "$mark-enviaLote.xml";
-        $this->gravaFile($lastMsg, $filename, $this->tpAmb, $this->aConfig['pathFiles'], 'temporarias');
+        $this->gravaFile($lastMsg, $filename, $this->tpAmb, $this->aConfig['pathFiles'], $this->aConfig['cnpj']);
         $filename = "$mark-retEnviaLote.xml";
-        $this->gravaFile($retorno, $filename, $this->tpAmb, $this->aConfig['pathFiles'], 'temporarias');
+        $this->gravaFile($retorno, $filename, $this->tpAmb, $this->aConfig['pathFiles'], $this->aConfig['cnpj']);
         //tratar dados de retorno
         $aResp = Response::readReturn($method, $retorno);
         return (string) $retorno;

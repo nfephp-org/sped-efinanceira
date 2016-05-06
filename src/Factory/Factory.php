@@ -188,6 +188,8 @@ abstract class Factory extends BaseMake
     
     /**
      * Executa a assinatura digital do xml
+     * Essa assinatura depende da classe Pkcs12.php que está no repositório
+     * nfephp-org/sped-common/Certificates
      */
     public function assina()
     {

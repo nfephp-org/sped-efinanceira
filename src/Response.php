@@ -26,12 +26,32 @@ class Response
      * @param string $xmlResp
      * @return array
      */
-    public static function readReturn($method, $xmlResp)
+    public static function readReturn($method, $xmlResp = '')
     {
+        if (trim($xmlResp) == '') {
+            return [
+                'bStat' => false,
+                'message' => 'Não retornou nenhum dado'
+            ];
+        }
+        libxml_use_internal_errors(true);
         $dom = new DOMDocument('1.0', 'utf-8');
         $dom->loadXML($xmlResp);
-        if ($reason = self::checkForFault($dom) != '') {
-            return array('Fault' => $reason);
+        $errors = libxml_get_errors();
+        libxml_clear_errors();
+        if (! empty($errors)) {
+            return [
+                'bStat' => false,
+                'message' => $xmlResp
+            ];
+        }
+        //foi retornado um xml continue
+        $reason = self::checkForFault($dom);
+        if ($reason != '') {
+            return [
+                'bStat' => false,
+                'message' => $reason
+            ];
         }
         //para cada $method tem um formato de retorno especifico
         switch ($method) {
@@ -58,14 +78,23 @@ class Response
     }
     
     /**
-     * Verifica se o retorno é relativo a um ERRO
+     * Verifica se o retorno é relativo a um ERRO SOAP
      *
-     * @param Dom $dom
+     * @param DOMDocument $dom
      * @return string
      */
     public static function checkForFault($dom)
     {
-        return '';
+        $tagfault = $dom->getElementsByTagName('Fault')->item(0);
+        if (empty($tagfault)) {
+            return '';
+        }
+        $tagreason = $tagfault->getElementsByTagName('Reason')->item(0);
+        if (! empty($tagreason)) {
+            $reason = $tagreason->getElementsByTagName('Text')->item(0)->nodeValue;
+            return $reason;
+        }
+        return 'Houve uma falha na comunicação.';
     }
     
     /**

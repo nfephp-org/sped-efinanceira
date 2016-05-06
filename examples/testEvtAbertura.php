@@ -10,7 +10,7 @@ use NFePHP\eFinanc\Factory\Abertura;
 $evt = new Abertura('../config/config.json');
 
 //########################################################################
-$id = '000000000000000001';
+$id = '1';
 $indRetificacao = 1; // 1 - para arquivo original 2 - para arquivo de retificação espontânea 3 – para arquivo de retificação a pedido
 $tpAmb = 2;
 $recibo = '';

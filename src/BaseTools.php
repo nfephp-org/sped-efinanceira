@@ -292,11 +292,15 @@ class BaseTools
         $filename,
         $tpAmb = '2',
         $folder = '',
-        $subFolder = 'temporarias'
+        $subFolder = ''
     ) {
         $anomes = date('Ym');
-        $pathTemp = Files\FilesFolders::getFilePath($tpAmb, $folder, $subFolder)
-            . DIRECTORY_SEPARATOR . $anomes;
+        $pathTemp = $folder
+            . Files\FilesFolders::getAmbiente($tpAmb)
+            . DIRECTORY_SEPARATOR
+            . $subFolder
+            . DIRECTORY_SEPARATOR
+            . $anomes;
         if (! Files\FilesFolders::saveFile($pathTemp, $filename, $data)) {
             $msg = 'Falha na gravação no diretório. '.$pathTemp;
             throw new RuntimeException($msg);
@@ -344,8 +348,7 @@ class BaseTools
         try {
             $retorno = $this->oSoap->send($urlService, '', '', $body, $this->xmlns.$method);
         } catch (\NFePHP\Common\Exception\RuntimeException $e) {
-            $this->errors .= $e->getMessage();
-            return false;
+            $retorno = $e->getMessage();
         }
         $aRet = [
             'retorno'=>$retorno,

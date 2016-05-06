@@ -76,7 +76,7 @@ class MovimentoTest extends FactoryTest
             $evt->declaradoTipo($tpDeclarado);
         }
         $evt->monta();
-        //file_put_contents($this->pathFixtures."xml".DIRECTORY_SEPARATOR."evtMovOpFinDeclarado.xml", $evt->getXML());
+        file_put_contents($this->pathFixtures."xml".DIRECTORY_SEPARATOR."evtMovOpFinDeclarado.xml", $evt->getXML());
         $result = str_replace("\n", "", $evt->getXML());
         $expected = str_replace("\n", "", file_get_contents($this->pathFixtures."xml".DIRECTORY_SEPARATOR."evtMovOpFinDeclarado.xml"));
         $this->assertEquals($expected, $result);
