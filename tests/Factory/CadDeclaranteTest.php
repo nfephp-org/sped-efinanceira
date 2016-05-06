@@ -53,7 +53,7 @@ class CadDeclaranteTest extends FactoryTest
         $evt->tagInfo($giin, $nome, $endereco, $municipio, $uf, $pais, $paisResidencia);
         $evt->monta();
         $evt->assina();
-        //file_put_contents($this->pathFixtures."xml".DIRECTORY_SEPARATOR."evtCadDeclaranteSigned.xml", $evt->getXML());
+        file_put_contents($this->pathFixtures."xml".DIRECTORY_SEPARATOR."evtCadDeclaranteSigned.xml", $evt->getXML());
         $result = str_replace("\n", "", $evt->getXML());
         $expected = str_replace("\n", "", file_get_contents($this->pathFixtures."xml".DIRECTORY_SEPARATOR."evtCadDeclaranteSigned.xml"));
         $this->assertEquals($expected, $result);
