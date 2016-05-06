@@ -22,10 +22,10 @@ $evt->tagDeclarante($cnpj);
 
 //########################################################################
 $giin = '';//caso não exista deixe em branco
-$nome = 'Actuary Corretora de seguros e consult atuarial';
-$endereco = 'Av. Pres. Kennedy, 2999';
-$municipio = '4106902';
-$uf = 'PR';
+$nome = 'Qualquer coisa Ltda';
+$endereco = 'Av. Pres. JFH, 99';
+$municipio = '5106955';
+$uf = 'PE';
 $pais = 'BR';
 $paisResidencia = 'BR';
 $evt->tagInfo($giin, $nome, $endereco, $municipio, $uf, $pais, $paisResidencia);
