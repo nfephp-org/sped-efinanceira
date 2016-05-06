@@ -24,7 +24,7 @@ $evt->tagDeclarante($cnpj);
 $giin = "0123456789123456789";
 $cnpj = "11119090910270";
 $nome = 'Fulano de Tal';
-$endereco = 'Rua Cel Silverio Magalhaes';
+$endereco = 'Rua Cel Silverino Fonseca';
 $municipio = '3304557';
 $pais = 'BR';
 $paisResidencia = 'BR';

@@ -22,23 +22,23 @@ $evt->tagDeclarante($cnpj);
 $evt->tagInfo('2016-03-01', '2016-04-01');
 
 //########################################################################
-$cpf = '00431733813';
+$cpf = '00429091901';
 $nome = 'Fulano de Tal';
 $setor = 'SETOR XXXX';
 $ddd = '11';
-$telefone = '50734858';
+$telefone = '5004255';
 $ramal = '';
-$logradouro = 'Rua Cel Silverio Magalhaes';
-$numero = '346';
+$logradouro = 'Rua Cel Silverino Fonseca';
+$numero = '1246';
 $complemento = '';
-$bairro = 'Jardim da Saude';
-$cep = '04154000';
+$bairro = 'Jardim da Saudade';
+$cep = '04187090';
 $municipio = 'Sao Paulo';
 $uf = 'SP';
 $evt->tagResponsavelRMF($cpf, $nome, $setor, $ddd, $telefone, $ramal, $logradouro, $numero, $complemento, $bairro, $cep, $municipio, $uf);
 
 //########################################################################
-$cpf = '00431733813';
+$cpf = '00429091901';
 $setor = 'SEILA ';
 $ddd = '11';
 $telefone = '11111111';
