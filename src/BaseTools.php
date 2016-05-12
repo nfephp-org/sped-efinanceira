@@ -133,6 +133,7 @@ class BaseTools
                 throw new RuntimeException($msg);
             }
         }
+        
         $this->setAmbiente($this->aConfig['tpAmb']);
         $this->certExpireTimestamp = $this->oCertificate->expireTimestamp;
         $this->certExpireDate = date('d/m/Y', $this->certExpireTimestamp);
@@ -248,6 +249,7 @@ class BaseTools
      */
     protected function setAmbiente($tpAmb = '2')
     {
+        $this->tpAmb = $tpAmb;
         $this->ambiente = 'homologacao';
         if ($tpAmb == '1') {
             $this->ambiente = 'producao';
