@@ -499,13 +499,13 @@ class Response
         $aStatus['cdRetorno'] = self::retValue($nodestatus, 'cdRetorno', '0');
         $aStatus['descRetorno'] = self::retValue($nodestatus, 'descRetorno');
         //status/dadosRegistroOcorrenciaEvento 0 -> N
-        $nodedados = $nodestatus->getElementsByTagName('dadosRegistroOcorrenciaEvento');
-        if (isset($nodedados)) {
+        $nodedados = $node->getElementsByTagName('dadosRegistroOcorrenciaEvento');
+        if (!empty($nodedados)) {
             $n = 0;
             foreach ($nodedados as $dados) {
                 //dadosRegistroOcorrenciaEvento/ocorrencias 0 - N
                 $nodeocor = $nodedados->item($n)->getElementsByTagName('ocorrencias');
-                if (isset($nodeocor)) {
+                if (!empty($nodeocor)) {
                     $x = 0;
                     foreach ($nodeocor as $ocor) {
                         $dnode = $nodeocor->item($x);
@@ -513,8 +513,9 @@ class Response
                         $aOcorr['codigo'] = self::retValue($dnode, 'codigo');
                         $aOcorr['descricao'] = self::retValue($dnode, 'descricao');
                         $aOcorr['localizacaoErroAviso'] = self::retValue($dnode, 'localizacaoErroAviso');
+                        $aOcorrencias[] = $aOcorr;
+                        $x++;
                     }
-                    $aOcorrencias[] = $aOcorr;
                 }
                 $n++;
             }
