@@ -352,7 +352,6 @@ class BaseTools
         } catch (\NFePHP\Common\Exception\RuntimeException $e) {
             $msg = $this->oSoap->infoCurl['http_code'] . ' - ' . $this->oSoap->errorCurl;
             throw new \RuntimeException($msg);
-            //$retorno = $e->getMessage();
         }
         $aRet = [
             'retorno'=>$retorno,
