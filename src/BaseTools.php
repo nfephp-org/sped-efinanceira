@@ -350,7 +350,9 @@ class BaseTools
         try {
             $retorno = $this->oSoap->send($urlService, '', '', $body, $this->xmlns.$method);
         } catch (\NFePHP\Common\Exception\RuntimeException $e) {
-            $retorno = $e->getMessage();
+            $msg = $this->oSoap->infoCurl['http_code'] . ' - ' . $this->oSoap->errorCurl;
+            throw new \RuntimeException($msg);
+            //$retorno = $e->getMessage();
         }
         $aRet = [
             'retorno'=>$retorno,

@@ -417,25 +417,27 @@ class Response
         //busca o status
         $aResposta['status'] = self::retStatus($tag);
         $tag = $dom->getElementsByTagName('retornoEventos')->item(0);
-        $eventos = $tag->getElementsByTagName('evento');
+        $eventos = $dom->getElementsByTagName('evento');
         $i = 0;
-        foreach ($eventos as $evento) {
-            $ret = $eventos->item($i)->getElementsByTagName('retornoEvento')->item(0);
-            $recepcao = $ret->getElementsByTagName('dadosRecepcaoEvento')->item(0);
-            $dadosReciboEntrega = $ret->getElementsByTagName('dadosReciboEntrega')->item(0);
-            $aEvento['id'] = $ret->getAttribute('id');
-            $aEvento['cnpjDeclarante'] = self::retDeclarante($ret)['cnpj'];
-            $aEvento['dhProcessamento'] = self::retValue($recepcao, 'dhProcessamento');
-            $aEvento['tipoEvento'] = self::retValue($recepcao, 'tipoEvento');
-            $aEvento['idEvento'] = self::retValue($recepcao, 'idEvento');
-            $aEvento['hash'] = self::retValue($recepcao, 'hash');
-            $aEvento['nrRecibo'] = self::retValue($recepcao, 'nrRecibo');
-            $aEvento['status'] = self::retStatus($ret);
-            $aEvento['numeroRecibo'] = '';
-            $aEvento['numeroRecibo'] = self::retValue($dadosReciboEntrega, 'numeroRecibo');
-            $aEventos[] = $aEvento;
-            $i++;
-        }
+        if (!empty($eventos)) {
+            foreach ($eventos as $evento) {
+                $ret = $eventos->item($i)->getElementsByTagName('retornoEvento')->item(0);
+                $recepcao = $ret->getElementsByTagName('dadosRecepcaoEvento')->item(0);
+                $dadosReciboEntrega = $ret->getElementsByTagName('dadosReciboEntrega')->item(0);
+                $aEvento['id'] = $ret->getAttribute('id');
+                $aEvento['cnpjDeclarante'] = self::retDeclarante($ret)['cnpj'];
+                $aEvento['dhProcessamento'] = self::retValue($recepcao, 'dhProcessamento');
+                $aEvento['tipoEvento'] = self::retValue($recepcao, 'tipoEvento');
+                $aEvento['idEvento'] = self::retValue($recepcao, 'idEvento');
+                $aEvento['hash'] = self::retValue($recepcao, 'hash');
+                $aEvento['nrRecibo'] = self::retValue($recepcao, 'nrRecibo');
+                $aEvento['status'] = self::retStatus($ret);
+                $aEvento['numeroRecibo'] = '';
+                $aEvento['numeroRecibo'] = self::retValue($dadosReciboEntrega, 'numeroRecibo');
+                $aEventos[] = $aEvento;
+                $i++;
+            }
+        }    
         $aResposta['retornoEventos'] = $aEventos;
         return $aResposta;
     }
@@ -500,6 +502,9 @@ class Response
         $aStatus['descRetorno'] = self::retValue($nodestatus, 'descRetorno');
         //status/dadosRegistroOcorrenciaEvento 0 -> N
         $nodedados = $node->getElementsByTagName('dadosRegistroOcorrenciaEvento');
+        if ($nodedados->length == 0) {
+            $nodedados = $node->getElementsByTagName('dadosRegistroOcorrenciaLote');
+        }
         if (!empty($nodedados)) {
             $n = 0;
             foreach ($nodedados as $dados) {
