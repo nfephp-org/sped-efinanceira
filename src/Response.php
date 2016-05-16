@@ -437,7 +437,7 @@ class Response
                 $aEventos[] = $aEvento;
                 $i++;
             }
-        }    
+        }
         $aResposta['retornoEventos'] = $aEventos;
         return $aResposta;
     }
