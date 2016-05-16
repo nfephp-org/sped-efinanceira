@@ -498,11 +498,16 @@ class Response
         ];
         //status 1 - 1
         $nodestatus = $node->getElementsByTagName('status')->item(0);
-        $aStatus['cdRetorno'] = self::retValue($nodestatus, 'cdRetorno');
-        if ($aStatus['cdRetorno'] == '') {
-            $aStatus['cdRetorno'] = self::retValue($nodestatus, 'cdStatus');
-        }
         $aStatus['descRetorno'] = self::retValue($nodestatus, 'descRetorno');
+        $aStatus['cdRetorno'] = '1';
+        if ($aStatus['descRetorno'] === 'SUCESSO') {
+            $aStatus['cdRetorno'] = '0';
+        }
+        //$aStatus['cdRetorno'] = self::retValue($nodestatus, 'cdRetorno', '0');
+        //if ($aStatus['cdRetorno'] == '') {
+        //    $aStatus['cdRetorno'] = self::retValue($nodestatus, 'cdStatus', '0');
+        //}
+        
         //status/dadosRegistroOcorrenciaEvento 0 -> N
         $nodedados = $node->getElementsByTagName('dadosRegistroOcorrenciaEvento');
         if ($nodedados->length == 0) {
