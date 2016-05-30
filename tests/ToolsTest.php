@@ -24,6 +24,7 @@ class ToolsTest extends FactoryTest
     
     /**
      * @covers NFePHP\eFinanc\Tools::__construct
+     * @expectedException RuntimeException
      */
     public function testInstantiable()
     {
