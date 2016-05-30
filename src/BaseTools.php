@@ -122,18 +122,18 @@ class BaseTools
             '',
             $ignore
         );
-        if ($this->oCertificate->priKey == '') {
+        $timestampnow = gmmktime(0, 0, 0, date("m"), date("d"), date("Y"));
+        if ($this->oCertificate->expireTimestamp == 0 || $this->oCertificate->expireTimestamp < $timestampnow) {
             //tentar carregar novo certificado
             $this->atualizaCertificado(
                 $this->aConfig['pathCertsFiles'].$this->aConfig['certPfxName'],
                 $this->aConfig['certPassword']
             );
-            if ($this->oCertificate->expireTimestamp == 0) {
+            if ($this->oCertificate->expireTimestamp == 0 || $this->oCertificate->expireTimestamp < $timestampnow) {
                 $msg = 'Não existe certificado válido disponível. Atualize o Certificado.';
                 throw new RuntimeException($msg);
             }
         }
-        
         $this->setAmbiente($this->aConfig['tpAmb']);
         $this->certExpireTimestamp = $this->oCertificate->expireTimestamp;
         $this->certExpireDate = date('d/m/Y', $this->certExpireTimestamp);
