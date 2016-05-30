@@ -29,8 +29,72 @@ $ composer require nfephp-org/sped-efinanceira
 
 ## Usage
 
-``` php
+Para instanciar a classe construtoras dos eventos em XML.
+### Cadastro de Declarante
+```php
+use NFePHP\eFinanc\Factory\CadDeclarante;
+//instancia a classe e passa o arquivo de configuração
+$evt = new CadDeclarante('../config/config.json');
 ```
+### Cadastro de Intermediário
+```php
+use NFePHP\eFinanc\Factory\CadIntermediario;
+//instancia a classe e passa o arquivo de configuração
+$evt = new CadIntermediario('../config/config.json');
+```
+### Cadastro de Patrocinado
+```php
+use NFePHP\eFinanc\Factory\CadPatrocinado;
+//instancia a classe e passa o arquivo de configuração
+$evt = new CadPatrocinado('../config/config.json');
+```
+### Abertura
+```php
+use NFePHP\eFinanc\Factory\Abertura;
+//instancia a classe e passa o arquivo de configuração
+$evt = new Abertura('../config/config.json');
+```
+### Movimento do Declarado
+```php
+use NFePHP\eFinanc\Factory\MovDeclarado;
+//instancia a classe e passa o arquivo de configuração
+$evt = new MovDeclarado('../config/config.json');
+```
+### Movimento do Patrocinado
+```php
+use NFePHP\eFinanc\Factory\Movimento;
+//instancia a classe e passa o arquivo de configuração
+$evt = new Movimento('../config/config.json');
+```
+### Fechamento
+```php
+use NFePHP\eFinanc\Factory\Fechamento;
+//instancia a classe e passa o arquivo de configuração
+$evt = new Fechamento('../config/config.json');
+```
+### Exclusão (parcial)
+```php
+use NFePHP\eFinanc\Factory\Exclusao;
+//instancia a classe e passa o arquivo de configuração
+$evt = new Exclusao('../config/config.json');
+```
+### Exclusão Total
+```php
+use NFePHP\eFinanc\Factory\ExclusaoTotal;
+//instancia a classe e passa o arquivo de configuração
+$evt = new ExclusaoTotal('../config/config.json');
+```
+
+
+Para instanciar a classe Tools, que realiza a comunicação propriamente dita com os webservices da Receita Federal.
+``` php
+
+use NFePHP\eFinanc\Tools;
+
+$tools = new Tools('../config/config.json');
+
+```
+
 
 ## Change log
 
@@ -44,17 +108,17 @@ $ composer test
 
 ## Contributing
 
-PAra contribuir por favor observe o [CONTRIBUTING](CONTRIBUTING.md) e o  [Código de Conduta](CONDUCT.md) parea detalhes.
+Para contribuir por favor observe o [CONTRIBUTING](CONTRIBUTING.md) e o  [Código de Conduta](CONDUCT.md) parea detalhes.
 
 ## Security
 
-Caso você encntre algum problema relativo a segurança, por favor envie um email diretamente aos mantenedores do pacote ao invés de abrir um ISSUE.
+Caso você encontre algum problema relativo a segurança, por favor envie um email diretamente aos mantenedores do pacote ao invés de abrir um ISSUE.
 
 ## Credits
 
 - Rodrigo Traleski <rodrigo@actuary.com.br>
 - Ademilson Santana da Silva <ademilsonssilva1@gmail.com>
-- Roberto L. MAchado <linux.rlm@gmail.com>
+- Roberto L. Machado <linux.rlm@gmail.com>
 
 O desenvolvimento desse pacote somente foi possivel devido a contribuição e colaboração da 
 [ACTUARY Ltda](http://www.actuary.com.br/v2/informatica/index.php) 

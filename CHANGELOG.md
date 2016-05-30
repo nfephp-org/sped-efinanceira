@@ -1,10 +1,10 @@
 # Changelog
 
-All Notable changes to `:package_name` will be documented in this file.
+All Notable changes to `sped-efinanceira` will be documented in this file.
 
-Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
+Todas as atualizações a partir de 30/05/206 devem observar os principios [Mantendo o CHANGELOG](http://keepachangelog.com/).
 
-## 0.1.0-dev - 2016-04-01
+## 1.0.0-dev - 2016-05-30 - Primeira versão estável
 
 ### Added
 - Nothing
