@@ -9,6 +9,7 @@
 [![Build Status][ico-travis]][link-travis]
 [![Coverage Status][ico-scrutinizer]][link-scrutinizer]
 [![Quality Score][ico-code-quality]][link-code-quality]
+[![Latest Stable Version][ico-stable]][link-packagist] 
 [![Total Downloads][ico-downloads]][link-downloads]
 
 Por meio da Instrução Normativa número 1.571/2015, de 03 de julho, a Receita Federal instituiu uma nova obrigação acessória denominada e-Financeira. Com ela, a partir de fevereiro de 2016, os contribuintes que têm movimentação financeira nos Estados Unidos (EUA) deverão transmitir essa informação ao governo, por meio do Sistema Público de Escrituração Digital (Sped) . O manual para preenchimento dos leiautes da e-Financeira já está disponível no site da Receita Federal.
@@ -133,6 +134,7 @@ Este patote está diponibilizado sob LGPLv3 ou MIT License (MIT). Leia  [Arquivo
 [ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/nfephp-org/sped-efinanceira.svg?style=flat-square
 [ico-code-quality]: https://img.shields.io/scrutinizer/g/nfephp-org/sped-efinanceira.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/nfephp-org/sped-efinanceira.svg?style=flat-square
+[ico-stable]: https://poser.pugx.org/nfephp-org/sped-efinanceira/v/stable?format=flat-square
 
 [link-packagist]: https://packagist.org/packages/nfephp-org/sped-efinanceira
 [link-travis]: https://travis-ci.org/nfephp-org/sped-efinanceira
@@ -140,3 +142,4 @@ Este patote está diponibilizado sob LGPLv3 ou MIT License (MIT). Leia  [Arquivo
 [link-code-quality]: https://scrutinizer-ci.com/g/nfephp-org/sped-efinanceira
 [link-downloads]: https://packagist.org/packages/nfephp-org/sped-efinanceira
 [link-author]: https://github.com/nfephp-org
+
