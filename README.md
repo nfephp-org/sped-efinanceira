@@ -23,6 +23,8 @@ Este pacote faz parte da API NFePHP e atende aos parâmetros das PSR2 e PSR4, be
 
 Este é um projeto totalmente *OpenSource*, para usa-lo e modifica-lo você não paga absolutamente nada. Porém para continuarmos a mante-lo é necessário qua alguma contribuição seja feita, seja auxiliando na codificação, na documentação ou na realização de testes e identificação de falhas e BUGs.
 
+Para contribuir, por favor, observe as condições em [CONTRIBUTING](CONTRIBUTING.md) e o [Código de Conduta](CONDUCT.md) para maiores detalhes.
+
 Mas também, caso você ache que qualquer informação obtida aqui, lhe foi útil e que isso vale de algum dinheiro e está disposto a doar algo, sinta-se livre para enviar qualquer quantia através de :
 
 <a target="_blank" href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=linux%2erlm%40gmail%2ecom&lc=BR&item_name=NFePHP%20OpenSource%20API&item_number=nfephp&currency_code=BRL&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest">
@@ -96,7 +98,6 @@ use NFePHP\eFinanc\Factory\ExclusaoTotal;
 $evt = new ExclusaoTotal('../config/config.json');
 ```
 
-
 Para instanciar a classe Tools, que realiza a comunicação propriamente dita com os webservices da Receita Federal.
 ``` php
 
@@ -106,26 +107,21 @@ $tools = new Tools('../config/config.json');
 
 ```
 
-
 ## Change log
 
 Acompanhe o [CHANGELOG](CHANGELOG.md) para maiores informações sobre as alterações recentes.
 
-## Testing
+## Testes
 
 ``` bash
 $ composer test
 ```
 
-## Contributing
-
-Para contribuir por favor observe o [CONTRIBUTING](CONTRIBUTING.md) e o  [Código de Conduta](CONDUCT.md) parea detalhes.
-
-## Security
+## Segurança
 
 Caso você encontre algum problema relativo a segurança, por favor envie um email diretamente aos mantenedores do pacote ao invés de abrir um ISSUE.
 
-## Credits
+## Creditos
 
 - Rodrigo Traleski <rodrigo@actuary.com.br>
 - Ademilson Santana da Silva <ademilsonssilva1@gmail.com>
@@ -134,7 +130,7 @@ Caso você encontre algum problema relativo a segurança, por favor envie um ema
 O desenvolvimento desse pacote somente foi possivel devido a contribuição e colaboração da 
 [ACTUARY Ltda](http://www.actuary.com.br/v2/informatica/index.php) 
 
-## License
+## Licenças
 
 Este patote está diponibilizado sob LGPLv3 ou MIT License (MIT). Leia  [Arquivo de Licença](LICENSE.md) para maiores informações.
 
