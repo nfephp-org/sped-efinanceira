@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.eFinanceira.gov.br/schemas/envioLoteEventos/v1_0_1" targetNamespace="http://www.eFinanceira.gov.br/schemas/envioLoteEventos/v1_0_1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.eFinanceira.gov.br/schemas/envioLoteEventos/v1_2_0" targetNamespace="http://www.eFinanceira.gov.br/schemas/envioLoteEventos/v1_2_0" elementFormDefault="qualified" attributeFormDefault="unqualified">
   <xs:element name="eFinanceira">
     <xs:annotation>
       <xs:documentation>Elemento raiz do lote de eFinanceira.</xs:documentation>
