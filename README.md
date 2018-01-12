@@ -1,5 +1,7 @@
 # SPED-EFINANCEIRA
 
+## REFATORAÇÃO EM ANDAMENTO NA BRANCH v2.0 - NÃO USAVEL AINDA
+
 **API PHP para a integração de aplicativo com o projeto SPED eFinanceira da Receita Federal do Brasil**
 
 *sped-efinanceira* é um framework que permite a integração de um aplicativo, com o serviço do projeto SPED da RFB denominado *eFinanceira*, com a construção dos eventos em xml e do envio dos lotes de eventos e consultas, através de requisições SOAP, sobre SSL usando certificado digital modelo A1 (PKCS#12), pertencentes a cadeia de certificação Brasileira.
@@ -27,85 +29,9 @@ Para contribuir, por favor, observe as condições em [CONTRIBUTING](CONTRIBUTIN
 
 Mas também, caso você ache que qualquer informação obtida aqui, lhe foi útil e que isso vale de algum dinheiro e está disposto a doar algo, sinta-se livre para enviar qualquer quantia através de :
 
-<a target="_blank" href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=linux%2erlm%40gmail%2ecom&lc=BR&item_name=NFePHP%20OpenSource%20API&item_number=nfephp&currency_code=BRL&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest">
-<img alt="Doar com Paypal" src="https://www.paypalobjects.com/pt_BR/BR/i/btn/btn_donateCC_LG.gif"/></a>
-[![](https://stc.pagseguro.uol.com.br/public/img/botoes/doacoes/209x48-doar-assina.gif)](https://pag.ae/bkXPq4) 
-
 
 ## Install
 
-Via Composer
-
-``` bash
-$ composer require nfephp-org/sped-efinanceira
-```
-
-## Usage
-
-Para instanciar a classe construtoras dos eventos em XML.
-### Cadastro de Declarante
-```php
-use NFePHP\eFinanc\Factory\CadDeclarante;
-//instancia a classe e passa o arquivo de configuração
-$evt = new CadDeclarante('../config/config.json');
-```
-### Cadastro de Intermediário
-```php
-use NFePHP\eFinanc\Factory\CadIntermediario;
-//instancia a classe e passa o arquivo de configuração
-$evt = new CadIntermediario('../config/config.json');
-```
-### Cadastro de Patrocinado
-```php
-use NFePHP\eFinanc\Factory\CadPatrocinado;
-//instancia a classe e passa o arquivo de configuração
-$evt = new CadPatrocinado('../config/config.json');
-```
-### Abertura
-```php
-use NFePHP\eFinanc\Factory\Abertura;
-//instancia a classe e passa o arquivo de configuração
-$evt = new Abertura('../config/config.json');
-```
-### Movimento do Declarado
-```php
-use NFePHP\eFinanc\Factory\MovDeclarado;
-//instancia a classe e passa o arquivo de configuração
-$evt = new MovDeclarado('../config/config.json');
-```
-### Movimento do Patrocinado
-```php
-use NFePHP\eFinanc\Factory\Movimento;
-//instancia a classe e passa o arquivo de configuração
-$evt = new Movimento('../config/config.json');
-```
-### Fechamento
-```php
-use NFePHP\eFinanc\Factory\Fechamento;
-//instancia a classe e passa o arquivo de configuração
-$evt = new Fechamento('../config/config.json');
-```
-### Exclusão (parcial)
-```php
-use NFePHP\eFinanc\Factory\Exclusao;
-//instancia a classe e passa o arquivo de configuração
-$evt = new Exclusao('../config/config.json');
-```
-### Exclusão Total
-```php
-use NFePHP\eFinanc\Factory\ExclusaoTotal;
-//instancia a classe e passa o arquivo de configuração
-$evt = new ExclusaoTotal('../config/config.json');
-```
-
-Para instanciar a classe Tools, que realiza a comunicação propriamente dita com os webservices da Receita Federal.
-``` php
-
-use NFePHP\eFinanc\Tools;
-
-$tools = new Tools('../config/config.json');
-
-```
 
 ## Change log
 
@@ -123,8 +49,6 @@ Caso você encontre algum problema relativo a segurança, por favor envie um ema
 
 ## Creditos
 
-- Rodrigo Traleski <rodrigo@actuary.com.br>
-- Ademilson Santana da Silva <ademilsonssilva1@gmail.com>
 - Roberto L. Machado <linux.rlm@gmail.com>
 
 O desenvolvimento desse pacote somente foi possivel devido a contribuição e colaboração da 
