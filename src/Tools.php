@@ -310,7 +310,6 @@ class Tools extends BaseTools
      * @return string será retornado o xml de resposta do webservice
      * @throws InvalidArgumentException
      */
-    
     public function enviaLote($aEv, &$aResp = array())
     {
         if (empty($aEv)) {

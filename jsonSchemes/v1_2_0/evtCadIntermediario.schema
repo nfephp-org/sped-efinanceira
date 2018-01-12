@@ -1,0 +1,46 @@
+{
+    "title": "evtCadIntermediario",
+    "type": "object",
+    "properties": {
+        "sequencial": {
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9]{1,18}"
+        },
+        "indretificacao": {
+            "required": true,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 3
+        },
+        "nrrecibo": {
+            "required": false,
+            "type": ["string","null"],
+            "minLength": 3,
+            "maxLength": 50
+        },
+        "giin": {
+            "required": false,
+            "type": ["string","null"],
+            "pattern": "^([0-9A-NP-Z]{6}[.][0-9A-NP-Z]{5}[.](LE|SL|ME|BR|SF|SD|SS|SB|SP)[.][0-9]{3})$"
+        },
+        "tpni": {
+            "required": false,
+            "type": ["integer","null"],
+            "minimum": 1,
+            "maximum": 5
+        },
+        "niintermediario": {
+            "required": false,
+            "type": ["string","null"],
+            "minLength": 3,
+            "maxLength": 25
+        },
+        "nomeintermediario": {
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100
+        }
+    }
+}
