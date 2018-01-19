@@ -47,19 +47,19 @@ class EvtAberturaeFinanceira extends Factory implements FactoryInterface
             "nrRecibo",
             isset($this->std->nrrecibo) ? $this->std->nrrecibo : null,
             false
-        );        
+        );
         $this->dom->addChild(
             $ideEvento,
             "tpAmb",
             $this->tpAmb,
             true
-        );        
+        );
         $this->dom->addChild(
             $ideEvento,
             "aplicEmi",
             '1',
             true
-        );        
+        );
         $this->dom->addChild(
             $ideEvento,
             "verAplic",
@@ -86,7 +86,7 @@ class EvtAberturaeFinanceira extends Factory implements FactoryInterface
         if (!empty($this->std->aberturapp)) {
             $AberturaPP = $this->dom->createElement("AberturaPP");
             $pp = $this->std->aberturapp;
-            foreach($pp->tpempresa as $tpe) {
+            foreach ($pp->tpempresa as $tpe) {
                 $tpEmpresa = $this->dom->createElement("tpEmpresa");
                 $this->dom->addChild(
                     $tpEmpresa,
@@ -187,7 +187,7 @@ class EvtAberturaeFinanceira extends Factory implements FactoryInterface
             );
             $ResponsavelRMF->appendChild($endereco);
             $AberturaMovOpFin->appendChild($ResponsavelRMF);
-            foreach($this->std->aberturamovopfin->respefin as $rf) {
+            foreach ($this->std->aberturamovopfin->respefin as $rf) {
                 $RespeFin = $this->dom->createElement("RespeFin");
                 $this->dom->addChild(
                     $RespeFin,
@@ -206,7 +206,7 @@ class EvtAberturaeFinanceira extends Factory implements FactoryInterface
                     "Setor",
                     $rf->setor,
                     true
-                );                
+                );
                 $Telefone = $this->dom->createElement("Telefone");
                 $this->dom->addChild(
                     $Telefone,
@@ -324,5 +324,5 @@ class EvtAberturaeFinanceira extends Factory implements FactoryInterface
         $this->eFinanceira->appendChild($this->node);
         //$this->xml = $this->dom->saveXML($this->eFinanceira);
         $this->sign($this->evtTag);
-    }    
+    }
 }

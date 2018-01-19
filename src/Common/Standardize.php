@@ -5,7 +5,7 @@ namespace NFePHP\eFinanc\Common;
 /**
  * Class for identification of eletronic documents in xml
  * used for Sped eFinanceira comunications
- * 
+ *
  * @category  API
  * @package   NFePHP\eFinanc
  * @copyright Copyright (c) 2018

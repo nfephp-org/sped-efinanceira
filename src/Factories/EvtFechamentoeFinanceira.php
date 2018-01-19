@@ -2,8 +2,7 @@
 
 namespace NFePHP\eFinanc\Factories;
 
-
-class evtFechamentoeFinanceira
+class EvtFechamentoeFinanceira
 {
     
 }

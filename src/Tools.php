@@ -3,7 +3,6 @@
 
 namespace NFePHP\eFinanc;
 
-
 class Tools
 {
     const CADASTRO = 'consultaInformacoesCadastrais';
@@ -21,7 +20,7 @@ class Tools
     }
     
     /**
-     * 
+     *
      * @param string $type
      * @param stdClass $std
      */
@@ -35,12 +34,11 @@ class Tools
     }
     
     /**
-     * 
+     *
      * @param array $events
      */
     public function envia($events):string
     {
-        
     }
     
     /**
@@ -48,27 +46,21 @@ class Tools
      */
     protected function consultaInformacoesCadastrais($std):string
     {
-        
     }
     
     protected function consultaInformacoesIntermediario($std):string
     {
-        
     }
     
     protected function consultaInformacoesPatrocinado($std):string
     {
-        
     }
     
     protected function consultaInformacoesMovimento($std):string
     {
-        
     }
             
     protected function consultaListaEFinanceira($std):string
     {
-        
     }
-    
 }

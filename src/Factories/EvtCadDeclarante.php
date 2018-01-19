@@ -47,19 +47,19 @@ class EvtCadDeclarante extends Factory implements FactoryInterface
             "nrRecibo",
             isset($this->std->nrrecibo) ? $this->std->nrrecibo : null,
             false
-        );        
+        );
         $this->dom->addChild(
             $ideEvento,
             "tpAmb",
             $this->tpAmb,
             true
-        );        
+        );
         $this->dom->addChild(
             $ideEvento,
             "aplicEmi",
             '1',
             true
-        );        
+        );
         $this->dom->addChild(
             $ideEvento,
             "verAplic",
@@ -165,7 +165,7 @@ class EvtCadDeclarante extends Factory implements FactoryInterface
             $infoCadastro->appendChild($paisResid);
         }
         if (!empty($info->enderecooutros)) {
-            foreach($info->enderecooutros as $out) {
+            foreach ($info->enderecooutros as $out) {
                 $EnderecoOutros = $this->dom->createElement("EnderecoOutros");
                 $this->dom->addChild(
                     $EnderecoOutros,

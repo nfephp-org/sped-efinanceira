@@ -125,7 +125,7 @@ class Crypto
         return [
           'validFrom' => $validFrom,
           'validTo' => $validTo,
-          'details' => $detail 
+          'details' => $detail
         ];
     }
     
