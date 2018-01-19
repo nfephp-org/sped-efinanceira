@@ -29,8 +29,7 @@ $jsonSchema = '{
         "nrrecibo": {
             "required": false,
             "type": ["string","null"],
-            "minLength": 3,
-            "maxLength": 50
+            "pattern": "^([0-9]{1,18}[-][0-9]{2}[-][0-9]{3}[-][0-9]{4}[-][0-9]{1,18})$"
         },
         "dtinicio": {
             "required": true,

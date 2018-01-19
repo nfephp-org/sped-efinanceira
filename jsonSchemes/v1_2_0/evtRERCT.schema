@@ -1,0 +1,11 @@
+{
+    "title": "evtRERCT",
+    "type": "object",
+    "properties": {
+        "sequencial": {
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9]{1,18}"
+        }
+    }
+}

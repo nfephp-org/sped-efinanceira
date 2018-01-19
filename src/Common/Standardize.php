@@ -33,7 +33,7 @@ class Standardize
      * @var array
      */
     public $rootTagList = [
-        '',
+        'retornoLoteEventos',
         ''
     ];
     
@@ -69,7 +69,7 @@ class Standardize
             }
         }
         throw new InvalidArgumentException(
-            "Este xml não pertence ao projeto eSocial."
+            "Este xml não pertence ao projeto eFinanceira."
         );
     }
     

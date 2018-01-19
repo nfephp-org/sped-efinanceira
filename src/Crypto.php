@@ -147,8 +147,8 @@ class Crypto
      */
     protected function encryptkey($key, $iv)
     {
-        openssl_public_encrypt($key, $cryptedkey, $this->certificate, OPENSSL_PKCS1_OAEP_PADDING);
-        return base64_encode($cryptedkey . $iv);
+        openssl_public_encrypt($key.$iv, $cryptedkey, $this->certificate, OPENSSL_PKCS1_OAEP_PADDING);
+        return base64_encode($cryptedkey);
     }
     
     /**

@@ -29,8 +29,7 @@ $jsonSchema = '{
         "nrrecibo": {
             "required": false,
             "type": ["string","null"],
-            "minLength": 3,
-            "maxLength": 50
+            "pattern": "^([0-9]{1,18}[-][0-9]{2}[-][0-9]{3}[-][0-9]{4}[-][0-9]{1,18})$"
         },
         "dtinicio": {
             "required": true,
@@ -183,6 +182,10 @@ $jsonSchema = '{
                                 "minLength": 3,
                                 "maxLength": 90
                             },
+                            "email": {
+                                "required": true,
+                                "type": "email"
+                            },
                             "telefone": {
                                 "required": true,
                                 "type": "object",
@@ -248,10 +251,6 @@ $jsonSchema = '{
                                         "type": "string",
                                         "minLength": 2,
                                         "maxLength": 2
-                                    },
-                                    "email": {
-                                        "required": true,
-                                        "type": "email"
                                     }
                                 }
                             }
@@ -304,7 +303,7 @@ $jsonSchema = '{
 $std = new \stdClass();
 $std->sequencial = '1';
 $std->indretificacao = 3;
-$std->nrrecibo = '12345asdfe';
+$std->nrrecibo = '123456789012345678-12-123-1234-123456789012345678';
 $std->dtinicio = '2017-01-01'; //A data informada deve pertencer ao mesmo semestre da dtFim
 $std->dtfim = '2017-05-31';
 
@@ -335,6 +334,7 @@ $std->aberturamovopfin->respefin[1] = new \stdClass();
 $std->aberturamovopfin->respefin[1]->cpf = '12345678901';
 $std->aberturamovopfin->respefin[1]->nome = 'lkslsklsklskslksl';
 $std->aberturamovopfin->respefin[1]->setor = 'lkslsklsk';
+$std->aberturamovopfin->respefin[1]->email = 'ksksk@msmsl.com';
 $std->aberturamovopfin->respefin[1]->telefone = new \stdClass();
 $std->aberturamovopfin->respefin[1]->telefone->ddd = '11';
 $std->aberturamovopfin->respefin[1]->telefone->numero = '5555555';
@@ -348,7 +348,7 @@ $std->aberturamovopfin->respefin[1]->endereco->bairro = 'jdkjdkjd';
 $std->aberturamovopfin->respefin[1]->endereco->cep = '12345678';
 $std->aberturamovopfin->respefin[1]->endereco->municipio = 'lksklsk';
 $std->aberturamovopfin->respefin[1]->endereco->uf = 'AC';
-$std->aberturamovopfin->respefin[1]->endereco->email = 'ksksk@msmsl.com';
+
 
 $std->aberturamovopfin->represlegal = new \stdClass();
 $std->aberturamovopfin->represlegal->cpf = '12345678901';

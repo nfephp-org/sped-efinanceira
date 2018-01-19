@@ -1,4 +1,5 @@
 <?php
+
 namespace NFePHP\eFinanc\Exception;
 
 /**
@@ -11,7 +12,7 @@ namespace NFePHP\eFinanc\Exception;
  * @author    Roberto L. Machado <linux.rlm at gmail dot com>
  * @link      http://github.com/nfephp-org/sped-efinanceira for the canonical source repository
  */
-use NFePHP\EFDReinf\Exception\ExceptionInterface;
+use NFePHP\eFinanc\Exception\ExceptionInterface;
 
 class EventsException extends \InvalidArgumentException implements ExceptionInterface
 {
