@@ -29,8 +29,7 @@ $jsonSchema = '{
         "nrrecibo": {
             "required": false,
             "type": ["string","null"],
-            "minLength": 3,
-            "maxLength": 50
+            "pattern": "^([0-9]{1,18}[-][0-9]{2}[-][0-9]{3}[-][0-9]{4}[-][0-9]{1,18})$"
         },
         "giin": {
             "required": false,
@@ -55,6 +54,12 @@ $jsonSchema = '{
             "minLength": 3,
             "maxLength": 100
         },
+        "paisresidencia": {
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+           "maxLength": 2
+        },
         "endereco": {
             "required": true,
             "type": "object",
@@ -65,19 +70,13 @@ $jsonSchema = '{
                     "minLength": 3,
                     "maxLength": 200
                 },
-                "município": {
+                "municipio": {
                     "required": true,
                     "type": "string",
                     "minLength": 3,
                     "maxLength": 100
                 },
                 "pais": {
-                    "required": true,
-                    "type": "string",
-                    "minLength": 2,
-                    "maxLength": 2
-                },
-                "paisresidencia": {
                     "required": true,
                     "type": "string",
                     "minLength": 2,
@@ -91,17 +90,18 @@ $jsonSchema = '{
 $std = new \stdClass();
 $std->sequencial = '1';
 $std->indretificacao = 3;
-$std->nrrecibo = '12345asdfe';
+$std->nrrecibo = '123456789012345678-12-123-1234-123456789012345678';
 $std->giin = '12ASDA.12345.LE.123';
 $std->tpni = 1;
 $std->niintermediario = '123454ssls';
 $std->nomeintermediario = 'kdkdkjdkdjkdj';
+$std->paisresidencia  = 'BR';
 
 $std->endereco = new \stdClass();
 $std->endereco->enderecolivre = 'sslskslslks';
-$std->endereco->município = 'slkslsklsklsks';
+$std->endereco->municipio = 'slkslsklsklsks';
 $std->endereco->pais = 'BR';
-$std->endereco->paisresidencia  = 'BR';
+
 
 
 // Schema must be decoded before it can be used for validation

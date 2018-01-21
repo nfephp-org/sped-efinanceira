@@ -23,7 +23,7 @@ class FakePretty
         $std = json_decode($response);
         if (!empty($save)) {
             file_put_contents(
-                "/var/www/sped/sped-efdreinf/tests/fixtures/xml/$save.xml",
+                "/var/www/sped/sped-efinanceira/tests/fixtures/xml/$save.xml",
                 $std->body
             );
         }

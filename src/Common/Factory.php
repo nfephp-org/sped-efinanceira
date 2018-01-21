@@ -21,101 +21,36 @@ use NFePHP\Common\DOMImproved as Dom;
 use NFePHP\Common\Signer;
 use NFePHP\Common\Strings;
 use NFePHP\Common\Validator;
-use NFePHP\EFDReinf\Exception\EventsException;
+use NFePHP\eFinanc\Exception\EventsException;
 use stdClass;
 
 abstract class Factory
 {
-    /**
-     * @var int
-     */
-    public $tpInsc;
-    /**
-     * @var string
-     */
-    public $nrInsc;
-    /**
-     * @var string
-     */
-    public $nmRazao;
-    /**
-     * @var DateTime
-     */
+ 
     public $date;
-    /**
-     * @var int
-     */
-    public $tpAmb = 3;
-    /**
-     * @var int
-     */
-    public $procEmi = 1;
-    /**
-     * @var string
-     */
-    public $verProc = '';
-    /**
-     * @var string
-     */
-    public $layout = '';
-    /**
-     * @var string
-     */
-    public $layoutStr = '';
-    /**
-     * @var string
-     */
-    public $schema = '';
-    /**
-     * @var string
-     */
-    public $jsonschema = '';
-    /**
-     * @var string
-     */
+    public $tpAmb;
+    public $verAplic;
+    public $layout;
+    public $cnpjDeclarante;
+    public $layoutStr;
     public $evtTag;
-    /**
-     * @var string
-     */
-    public $evtName = '';
-    /**
-     * @var string
-     */
-    public $evtAlias = '';
-
+    public $evtName;
+    public $evtAlias;
+    public $std;
+    public $xmlns = 'http://www.eFinanceira.gov.br/schemas/';
+    public $eFinanceira;
+    public $node;
+    public $evtid;
+    public $dom;
+    public $xml;
     
-    /**
-     * @var string
-     */
-    protected $xmlns = "http://www.reinf.esocial.gov.br/schemas/";
-    /**
-     * @var Dom
-     */
-    protected $dom;
-    /**
-     * @var stdClass
-     */
-    protected $std;
-    /**
-     * @var string
-     */
-    protected $xml;
-    /**
-     * @var \DOMElement
-     */
-    protected $reinf;
-    /**
-     * @var \DOMElement
-     */
-    protected $node;
-    /**
-     * @var string
-     */
-    public $evtid = '';
+    
     /**
      * @var Certificate|null
      */
     protected $certificate;
+    protected $jsonschema;
+    protected $schema;
 
     /**
      * Constructor
@@ -139,11 +74,9 @@ abstract class Factory
             $this->date = new DateTime($date);
         }
         $this->tpAmb = $stdConf->tpAmb;
-        $this->verProc = $stdConf->verProc;
+        $this->verAplic = $stdConf->verAplic;
         $this->layout = $stdConf->eventoVersion;
-        $this->tpInsc = $stdConf->empregador->tpInsc;
-        $this->nrInsc = $stdConf->empregador->nrInsc;
-        $this->nmRazao = $stdConf->empregador->nmRazao;
+        $this->cnpjDeclarante = $stdConf->cnpjDeclarante;
         $this->layoutStr = $this->strLayoutVer($this->layout);
         $this->certificate = $certificate;
         $this->evtTag = $params->evtTag;
@@ -183,12 +116,7 @@ abstract class Factory
      */
     protected function strLayoutVer($layout)
     {
-        $fils = explode('.', $layout);
-        $str = 'v';
-        foreach ($fils as $fil) {
-            $str .= str_pad($fil, 2, '0', STR_PAD_LEFT) . '_';
-        }
-        return substr($str, 0, -1);
+        return "v" . str_replace('.', '_', $layout);
     }
 
     /**
@@ -242,37 +170,22 @@ abstract class Factory
             $this->dom = new Dom('1.0', 'UTF-8');
             $this->dom->preserveWhiteSpace = false;
             $this->dom->formatOutput = false;
-            $xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-                . "<Reinf xmlns=\"$this->xmlns"
-                . $this->evtName
-                . "/$this->layoutStr\">"
-                . "</Reinf>";
-            $this->dom->loadXML($xml);
-            $this->reinf = $this->dom->getElementsByTagName('Reinf')->item(0);
-            $this->evtid = FactoryId::build(
-                $this->tpInsc,
-                $this->nrInsc,
-                $this->date,
-                $this->std->sequencial
-            );
+            $ns = $this->xmlns . $this->evtName . "/" . $this->layoutStr;
+            $this->eFinanceira = $this->dom->createElementNS($ns, 'eFinanceira');
+            //cria o node principal
+            $this->evtid = FactoryId::build($this->std->sequencial);
             $this->node = $this->dom->createElement($this->evtTag);
             $att = $this->dom->createAttribute('id');
             $att->value = $this->evtid;
             $this->node->appendChild($att);
-            $ideContri = $this->dom->createElement("ideContri");
+            $ideDeclarante = $this->dom->createElement("ideDeclarante");
             $this->dom->addChild(
-                $ideContri,
-                "tpInsc",
-                (string) $this->tpInsc,
+                $ideDeclarante,
+                "cnpjDeclarante",
+                (string) $this->cnpjDeclarante,
                 true
             );
-            $this->dom->addChild(
-                $ideContri,
-                "nrInsc",
-                $this->nrInsc,
-                true
-            );
-            $this->node->appendChild($ideContri);
+            $this->node->appendChild($ideDeclarante);
         }
     }
     
@@ -401,7 +314,7 @@ abstract class Factory
      */
     protected function sign($tagsigned = '')
     {
-        $xml = $this->dom->saveXML($this->reinf);
+        $xml = $this->dom->saveXML($this->eFinanceira);
         $xml = Strings::clearXmlString($xml);
         if (!empty($this->certificate)) {
             $xml = Signer::sign(

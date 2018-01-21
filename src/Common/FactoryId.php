@@ -18,25 +18,14 @@ class FactoryId
 {
     /**
      * Build Id for EFDReinf event
-     * @param int $tpInsc
-     * @param string $nrInsc
-     * @param DateTime $date
      * @param int $sequential
      * @return string
      */
-    public static function build(
-        $tpInsc,
-        $nrInsc,
-        DateTime $date,
-        $sequential = 1
-    ) {
+    public static function build($sequential)
+    {
         if (empty($sequential)) {
             $sequential = 1;
         }
-        return "ID"
-            . $tpInsc
-            . str_pad($nrInsc, 14, '0', STR_PAD_RIGHT)
-            . $date->format('YmdHis')
-            . str_pad($sequential, 5, '0', STR_PAD_LEFT);
+        return "ID".str_pad($sequential, 18, '0', STR_PAD_LEFT);
     }
 }

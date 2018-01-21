@@ -21,20 +21,15 @@ class Event
      * @var array
      */
     private static $available = [
-        'evtinfocontri' => Factories\EvtInfoContri::class,
-        'evttabprocesso' => Factories\EvtTabProcesso::class,
-        'evtservtom' => Factories\EvtServTom::class,
-        'evtservprest' => Factories\EvtServPrest::class,
-        'evtassocdesprec' => Factories\EvtAssocDespRec::class,
-        'evtassocdesprep' => Factories\EvtAssocDespRep::class,
-        'evtcomprod' => Factories\EvtComProd::class,
-        'evtcprb' => Factories\EvtCPRB::class,
-        'evtpgtosdivs' => Factories\EvtPgtosDivs::class,
-        'evtreabreevper' => Factories\EvtReabreEvPer::class,
-        'evtfechaevper' => Factories\EvtFechaEvPer::class,
-        'evtespdesportivo' => Factories\EvtEspDesportivo::class,
-        'evttotal' => Factories\EvtTotal::class,
-        'evtexclusao' => Factories\EvtExclusao::class
+        'evtaberturaefinanceira' => Factories\EvtAberturaeFinanceira::class,
+        'evtcaddeclarante' => Factories\EvtCadDeclarante::class,
+        'evtcadintermediario' => Factories\EvtCadIntermediario::class,
+        'evtcadpatrocinado' => Factories\EvtCadPatrocinado::class,
+        'evtexclusao' => Factories\EvtExclusao::class,
+        'evtexclusaoefinanceira' => Factories\EvtExclusaoeFinanceira::class,
+        'evtfechamentoefinanceira' => Factories\EvtFechamentoeFinanceira::class,
+        'evtmovopfin' => Factories\EvtMovOpFin::class,
+        'evtrerct' => Factories\EvtRERCT::class
     ];
     
     /**
@@ -42,20 +37,15 @@ class Event
      * @var array
      */
     private static $aliases = [
-        'r1000' => 'evtinfocontri',
-        'r1070' => 'evttabprocesso',
-        'r2010' => 'evtservtom',
-        'r2020' => 'evtservprest',
-        'r2030' => 'evtassocdesprec',
-        'r2040' => 'evtassocdesprep',
-        'r2050' => 'evtcomprod',
-        'r2060' => 'evtcprb',
-        'r2070' => 'evtpgtosdivs',
-        'r2098' => 'evteeabreevper',
-        'r2099' => 'evtfecharvper',
-        'r3010' => 'evtespdesportivo',
-        'r5001' => 'evttotal',
-        'r9000' => 'evtexclusao'
+        'f1000' => 'evtaberturaefinanceira',
+        'f2000' => 'evtcaddeclarante',
+        'f2010' => 'evtcadintermediario',
+        'f2020' => 'evtcadpatrocinado',
+        'f3000' => 'evtmovopfin',
+        'f4000' => 'evtfechamentoefinanceira',
+        'f5000' => 'evtexclusao',
+        'f8000' => 'evtrerct',
+        'f9000' => 'evtexclusaoefinanceira'
     ];
     
     /**
@@ -63,13 +53,13 @@ class Event
      * @param string $name
      * @param array $arguments [config, std, certificate, $date]
      * @return object
-     * @throws NFePHP\EFDReinf\Exception\EventsException
+     * @throws NFePHP\eFinanc\Exception\EventsException
      */
     public static function __callStatic($name, $arguments)
     {
         $name = str_replace('-', '', strtolower($name));
         $realname = $name;
-        if (substr($name, 0, 1) == 'r') {
+        if (substr($name, 0, 1) == 'f') {
             if (!array_key_exists($name, self::$aliases)) {
                 //este evento não foi localizado
                 throw EventsException::wrongArgument(1000, $name);
@@ -81,6 +71,7 @@ class Event
             throw EventsException::wrongArgument(1000, $name);
         }
         $className = self::$available[$realname];
+        
         if (empty($arguments[0])) {
             throw EventsException::wrongArgument(1001);
         }

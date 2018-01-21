@@ -5,7 +5,7 @@ namespace NFePHP\eFinanc\Common;
 /**
  * Class for identification of eletronic documents in xml
  * used for Sped eFinanceira comunications
- * 
+ *
  * @category  API
  * @package   NFePHP\eFinanc
  * @copyright Copyright (c) 2018
@@ -33,7 +33,7 @@ class Standardize
      * @var array
      */
     public $rootTagList = [
-        '',
+        'retornoLoteEventos',
         ''
     ];
     
@@ -69,7 +69,7 @@ class Standardize
             }
         }
         throw new InvalidArgumentException(
-            "Este xml não pertence ao projeto eSocial."
+            "Este xml não pertence ao projeto eFinanceira."
         );
     }
     

@@ -37,7 +37,9 @@ try {
     $tools->loadSoapClass($soap);
     
     //executa a consulta
-    $response = $tools->consultarLoteEventos('1.2.201707.0000000000000007638');    
+    $stdConsulta = new stdClass();
+    $stdConsulta->cnpj = '999999999999999';
+    $response = $tools->consulta($tools::CADASTRO, $stdConsulta);
     
     //retorna os dados que serão usados na conexão para conferência
     echo FakePretty::prettyPrint($response, 'fake_envConsulta');
