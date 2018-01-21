@@ -253,7 +253,7 @@ $jsonSchema = '{
 $std = new \stdClass();
 $std->sequencial = '1';
 $std->indretificacao = 3;
-$std->nrrecibo = '12345asdfe';
+$std->nrrecibo = '123456789012345678-12-123-1234-123456789012345678';
 $std->giin = '12ASDA.12345.LE.123';
 $std->categoriapatrocinador = 'FATCA601';
 
