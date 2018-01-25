@@ -55,6 +55,24 @@ $jsonSchema = '{
                     "type": "string",
                     "pattern": "^[0-9]{14}"
                 },
+                "nomepatrocinado": {
+                    "required": true,
+                    "type": "string",
+                    "minLength": 3,
+                    "maxLength": 100
+                },
+                "tpnome": {
+                    "required": false,
+                    "type": ["string","null"],
+                    "minLength": 1,
+                    "maxLength": 7
+                },
+                "tpendereco": {
+                    "required": false,
+                    "type": ["string","null"],
+                    "minLength": 1,
+                    "maxLength": 7
+                },
                 "nif": {
                     "required": false,
                     "type": ["array","null"],
@@ -79,18 +97,6 @@ $jsonSchema = '{
                                 "type": ["string","null"],
                                 "minLength": 1,
                                 "maxLength": 30
-                            },
-                            "nomepatrocinado": {
-                                "required": true,
-                                "type": "string",
-                                "minLength": 3,
-                                "maxLength": 100
-                            },
-                            "tpnome": {
-                                "required": false,
-                                "type": ["string","null"],
-                                "minLength": 1,
-                                "maxLength": 7
                             }
                         }
                     }    
@@ -121,12 +127,6 @@ $jsonSchema = '{
                             "type": "string",
                             "minLength": 2,
                             "maxLength": 2
-                        },
-                        "tpendereco": {
-                            "required": false,
-                            "type": ["string","null"],
-                            "minLength": 1,
-                            "maxLength": 7
                         }
                     }
                 },
@@ -158,6 +158,23 @@ $jsonSchema = '{
                                         "type": ["string","null"],
                                         "minLength": 3,
                                         "maxLength": 200
+                                    },
+                                    "cep": {
+                                        "required": true,
+                                        "type": "string",
+                                        "pattern": "^[0-9]{8}"
+                                    },
+                                    "municipio": {
+                                        "required": true,
+                                        "type": "string",
+                                        "minLength": 3,
+                                        "maxLength": 60
+                                    },
+                                    "uf": {
+                                        "required": true,
+                                        "type": "string",
+                                        "minLength": 2,
+                                        "maxLength": 40
                                     },
                                     "endereco": {
                                         "required": false,
@@ -198,29 +215,6 @@ $jsonSchema = '{
                                                 "type": ["string","null"],
                                                 "minLength": 1,
                                                 "maxLength": 12
-                                            },
-                                            "cep": {
-                                                "required": true,
-                                                "type": "string",
-                                                "pattern": "^[0-9]{8}"
-                                            },
-                                            "municipio": {
-                                                "required": true,
-                                                "type": "string",
-                                                "minLength": 3,
-                                                "maxLength": 60
-                                            },
-                                            "uf": {
-                                                "required": true,
-                                                "type": "string",
-                                                "minLength": 2,
-                                                "maxLength": 40
-                                            },
-                                            "pais": {
-                                                "required": true,
-                                                "type": "string",
-                                                "minLength": 2,
-                                                "maxLength": 2
                                             }
                                         }
                                     }
@@ -260,27 +254,32 @@ $std->categoriapatrocinador = 'FATCA601';
 $std->infopatrocinado = new \stdClass();
 $std->infopatrocinado->giin = '12ASDA.12345.LE.123';
 $std->infopatrocinado->cnpj = '12345678901234';
+$std->infopatrocinado->nomepatrocinado = 'sjlskjslkjskj';
+$std->infopatrocinado->tpnome = 'lks1';
 
 $std->infopatrocinado->nif[0] = new \stdClass();
 $std->infopatrocinado->nif[0]->numeronif = 'sa123';
 $std->infopatrocinado->nif[0]->paisemissao = 'BR';
 $std->infopatrocinado->nif[0]->tpnif = '1111';
-$std->infopatrocinado->nif[0]->nomepatrocinado = 'sjlskjslkjskj';
-$std->infopatrocinado->nif[0]->tpnome = 'lks1';
+$std->infopatrocinado->tpendereco = '1234asd';
 
 $std->infopatrocinado->endereco = new \stdClass();
 $std->infopatrocinado->endereco->enderecolivre = 'jlkjksjlskj';
 $std->infopatrocinado->endereco->cep = '12345678';
 $std->infopatrocinado->endereco->municipio = 'kslksçlks';
 $std->infopatrocinado->endereco->pais = 'BR';
-$std->infopatrocinado->endereco->tpendereco = '1234asd';
 
 $std->infopatrocinado->enderecooutros[0] = new \stdClass();
 $std->infopatrocinado->enderecooutros[0]->tpendereco = '1234asd';
 $std->infopatrocinado->enderecooutros[0]->enderecolivre = 'kjslksjksj';
+$std->infopatrocinado->enderecooutros[0]->pais = 'BR';
 
 $std->infopatrocinado->enderecooutros[0]->enderecoestrutura = new \stdClass();
 $std->infopatrocinado->enderecooutros[0]->enderecoestrutura->enderecolivre = 'kjskj';
+$std->infopatrocinado->enderecooutros[0]->enderecoestrutura->cep = '12345678';
+$std->infopatrocinado->enderecooutros[0]->enderecoestrutura->municipio = 'skjskjsjks';
+$std->infopatrocinado->enderecooutros[0]->enderecoestrutura->uf = 'Acre';
+
 $std->infopatrocinado->enderecooutros[0]->enderecoestrutura->endereco = new \stdClass();
 $std->infopatrocinado->enderecooutros[0]->enderecoestrutura->endereco->logradouro = 'çlksçksçlks';
 $std->infopatrocinado->enderecooutros[0]->enderecoestrutura->endereco->numero = 'jhjh11';
@@ -288,10 +287,7 @@ $std->infopatrocinado->enderecooutros[0]->enderecoestrutura->endereco->complemen
 $std->infopatrocinado->enderecooutros[0]->enderecoestrutura->endereco->andar = '1234';
 $std->infopatrocinado->enderecooutros[0]->enderecoestrutura->endereco->bairro = 'skjhsh';
 $std->infopatrocinado->enderecooutros[0]->enderecoestrutura->endereco->caixapostal = '111sd';
-$std->infopatrocinado->enderecooutros[0]->enderecoestrutura->endereco->cep = '12345678';
-$std->infopatrocinado->enderecooutros[0]->enderecoestrutura->endereco->municipio = 'skjskjsjks';
-$std->infopatrocinado->enderecooutros[0]->enderecoestrutura->endereco->uf = 'Acre';
-$std->infopatrocinado->enderecooutros[0]->enderecoestrutura->endereco->pais = 'BR';
+
 
 $std->infopatrocinado->paisresid[0] = new \stdClass();
 $std->infopatrocinado->paisresid[0]->pais = 'BR';

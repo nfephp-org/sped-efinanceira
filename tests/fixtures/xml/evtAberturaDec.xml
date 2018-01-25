@@ -1,2 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<eFinanceira xmlns="http://www.eFinanceira.gov.br/schemas/evtAberturaeFinanceira/v1_0_1"><evtAberturaeFinanceira id="ID000000000000000001"><ideEvento><indRetificacao>1</indRetificacao><tpAmb>2</tpAmb><aplicEmi>1</aplicEmi><verAplic>001</verAplic></ideEvento><ideDeclarante><cnpjDeclarante>99999090910270</cnpjDeclarante></ideDeclarante><AberturaMovOpFin/></evtAberturaeFinanceira></eFinanceira>

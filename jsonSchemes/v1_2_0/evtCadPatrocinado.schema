@@ -42,6 +42,24 @@
                     "type": "string",
                     "pattern": "^[0-9]{14}"
                 },
+                "nomepatrocinado": {
+                    "required": true,
+                    "type": "string",
+                    "minLength": 3,
+                    "maxLength": 100
+                },
+                "tpnome": {
+                    "required": false,
+                    "type": ["string","null"],
+                    "minLength": 1,
+                    "maxLength": 7
+                },
+                "tpendereco": {
+                    "required": false,
+                    "type": ["string","null"],
+                    "minLength": 1,
+                    "maxLength": 7
+                },
                 "nif": {
                     "required": false,
                     "type": ["array","null"],
@@ -66,18 +84,6 @@
                                 "type": ["string","null"],
                                 "minLength": 1,
                                 "maxLength": 30
-                            },
-                            "nomepatrocinado": {
-                                "required": true,
-                                "type": "string",
-                                "minLength": 3,
-                                "maxLength": 100
-                            },
-                            "tpnome": {
-                                "required": false,
-                                "type": ["string","null"],
-                                "minLength": 1,
-                                "maxLength": 7
                             }
                         }
                     }    
@@ -108,12 +114,6 @@
                             "type": "string",
                             "minLength": 2,
                             "maxLength": 2
-                        },
-                        "tpendereco": {
-                            "required": false,
-                            "type": ["string","null"],
-                            "minLength": 1,
-                            "maxLength": 7
                         }
                     }
                 },
@@ -145,6 +145,23 @@
                                         "type": ["string","null"],
                                         "minLength": 3,
                                         "maxLength": 200
+                                    },
+                                    "cep": {
+                                        "required": true,
+                                        "type": "string",
+                                        "pattern": "^[0-9]{8}"
+                                    },
+                                    "municipio": {
+                                        "required": true,
+                                        "type": "string",
+                                        "minLength": 3,
+                                        "maxLength": 60
+                                    },
+                                    "uf": {
+                                        "required": true,
+                                        "type": "string",
+                                        "minLength": 2,
+                                        "maxLength": 40
                                     },
                                     "endereco": {
                                         "required": false,
@@ -185,29 +202,6 @@
                                                 "type": ["string","null"],
                                                 "minLength": 1,
                                                 "maxLength": 12
-                                            },
-                                            "cep": {
-                                                "required": true,
-                                                "type": "string",
-                                                "pattern": "^[0-9]{8}"
-                                            },
-                                            "municipio": {
-                                                "required": true,
-                                                "type": "string",
-                                                "minLength": 3,
-                                                "maxLength": 60
-                                            },
-                                            "uf": {
-                                                "required": true,
-                                                "type": "string",
-                                                "minLength": 2,
-                                                "maxLength": 40
-                                            },
-                                            "pais": {
-                                                "required": true,
-                                                "type": "string",
-                                                "minLength": 2,
-                                                "maxLength": 2
                                             }
                                         }
                                     }
