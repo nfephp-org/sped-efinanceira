@@ -112,171 +112,181 @@ $jsonSchema = '{
                 }
             }    
         },
-        "nomepf": {
+        "nomeoutros": {
             "required": false,
-            "type": ["object","null"],
-            "properties": {
-                "tpnome": {
-                    "required": false,
-                    "type": ["string","null"],
-                    "minLength": 1,
-                    "maxLength": 7
-                },
-                "prectitulo": {
-                    "required": false,
-                    "type": ["string","null"],
-                    "minLength": 1,
-                    "maxLength": 20
-                },
-                "titulo": {
-                    "required": false,
-                    "type": ["string","null"],
-                    "minLength": 1,
-                    "maxLength": 20
-                },
-                "idgeracao": {
-                    "required": false,
-                    "type": ["string","null"],
-                    "minLength": 1,
-                    "maxLength": 10
-                },
-                "sufixo": {
-                    "required": false,
-                    "type": ["string","null"],
-                    "minLength": 1,
-                    "maxLength": 10
-                },
-                "gensufixo": {
-                    "required": false,
-                    "type": ["string","null"],
-                    "minLength": 1,
-                    "maxLength": 10
-                },
-                "primeironome": {
-                    "required": true,
-                    "type": "object",
-                    "properties": {
-                        "tipo": {
-                            "required": false,
-                            "type": ["string","null"],
-                            "minLength": 1,
-                            "maxLength": 20
-                        },
-                        "nome": {
-                            "required": true,
-                            "type": "string",
-                            "minLength": 1,
-                            "maxLength": 20
+            "type": ["array","null"],
+            "minItems": 0,
+            "items": {
+                "type": "object",
+                "properties": {
+                    "nomepf": {
+                        "required": false,
+                        "type": ["object","null"],
+                        "properties": {
+                            "tpnome": {
+                                "required": false,
+                                "type": ["string","null"],
+                                "minLength": 1,
+                                "maxLength": 7
+                            },
+                            "prectitulo": {
+                                "required": false,
+                                "type": ["string","null"],
+                                "minLength": 1,
+                                "maxLength": 20
+                            },
+                            "titulo": {
+                                "required": false,
+                                "type": ["string","null"],
+                                "minLength": 1,
+                                "maxLength": 20
+                            },
+                            "idgeracao": {
+                                "required": false,
+                                "type": ["string","null"],
+                                "minLength": 1,
+                                "maxLength": 10
+                            },
+                            "sufixo": {
+                                "required": false,
+                                "type": ["string","null"],
+                                "minLength": 1,
+                                "maxLength": 10
+                            },
+                            "gensufixo": {
+                                "required": false,
+                                "type": ["string","null"],
+                                "minLength": 1,
+                                "maxLength": 10
+                            },
+                            "primeironome": {
+                                "required": true,
+                                "type": "object",
+                                "properties": {
+                                    "tipo": {
+                                        "required": false,
+                                        "type": ["string","null"],
+                                        "minLength": 1,
+                                        "maxLength": 20
+                                    },
+                                    "nome": {
+                                        "required": true,
+                                        "type": "string",
+                                        "minLength": 1,
+                                        "maxLength": 20
+                                    }
+                                }
+                            },
+                            "meionome": {
+                                "required": false,
+                                "type": ["array","null"],
+                                "minItems": 0,
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "tipo": {
+                                            "required": false,
+                                            "type": ["string","null"],
+                                            "minLength": 1,
+                                            "maxLength": 20
+                                        },
+                                        "nome": {
+                                            "required": true,
+                                            "type": "string",
+                                            "minLength": 1,
+                                            "maxLength": 20
+                                        }
+                                    }
+                                }    
+                            },
+                            "prefixonome": {
+                                "required": false,
+                                "type": ["object","null"],
+                                "properties": {
+                                    "tipo": {
+                                        "required": false,
+                                        "type": ["string","null"],
+                                        "minLength": 1,
+                                        "maxLength": 20
+                                    },
+                                    "nome": {
+                                        "required": true,
+                                        "type": "string",
+                                        "minLength": 1,
+                                        "maxLength": 10
+                                    }
+                                }
+                            },
+                            "ultimonome": {
+                                "required": true,
+                                "type": "object",
+                                "properties": {
+                                    "tipo": {
+                                        "required": false,
+                                        "type": ["string","null"],
+                                        "minLength": 1,
+                                        "maxLength": 20
+                                    },
+                                    "nome": {
+                                        "required": true,
+                                        "type": "string",
+                                        "minLength": 1,
+                                        "maxLength": 20
+                                    }
+                                }
+                            }
                         }
-                    }
-                },
-                "meionome": {
-                    "required": false,
-                    "type": ["array","null"],
-                    "minItems": 0,
-                    "items": {
-                        "type": "object",
+                    },    
+                    "nomepj": {
+                        "required": false,
+                        "type": ["object","null"],
                         "properties": {
                             "tipo": {
                                 "required": false,
                                 "type": ["string","null"],
                                 "minLength": 1,
-                                "maxLength": 20
-                           },
+                                "maxLength": 7
+                            },
                             "nome": {
                                 "required": true,
                                 "type": "string",
                                 "minLength": 1,
-                                "maxLength": 20
+                                "maxLength": 100
                             }
                         }
-                    }    
-                },
-                "prefixonome": {
-                    "required": false,
-                    "type": ["object","null"],
-                    "properties": {
-                        "tipo": {
-                            "required": false,
-                            "type": ["string","null"],
-                            "minLength": 1,
-                            "maxLength": 20
-                        },
-                        "nome": {
-                            "required": true,
-                            "type": "string",
-                            "minLength": 1,
-                            "maxLength": 10
+                    },
+                    "infonascimento": {
+                        "required": false,
+                        "type": ["object","null"],
+                        "properties": {
+                            "municipio": {
+                                "required": false,
+                                "type": ["string","null"],
+                                "minLength": 1,
+                                "maxLength": 60
+                            },
+                            "bairro": {
+                                "required": false,
+                                "type": ["string","null"],
+                                "minLength": 1,
+                                "maxLength": 40
+                            },
+                            "pais": {
+                                "required": false,
+                                "type": ["string","null"],
+                                "minLength": 2,
+                                "maxLength": 2
+                            },
+                            "antigonomepais": {
+                                "required": false,
+                                "type": ["string","null"],
+                                "minLength": 1,
+                                "maxLength": 40
+                            }
                         }
-                    }
-                },
-                "ultimonome": {
-                    "required": true,
-                    "type": "object",
-                    "properties": {
-                        "tipo": {
-                            "required": false,
-                            "type": ["string","null"],
-                            "minLength": 1,
-                            "maxLength": 20
-                        },
-                        "nome": {
-                            "required": true,
-                            "type": "string",
-                            "minLength": 1,
-                            "maxLength": 20
-                        }
-                    }
+                    }                
                 }
-            }
-        },    
-        "nomepj": {
-            "required": false,
-            "type": ["object","null"],
-            "properties": {
-                "tipo": {
-                    "required": false,
-                    "type": ["string","null"],
-                    "minLength": 1,
-                    "maxLength": 7
-                },
-                "nome": {
-                    "required": true,
-                    "type": "string",
-                    "minLength": 1,
-                    "maxLength": 100
-                }
-            }
-        },
-        "infonascimento": {
-            "required": false,
-            "type": ["object","null"],
-            "properties": {
-                "municipio": {
-                    "required": false,
-                    "type": ["string","null"],
-                    "minLength": 1,
-                    "maxLength": 60
-                },
-                "bairro": {
-                    "required": false,
-                    "type": ["string","null"],
-                    "minLength": 1,
-                    "maxLength": 40
-                },
-                "pais": {
-                    "required": false,
-                    "type": ["string","null"],
-                    "minLength": 2,
-                    "maxLength": 2
-                },
-                "antigonomepais": {
-                    "required": false,
-                    "type": ["string","null"],
-                    "minLength": 1,
-                    "maxLength": 40
-                }
-            }
+            }    
         },
         "enderecooutros": {
             "required": false,
@@ -886,9 +896,9 @@ $jsonSchema = '{
                             },
                             "tprelacaodeclarado": {
                                 "required": true,
-                                "type": "string",
+                                "type": "integer",
                                 "minLength": 1,
-                                "maxLength": 2
+                                "maxLength": 5
                             },
                             "notitulares": {
                                 "required": false,
@@ -1080,7 +1090,7 @@ $jsonSchema = '{
 $std = new \stdClass();
 $std->sequencial = '1';
 $std->indretificacao = 3;
-$std->nrrecibo = '12345asdfe';
+$std->nrrecibo = '123456789012345678-12-123-1234-123456789012345678';
 $std->tpni = 2;
 $std->tpdeclarado = 'klsks';
 $std->nideclarado = 'ssss';
@@ -1090,39 +1100,36 @@ $std->enderecolivre = 'ssklsklskslks';
 $std->tpendereco = 'ssk';
 $std->pais = 'BR';
 $std->datanasc = '2017-01-01';
+$std->anomescaixa = '201712';
 
 $std->nif[0] = new \stdClass();
 $std->nif[0]->numeronif = 'skjskjskjs';
 $std->nif[0]->paisemissaonif = 'BR';
 $std->nif[0]->tpnif = 'slksl';
 
-$std->nomepf = new \stdClass();
-$std->nomepf->tpnome = 'slsklsk';
-$std->nomepf->prectitulo = 'sss';
-$std->nomepf->titulo = 'slsklsk';
-$std->nomepf->idgeracao = 'sss';
-$std->nomepf->sufixo = 'sss';
-$std->nomepf->gensufixo = 'sss';
-
-$std->nomepf->primeironome = new \stdClass();
-$std->nomepf->primeironome->tipo = 'lsklsk';
-$std->nomepf->primeironome->nome = 'lkdlkdlkd';
-
-$std->nomepf->meionome[0] = new \stdClass();
-$std->nomepf->meionome[0]->tipo = 'lkslk';
-$std->nomepf->meionome[0]->nome = 'flkfk';
-
-$std->nomepf->prefixonome = new \stdClass();
-$std->nomepf->prefixonome->tipo = 'dldkk';
-$std->nomepf->prefixonome->nome = 'flklf';
-
-$std->nomepf->ultimonome = new \stdClass();
-$std->nomepf->ultimonome->tipo = 'dddlk';
-$std->nomepf->ultimonome->nome = 'flfkflkf';
-
-$std->nomepj = new \stdClass();
-$std->nomepj->tpnome = 'dkddkld';
-$std->nomepj->nome = 'ddcldcllc';
+$std->nomeoutros[0] = new \stdClass();
+$std->nomeoutros[0]->nomepf = new \stdClass();
+$std->nomeoutros[0]->nomepf->tpnome = 'slsklsk';
+$std->nomeoutros[0]->nomepf->prectitulo = 'sss';
+$std->nomeoutros[0]->nomepf->titulo = 'slsklsk';
+$std->nomeoutros[0]->nomepf->idgeracao = 'sss';
+$std->nomeoutros[0]->nomepf->sufixo = 'sss';
+$std->nomeoutros[0]->nomepf->gensufixo = 'sss';
+$std->nomeoutros[0]->nomepf->primeironome = new \stdClass();
+$std->nomeoutros[0]->nomepf->primeironome->tipo = 'lsklsk';
+$std->nomeoutros[0]->nomepf->primeironome->nome = 'lkdlkdlkd';
+$std->nomeoutros[0]->nomepf->meionome[0] = new \stdClass();
+$std->nomeoutros[0]->nomepf->meionome[0]->tipo = 'lkslk';
+$std->nomeoutros[0]->nomepf->meionome[0]->nome = 'flkfk';
+$std->nomeoutros[0]->nomepf->prefixonome = new \stdClass();
+$std->nomeoutros[0]->nomepf->prefixonome->tipo = 'dldkk';
+$std->nomeoutros[0]->nomepf->prefixonome->nome = 'flklf';
+$std->nomeoutros[0]->nomepf->ultimonome = new \stdClass();
+$std->nomeoutros[0]->nomepf->ultimonome->tipo = 'dddlk';
+$std->nomeoutros[0]->nomepf->ultimonome->nome = 'flfkflkf';
+$std->nomeoutros[0]->nomepj = new \stdClass();
+$std->nomeoutros[0]->nomepj->tpnome = 'dkddkld';
+$std->nomeoutros[0]->nomepj->nome = 'ddcldcllc';
 
 $std->infonascimento = new \stdClass();
 $std->infonascimento->municipio = 'dcldcldcl';
@@ -1230,7 +1237,7 @@ $std->proprietarios[0]->infonascimento->antigonomepais = 'kjskjskj';
 $std->proprietarios[0]->reportavel[0] = new \stdClass();
 $std->proprietarios[0]->reportavel[0]->pais = 'BR';
 
-$std->anomescaixa = '201712';
+
 
 $std->conta[0] = new \stdClass();
 
@@ -1247,7 +1254,7 @@ $std->conta[0]->infoconta->tpconta = 'A';
 $std->conta[0]->infoconta->subtpconta = 'asa';
 $std->conta[0]->infoconta->tpnumconta = 'assss';
 $std->conta[0]->infoconta->numconta = 'aasssdddd';
-$std->conta[0]->infoconta->tprelacaodeclarado = 'S';
+$std->conta[0]->infoconta->tprelacaodeclarado = 1;
 $std->conta[0]->infoconta->notitulares = 5;
 $std->conta[0]->infoconta->dtencerramentoconta = '2017-12-12';
 $std->conta[0]->infoconta->indinatividade = 1;
