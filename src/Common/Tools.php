@@ -153,14 +153,15 @@ class Tools
             "Content-length: $msgSize"
         ];
         $this->request = $request;
-        
-        return (string) $this->soap->send(
+        return $this->request;
+        $this->response = $this->soap->send(
             $method,
             $url,
             $action,
             $request,
             $parameters
         );
+        return $this->response;
     }
     
     /**
