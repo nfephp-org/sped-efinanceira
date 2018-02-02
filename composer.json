@@ -4,7 +4,7 @@
     "description": "e-Financeira library",
     "homepage": "https://github.com/nfephp-org/sped-efinanceira",
     "keywords": ["Sped", "e-Financeira"],
-    "license": ["LGPLv3+", "GPLv3+", "MIT"],
+    "license": ["LGPL-3.0-or-later", "GPL-3.0-or-later", "MIT"],
     "authors": [
         {
             "name": "Roberto L. Machado",
