@@ -26,32 +26,83 @@ use stdClass;
 
 abstract class Factory
 {
- 
+    /**
+     * @var DateTime
+     */
     public $date;
+    /**
+     * @var int
+     */
     public $tpAmb;
+    /**
+     * @var string
+     */
     public $verAplic;
+    /**
+     * @var string
+     */
     public $layout;
+    /**
+     * @var string
+     */
     public $cnpjDeclarante;
+    /**
+     * @var string
+     */
     public $layoutStr;
+    /**
+     * @var string
+     */
     public $evtTag;
+    /**
+     * @var string
+     */
     public $evtName;
+    /**
+     * @var string
+     */
     public $evtAlias;
+    /**
+     * @var stdClass
+     */
     public $std;
+    /**
+     * @var string
+     */
     public $xmlns = 'http://www.eFinanceira.gov.br/schemas/';
+    /**
+     * @var \DOMElement
+     */
     public $eFinanceira;
+    /**
+     * @var \DOMElement
+     */
     public $node;
+    /**
+     * @var string
+     */
     public $evtid;
+    /**
+     *
+     * @var \NFePHP\Common\DOMImproved
+     */
     public $dom;
+    /**
+     * @var string
+     */
     public $xml;
-    
-    
     /**
      * @var Certificate|null
      */
     protected $certificate;
+    /**
+     * @var string
+     */
     protected $jsonschema;
+    /**
+     * @var string
+     */
     protected $schema;
-
     /**
      * Constructor
      * @param string      $config
@@ -182,7 +233,7 @@ abstract class Factory
             $this->dom->addChild(
                 $ideDeclarante,
                 "cnpjDeclarante",
-                (string) $this->cnpjDeclarante,
+                $this->cnpjDeclarante,
                 true
             );
             $this->node->appendChild($ideDeclarante);
@@ -292,21 +343,6 @@ abstract class Factory
     {
         return json_decode($this->toJson());
     }
-
-    /**
-     * Adjust missing properties form original data according schema
-     * @param \stdClass $data
-     * @return \stdClass
-     */
-    //public function standardizeProperties(stdClass $data)
-    //{
-    //    if (!is_file($this->jsonschema)) {
-    //        return $data;
-    //    }
-    //    $jsonSchemaObj = json_decode(file_get_contents($this->jsonschema));
-    //    $sc = new ParamsStandardize($jsonSchemaObj);
-    //    return $sc->stdData($data);
-    //}
 
     /**
      * Sign and validate XML with XSD, can throw Exception

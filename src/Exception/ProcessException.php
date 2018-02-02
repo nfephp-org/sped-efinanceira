@@ -16,12 +16,15 @@ use NFePHP\eFinanc\Exception\ExceptionInterface;
 class ProcessException extends \InvalidArgumentException implements ExceptionInterface
 {
     public static $list = [
-        2000 => "O numero máximo de eventos em um lote é 100, você está tentando enviar {{msg}} eventos !",
+        2000 => "O numero máximo de eventos em um lote é 100, você está tentando "
+            . "enviar {{msg}} eventos !",
         2001 => "Não temos um certificado disponível!",
         2002 => "Não foi passado um evento válido.",
-        2003 => "",
-        2004 => "",
-        2005 => ""
+        2003 => "O certificado do servidor não foi passado para a classe então "
+            . "não é possivel a encriptação da mensagem.",
+        2004 => "O certificado do servidor está vencido e deve ser substituido.",
+        2005 => "",
+        2999 => ""
     ];
     
     public static function wrongArgument($code, $msg = '')

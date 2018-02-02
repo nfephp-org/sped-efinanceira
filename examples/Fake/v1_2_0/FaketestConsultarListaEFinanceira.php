@@ -38,7 +38,12 @@ try {
     //executa a consulta
     $std = new stdClass();
     $std->cnpj = '999999999999999'; //CNPJ da empresa declarante
-    $response = $tools->consultar('ConsultarInformacoesCadastrais', $std);
+    $std->situacaoefinanceira = 1; //0-Todas,1-Em Andamento,2-Ativa,3-Retificada
+                                  //4-Excluída
+    $std->datainicio = '2017-01-12'; //??? formato ???
+    $std->datafim = '2017-06-01'; //??? formato ???
+    
+    $response = $tools->consultar('ConsultarListaEFinanceira', $std);
     
     //retorna os dados que serão usados na conexão para conferência
     echo FakePretty::prettyPrint($response, null);
