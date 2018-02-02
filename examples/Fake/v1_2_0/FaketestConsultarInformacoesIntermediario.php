@@ -37,8 +37,11 @@ try {
     
     //executa a consulta
     $std = new stdClass();
-    $std->cnpj = '999999999999999'; //CNPJ da empresa declarante
-    $response = $tools->consultar('ConsultarInformacoesCadastrais', $std);
+    $std->cnpj = '999999999999999'; //CNPJ da empresa declarante (obrigatório)
+    $std->ginn = '123456789'; //GIIN do intermediário (OPCIONAL)
+    $std->tiponi = '1'; //(OPCIONAL) 1=CPF 2=CNPJ 3=NIF Pessoa Física (Número de Identificação Fiscal Pessoa Física) 4=NIF Pessoa Jurídica (Número de Identificação Fiscal Pessoa Jurídica)
+    $std->numeroidentificacao = '12345678901'; //(OPCIONAL) numero indicado no tipo
+    $response = $tools->consultar('ConsultarInformacoesIntermediario', $std);
     
     //retorna os dados que serão usados na conexão para conferência
     echo FakePretty::prettyPrint($response, null);

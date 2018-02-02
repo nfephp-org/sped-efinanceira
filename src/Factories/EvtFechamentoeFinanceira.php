@@ -108,8 +108,8 @@ class EvtFechamentoeFinanceira extends Factory implements FactoryInterface
                 );
                 $FechamentoPP->appendChild($FechamentoMes);
             }
+            $this->node->appendChild($FechamentoPP);
         }
-        $this->node->appendChild($FechamentoPP);
 
         if (!empty($this->std->fechamentomovopfin)) {
             $opfin = $this->std->fechamentomovopfin;
@@ -165,8 +165,9 @@ class EvtFechamentoeFinanceira extends Factory implements FactoryInterface
                     $FechamentoMovOpFin->appendChild($EntPatDecExterior);
                 }
             }
+            $this->node->appendChild($FechamentoMovOpFin);
         }
-        $this->node->appendChild($FechamentoMovOpFin);
+        
         //finalização do xml
         $this->eFinanceira->appendChild($this->node);
         //$this->xml = $this->dom->saveXML($this->eFinanceira);

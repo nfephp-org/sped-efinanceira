@@ -12,7 +12,10 @@ namespace NFePHP\eFinanc\Common;
  * @author    Roberto L. Machado <linux.rlm at gmail dot com>
  * @link      http://github.com/nfephp-org/sped-efinanceira for the canonical source repository
  */
+use stdClass;
 use NFePHP\Common\Certificate;
+use NFePHP\eFinanc\Common\Soap\SoapCurl;
+use NFePHP\eFinanc\Common\Soap\SoapInterface;
 use NFePHP\eFinanc\Common\XsdSeeker;
 use DateTime;
 
@@ -21,51 +24,26 @@ class Tools
     /**
      * @var string
      */
+    public $request;
+    /**
+     * @var string
+     */
+    public $response;
+    /**
+     * @var string
+     */
     protected $path;
     /**
-     * @var DateTime
-     */
-    protected $date;
-    /**
-     * @var int
-     */
-    protected $tpInsc;
-    /**
      * @var string
      */
-    protected $nrInsc;
-    /**
-     * @var string
-     */
-    protected $nmRazao;
-    /**
-     * @var int
-     */
-    protected $tpAmb;
-    /**
-     * @var string
-     */
-    protected $verProc;
-    /**
-     * @var string
-     */
-    protected $eventoVersion;
-    /**
-     * @var string
-     */
-    protected $serviceVersion;
-    /**
-     * @var string
-     */
-    protected $layoutStr;
-    /**
-     * @var string
-     */
-    protected $serviceStr;
+    protected $der;
     /**
      * @var array
      */
-    protected $serviceXsd = [];
+    protected $soapnamespaces = [
+        'xmlns:soapenv' => "http://schemas.xmlsoap.org/soap/envelope/",
+        'xmlns:sped'=> "http://sped.fazenda.gov.br/"
+    ];
     /**
      * @var Certificate
      */
@@ -73,41 +51,132 @@ class Tools
     /**
      * @var int
      */
-    protected $transmissortpInsc;
+    protected $tpAmb = 2;
     /**
      * @var string
      */
-    protected $transmissornrInsc;
-
+    protected $verAplic;
+    /**
+     * @var string
+     */
+    protected $eventoVersion;
+    /**
+     * @var string
+     */
+    protected $cnpjDeclarante;
+    /**
+     * @var SoapInterface
+     */
+    protected $soap;
+    /**
+     * @var \DateTime
+     */
+    protected $date;
     /**
      * Constructor
      * @param string $config
      * @param Certificate $certificate
      */
     public function __construct(
-        $config,
-        Certificate $certificate
+        string $config,
+        \NFePHP\Common\Certificate $certificate
     ) {
         //set properties from config
         $stdConf = json_decode($config);
         $this->tpAmb = $stdConf->tpAmb;
-        $this->verProc = $stdConf->verProc;
+        $this->verAplic = $stdConf->verAplic;
         $this->eventoVersion = $stdConf->eventoVersion;
-        $this->serviceVersion = $stdConf->serviceVersion;
-        $this->date = new DateTime();
-        $this->tpInsc = $stdConf->empregador->tpInsc;
-        $this->nrInsc = $stdConf->empregador->nrInsc;
-        $this->nmRazao = $stdConf->empregador->nmRazao;
-        $this->transmissortpInsc = $stdConf->transmissor->tpInsc;
-        $this->transmissornrInsc = $stdConf->transmissor->nrInsc;
+        $this->date = new \DateTime();
+        $this->cnpjDeclarante = $stdConf->cnpjDeclarante;
         $this->certificate = $certificate;
-        
         $this->path = realpath(
             __DIR__ . '/../../'
         ).'/';
+        $this->der = file_get_contents($this->path.'storage'.DIRECTORY_SEPARATOR.'preprod-efinanc_web.cer');
+        if ($this->tpAmb == 1) {
+            $this->der = file_get_contents($this->path.'storage'.DIRECTORY_SEPARATOR.'efinanc_web.cer');
+        }
+    }
+    
+    /**
+     * Load Soap Class
+     * @param SoapInterface $soap
+     */
+    public function loadSoapClass(SoapInterface $soap)
+    {
+        $this->soap = $soap;
+    }
+    
+    /**
+     * Returns a string not subject to repetition indicating
+     * the year, month, day, hour, minute, and second
+     * This return is used to name the log files of the
+     * SOAP communications sent and returned
+     * @return string AAAMMDDHHMMSS
+     */
+    protected function generateMark()
+    {
+        return date('YmdHis');
+    }
+    
+    /**
+     * This method communicates with the webservice by sending the
+     * pre-mounted message to the designated URL
+     * @param string $body
+     * @param string $method
+     * @param string $url
+     * @return string
+     */
+    protected function sendRequest($body, $method, $url)
+    {
+        if (!is_object($this->soap)) {
+            $this->soap = new SoapCurl($this->certificate);
+        }
+        $request = "<soapenv:Envelope ";
+        foreach ($this->soapnamespaces as $key => $xmlns) {
+            $request .= "$key = \"$xmlns\" ";
+        }
+        $action = $this->soapnamespaces['xmlns:sped']."$method";
+        $request .= ">"
+            . "<soapenv:Header/>"
+            . "<soapenv:Body>"
+            . "<sped:$method>"
+            . $body
+            . "</sped:$method>"
+            . "</soapenv:Body>"
+            . "</soapenv:Envelope>";
         
-        $this->serviceXsd = XsdSeeker::seek(
-            $this->path . "schemes/comunicacao/v$this->serviceVersion/"
+        $msgSize = strlen($request);
+        $parameters = [
+            "Content-Type: text/xml;charset=UTF-8",
+            "SOAPAction: \"$action\"",
+            "Content-length: $msgSize"
+        ];
+        $this->request = $request;
+        
+        return (string) $this->soap->send(
+            $method,
+            $url,
+            $action,
+            $request,
+            $parameters
         );
+    }
+    
+    /**
+     * Includes missing or unsupported properties in stdClass
+     * @param stdClass $std
+     * @param array $possible
+     * @return stdClass
+     */
+    protected function equilizeParameters(stdClass $std, $possible)
+    {
+        $arr = get_object_vars($std);
+        foreach ($possible as $key) {
+            if (!array_key_exists($key, $arr)) {
+                $std->$key = null;
+            }
+        }
+        return $std;
     }
 }

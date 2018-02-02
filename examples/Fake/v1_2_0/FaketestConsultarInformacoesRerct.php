@@ -37,8 +37,17 @@ try {
     
     //executa a consulta
     $std = new stdClass();
-    $std->cnpj = '999999999999999'; //CNPJ da empresa declarante
-    $response = $tools->consultar('ConsultarInformacoesCadastrais', $std);
+    $std->ideventorerct = 1; // 1 ou 2 
+    $std->situacaoinformacao = 0; //0-Todas,1-Ativo,2-Retificado,3-Excluído
+    $std->numerorecibo = '123456789012345678-12-123-1234-123456789012345678';
+    $std->cnpjdeclarante = '99999999999999';
+    $std->tipoinscricaodeclarado = 1;
+    $std->inscricaodeclarado = '12345678901';
+    $std->tipoinscricaotitular = '1';
+    $std->inscricaotitular = '12345678901';
+    $std->cpfbeneficiariofinal = '12345678901';
+    
+    $response = $tools->consultar('ConsultarInformacoesRerct', $std);
     
     //retorna os dados que serão usados na conexão para conferência
     echo FakePretty::prettyPrint($response, null);

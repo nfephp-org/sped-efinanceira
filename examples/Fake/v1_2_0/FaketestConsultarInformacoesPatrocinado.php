@@ -38,7 +38,9 @@ try {
     //executa a consulta
     $std = new stdClass();
     $std->cnpj = '999999999999999'; //CNPJ da empresa declarante
-    $response = $tools->consultar('ConsultarInformacoesCadastrais', $std);
+    $std->giin = '12ASDA.12345.LE.123';
+    $std->numeroidentificacao = '12345678901234';
+    $response = $tools->consultar('ConsultarInformacoesPatrocinado', $std);
     
     //retorna os dados que serão usados na conexão para conferência
     echo FakePretty::prettyPrint($response, null);

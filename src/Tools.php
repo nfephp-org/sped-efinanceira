@@ -1,31 +1,82 @@
 <?php
 
-
 namespace NFePHP\eFinanc;
 
-class Tools
+/**
+ * Class Tools, performs communication with the federal revenue webservice
+ *
+ * @category  API
+ * @package   NFePHP\eFinanc
+ * @copyright Copyright (c) 2018
+ * @license   http://www.gnu.org/licenses/lesser.html LGPL v3
+ * @author    Roberto L. Machado <linux.rlm at gmail dot com>
+ * @link      http://github.com/nfephp-org/sped-efinanceira for the canonical source repository
+ */
+use stdClass;
+use NFePHP\eFinanc\Common\Tools as Base;
+use NFePHP\eFinanc\Common\FactoryInterface;
+use NFePHP\eFinanc\Exception\EventsException;
+use NFePHP\eFinanc\Exception\ProcessException;
+use NFePHP\eFinanc\Exception\ConsultException;
+
+class Tools extends Base
 {
-    const CADASTRO = 'consultaInformacoesCadastrais';
-    const INTERMEDIARIO  = 'consultaInformacoesIntermediario';
-    const PATROCINADO = 'consultaInformacoesPatrocinado';
-    const MOVIMENTO = 'consultaInformacoesMovimento';
-    const LISTA = 'consultaListaEFinanceira';
+    const MODO_NORMAL = 0;
+    const MODO_ZIP = 1;
+    const MODO_CRYPTO = 2;
+    const MODO_CRYPTOZIP = 3;
     
+    /**
+     * @var array
+     */
     private $available;
+    /**
+     * @var stdClass
+     */
+    private $urls;
     
-    public function __construct()
-    {
+    /**
+     * Constructor
+     * @param string $config
+     * @param \NFePHP\Common\Certificate $certificate
+     */
+    public function __construct(
+        string $config,
+        \NFePHP\Common\Certificate $certificate
+    ) {
+        parent::__construct($config, $certificate);
         $this->available = get_class_methods($this);
-        var_dump($this->available);
+        $this->urls = new \stdClass();
+        $this->urls->recepcao = 'https://preprod-efinanc.receita.fazenda.gov.br'
+            . '/WsEFinanceira/WsRecepcao.asmx';
+        $this->urls->compact = 'https://preprod-efinanc.receita.fazenda.gov.br'
+            . '/WsEFinanceira/WsRecepcao.asmx';
+        $this->urls->crypto = 'https://preprod-efinanc.receita.fazenda.gov.br'
+            . '/WsEFinanceiraCripto/WsRecepcaoCripto.asmx';
+        $this->urls->consulta = 'https://preprod-efinanc.receita.fazenda.gov.br'
+            . '/WsEFinanceira/WsConsulta.asmx';
+        if ($this->tpAmb == 1) {
+            $this->urls->recepcao = 'https://efinanc.receita.fazenda.gov.br'
+                . '/WsEFinanceira/WsRecepcao.asmx';
+            $this->urls->compact = 'https://efinanc.receita.fazenda.gov.br'
+                . '/WsEFinanceira/WsRecepcao.asmx';
+            $this->urls->crypto = 'https://efinanc.receita.fazenda.gov.br'
+                . '/WsEFinanceiraCripto/WsRecepcaoCripto.asmx';
+            $this->urls->consulta = 'https://efinanc.receita.fazenda.gov.br'
+                . '/WsEFinanceira/WsConsulta.asmx';
+        }
     }
     
     /**
-     *
-     * @param string $type
-     * @param stdClass $std
+     * This method performs the desired query to the webservice
+     * @param string $type indicate the query to be used
+     * @param stdClass $std contain the parameters of this query
+     * @return string xml webservice response
+     * @throws type
      */
-    public function consulta($type, $std):string
+    public function consultar(string $type, stdClass $std):string
     {
+        $type = lcfirst($type);
         if (!in_array($type, $this->available)) {
             //esta consulta não foi localizada
             throw EventsException::wrongArgument(1000, $type);
@@ -34,33 +85,406 @@ class Tools
     }
     
     /**
-     *
+     * This method sends the events to the webservice
      * @param array $events
+     * @param integer $modo
+     * @return string xml webservice response
+     * @throws \InvalidArgumentException
      */
-    public function envia($events):string
+    public function enviar(array $events, $modo = self::MODO_NORMAL):string
     {
+        //constructor do lote
+        $body = $this->batchBuilder($events);
+        
+        $url = $this->urls->recepcao;
+        $method = 'ReceberLoteEvento';
+        if ($modo == self::MODO_ZIP) {
+            $url = $this->urls->compact;
+            $method = 'ReceberLoteEventoGZip';
+            $zip = base64_encode(gzencode($body));
+            $body = "<sped:bufferXmlGZip>$zip</sped:bufferXmlGZip>";
+        } elseif ($modo == self::MODO_CRYPTO) {
+            $url = $this->urls->crypto;
+            $method = 'RecetypeberLoteEventoCripto';
+            $crypted = base64_encode($this->sendCripto($body));
+            $body = "<sped:bufferXmlComLoteCriptografado>$crypted</sped:bufferXmlComLoteCriptografado>";
+        } elseif ($modo == self::MODO_CRYPTOZIP) {
+            $url = $this->urls->crypto;
+            $method = 'ReceberLoteEventoCriptoGZip';
+            $crypted = $this->sendCripto($body);
+            $zip = base64_encode(gzencode($crypted));
+            $body = "<sped:bufferXmlComLoteCriptografadoGZip>$zip</sped:bufferXmlComLoteCriptografadoGZip>";
+        }
+        return $this->sendRequest($body, $method, $url);
     }
     
     /**
-     * @param stdClass $std
+     * This method constructs the event batch
+     * @param array $events
+     * @return string
+     * @throws NFePHP\eFincnac\Exception\ProcessException
      */
-    protected function consultaInformacoesCadastrais($std):string
+    private function batchBuilder(array $events)
     {
+        if (empty($events)) {
+            //não foram passados os eventos
+            throw ProcessException::wrongArgument(2002, '');
+        }
+        if (! is_array($events)) {
+            //não foram passados os eventos
+            throw ProcessException::wrongArgument(2002, '');
+        }
+        $num = count($events);
+        if ($num > 100) {
+            //excedido o numero máximo de eventos
+            throw ProcessException::wrongArgument(2000, $num);
+        }
+        $xml = "<loteEventos xmlns=\"".$this->soapnamespaces['xmlns:sped']."\">";
+        $xml .= "<eFinanceira "
+                . "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" "
+                . "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
+                . "xmlns=\"http://www.eFinanceira.gov.br/schemas/envioLoteEventos/v$this->eventoVersion\">";
+        $iCount = 0;
+        $xml .= "<loteEventos>";
+        foreach ($events as $evt) {
+            if (!is_a($evt, '\NFePHP\eFinanc\Common\FactoryInterface')) {
+                throw ProcessException::wrongArgument(2002, '');
+            }
+            $this->checkCertificate($evt);
+            $xml .= "<evento id=\"".$evt->getId()."\">";
+            $xml .= $evt->toXML();
+            $xml .= "</evento>";
+        }
+        $xml .= "</loteEventos>";
+        $xml .= "</eFinanceira>";
+        $xml .= "</loteEventos>";
+        return $xml;
     }
     
-    protected function consultaInformacoesIntermediario($std):string
+    /**
+     * This method encrypts the event batch
+     * @param string $body
+     * @return string
+     * @throws NFePHP\eFincnac\Exception\ProcessException
+     */
+    private function sendCripto($body)
     {
+        if (empty($this->der)) {
+            //deve existir um certificado do servidor da Receita
+            throw ProcessException::wrongArgument(2003, '');
+        }
+        $crypt = new Crypto($this->der);
+        $resp = $crypt->certificateInfo();
+        $dt = new \DateTime();
+        if ($resp['validTo'] < $dt) {
+            //a validade do certificado expirou
+            throw Exception\ProcessException::wrongArgument(2004, '');
+        }
+        $id = 1;
+        $key = $crypt->getEncrypedKey();
+        $fingerprint = $crypt->getThumbprint();
+        $crypted = $crypt->encryptMsg($body);
+        $msg = "<eFinanceira xmlns=\"http://www.eFinanceira.gov.br/schemas"
+            . "/envioLoteCriptografado/v$this->eventoVersion\">"
+            . "<loteCriptografado>"
+            . "<id>$id</id>"
+            . "<idCertificado>$fingerprint</idCertificado>"
+            . "<chave>$key</chave>"
+            . "<lote>$crypted</lote>"
+            . "</loteCriptografado>"
+            . "</eFinanceira>";
+        return $msg;
     }
     
-    protected function consultaInformacoesPatrocinado($std):string
+    /**
+     * This method consults "Informacoes Cadastrais"
+     * @param stdClass $std
+     * @return string
+     * @throws NFePHP\eFinanc\Exception\ConsultException
+     */
+    protected function consultarInformacoesCadastrais(stdClass $std):string
     {
+        if (empty($std->cnpj) && !preg_match("/^[0-9]{14}/", $std->cnpj)) {
+            throw ConsultException::wrongArgument(
+                'O CNPJ da empresa declarante deve ser informado para essa consulta'
+            );
+        }
+        $method = 'ConsultarInformacoesCadastrais';
+        $body = "<cnpj>$std->cnpj</cnpj>";
+        return $this->sendRequest($body, $method, $this->urls->consulta);
+    }
+
+    /**
+     * This method consults "Informacoes Intermediario"
+     * @param stdClass $std
+     * @return string
+     * @throws NFePHP\eFinanc\Exception\ConsultException
+     */
+    protected function consultarInformacoesIntermediario(stdClass $std):string
+    {
+        $possible = [
+            'cnpj',
+            'giin',
+            'tiponi',
+            'numeroidentificacao'
+        ];
+        $std = $this->equilizeParameters($std, $possible);
+        if (empty($std->cnpj) && !preg_match("/^[0-9]{14}/", $std->cnpj)) {
+            throw ConsultException::wrongArgument(
+                'O CNPJ da empresa declarante deve ser informado para essa consulta.'
+            );
+        }
+        if (empty($std->ginn) && empty($std->numeroidentificacao)) {
+            throw ConsultException::wrongArgument(
+                'Algum dado do intermediário deve ser passado.'
+            );
+        }
+        if (!empty($std->giin)) {
+            if (preg_match("/^([0-9A-NP-Z]{6}[.][0-9A-NP-Z]{5}[.](LE|SL|ME|BR|"
+                    . "SF|SD|SS|SB|SP)[.][0-9]{3})$/", $std->giin)) {
+                throw ConsultException::wrongArgument(
+                    'Este GIIN passado não atende a estrutura estabelecida.'
+                );
+            }
+        }
+        $method = 'ConsultarInformacoesIntermediario';
+        $body = "<sped:cnpj>$std->cnpj</sped:cnpj>";
+        if (!empty($ginn)) {
+            $body .= "<sped:GINN>$std->giin</sped:GINN>";
+        } elseif (!empty($std->numeroidentificacao)) {
+            $body .= "<sped:TipoNI>$std->tiponi</sped:TipoNI>"
+            . "<sped:NumeroIdentificacao>$std->numeroidentificacao</sped:NumeroIdentificacao>";
+        } else {
+            throw ConsultException::wrongArgument(
+                'Deve ser indicado algum documento do Intermediario.'
+            );
+        }
+        return $this->sendRequest($body, $method, $this->urls->consulta);
+    }
+        
+    /**
+     * This method consults "Informacoes Movimento"
+     * @param stdClass $std
+     * @return string
+     * @throws NFePHP\eFinanc\Exception\ConsultException
+     */
+    protected function consultarInformacoesMovimento(stdClass $std):string
+    {
+        $possible = [
+            'cnpj',
+            'situacaoinformacao',
+            'anomesiniciovigencia',
+            'anomesterminovigencia',
+            'tipomovimento',
+            'tipoidentificacao',
+            'identificacao'
+        ];
+        $std = $this->equilizeParameters($std, $possible);
+        if (empty($std->cnpj) && !preg_match("/^[0-9]{14}/", $std->cnpj)) {
+            throw ConsultException::wrongArgument(
+                'O CNPJ da empresa declarante deve ser informado para essa consulta.'
+            );
+        }
+        if (!is_numeric($std->situacaoinformacao)
+                || !($std->situacaoinformacao >=0 && $std->situacaoinformacao<=3)
+        ) {
+            throw ConsultException::wrongArgument(
+                'A situação deve ser informada: 0-Todas, 1-Ativo, 2-Retificado,3-Excluído.'
+            );
+        }
+        if (!preg_match(
+            "/^(19[0-9][0-9]|2[0-9][0-9][0-9])[\/](0?[1-9]|1[0-2])$/",
+            $std->anomesiniciovigencia
+        )
+        ) {
+            throw ConsultException::wrongArgument(
+                'O ano e mês do inicio da vigência deve ser informado: AAAA/MM.'
+            );
+        }
+        if (!preg_match(
+            "/^(19[0-9][0-9]|2[0-9][0-9][0-9])[\/](0?[1-9]|1[0-2])$/",
+            $std->anomesterminovigencia
+        )
+        ) {
+            throw ConsultException::wrongArgument(
+                'O ano e mês do inicio do término da vigência deve ser informado: AAAA/MM.'
+            );
+        }
+        $method = 'ConsultarInformacoesMovimento';
+        $body = "<sped:cnpj>$std->cnpj</sped:cnpj>"
+           . "<sped:situacaoInformacao>$std->situacaoinformacao</sped:situacaoInformacao>"
+           ."<sped:anoMesInicioVigencia>$std->anomesiniciovigencia</sped:anoMesInicioVigencia>"
+           . "<sped:anoMesTerminoVigencia>$std->anomesterminovigencia</sped:anoMesTerminoVigencia>";
+        if (!empty($std->tipomovimento)) {
+            if (preg_match("/[1-2]{1}/", $std->tipomovimento)) {
+                $body .= "<sped:tipoMovimento>$std->tipomovimento</sped:tipoMovimento>";
+            }
+        }
+        if (!empty($std->tipoidentificacao)) {
+            if (preg_match("/[1-7]{1}|99/", $std->tipoidentificacao)) {
+                $body .= "<sped:tipoIdentificacao>$std->tipoidentificacao</sped:tipoIdentificacao>";
+                $body .= "<sped:identificacao>$std->identificacao</sped:identificacao>";
+            }
+        }
+        return $this->sendRequest($body, $method, $this->urls->consulta);
+    }
+
+    /**
+     * This method consults "Informacoes Patrocinado"
+     * @param stdClass $std
+     * @return string
+     * @throws NFePHP\eFinanc\Exception\ConsultException
+     */
+    protected function consultarInformacoesPatrocinado(stdClass $std):string
+    {
+        $possible = [
+            'cnpj',
+            'giin',
+            'numeroidentificacao'
+        ];
+        $std = $this->equilizeParameters($std, $possible);
+        if (empty($std->cnpj) && !preg_match("/^[0-9]{14}/", $std->cnpj)) {
+            throw ConsultException::wrongArgument(
+                'O CNPJ da empresa declarante deve ser informado para essa consulta.'
+            );
+        }
+        if (empty($std->ginn) && empty($std->numeroidentificacao)) {
+            throw ConsultException::wrongArgument(
+                'Algum dado do patrocinado deve ser passado.'
+            );
+        }
+        if (!empty($std->giin)) {
+            if (preg_match("/^([0-9A-NP-Z]{6}[.][0-9A-NP-Z]{5}[.](LE|SL|ME|BR|SF"
+                    . "|SD|SS|SB|SP)[.][0-9]{3})$/", $std->ginn)) {
+                throw ConsultException::wrongArgument(
+                    'Este GIIN passado não atende a estrutura estabelecida.'
+                );
+            }
+        }
+        $method = 'ConsultarInformacoesPatrocinado';
+        $body = "<sped:cnpj>$std->cnpj</sped:cnpj>";
+        if (!empty($std->giin)) {
+            $body .= "<sped:GINN>$std->giin</sped:GINN>";
+        }
+        if (!empty($std->numeroidentificacao)) {
+            $body .= "<sped:NumeroIdentificacao>$std->numeroidentificacao</sped:NumeroIdentificacao>";
+        }
+        return $this->sendRequest($body, $method, $this->urls->consulta);
+    }
+
+    /**
+     * This method consults "Informacoes Rerct"
+     * @param stdClass $std
+     * @return string
+     * @throws NFePHP\eFinanc\Exception\ConsultException
+     */
+    protected function consultarInformacoesRerct(stdClass $std):string
+    {
+        $possible = [
+            'ideventorerct',
+            'situacaoinformacao',
+            'numerorecibo',
+            'cnpjdeclarante',
+            'tipoinscricaodeclarado',
+            'inscricaodeclarado',
+            'tipoinscricaotitular',
+            'inscricaotitular',
+            'cpfbeneficiariofinal'
+        ];
+        $std = $this->equilizeParameters($std, $possible);
+        if (empty($std->cnpjdeclarante) && !preg_match("/^[0-9]{14}/", $std->cnpjdeclarante)) {
+            throw ConsultException::wrongArgument(
+                'O CNPJ da empresa declarante deve ser informado para essa consulta.'
+            );
+        }
+        if (!is_numeric($std->ideventorerct)
+                || !($std->ideventorerct == 1 || $std->ideventorerct == 2)
+        ) {
+            throw ConsultException::wrongArgument(
+                'A Identificação do Evento RERCT deve ser informada.'
+            );
+        }
+        if (!is_numeric($std->situacaoinformacao)
+                || !($std->situacaoinformacao >=0 && $std->situacaoinformacao<=3)
+        ) {
+            throw ConsultException::wrongArgument(
+                'A situação deve ser informada: 0-Todas, 1-Ativo, 2-Retificado,3-Excluído.'
+            );
+        }
+        $method = 'ConsultarInformacoesRerct';
+        $body = "<sped:idEventoRerct>$std->ideventorerct</sped:idEventoRerct>"
+            . "<sped:situacaoInformacao>$std->situacaoinformacao</sped:situacaoInformacao>";
+        
+        if (preg_match("/^([0-9]{1,18}[-][0-9]{2}[-][0-9]{3}[-][0-9]{4}[-][0-9]{1,18})$/", $std->numerorecibo)) {
+            $body .= "<sped:numeroRecibo>$std->numerorecibo</sped:numeroRecibo>";
+        }
+        $body .= "<sped:cnpjDeclarante>$std->cnpjdeclarante</sped:cnpjDeclarante>";
+        if (preg_match('/[0-9]{11,14}/', $std->inscricaodeclarado)) {
+            $body .= "<sped:tipoInscricaoDeclarado>$std->tipoinscricaodeclarado</sped:tipoInscricaoDeclarado>"
+                . "<sped:inscricaoDeclarado>$std->inscricaodeclarado</sped:inscricaoDeclarado>";
+        }
+        if (preg_match('/[0-9]{11,14}/', $std->inscricaotitular)) {
+            $body .= "<sped:tipoInscricaoTitular>$std->tipoinscricaotitular</sped:tipoInscricaoTitular>"
+                . "<sped:inscricaoTitular>$std->inscricaotitular</sped:inscricaoTitular>";
+        }
+        if (preg_match('/[0-9]{11}/', $std->cpfbeneficiariofinal)) {
+            $body .= "<sped:cpfBeneficiarioFinal>$std->cpfbeneficiariofinal</sped:cpfBeneficiarioFinal>";
+        }
+        return $this->sendRequest($body, $method, $this->urls->consulta);
+    }
+
+    /**
+     * This method consults "Lista EFinanceira"
+     * @param stdClass $std
+     * @return string
+     * @throws NFePHP\eFinanc\Exception\ConsultException
+     */
+    protected function consultarListaEFinanceira(stdClass $std):string
+    {
+        $possible = [
+            'cnpj',
+            'situacaoefinanceira',
+            'datainicio',
+            'dataFim'
+        ];
+        $std = $this->equilizeParameters($std, $possible);
+        if (empty($std->cnpj) && !preg_match("/^[0-9]{14}/", $std->cnpj)) {
+            throw ConsultException::wrongArgument(
+                'O CNPJ da empresa declarante deve ser informado para essa consulta.'
+            );
+        }
+        if (!is_numeric($std->situacaoefinanceira)
+                || !($std->situacaoefinanceira >=0 && $std->situacaoefinanceira<=4)
+        ) {
+            throw ConsultException::wrongArgument(
+                'A situação deve ser informada: 0-Todas,1-Em Andamento,2-Ativa,'
+                    . '3-Retificada,4-Excluída.'
+            );
+        }
+        $method = 'ConsultarListaEFinanceira';
+        $body = "<sped:cnpj>$std->cnpj</sped:cnpj>"
+            . "<sped:situacaoEFinanceira>$std->situacaoefinanceira</sped:situacaoEFinanceira>";
+        if (!empty($std->datainicio)) {
+            $body .= "<sped:dataInicio>$std->datainicio</sped:dataInicio>";
+        }
+        if (!empty($std->datafim)) {
+            $body .= "<sped:dataFim>$std->datafim</sped:dataFim>";
+        }
+        return $this->sendRequest($body, $method, $this->urls->consulta);
     }
     
-    protected function consultaInformacoesMovimento($std):string
+    /**
+     * Verify the availability of a digital certificate.
+     * If available, place it where it is needed
+     * @param FactoryInterface $evento
+     * @throws RuntimeException
+     */
+    protected function checkCertificate(FactoryInterface $evento)
     {
-    }
-            
-    protected function consultaListaEFinanceira($std):string
-    {
+        //try to get certificate from event
+        $certificate = $evento->getCertificate();
+        if (empty($certificate)) {
+            $evento->setCertificate($this->certificate);
+        }
     }
 }

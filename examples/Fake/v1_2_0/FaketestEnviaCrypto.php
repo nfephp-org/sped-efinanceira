@@ -96,7 +96,7 @@ try {
     $tools->loadSoapClass($soap);
     
     //executa o envio
-    $response = $tools->enviar([$evento], $tools::MODO_NORMAL);
+    $response = $tools->enviar([$evento], $tools::MODO_CRYPTO);
     
     //retorna os dados que serão usados na conexão para conferência
     echo FakePretty::prettyPrint($response, '');

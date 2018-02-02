@@ -34,7 +34,24 @@ class Standardize
      */
     public $rootTagList = [
         'retornoLoteEventos',
-        ''
+        'retornoEvento',
+        'retornoConsultaListaEFinanceira',
+        'retornoConsultaInformacoesRerct',
+        'retornoConsultaInformacoesPatrocinado',
+        'retornoConsultaInformacoesMovimento',
+        'retornoConsultaInformacoesIntermediario',
+        'retornoConsultaInformacoesCadastrais',
+        'evtRERCT',
+        'evtMovOpFin',
+        'evtFechamentoeFinanceira',
+        'evtExclusaoeFinanceira',
+        'evtExclusao',
+        'evtCadPatrocinado',
+        'evtCadIntermediario',
+        'evtCadDeclarante',
+        'evtAberturaeFinanceira',
+        'loteEventos',
+        'loteCriptografado'
     ];
     
     public function __construct($xml = null)
