@@ -21,13 +21,13 @@ $configJson = json_encode($config, JSON_PRETTY_PRINT);
 $std = new \stdClass();
 $std->sequencial = '1';
 $std->indretificacao = 2;
-$std->nrrecibo = '123456789012345678-12-123-1234-123456789012345678';
+//$std->nrrecibo = '123456789012345678-12-123-1234-123456789012345678';
 $std->dtinicio = '2017-01-01'; //A data informada deve pertencer ao mesmo semestre da dtFim
 $std->dtfim = '2017-05-31';
 
-$std->aberturapp = new \stdClass();
-$std->aberturapp->tpempresa[0] = new \stdClass();
-$std->aberturapp->tpempresa[0]->tpprevpriv = 'X';
+//$std->aberturapp = new \stdClass();
+//$std->aberturapp->tpempresa[0] = new \stdClass();
+//$std->aberturapp->tpempresa[0]->tpprevpriv = 'X';
 
 $std->aberturamovopfin = new \stdClass();
 $std->aberturamovopfin->responsavelrmf = new \stdClass();

@@ -16,7 +16,7 @@ $configJson = json_encode($config, JSON_PRETTY_PRINT);
 
 $std = new \stdClass();
 $std->sequencial = '1';
-$std->indretificacao = 2;
+$std->indretificacao = 1;//1-original 2-retificação
 $std->nrrecibo = '123456789012345678-12-123-1234-123456789012345678';
 $std->dtinicio = '2017-01-01'; //A data informada deve pertencer ao mesmo semestre da dtFim
 $std->dtfim = '2017-05-31';

@@ -16,7 +16,6 @@ use stdClass;
 use NFePHP\Common\Certificate;
 use NFePHP\eFinanc\Common\Soap\SoapCurl;
 use NFePHP\eFinanc\Common\Soap\SoapInterface;
-use NFePHP\eFinanc\Common\XsdSeeker;
 use DateTime;
 
 class Tools
@@ -134,7 +133,7 @@ class Tools
         }
         $request = "<soapenv:Envelope ";
         foreach ($this->soapnamespaces as $key => $xmlns) {
-            $request .= "$key = \"$xmlns\" ";
+            $request .= "$key=\"$xmlns\" ";
         }
         $action = $this->soapnamespaces['xmlns:sped']."$method";
         $request .= ">"
@@ -153,7 +152,6 @@ class Tools
             "Content-length: $msgSize"
         ];
         $this->request = $request;
-        return $this->request;
         $this->response = $this->soap->send(
             $method,
             $url,

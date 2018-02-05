@@ -51,7 +51,7 @@ class EvtFechamentoeFinanceira extends Factory implements FactoryInterface
         $this->dom->addChild(
             $ideEvento,
             "tpAmb",
-            $this->tpAmb,
+            (string) $this->tpAmb,
             true
         );
         $this->dom->addChild(
