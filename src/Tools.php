@@ -13,7 +13,9 @@ namespace NFePHP\eFinanc;
  * @link      http://github.com/nfephp-org/sped-efinanceira for the canonical source repository
  */
 use stdClass;
+use NFePHP\Common\Validator;
 use NFePHP\eFinanc\Common\Tools as Base;
+use NFePHP\eFinanc\Common\Crypto;
 use NFePHP\eFinanc\Common\FactoryInterface;
 use NFePHP\eFinanc\Exception\EventsException;
 use NFePHP\eFinanc\Exception\ProcessException;
@@ -95,25 +97,30 @@ class Tools extends Base
     {
         //constructor do lote
         $body = $this->batchBuilder($events);
-        
+        //return $body;
         $url = $this->urls->recepcao;
         $method = 'ReceberLoteEvento';
         if ($modo == self::MODO_ZIP) {
+            //apenas compacta a mensagem 
             $url = $this->urls->compact;
             $method = 'ReceberLoteEventoGZip';
             $zip = base64_encode(gzencode($body));
             $body = "<sped:bufferXmlGZip>$zip</sped:bufferXmlGZip>";
         } elseif ($modo == self::MODO_CRYPTO) {
+            //apenas encripta a mensagem
             $url = $this->urls->crypto;
             $method = 'RecetypeberLoteEventoCripto';
             $crypted = base64_encode($this->sendCripto($body));
             $body = "<sped:bufferXmlComLoteCriptografado>$crypted</sped:bufferXmlComLoteCriptografado>";
         } elseif ($modo == self::MODO_CRYPTOZIP) {
+            //compacta a mensagem encriptada
             $url = $this->urls->crypto;
             $method = 'ReceberLoteEventoCriptoGZip';
             $crypted = $this->sendCripto($body);
             $zip = base64_encode(gzencode($crypted));
             $body = "<sped:bufferXmlComLoteCriptografadoGZip>$zip</sped:bufferXmlComLoteCriptografadoGZip>";
+        } else {
+            $body = "<sped:loteEventos>$body</sped:loteEventos>";
         }
         return $this->sendRequest($body, $method, $url);
     }
@@ -139,25 +146,34 @@ class Tools extends Base
             //excedido o numero máximo de eventos
             throw ProcessException::wrongArgument(2000, $num);
         }
-        $xml = "<loteEventos xmlns=\"".$this->soapnamespaces['xmlns:sped']."\">";
-        $xml .= "<eFinanceira "
+        $xml = "<eFinanceira "
                 . "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" "
                 . "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
                 . "xmlns=\"http://www.eFinanceira.gov.br/schemas/envioLoteEventos/v$this->eventoVersion\">";
         $iCount = 0;
+        $lote = date('YmdHms');
         $xml .= "<loteEventos>";
         foreach ($events as $evt) {
             if (!is_a($evt, '\NFePHP\eFinanc\Common\FactoryInterface')) {
                 throw ProcessException::wrongArgument(2002, '');
             }
             $this->checkCertificate($evt);
-            $xml .= "<evento id=\"".$evt->getId()."\">";
+            $xml .= "<evento id=\"ID".$lote.$iCount."\">";
             $xml .= $evt->toXML();
             $xml .= "</evento>";
+            $iCount++;
         }
         $xml .= "</loteEventos>";
         $xml .= "</eFinanceira>";
-        $xml .= "</loteEventos>";
+        $schema = $this->path 
+            . 'schemes/v'
+            . $this->eventoVersion
+            . '/envioLoteEventos-v'
+            . $this->eventoVersion
+            . '.xsd';
+        if ($schema) {
+            Validator::isValid($xml, $schema);
+        }
         return $xml;
     }
     
@@ -354,8 +370,8 @@ class Tools extends Base
             );
         }
         if (!empty($std->giin)) {
-            if (preg_match("/^([0-9A-NP-Z]{6}[.][0-9A-NP-Z]{5}[.](LE|SL|ME|BR|SF"
-                    . "|SD|SS|SB|SP)[.][0-9]{3})$/", $std->ginn)) {
+            if (!preg_match("/^([0-9A-NP-Z]{6}[.][0-9A-NP-Z]{5}[.](LE|SL|ME|BR|SF"
+                    . "|SD|SS|SB|SP)[.][0-9]{3})$/", $std->giin)) {
                 throw ConsultException::wrongArgument(
                     'Este GIIN passado não atende a estrutura estabelecida.'
                 );

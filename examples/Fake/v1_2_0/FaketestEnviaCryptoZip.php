@@ -87,6 +87,7 @@ try {
     //estamos usando um certificado vencido nesse teste
     $soap->disableCertValidation(true);
     
+    //cria evento de abertura
     $evento = Event::evtAberturaeFinanceira($configJson, $std);
     
     //instancia a classe responsável pela comunicação
