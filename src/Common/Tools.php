@@ -139,9 +139,9 @@ class Tools
         $request .= ">"
             . "<soapenv:Header/>"
             . "<soapenv:Body>"
-            . "<sped:$method>"
+            . "<$method xmlns=\"http://sped.fazenda.gov.br/\">"
             . $body
-            . "</sped:$method>"
+            . "</$method>"
             . "</soapenv:Body>"
             . "</soapenv:Envelope>";
         

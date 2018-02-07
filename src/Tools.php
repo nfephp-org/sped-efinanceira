@@ -120,7 +120,7 @@ class Tools extends Base
             $zip = base64_encode(gzencode($crypted));
             $body = "<sped:bufferXmlComLoteCriptografadoGZip>$zip</sped:bufferXmlComLoteCriptografadoGZip>";
         } else {
-            $body = "<sped:loteEventos>$body</sped:loteEventos>";
+            $body = "<loteEventos>$body</loteEventos>";
         }
         return $this->sendRequest($body, $method, $url);
     }
@@ -158,7 +158,7 @@ class Tools extends Base
                 throw ProcessException::wrongArgument(2002, '');
             }
             $this->checkCertificate($evt);
-            $xml .= "<evento id=\"ID".$lote.$iCount."\">";
+            $xml .= "<evento id=\"ID".$iCount."\">";
             $xml .= $evt->toXML();
             $xml .= "</evento>";
             $iCount++;
@@ -226,7 +226,7 @@ class Tools extends Base
             );
         }
         $method = 'ConsultarInformacoesCadastrais';
-        $body = "<sped:cnpj>$std->cnpj</sped:cnpj>";
+        $body = "<cnpj>$std->cnpj</cnpj>";
         return $this->sendRequest($body, $method, $this->urls->consulta);
     }
 
