@@ -113,23 +113,23 @@ class Crypto
     
     /**
      * Decript message with private key and randon key and iv
-     * @param string $msg encrytped message
+     * @param string $cryptedmsg encrytped message
      * @param string $privateKey in PEM format
      * @param string $keyencrypted key+iv im base64 format
      * @param string $cipher for encrypt and decrypt
      * @return string
      */
-    public function decriptMsg($msg, $privateKey, $keyencrypted, $cipher = self::AES_128_CBC)
+    public function decriptMsg($cryptedmsg, $privateKey, $keyencrypted, $cipher = self::AES_128_CBC)
     {
         openssl_private_decrypt(
             base64_decode($keyencrypted),
             $decryptedkey,
             $privateKey,
-            OPENSSL_PKCS1_OAEP_PADDING
+            OPENSSL_PKCS1_PADDING
         );
-        $ekey = substr($decryptedkey, 0, strlen($decryptedkey)-16);
-        $iv = substr($decryptedkey,-16);
-        return openssl_decrypt($cryptmsg, $this->cipher, $ekey, 0, $iv);
+        $key = substr($decryptedkey, 0, strlen($decryptedkey)-16);
+        $iv = substr($decryptedkey, -16);
+        return openssl_decrypt($cryptedmsg, $this->cipher, $key, 0, $iv);
     }
     
     /**
@@ -167,8 +167,7 @@ class Crypto
      */
     protected function encryptkey($key, $iv)
     {
-        echo "COMPOSICAO ".$key.$iv."<br><br><br>";
-        openssl_public_encrypt($key.$iv, $cryptedkey, $this->certificate, OPENSSL_PKCS1_OAEP_PADDING);
+        openssl_public_encrypt($key.$iv, $cryptedkey, $this->certificate, OPENSSL_PKCS1_PADDING);
         return base64_encode($cryptedkey);
     }
     
