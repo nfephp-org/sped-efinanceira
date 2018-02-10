@@ -139,9 +139,9 @@ class Tools
         $request .= ">"
             . "<soapenv:Header/>"
             . "<soapenv:Body>"
-            . "<sped:$method>"
+            //. "<sped:$method>"
             . $body
-            . "</sped:$method>"
+            //. "</sped:$method>"
             . "</soapenv:Body>"
             . "</soapenv:Envelope>";
         

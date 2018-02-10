@@ -101,16 +101,19 @@ class Tools extends Base
         $url = $this->urls->recepcao;
         $method = 'ReceberLoteEvento';
         if ($modo == self::MODO_ZIP) {
-            //apenas compacta a mensagem 
+            //apenas compacta a mensagem
             $url = $this->urls->compact;
             $method = 'ReceberLoteEventoGZip';
             $zip = base64_encode(gzencode($body));
+            //$cdata_value = $xml->createCDATASection( 'John Smith' );
+            //$xml->createElement( 'name', $cdata_value );
             $body = "<sped:bufferXmlGZip>$zip</sped:bufferXmlGZip>";
         } elseif ($modo == self::MODO_CRYPTO) {
             //apenas encripta a mensagem
             $url = $this->urls->crypto;
-            $method = 'RecetypeberLoteEventoCripto';
+            $method = 'ReceberLoteEventoCripto';
             $crypted = base64_encode($this->sendCripto($body));
+            //$crypted = $this->sendCripto($body);
             $body = "<sped:bufferXmlComLoteCriptografado>$crypted</sped:bufferXmlComLoteCriptografado>";
         } elseif ($modo == self::MODO_CRYPTOZIP) {
             //compacta a mensagem encriptada
@@ -158,14 +161,14 @@ class Tools extends Base
                 throw ProcessException::wrongArgument(2002, '');
             }
             $this->checkCertificate($evt);
-            $xml .= "<evento id=\"ID".$lote.$iCount."\">";
+            $xml .= "<evento id=\"ID".$iCount."\">";
             $xml .= $evt->toXML();
             $xml .= "</evento>";
             $iCount++;
         }
         $xml .= "</loteEventos>";
         $xml .= "</eFinanceira>";
-        $schema = $this->path 
+        $schema = $this->path
             . 'schemes/v'
             . $this->eventoVersion
             . '/envioLoteEventos-v'
@@ -209,6 +212,15 @@ class Tools extends Base
             . "<lote>$crypted</lote>"
             . "</loteCriptografado>"
             . "</eFinanceira>";
+        $schema = $this->path
+            . 'schemes/v'
+            . $this->eventoVersion
+            . '/envioLoteCriptografado-v'
+            . $this->eventoVersion
+            . '.xsd';
+        if ($schema) {
+            Validator::isValid($msg, $schema);
+        }
         return $msg;
     }
     
@@ -226,7 +238,7 @@ class Tools extends Base
             );
         }
         $method = 'ConsultarInformacoesCadastrais';
-        $body = "<sped:cnpj>$std->cnpj</sped:cnpj>";
+        $body = "<sped:$method><cnpj>$std->cnpj</cnpj></sped:$method>";
         return $this->sendRequest($body, $method, $this->urls->consulta);
     }
 
@@ -264,7 +276,7 @@ class Tools extends Base
             }
         }
         $method = 'ConsultarInformacoesIntermediario';
-        $body = "<sped:cnpj>$std->cnpj</sped:cnpj>";
+        $body = "<sped:$method><sped:cnpj>$std->cnpj</sped:cnpj>";
         if (!empty($ginn)) {
             $body .= "<sped:GINN>$std->giin</sped:GINN>";
         } elseif (!empty($std->numeroidentificacao)) {
@@ -275,6 +287,7 @@ class Tools extends Base
                 'Deve ser indicado algum documento do Intermediario.'
             );
         }
+        $body .= "</sped:$method>";
         return $this->sendRequest($body, $method, $this->urls->consulta);
     }
         
@@ -327,7 +340,7 @@ class Tools extends Base
             );
         }
         $method = 'ConsultarInformacoesMovimento';
-        $body = "<sped:cnpj>$std->cnpj</sped:cnpj>"
+        $body = "<sped:$method><sped:cnpj>$std->cnpj</sped:cnpj>"
            . "<sped:situacaoInformacao>$std->situacaoinformacao</sped:situacaoInformacao>"
            ."<sped:anoMesInicioVigencia>$std->anomesiniciovigencia</sped:anoMesInicioVigencia>"
            . "<sped:anoMesTerminoVigencia>$std->anomesterminovigencia</sped:anoMesTerminoVigencia>";
@@ -342,6 +355,7 @@ class Tools extends Base
                 $body .= "<sped:identificacao>$std->identificacao</sped:identificacao>";
             }
         }
+        $body .= "</sped:$method>";
         return $this->sendRequest($body, $method, $this->urls->consulta);
     }
 
@@ -378,13 +392,14 @@ class Tools extends Base
             }
         }
         $method = 'ConsultarInformacoesPatrocinado';
-        $body = "<sped:cnpj>$std->cnpj</sped:cnpj>";
+        $body = "<sped:$method><sped:cnpj>$std->cnpj</sped:cnpj>";
         if (!empty($std->giin)) {
             $body .= "<sped:GINN>$std->giin</sped:GINN>";
         }
         if (!empty($std->numeroidentificacao)) {
             $body .= "<sped:NumeroIdentificacao>$std->numeroidentificacao</sped:NumeroIdentificacao>";
         }
+        $body .= "</sped:$method>";
         return $this->sendRequest($body, $method, $this->urls->consulta);
     }
 
@@ -428,7 +443,7 @@ class Tools extends Base
             );
         }
         $method = 'ConsultarInformacoesRerct';
-        $body = "<sped:idEventoRerct>$std->ideventorerct</sped:idEventoRerct>"
+        $body = "<sped:$method><sped:idEventoRerct>$std->ideventorerct</sped:idEventoRerct>"
             . "<sped:situacaoInformacao>$std->situacaoinformacao</sped:situacaoInformacao>";
         
         if (preg_match("/^([0-9]{1,18}[-][0-9]{2}[-][0-9]{3}[-][0-9]{4}[-][0-9]{1,18})$/", $std->numerorecibo)) {
@@ -446,6 +461,7 @@ class Tools extends Base
         if (preg_match('/[0-9]{11}/', $std->cpfbeneficiariofinal)) {
             $body .= "<sped:cpfBeneficiarioFinal>$std->cpfbeneficiariofinal</sped:cpfBeneficiarioFinal>";
         }
+        $body .= "</sped:$method>";
         return $this->sendRequest($body, $method, $this->urls->consulta);
     }
 
@@ -478,7 +494,7 @@ class Tools extends Base
             );
         }
         $method = 'ConsultarListaEFinanceira';
-        $body = "<sped:cnpj>$std->cnpj</sped:cnpj>"
+        $body = "<sped:$method><sped:cnpj>$std->cnpj</sped:cnpj>"
             . "<sped:situacaoEFinanceira>$std->situacaoefinanceira</sped:situacaoEFinanceira>";
         if (!empty($std->datainicio)) {
             $body .= "<sped:dataInicio>$std->datainicio</sped:dataInicio>";
@@ -486,6 +502,7 @@ class Tools extends Base
         if (!empty($std->datafim)) {
             $body .= "<sped:dataFim>$std->datafim</sped:dataFim>";
         }
+        $body .= "</sped:$method>";
         return $this->sendRequest($body, $method, $this->urls->consulta);
     }
     
