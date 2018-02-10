@@ -38,7 +38,9 @@ class Crypto
      * @var string
      */
     protected $keyencrypted;
-
+    /**
+     * constants
+     */
     const AES_128_CBC = 'aes-128-cbc';
     const AES_128_CBF = 'aes-128-cfb';
     const AES_128_CBF1 = 'aes-128-cfb1';
