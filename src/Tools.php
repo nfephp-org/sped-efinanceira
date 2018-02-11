@@ -127,6 +127,31 @@ class Tools extends Base
     }
     
     /**
+     * Allow the registration of new certificates for encrypted messages
+     * @param string $derdata certificate content in DER format (usual)
+     * @throws NFePHP\eFincnac\Exception\ProcessException
+     */
+    public function setCertificateEFinanceira($derdata)
+    {
+        $crypto = new Crypto($derdata);
+        $info = $crypto->certificateInfo();
+        $std = json_decode(json_encode($info['details']));
+        $commonName = $std->subject->commonName;
+        if ($this->tpAmb == 1
+            && $commonName != 'efinancentreposto.receita.fazenda.gov.br'
+        ) {
+            //O certificado do servidor fornecido não pertence ao commonName requerido
+            throw ProcessException::wrongArgument(2005, '');
+        } elseif ($this->tpAmb == 2
+            && $commonName != 'preprod-efinancentreposto.receita.fazenda.gov.br'
+        ) {
+            //O certificado do servidor fornecido não pertence ao commonName requerido
+            throw ProcessException::wrongArgument(2005, '');
+        }
+        $this->der = $derdata;
+    }
+    
+    /**
      * This method constructs the event batch
      * @param array $events
      * @return string
