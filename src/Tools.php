@@ -105,23 +105,21 @@ class Tools extends Base
             $url = $this->urls->compact;
             $method = 'ReceberLoteEventoGZip';
             $zip = base64_encode(gzencode($body));
-            //$cdata_value = $xml->createCDATASection( 'John Smith' );
-            //$xml->createElement( 'name', $cdata_value );
             $body = "<sped:bufferXmlGZip>$zip</sped:bufferXmlGZip>";
         } elseif ($modo == self::MODO_CRYPTO) {
             //apenas encripta a mensagem
             $url = $this->urls->crypto;
             $method = 'ReceberLoteEventoCripto';
             $crypted = base64_encode($this->sendCripto($body));
-            //$crypted = $this->sendCripto($body);
             $body = "<sped:bufferXmlComLoteCriptografado>$crypted</sped:bufferXmlComLoteCriptografado>";
         } elseif ($modo == self::MODO_CRYPTOZIP) {
-            //compacta a mensagem encriptada
+            //compacta a mensagem
             $url = $this->urls->crypto;
             $method = 'ReceberLoteEventoCriptoGZip';
-            $crypted = $this->sendCripto($body);
-            $zip = base64_encode(gzencode($crypted));
-            $body = "<sped:bufferXmlComLoteCriptografadoGZip>$zip</sped:bufferXmlComLoteCriptografadoGZip>";
+            $zip = gzencode($body);
+            //encripta a mensagem compactada
+            $crypted = base64_encode($this->sendCripto($zip));
+            $body = "<sped:bufferXmlComLoteCriptografadoGZip>$crypted</sped:bufferXmlComLoteCriptografadoGZip>";
         } else {
             $body = "<sped:loteEventos>$body</sped:loteEventos>";
         }
