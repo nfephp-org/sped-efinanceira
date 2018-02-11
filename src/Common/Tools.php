@@ -91,6 +91,7 @@ class Tools
         $this->path = realpath(
             __DIR__ . '/../../'
         ).'/';
+        //loads the encryption certificates distributed in the package
         $this->der = file_get_contents($this->path.'storage'.DIRECTORY_SEPARATOR.'preprod-efinanc_web.cer');
         if ($this->tpAmb == 1) {
             $this->der = file_get_contents($this->path.'storage'.DIRECTORY_SEPARATOR.'efinanc_web.cer');

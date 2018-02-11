@@ -23,7 +23,7 @@ class ProcessException extends \InvalidArgumentException implements ExceptionInt
         2003 => "O certificado do servidor não foi passado para a classe então "
             . "não é possivel a encriptação da mensagem.",
         2004 => "O certificado do servidor está vencido e deve ser substituido.",
-        2005 => "",
+        2005 => "O certificado do servidor fornecido não pertence ao commonName requerido.",
         2999 => ""
     ];
     
