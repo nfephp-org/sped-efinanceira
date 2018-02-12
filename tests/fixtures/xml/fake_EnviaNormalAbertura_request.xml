@@ -1,0 +1,100 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sped="http://sped.fazenda.gov.br/" >
+    <soapenv:Header/>
+    <soapenv:Body>
+        <sped:loteEventos>
+            <eFinanceira xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.eFinanceira.gov.br/schemas/envioLoteEventos/v1_2_0">
+                <loteEventos>
+                    <evento id="ID0">
+                        <eFinanceira xmlns="http://www.eFinanceira.gov.br/schemas/evtAberturaeFinanceira/v1_2_0">
+                            <evtAberturaeFinanceira id="ID000000000000000001">
+                                <ideEvento>
+                                    <indRetificacao>1</indRetificacao>
+                                    <tpAmb>2</tpAmb>
+                                    <aplicEmi>1</aplicEmi>
+                                    <verAplic>0_1_2</verAplic>
+                                </ideEvento>
+                                <ideDeclarante>
+                                    <cnpjDeclarante>75156034000179</cnpjDeclarante>
+                                </ideDeclarante>
+                                <infoAbertura>
+                                    <dtInicio>2017-01-01</dtInicio>
+                                    <dtFim>2017-06-30</dtFim>
+                                </infoAbertura>
+                                <AberturaMovOpFin>
+                                    <ResponsavelRMF>
+                                        <CPF>12345678901</CPF>
+                                        <Nome>lkslsklsklskslksl</Nome>
+                                        <Setor>lkslsklsk</Setor>
+                                        <Telefone>
+                                            <DDD>11</DDD>
+                                            <Numero>5555555</Numero>
+                                            <Ramal>123</Ramal>
+                                        </Telefone>
+                                        <Endereco>
+                                            <Logradouro>jhskhjskjhsjshjh</Logradouro>
+                                            <Numero>km123</Numero>
+                                            <Complemento>lkwlkwlkw</Complemento>
+                                            <Bairro>jdkjdkjd</Bairro>
+                                            <CEP>12345678</CEP>
+                                            <Municipio>lksklsk</Municipio>
+                                            <UF>AC</UF>
+                                        </Endereco>
+                                    </ResponsavelRMF>
+                                    <RespeFin>
+                                        <CPF>12345678901</CPF>
+                                        <Nome>lkslsklsklskslksl</Nome>
+                                        <Setor>lkslsklsk</Setor>
+                                        <Telefone>
+                                            <DDD>11</DDD>
+                                            <Numero>5555555</Numero>
+                                            <Ramal>123</Ramal>
+                                        </Telefone>
+                                        <Endereco>
+                                            <Logradouro>jhskhjskjhsjshjh</Logradouro>
+                                            <Numero>km123</Numero>
+                                            <Complemento>lkwlkwlkw</Complemento>
+                                            <Bairro>jdkjdkjd</Bairro>
+                                            <CEP>12345678</CEP>
+                                            <Municipio>lksklsk</Municipio>
+                                            <UF>AC</UF>
+                                        </Endereco>
+                                        <Email>ksksk@msmsl.com</Email>
+                                    </RespeFin>
+                                    <RepresLegal>
+                                        <CPF>12345678901</CPF>
+                                        <Setor>lkslsklsk</Setor>
+                                        <Telefone>
+                                            <DDD>11</DDD>
+                                            <Numero>5555555</Numero>
+                                            <Ramal>123</Ramal>
+                                        </Telefone>
+                                    </RepresLegal>
+                                </AberturaMovOpFin>
+                            </evtAberturaeFinanceira>
+                            <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+                                <SignedInfo>
+                                    <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+                                    <SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
+                                    <Reference URI="#ID000000000000000001">
+                                        <Transforms>
+                                            <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+                                            <Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+                                        </Transforms>
+                                        <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+                                        <DigestValue>s6zT5H47S/JlW6+OvAwrSDOeOSBrRyspH7rJTbL1nDk=</DigestValue>
+                                    </Reference>
+                                </SignedInfo>
+                                <SignatureValue>DQbCDQQo2SHPW8x29/CbjOtOyInKoJnuYkaYbL+kLebeBi0qscKn4BSMLDCkQPDjVQYDk6h1XcNw+pVY8mwMYjNXzN0nrfugOh0JB+mp8Ca8tVBENJpgGzxwYYmH9wDeG6fxw7fcrC3dW08VVZz0rjYK8eWxHBG4oPKbs2SzHJby8uXUY4rNSFt8tbvOe9Zss6Jrzw5omyqAnkJGrfNi8VYqWS1Bo/YRZnlAX+rH+S69pQLyrT21FH/Jmayjv8LSNOzQIQCO5yEzrboJZjqvYHbueLIRSBL9DcJdRX2OxY3Ua17+7JOmK5wL4S+25iJRCX87ygvzyyzI4mtvt/pucg==</SignatureValue>
+                                <KeyInfo>
+                                    <X509Data>
+                                        <X509Certificate>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</X509Certificate>
+                                    </X509Data>
+                                </KeyInfo>
+                            </Signature>
+                        </eFinanceira>
+                    </evento>
+                </loteEventos>
+            </eFinanceira>
+        </sped:loteEventos>
+    </soapenv:Body>
+</soapenv:Envelope>
