@@ -365,7 +365,7 @@ class Tools extends Base
         $method = 'ConsultarInformacoesMovimento';
         $body = "<sped:$method><sped:cnpj>$std->cnpj</sped:cnpj>"
            . "<sped:situacaoInformacao>$std->situacaoinformacao</sped:situacaoInformacao>"
-           ."<sped:anoMesInicioVigencia>$std->anomesiniciovigencia</sped:anoMesInicioVigencia>"
+           . "<sped:anoMesInicioVigencia>$std->anomesiniciovigencia</sped:anoMesInicioVigencia>"
            . "<sped:anoMesTerminoVigencia>$std->anomesterminovigencia</sped:anoMesTerminoVigencia>";
         if (!empty($std->tipomovimento)) {
             if (preg_match("/[1-2]{1}/", $std->tipomovimento)) {
