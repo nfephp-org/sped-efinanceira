@@ -261,7 +261,7 @@ class Tools extends Base
             );
         }
         $method = 'ConsultarInformacoesCadastrais';
-        $body = "<sped:$method><cnpj>$std->cnpj</cnpj></sped:$method>";
+        $body = "<sped:$method><sped:cnpj>$std->cnpj</sped:cnpj></sped:$method>";
         return $this->sendRequest($body, $method, $this->urls->consulta);
     }
 

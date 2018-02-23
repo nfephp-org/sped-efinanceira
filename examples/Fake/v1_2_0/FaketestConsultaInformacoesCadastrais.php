@@ -6,6 +6,7 @@ require_once '../../../bootstrap.php';
 use NFePHP\Common\Certificate;
 use NFePHP\eFinanc\Event;
 use NFePHP\eFinanc\Tools;
+use NFePHP\eFinanc\Common\Standardize;
 use NFePHP\eFinanc\Common\FakePretty;
 use NFePHP\eFinanc\Common\Soap\SoapFake;
 
@@ -39,6 +40,10 @@ try {
     $std = new stdClass();
     $std->cnpj = '999999999999999'; //CNPJ da empresa declarante
     $response = $tools->consultar('ConsultarInformacoesCadastrais', $std);
+    
+    //voce pode usar a classe Standarize para converter o xml da resposta em um stdClass
+    //$rstd = new Standardize($response);
+    
     
     //retorna os dados que serão usados na conexão para conferência
     echo FakePretty::prettyPrint($response, '');

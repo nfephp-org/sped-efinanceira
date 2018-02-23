@@ -1,1 +1,8 @@
-<soapenv:Envelope xmlns:soapenv = "http://schemas.xmlsoap.org/soap/envelope/" xmlns:sped = "http://sped.fazenda.gov.br/" ><soapenv:Header/><soapenv:Body><sped:ConsultarInformacoesCadastrais><sped:cnpj>999999999999999</sped:cnpj></sped:ConsultarInformacoesCadastrais></soapenv:Body></soapenv:Envelope>
+<soapenv:Envelope xmlns:soapenv = "http://schemas.xmlsoap.org/soap/envelope/" xmlns:sped = "http://sped.fazenda.gov.br/" >
+    <soapenv:Header/>
+    <soapenv:Body>
+        <sped:ConsultarInformacoesCadastrais>
+            <sped:cnpj>999999999999999</sped:cnpj>
+        </sped:ConsultarInformacoesCadastrais>
+    </soapenv:Body>
+</soapenv:Envelope>
