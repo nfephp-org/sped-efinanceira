@@ -104,6 +104,15 @@ class Crypto
     }
     
     /**
+     * Return an array with KEY and IV used to encripy and decript
+     * @return array
+     */
+    public function getKeyAndIV()
+    {
+        return ['key' => $this->key, 'iv' => $this->iv];
+    }
+    
+    /**
      * Encrypt message whith generate randon key and iv
      * @param string $datamsg
      * @return string

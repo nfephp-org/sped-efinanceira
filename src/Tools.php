@@ -97,7 +97,9 @@ class Tools extends Base
     {
         //constructor do lote
         $body = $this->batchBuilder($events);
-        //return $body;
+        //header('Content-Type: application/xml; charset=utf-8');
+        //echo $body;
+        //die;
         $url = $this->urls->recepcao;
         $method = 'ReceberLoteEvento';
         if ($modo == self::MODO_ZIP) {
@@ -244,6 +246,9 @@ class Tools extends Base
         if ($schema) {
             Validator::isValid($msg, $schema);
         }
+        //header('Content-Type: application/xml; charset=utf-8');
+        //echo $msg;
+        //die;
         return $msg;
     }
     
