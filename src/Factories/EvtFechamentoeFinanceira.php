@@ -175,14 +175,14 @@ class EvtFechamentoeFinanceira extends Factory implements FactoryInterface
             $this->dom->addChild(
                 $fAno,
                 "anoCaixa",
-                 $f->anocaixa,
-                 true
+                $f->anocaixa,
+                true
             );
             $this->dom->addChild(
                 $fAno,
                 "quantArqTrans",
-                 $f->quantarqtrans,
-                 true
+                $f->quantarqtrans,
+                true
             );
             $fechaAno->appendChild($fAno);
             $this->node->appendChild($fechaAno);
