@@ -168,6 +168,26 @@ class EvtFechamentoeFinanceira extends Factory implements FactoryInterface
             $this->node->appendChild($FechamentoMovOpFin);
         }
         
+        if (!empty($this->std->fechamentomovopfinanual)) {
+            $f = $this->std->fechamentomovopfinanual->fechamentoano;
+            $fechaAno = $this->dom->createElement("FechamentoMovOpFinAnual");
+            $fAno = $this->dom->createElement("FechamentoAno");
+            $this->dom->addChild(
+                $fAno,
+                "anoCaixa",
+                 $f->anocaixa,
+                 true
+            );
+            $this->dom->addChild(
+                $fAno,
+                "quantArqTrans",
+                 $f->quantarqtrans,
+                 true
+            );
+            $fechaAno->appendChild($fAno);
+            $this->node->appendChild($fechaAno);
+        }
+        
         //finalização do xml
         $this->eFinanceira->appendChild($this->node);
         //$this->xml = $this->dom->saveXML($this->eFinanceira);
