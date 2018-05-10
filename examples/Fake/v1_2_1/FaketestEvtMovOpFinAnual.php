@@ -9,7 +9,7 @@ use NFePHP\Common\Certificate;
 $config = [
     'tpAmb' => 2, //tipo de ambiente 1 - Produção; 2 - pre-produção
     'verAplic' => '43_0', //Versão do processo de emissão do evento. Informar a versão do aplicativo emissor do evento.
-    'eventoVersion' => '1_2_1', //versão do layout do evento
+    'eventoVersion' => '1_2_0', //versão do layout do evento
     'cnpjDeclarante' => '99999999999999'
 ];
 $configJson = json_encode($config, JSON_PRETTY_PRINT);
@@ -187,10 +187,6 @@ $std->conta[0]->infoconta->notitulares = 5;
 $std->conta[0]->infoconta->dtencerramentoconta = '2017-12-12';
 $std->conta[0]->infoconta->indinatividade = 1;
 $std->conta[0]->infoconta->indndoc = 1;
-$std->conta[0]->infoconta->totcreditos = 100.00;
-$std->conta[0]->infoconta->totdebitos = 800.00;
-$std->conta[0]->infoconta->totcreditosmesmatitularidade = 150.00;
-$std->conta[0]->infoconta->totdebitosmesmatitularidade = 850.00;
 $std->conta[0]->infoconta->vlrultdia = 700.00;
 
 $std->conta[0]->infoconta->reportavel[0] = new \stdClass();
@@ -209,19 +205,6 @@ $std->conta[0]->infoconta->pgtosacum[0] = new \stdClass();
 $std->conta[0]->infoconta->pgtosacum[0]->tppgto = 'ksksksk';
 $std->conta[0]->infoconta->pgtosacum[0]->totpgtosacum = 154568978.99;
 
-$std->cambio = new \stdClass();
-$std->cambio->totcompras = 1245789.35;
-$std->cambio->totvendas = 1428974578.88;
-$std->cambio->tottransferencias = 152789456.25;
-
-$std->cambio->medjudic[0] = new \stdClass();
-$std->cambio->medjudic[0]->numprocjud = '18289192929';
-$std->cambio->medjudic[0]->vara = 21;
-$std->cambio->medjudic[0]->secjud = 12;
-$std->cambio->medjudic[0]->subsecjud = '12 skjskjskj';
-$std->cambio->medjudic[0]->dtconcessao = '2017-12-01';
-$std->cambio->medjudic[0]->dtcassacao = '2017-10-31';
-
 try {
     
    //carrega a classe responsavel por lidar com os certificados
@@ -234,7 +217,8 @@ try {
         $configJson,
         $std,
         $certificate,
-        '2017-08-03 10:37:00'
+        '2017-08-03 10:37:00',
+        '1_2_1'
     )->toXml();
     
     //$xml = Event::f3001($json, $std, $certificate)->toXML();

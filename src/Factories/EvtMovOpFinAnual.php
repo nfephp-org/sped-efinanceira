@@ -16,18 +16,20 @@ class EvtMovOpFinAnual extends Factory implements FactoryInterface
      * @param stdClass $std
      * @param Certificate $certificate
      * @param string $data
+     * @param string $version
      */
     public function __construct(
         $config,
         stdClass $std,
         Certificate $certificate = null,
-        $data = ''
+        $data = '',
+        $version = ''
     ) {
         $params = new \stdClass();
         $params->evtName = 'evtMovOpFinAnual';
         $params->evtTag = 'evtMovOpFinAnual';
-        $params->evtAlias = 'F-3001';
-        parent::__construct($config, $std, $params, $certificate, $data);
+        $params->evtAlias = 'F-3010';
+        parent::__construct($config, $std, $params, $certificate, $data, $version);
     }
 
     protected function toNode()
@@ -722,6 +724,13 @@ class EvtMovOpFinAnual extends Factory implements FactoryInterface
                     }
                 }
                 
+                $this->dom->addChild(
+                    $Proprietarios,
+                    "DataNasc",
+                    !empty($p->datanasc) ? $p->datanasc : null,
+                    false
+                );
+                
                 if (!empty($p->infonascimento)) {
                     $in = $p->infonascimento;
                     $InfoNascimento = $this->dom->createElement("InfoNascimento");
@@ -758,6 +767,7 @@ class EvtMovOpFinAnual extends Factory implements FactoryInterface
                     }
                     $Proprietarios->appendChild($InfoNascimento);
                 }
+                
                 
                 foreach ($p->reportavel as $r) {
                     $Reportavel = $this->dom->createElement("Reportavel");
@@ -951,30 +961,6 @@ class EvtMovOpFinAnual extends Factory implements FactoryInterface
                     $BalancoConta = $this->dom->createElement("BalancoConta");
                     $this->dom->addChild(
                         $BalancoConta,
-                        "totCreditos",
-                        number_format($ic->totcreditos, 2, ',', ''),
-                        true
-                    );
-                    $this->dom->addChild(
-                        $BalancoConta,
-                        "totDebitos",
-                        number_format($ic->totdebitos, 2, ',', ''),
-                        true
-                    );
-                    $this->dom->addChild(
-                        $BalancoConta,
-                        "totCreditosMesmaTitularidade",
-                        number_format($ic->totcreditosmesmatitularidade, 2, ',', ''),
-                        true
-                    );
-                    $this->dom->addChild(
-                        $BalancoConta,
-                        "totDebitosMesmaTitularidade",
-                        number_format($ic->totdebitosmesmatitularidade, 2, ',', ''),
-                        true
-                    );
-                    $this->dom->addChild(
-                        $BalancoConta,
                         "vlrUltDia",
                         !empty($ic->vlrultdia) ? number_format($ic->vlrultdia, 2, ',', '') : null,
                         false
@@ -1001,72 +987,6 @@ class EvtMovOpFinAnual extends Factory implements FactoryInterface
                 }
                 $movOpFin->appendChild($Conta);
             }
-        }
-        
-        if (!empty($this->std->cambio)) {
-            $c = $this->std->cambio;
-            $Cambio = $this->dom->createElement("Cambio");
-            if (!empty($c->medjudic)) {
-                foreach ($c->medjudic as $j) {
-                    $MedJudic = $this->dom->createElement("MedJudic");
-                    $this->dom->addChild(
-                        $MedJudic,
-                        "NumProcJud",
-                        $j->numprocjud,
-                        true
-                    );
-                    $this->dom->addChild(
-                        $MedJudic,
-                        "Vara",
-                        $j->vara,
-                        true
-                    );
-                    $this->dom->addChild(
-                        $MedJudic,
-                        "SecJud",
-                        $j->secjud,
-                        true
-                    );
-                    $this->dom->addChild(
-                        $MedJudic,
-                        "SubSecJud",
-                        $j->subsecjud,
-                        true
-                    );
-                    $this->dom->addChild(
-                        $MedJudic,
-                        "dtConcessao",
-                        $j->dtconcessao,
-                        true
-                    );
-                    $this->dom->addChild(
-                        $MedJudic,
-                        "dtCassacao",
-                        !empty($j->dtcassacao) ? $j->dtcassacao : null,
-                        false
-                    );
-                    $Cambio->appendChild($MedJudic);
-                }
-                $this->dom->addChild(
-                    $Cambio,
-                    "totCompras",
-                    number_format($c->totcompras, 2, ',', ''),
-                    true
-                );
-                $this->dom->addChild(
-                    $Cambio,
-                    "totVendas",
-                    number_format($c->totvendas, 2, ',', ''),
-                    true
-                );
-                $this->dom->addChild(
-                    $Cambio,
-                    "totTransferencias",
-                    number_format($c->tottransferencias, 2, ',', ''),
-                    true
-                );
-            }
-            $movOpFin->appendChild($Cambio);
         }
         
         $caixa->appendChild($movOpFin);

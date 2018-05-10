@@ -934,22 +934,6 @@ $jsonSchema = '{
                                 "minimum": 1,
                                 "maximum": 1
                             },
-                            "totcreditos": {
-                                "required": true,
-                                "type": "number"
-                            },
-                            "totdebitos": {
-                                "required": true,
-                                "type": "number"
-                            },
-                            "totcreditosmesmatitularidade": {
-                                "required": true,
-                                "type": "number"
-                            },
-                            "totdebitosmesmatitularidade": {
-                                "required": true,
-                                "type": "number"
-                            },
                             "vlrultdia": {
                                 "required": false,
                                 "type": ["number","null"]
@@ -1033,67 +1017,6 @@ $jsonSchema = '{
                     }
                 }
             }    
-        },
-        "cambio": {
-            "required": false,
-            "type": ["object","null"],
-            "properties": {
-                "totcompras": {
-                    "required": true,
-                    "type": "number"
-                },
-                "totvendas": {
-                    "required": true,
-                    "type": "number"
-                },
-                "tottransferencias": {
-                    "required": true,
-                    "type": "number"
-                },
-                "medjudic": {
-                    "required": false,
-                    "type": ["array","null"],
-                    "minItems": 0,
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "numprocjud": {
-                                "required": true,
-                                "type": "string",
-                                "pattern": "^[0-9]{1,21}"
-                            },
-                            "vara": {
-                                "required": true,
-                                "type": "integer",
-                                "minimum": 1,
-                                "maximum": 99
-                            },
-                            "secjud": {
-                                "required": true,
-                                "type": "integer",
-                                "minimum": 1,
-                                "maximum": 99
-                            },
-                            "subsecjud": {
-                                "required": true,
-                                "type": "string",
-                                "minLength": 1,
-                                "maxLength": 40
-                            },
-                            "dtconcessao": {
-                                "required": true,
-                                "type": "string",
-                                "pattern": "^(19[0-9][0-9]|2[0-9][0-9][0-9])[-/](0?[1-9]|1[0-2])[-/](0?[1-9]|[12][0-9]|3[01])$"
-                            },
-                            "dtcassacao": {
-                                "required": false,
-                                "type": ["string","null"],
-                                "pattern": "^(19[0-9][0-9]|2[0-9][0-9][0-9])[-/](0?[1-9]|1[0-2])[-/](0?[1-9]|[12][0-9]|3[01])$"
-                            }
-                        }
-                    }
-                }
-            }
         }
     }
 }';
@@ -1107,13 +1030,16 @@ $std->semestre = 2;
 $std->tpni = 2;
 $std->tpdeclarado = 'klsks';
 $std->nideclarado = 'ssss';
+
 $std->nomedeclarado = 'slkcskkslsklsklsk';
 $std->tpnomedeclarado = 'slsklsk';
+
 $std->enderecolivre = 'ssklsklskslks';
 $std->tpendereco = 'ssk';
 $std->pais = 'BR';
 $std->datanasc = '2017-01-01';
-$std->anomescaixa = '201712';
+
+$std->anomescaixa = '201712';//??
 
 $std->nif[0] = new \stdClass();
 $std->nif[0]->numeronif = 'skjskjskjs';
@@ -1125,21 +1051,28 @@ $std->nomeoutros[0]->nomepf = new \stdClass();
 $std->nomeoutros[0]->nomepf->tpnome = 'slsklsk';
 $std->nomeoutros[0]->nomepf->prectitulo = 'sss';
 $std->nomeoutros[0]->nomepf->titulo = 'slsklsk';
+
 $std->nomeoutros[0]->nomepf->idgeracao = 'sss';
+
 $std->nomeoutros[0]->nomepf->sufixo = 'sss';
 $std->nomeoutros[0]->nomepf->gensufixo = 'sss';
+
 $std->nomeoutros[0]->nomepf->primeironome = new \stdClass();
 $std->nomeoutros[0]->nomepf->primeironome->tipo = 'lsklsk';
 $std->nomeoutros[0]->nomepf->primeironome->nome = 'lkdlkdlkd';
+
 $std->nomeoutros[0]->nomepf->meionome[0] = new \stdClass();
 $std->nomeoutros[0]->nomepf->meionome[0]->tipo = 'lkslk';
 $std->nomeoutros[0]->nomepf->meionome[0]->nome = 'flkfk';
+
 $std->nomeoutros[0]->nomepf->prefixonome = new \stdClass();
 $std->nomeoutros[0]->nomepf->prefixonome->tipo = 'dldkk';
 $std->nomeoutros[0]->nomepf->prefixonome->nome = 'flklf';
+
 $std->nomeoutros[0]->nomepf->ultimonome = new \stdClass();
 $std->nomeoutros[0]->nomepf->ultimonome->tipo = 'dddlk';
 $std->nomeoutros[0]->nomepf->ultimonome->nome = 'flfkflkf';
+
 $std->nomeoutros[0]->nomepj = new \stdClass();
 $std->nomeoutros[0]->nomepj->tpnome = 'dkddkld';
 $std->nomeoutros[0]->nomepj->nome = 'ddcldcllc';
@@ -1273,10 +1206,6 @@ $std->conta[0]->infoconta->notitulares = 5;
 $std->conta[0]->infoconta->dtencerramentoconta = '2017-12-12';
 $std->conta[0]->infoconta->indinatividade = 1;
 $std->conta[0]->infoconta->indndoc = 1;
-$std->conta[0]->infoconta->totcreditos = 100.00;
-$std->conta[0]->infoconta->totdebitos = 800.00;
-$std->conta[0]->infoconta->totcreditosmesmatitularidade = 150.00;
-$std->conta[0]->infoconta->totdebitosmesmatitularidade = 850.00;
 $std->conta[0]->infoconta->vlrultdia = 700.00;
 
 $std->conta[0]->infoconta->reportavel[0] = new \stdClass();
@@ -1294,19 +1223,6 @@ $std->conta[0]->infoconta->fundo->cnpj = '12345678901234';
 $std->conta[0]->infoconta->pgtosacum[0] = new \stdClass();
 $std->conta[0]->infoconta->pgtosacum[0]->tppgto = 'ksksksk';
 $std->conta[0]->infoconta->pgtosacum[0]->totpgtosacum = 154568978.99;
-
-$std->cambio = new \stdClass();
-$std->cambio->totcompras = 1245789.35;
-$std->cambio->totvendas = 1428974578.88;
-$std->cambio->tottransferencias = 152789456.25;
-
-$std->cambio->medjudic[0] = new \stdClass();
-$std->cambio->medjudic[0]->numprocjud = '18289192929';
-$std->cambio->medjudic[0]->vara = 21;
-$std->cambio->medjudic[0]->secjud = 12;
-$std->cambio->medjudic[0]->subsecjud = '12 skjskjskj';
-$std->cambio->medjudic[0]->dtconcessao = '2017-12-01';
-$std->cambio->medjudic[0]->dtcassacao = '2017-10-31';
 
 
 // Schema must be decoded before it can be used for validation

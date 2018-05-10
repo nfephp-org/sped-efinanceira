@@ -105,18 +105,20 @@ abstract class Factory
     protected $schema;
     /**
      * Constructor
-     * @param string      $config
-     * @param stdClass    $std
+     * @param string $config
+     * @param stdClass $std
      * @param Certificate $certificate
      * @param stdClass $params
-     * @param string      $date
+     * @param string $date OPTIONAL DONT USE
+     * @param string $version layout version optional
      */
     public function __construct(
         $config,
         stdClass $std,
         stdClass $params,
         Certificate $certificate = null,
-        $date = ''
+        $date = '',
+        $version = ''
     ) {
         //set properties from config
         $stdConf = json_decode($config);
@@ -127,6 +129,9 @@ abstract class Factory
         $this->tpAmb = $stdConf->tpAmb;
         $this->verAplic = $stdConf->verAplic;
         $this->layout = $stdConf->eventoVersion;
+        if (!empty($version)) {
+            $this->layout = $version;
+        }
         $this->cnpjDeclarante = $stdConf->cnpjDeclarante;
         $this->layoutStr = $this->strLayoutVer($this->layout);
         $this->certificate = $certificate;

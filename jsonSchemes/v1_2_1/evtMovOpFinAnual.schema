@@ -921,22 +921,6 @@
                                 "minimum": 1,
                                 "maximum": 1
                             },
-                            "totcreditos": {
-                                "required": true,
-                                "type": "number"
-                            },
-                            "totdebitos": {
-                                "required": true,
-                                "type": "number"
-                            },
-                            "totcreditosmesmatitularidade": {
-                                "required": true,
-                                "type": "number"
-                            },
-                            "totdebitosmesmatitularidade": {
-                                "required": true,
-                                "type": "number"
-                            },
                             "vlrultdia": {
                                 "required": false,
                                 "type": ["number","null"]
@@ -1020,67 +1004,6 @@
                     }
                 }
             }    
-        },
-        "cambio": {
-            "required": false,
-            "type": ["object","null"],
-            "properties": {
-                "totcompras": {
-                    "required": true,
-                    "type": "number"
-                },
-                "totvendas": {
-                    "required": true,
-                    "type": "number"
-                },
-                "tottransferencias": {
-                    "required": true,
-                    "type": "number"
-                },
-                "medjudic": {
-                    "required": false,
-                    "type": ["array","null"],
-                    "minItems": 0,
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "numprocjud": {
-                                "required": true,
-                                "type": "string",
-                                "pattern": "^[0-9]{1,21}"
-                            },
-                            "vara": {
-                                "required": true,
-                                "type": "integer",
-                                "minimum": 1,
-                                "maximum": 99
-                            },
-                            "secjud": {
-                                "required": true,
-                                "type": "integer",
-                                "minimum": 1,
-                                "maximum": 99
-                            },
-                            "subsecjud": {
-                                "required": true,
-                                "type": "string",
-                                "minLength": 1,
-                                "maxLength": 40
-                            },
-                            "dtconcessao": {
-                                "required": true,
-                                "type": "string",
-                                "pattern": "^(19[0-9][0-9]|2[0-9][0-9][0-9])[-/](0?[1-9]|1[0-2])[-/](0?[1-9]|[12][0-9]|3[01])$"
-                            },
-                            "dtcassacao": {
-                                "required": false,
-                                "type": ["string","null"],
-                                "pattern": "^(19[0-9][0-9]|2[0-9][0-9][0-9])[-/](0?[1-9]|1[0-2])[-/](0?[1-9]|[12][0-9]|3[01])$"
-                            }
-                        }
-                    }
-                }
-            }
         }
     }
 }

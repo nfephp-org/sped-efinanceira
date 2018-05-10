@@ -16,18 +16,20 @@ class EvtExclusaoeFinanceira extends Factory implements FactoryInterface
      * @param stdClass $std
      * @param Certificate $certificate
      * @param string $data
+     * @param string $version
      */
     public function __construct(
         $config,
         stdClass $std,
         Certificate $certificate = null,
-        $data = ''
+        $data = '',
+        $version = ''
     ) {
         $params = new \stdClass();
         $params->evtName = 'evtExclusaoeFinanceira';
         $params->evtTag = 'evtExclusaoeFinanceira';
         $params->evtAlias = 'F-9000';
-        parent::__construct($config, $std, $params, $certificate, $data);
+        parent::__construct($config, $std, $params, $certificate, $data, $version);
     }
 
     protected function toNode()
