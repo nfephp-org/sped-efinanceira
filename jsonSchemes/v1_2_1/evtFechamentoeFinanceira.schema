@@ -125,6 +125,29 @@
                     }    
                 }
             }
-        }
+        },
+        "fechamentomovopfinanual": {
+            "required": false,
+            "type": ["object","null"],
+            "properties": {
+                "fechamentoano": {
+                    "required": true,
+                    "type": "object",
+                    "properties": {
+                        "anocaixa": {
+                            "required": true,
+                            "type": "string",
+                            "pattern": "^20([0-9][0-9])"
+                        },
+                        "quantarqtrans": {
+                            "required": true,
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 999999999
+                        }    
+                    }
+                }    
+            }
+        }    
     }
 }
