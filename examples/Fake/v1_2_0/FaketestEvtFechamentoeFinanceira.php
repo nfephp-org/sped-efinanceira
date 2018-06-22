@@ -53,7 +53,8 @@ try {
         $configJson,
         $std,
         $certificate,
-        '2017-08-03 10:37:00'
+        '2017-08-03 10:37:00',
+        '1_2_1'
     )->toXml();
     
     //$xml = Event::f4000($json, $std, $certificate)->toXML();

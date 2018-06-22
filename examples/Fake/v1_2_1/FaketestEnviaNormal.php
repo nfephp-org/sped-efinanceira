@@ -3,27 +3,31 @@ error_reporting(E_ALL);
 ini_set('display_errors', 'On');
 require_once '../../../bootstrap.php';
 
-use NFePHP\eFinanc\Event;
 use NFePHP\Common\Certificate;
+use JsonSchema\Validator;
+use NFePHP\eFinanc\Event;
+use NFePHP\eFinanc\Tools;
+use NFePHP\eFinanc\Common\FakePretty;
+use NFePHP\eFinanc\Common\Soap\SoapFake;
 
 $config = [
     'tpAmb' => 2, //tipo de ambiente 1 - Produção; 2 - pre-produção
-    'verAplic' => '43_0', //Versão do processo de emissão do evento. Informar a versão do aplicativo emissor do evento.
-    'eventoVersion' => '1_2_0', //versão do layout do evento
+    'verAplic' => '0_1_2', //Versão do processo de emissão do evento. Informar a versão do aplicativo emissor do evento.
+    'eventoVersion' => '1_2_1', //versão do layout do evento
     'cnpjDeclarante' => '99999999999999'
 ];
 $configJson = json_encode($config, JSON_PRETTY_PRINT);
 
 $std = new \stdClass();
 $std->sequencial = '1';
-$std->indretificacao = 1;//1-original 2-retificação
+$std->indretificacao = 2;
 //$std->nrrecibo = '123456789012345678-12-123-1234-123456789012345678';
 $std->dtinicio = '2017-01-01'; //A data informada deve pertencer ao mesmo semestre da dtFim
 $std->dtfim = '2017-05-31';
 
-$std->aberturapp = new \stdClass();
-$std->aberturapp->tpempresa[0] = new \stdClass();
-$std->aberturapp->tpempresa[0]->tpprevpriv = 'X';
+//$std->aberturapp = new \stdClass();
+//$std->aberturapp->tpempresa[0] = new \stdClass();
+//$std->aberturapp->tpempresa[0]->tpprevpriv = 'X';
 
 $std->aberturamovopfin = new \stdClass();
 $std->aberturamovopfin->responsavelrmf = new \stdClass();
@@ -72,25 +76,30 @@ $std->aberturamovopfin->represlegal->telefone->numero = '5555555';
 $std->aberturamovopfin->represlegal->telefone->ramal = '123';
 
 try {
-    
-   //carrega a classe responsavel por lidar com os certificados
-    $content     = file_get_contents('expired_certificate.pfx');
-    $password    = 'associacao';
+    //carrega a classe responsavel por lidar com os certificados
+    $content = file_get_contents('expired_certificate.pfx');
+    $password = 'associacao';
     $certificate = Certificate::readPfx($content, $password);
     
-    //cria o evento e retorna o XML assinado
-    $xml = Event::evtAberturaeFinanceira(
-        $configJson,
-        $std,
-        $certificate,
-        '2017-08-03 10:37:00'
-    )->toXml();
+    //usar a classe Fake para não tentar enviar apenas ver o resultado da chamada
+    $soap = new SoapFake();
+    //desativa a validação da validade do certificado 
+    //estamos usando um certificado vencido nesse teste
+    $soap->disableCertValidation(true);
     
-    //$xml = Event::f1000($json, $std, $certificate)->toXML();
-    //$json = Event::evtAberturaeFinanceira($configjson, $std, $certificate)->toJson();
+    $evento = Event::evtAberturaeFinanceira($configJson, $std);
     
-    header('Content-type: text/xml; charset=UTF-8');
-    echo $xml;
+    //instancia a classe responsável pela comunicação
+    $tools = new Tools($configJson, $certificate);
+    //carrega a classe responsável pelo envio SOAP
+    //nesse caso um envio falso
+    $tools->loadSoapClass($soap);
+    
+    //executa o envio
+    $response = $tools->enviar([$evento], $tools::MODO_NORMAL);
+    
+    //retorna os dados que serão usados na conexão para conferência
+    echo FakePretty::prettyPrint($response, '');
     
 } catch (\Exception $e) {
     echo $e->getMessage();

@@ -157,7 +157,7 @@ class Tools extends Base
      * This method constructs the event batch
      * @param array $events
      * @return string
-     * @throws NFePHP\eFincnac\Exception\ProcessException
+     * @throws NFePHP\eFinanc\Exception\ProcessException
      */
     private function batchBuilder(array $events)
     {
@@ -174,10 +174,11 @@ class Tools extends Base
             //excedido o numero máximo de eventos
             throw ProcessException::wrongArgument(2000, $num);
         }
+        $layout = $this->versions['envioLoteEventos'];
         $xml = "<eFinanceira "
                 . "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" "
                 . "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
-                . "xmlns=\"http://www.eFinanceira.gov.br/schemas/envioLoteEventos/v$this->eventoVersion\">";
+                . "xmlns=\"http://www.eFinanceira.gov.br/schemas/envioLoteEventos/v$layout\">";
         $iCount = 0;
         $lote = date('YmdHms');
         $xml .= "<loteEventos>";
@@ -197,7 +198,7 @@ class Tools extends Base
             . 'schemes/v'
             . $this->eventoVersion
             . '/envioLoteEventos-v'
-            . $this->eventoVersion
+            . $layout
             . '.xsd';
         if ($schema) {
             Validator::isValid($xml, $schema);
@@ -211,7 +212,7 @@ class Tools extends Base
      * @return string
      * @throws NFePHP\eFincnac\Exception\ProcessException
      */
-    private function sendCripto($body)
+    public function sendCripto($body)
     {
         if (empty($this->der)) {
             //deve existir um certificado do servidor da Receita
@@ -225,11 +226,12 @@ class Tools extends Base
             throw Exception\ProcessException::wrongArgument(2004, '');
         }
         $id = 1;
+        $layout = $this->versions['envioLoteCriptografado'];
         $key = $crypt->getEncrypedKey();
         $fingerprint = $crypt->getThumbprint();
         $crypted = $crypt->encryptMsg($body);
         $msg = "<eFinanceira xmlns=\"http://www.eFinanceira.gov.br/schemas"
-            . "/envioLoteCriptografado/v$this->eventoVersion\">"
+            . "/envioLoteCriptografado/v$layout\">"
             . "<loteCriptografado>"
             . "<id>$id</id>"
             . "<idCertificado>$fingerprint</idCertificado>"
@@ -241,7 +243,7 @@ class Tools extends Base
             . 'schemes/v'
             . $this->eventoVersion
             . '/envioLoteCriptografado-v'
-            . $this->eventoVersion
+            . $layout
             . '.xsd';
         if ($schema) {
             Validator::isValid($msg, $schema);

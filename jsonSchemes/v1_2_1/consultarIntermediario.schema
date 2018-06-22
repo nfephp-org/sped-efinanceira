@@ -1,0 +1,28 @@
+{
+    "title": "consultarIntermediario",
+    "type": "object",
+    "properties": {
+        "cnpj": {
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9]{14}"
+        },
+        "ginn": {
+            "required": false,
+            "type": ["string","null"],
+            "maxLength": "19",
+            "pattern": "^[0-9]"
+        },
+        "tiponi": {
+            "required": false,
+            "type": ["integer","null"],
+            "minimum": 0,
+            "maximum": 4
+        },
+        "numeroidentificacao": {
+            "required": false,
+            "type": ["string","null"],
+            "maxLength": "28"
+        }
+    }
+}

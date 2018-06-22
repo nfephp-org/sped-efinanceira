@@ -22,6 +22,7 @@ use NFePHP\Common\Signer;
 use NFePHP\Common\Strings;
 use NFePHP\Common\Validator;
 use NFePHP\eFinanc\Exception\EventsException;
+use NFePHP\eFinanc\Common\Layouts;
 use stdClass;
 
 abstract class Factory
@@ -104,21 +105,23 @@ abstract class Factory
      */
     protected $schema;
     /**
+     * @var array
+     */
+    protected $versions;
+    /**
      * Constructor
      * @param string $config
      * @param stdClass $std
      * @param Certificate $certificate
      * @param stdClass $params
      * @param string $date OPTIONAL DONT USE
-     * @param string $version layout version optional
      */
     public function __construct(
         $config,
         stdClass $std,
         stdClass $params,
         Certificate $certificate = null,
-        $date = '',
-        $version = ''
+        $date = ''
     ) {
         //set properties from config
         $stdConf = json_decode($config);
@@ -129,15 +132,15 @@ abstract class Factory
         $this->tpAmb = $stdConf->tpAmb;
         $this->verAplic = $stdConf->verAplic;
         $this->layout = $stdConf->eventoVersion;
-        if (!empty($version)) {
-            $this->layout = $version;
-        }
+        $lay = new Layouts($config);
+        $this->versions = $lay->versions;
         $this->cnpjDeclarante = $stdConf->cnpjDeclarante;
-        $this->layoutStr = $this->strLayoutVer($this->layout);
+        $this->layoutStr = $this->strLayoutVer($stdConf->eventoVersion);
         $this->certificate = $certificate;
         $this->evtTag = $params->evtTag;
         $this->evtName = $params->evtName;
         $this->evtAlias = $params->evtAlias;
+        $this->layout = $this->versions[$this->evtName];
         if (empty($std) || !is_object($std)) {
             throw EventsException::wrongArgument(1003, '');
         }
@@ -151,7 +154,7 @@ abstract class Factory
             __DIR__
             . "/../../schemes/$this->layoutStr/"
             . $this->evtName
-            . "-" . $this->layoutStr
+            . "-" . $this->layout
             . ".xsd"
         );
         //convert all data fields to lower case
@@ -226,7 +229,7 @@ abstract class Factory
             $this->dom = new Dom('1.0', 'UTF-8');
             $this->dom->preserveWhiteSpace = false;
             $this->dom->formatOutput = false;
-            $ns = $this->xmlns . $this->evtName . "/" . $this->layoutStr;
+            $ns = $this->xmlns . $this->evtName . "/" . $this->layout;
             $this->eFinanceira = $this->dom->createElementNS($ns, 'eFinanceira');
             //cria o node principal
             $this->evtid = FactoryId::build($this->std->sequencial);
