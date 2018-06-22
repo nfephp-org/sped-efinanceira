@@ -16,6 +16,7 @@ use stdClass;
 use NFePHP\Common\Certificate;
 use NFePHP\eFinanc\Common\Soap\SoapCurl;
 use NFePHP\eFinanc\Common\Soap\SoapInterface;
+use NFePHP\eFinanc\Common\Layouts;
 use DateTime;
 
 class Tools
@@ -72,6 +73,10 @@ class Tools
      */
     protected $date;
     /**
+     * @var array
+     */
+    protected $versions;
+    /**
      * Constructor
      * @param string $config
      * @param Certificate $certificate
@@ -91,6 +96,8 @@ class Tools
         $this->path = realpath(
             __DIR__ . '/../../'
         ).'/';
+        $lay = new Layouts($config);
+        $this->versions = $lay->versions;
         //loads the encryption certificates distributed in the package
         $this->der = file_get_contents($this->path.'storage'.DIRECTORY_SEPARATOR.'preprod-efinanc_web.cer');
         if ($this->tpAmb == 1) {
@@ -140,9 +147,7 @@ class Tools
         $request .= ">"
             . "<soapenv:Header/>"
             . "<soapenv:Body>"
-            //. "<sped:$method>"
             . $body
-            //. "</sped:$method>"
             . "</soapenv:Body>"
             . "</soapenv:Envelope>";
         

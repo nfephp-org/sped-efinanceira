@@ -15,7 +15,7 @@ namespace NFePHP\eFinanc\Common;
 class Crypto
 {
     /**
-     * @var integer
+     * @var string
      */
     protected $cipher;
     /**
@@ -62,7 +62,7 @@ class Crypto
      * Recive cer content and convert to pem, get certificate fingerprint and
      * creates a encryption key and initialization vector
      * @param string $derdata certificate content in DER format (usual)
-     * @param int $cipher encoded cipher
+     * @param string $cipher encoded cipher
      */
     public function __construct($derdata, $cipher = self::AES_128_CBC)
     {
@@ -76,6 +76,7 @@ class Crypto
      * Generate a key and initialization vector
      * and encrypt this key with a certificate
      * and combine with initialization vector in base64 format
+     * @return void
      */
     public function keyGenerate()
     {
@@ -89,7 +90,7 @@ class Crypto
      * Recover encryped key+iv in base64
      * @return string
      */
-    public function getEncrypedKey()
+    public function getEncrypedKey():string
     {
         return $this->keyencrypted;
     }
@@ -98,16 +99,25 @@ class Crypto
      * Recover Thumbprint (or fingerprint) from certificate
      * @return string
      */
-    public function getThumbprint()
+    public function getThumbprint():string
     {
         return $this->fingerprint;
+    }
+    
+    /**
+     * Recover used cipher
+     * @return string
+     */
+    public function getCipher():string
+    {
+        return $this->cipher;
     }
     
     /**
      * Return an array with KEY and IV used to encripy and decript
      * @return array
      */
-    public function getKeyAndIV()
+    public function getKeyAndIV():array
     {
         return ['key' => $this->key, 'iv' => $this->iv];
     }
@@ -117,20 +127,20 @@ class Crypto
      * @param string $datamsg
      * @return string
      */
-    public function encryptMsg($datamsg)
+    public function encryptMsg($datamsg):string
     {
         return openssl_encrypt($datamsg, $this->cipher, $this->key, 0, $this->iv);
     }
     
     /**
-     * Decript message with private key and randon key and iv
+     * Decrypt message with private key and randon key and iv
      * @param string $cryptedmsg encrytped message
      * @param string $privateKey in PEM format
      * @param string $keyencrypted key+iv im base64 format
      * @param string $cipher for encrypt and decrypt
      * @return string
      */
-    public function decriptMsg($cryptedmsg, $privateKey, $keyencrypted, $cipher = self::AES_128_CBC)
+    public function decryptMsg($cryptedmsg, $privateKey, $keyencrypted, $cipher = self::AES_128_CBC):string
     {
         openssl_private_decrypt(
             base64_decode($keyencrypted),
@@ -144,10 +154,23 @@ class Crypto
     }
     
     /**
+     * Decrypt message encripted with AES
+     * @param string $message
+     * @param string $cipher
+     * @param string $key
+     * @param string $iv
+     * @return string
+     */
+    public function decryptAes($message, $cipher, $key, $iv):string
+    {
+        return openssl_decrypt($message, $cipher, $key, 0, $iv);
+    }
+    
+    /**
      * Recover certificate info
      * @return array
      */
-    public function certificateInfo()
+    public function certificateInfo():array
     {
         $resource = openssl_x509_read($this->certificate);
         $detail = openssl_x509_parse($resource, false);
@@ -165,7 +188,7 @@ class Crypto
      * @param string $certificate
      * @return string
      */
-    protected function thumbprint($certificate)
+    protected function thumbprint($certificate):string
     {
         return openssl_x509_fingerprint($certificate, "sha1", false);
     }
@@ -176,7 +199,7 @@ class Crypto
      * @param string $iv
      * @return string
      */
-    protected function encryptkey($key, $iv)
+    protected function encryptkey($key, $iv):string
     {
         openssl_public_encrypt($key.$iv, $cryptedkey, $this->certificate, OPENSSL_PKCS1_PADDING);
         return base64_encode($cryptedkey);
@@ -187,7 +210,7 @@ class Crypto
      * @param string $derdata
      * @return string
      */
-    protected function convertDERtoPEM($derdata)
+    protected function convertDERtoPEM($derdata):string
     {
         $certificate = chunk_split(base64_encode($derdata), 64, "\n");
         return "-----BEGIN CERTIFICATE-----\n"
