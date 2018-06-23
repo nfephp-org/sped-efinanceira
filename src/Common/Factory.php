@@ -229,7 +229,7 @@ abstract class Factory
             $this->dom = new Dom('1.0', 'UTF-8');
             $this->dom->preserveWhiteSpace = false;
             $this->dom->formatOutput = false;
-            $ns = $this->xmlns . $this->evtName . "/" . $this->layout;
+            $ns = $this->xmlns . $this->evtName . "/v" . $this->layout;
             $this->eFinanceira = $this->dom->createElementNS($ns, 'eFinanceira');
             //cria o node principal
             $this->evtid = FactoryId::build($this->std->sequencial);
