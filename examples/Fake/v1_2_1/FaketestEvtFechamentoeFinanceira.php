@@ -7,44 +7,69 @@ use NFePHP\eFinanc\Event;
 use NFePHP\Common\Certificate;
 
 $config = [
-    'tpAmb' => 2, //tipo de ambiente 1 - Produção; 2 - pre-produção
-    'verAplic' => '43_0', //Versão do processo de emissão do evento. Informar a versão do aplicativo emissor do evento.
+    'tpAmb' => 1, //tipo de ambiente 1 - Produção; 2 - pre-produção
+    'verAplic' => '1', //Versão do processo de emissão do evento. Informar a versão do aplicativo emissor do evento.
     'eventoVersion' => '1_2_1', //versão do layout do evento
-    'cnpjDeclarante' => '99999999999999'
+    'cnpjDeclarante' => '14388516000160'
 ];
 $configJson = json_encode($config, JSON_PRETTY_PRINT);
 
 $std = new \stdClass();
-$std->sequencial = '1';
-$std->indretificacao = 2;
-$std->nrrecibo = '123456789012345678-12-123-1234-123456789012345678';
-$std->dtinicio = '2017-01-01';
-$std->dtfim = '2017-05-31';
-$std->sitespecial = 1;
+$std->sequencial = '11630';
+$std->indretificacao = 1;
+//$std->nrrecibo = '123456789012345678-12-123-1234-123456789012345678';
+$std->dtinicio = '2017-07-01';
+$std->dtfim = '2017-12-31';
+$std->sitespecial = 0;
 
+/*
 $std->fechamentopp = new \stdClass();
 $std->fechamentopp->fechamentomes[0] = new \stdClass();
 $std->fechamentopp->fechamentomes[0]->anomescaixa = '201713';
 $std->fechamentopp->fechamentomes[0]->quantarqtrans = 99999;
+*/
 
 $std->fechamentomovopfin = new \stdClass();
 $std->fechamentomovopfin->fechamentomes[0] = new \stdClass();
-$std->fechamentomovopfin->fechamentomes[0]->anomescaixa = '201713';
-$std->fechamentomovopfin->fechamentomes[0]->quantarqtrans = 99999;
+$std->fechamentomovopfin->fechamentomes[0]->anomescaixa = '201707';
+$std->fechamentomovopfin->fechamentomes[0]->quantarqtrans = 40;
 
+$std->fechamentomovopfin->fechamentomes[1] = new \stdClass();
+$std->fechamentomovopfin->fechamentomes[1]->anomescaixa = '201708';
+$std->fechamentomovopfin->fechamentomes[1]->quantarqtrans = 50;
+
+$std->fechamentomovopfin->fechamentomes[2] = new \stdClass();
+$std->fechamentomovopfin->fechamentomes[2]->anomescaixa = '201709';
+$std->fechamentomovopfin->fechamentomes[2]->quantarqtrans = 33;
+
+$std->fechamentomovopfin->fechamentomes[3] = new \stdClass();
+$std->fechamentomovopfin->fechamentomes[3]->anomescaixa = '201710';
+$std->fechamentomovopfin->fechamentomes[3]->quantarqtrans = 22;
+
+$std->fechamentomovopfin->fechamentomes[4] = new \stdClass();
+$std->fechamentomovopfin->fechamentomes[4]->anomescaixa = '201711';
+$std->fechamentomovopfin->fechamentomes[4]->quantarqtrans = 68;
+
+$std->fechamentomovopfin->fechamentomes[5] = new \stdClass();
+$std->fechamentomovopfin->fechamentomes[5]->anomescaixa = '201712';
+$std->fechamentomovopfin->fechamentomes[5]->quantarqtrans = 58;
+
+/*
 $std->fechamentomovopfin->entdecexterior = new \stdClass();
 $std->fechamentomovopfin->entdecexterior->contasareportar = 0;
-
+*/
+/*
 $std->fechamentomovopfin->entpatdecexterior[0] = new \stdClass();
 $std->fechamentomovopfin->entpatdecexterior[0]->giin = '12ASDA.12345.LE.123';
 $std->fechamentomovopfin->entpatdecexterior[0]->cnpj = '12345678901234';
 $std->fechamentomovopfin->entpatdecexterior[0]->contasareportar = 0;
-
+*/
+/*
 $std->fechamentomovopfinanual = new \stdClass();
 $std->fechamentomovopfinanual->fechamentoano = new \stdClass();
 $std->fechamentomovopfinanual->fechamentoano->anocaixa = '2017';
-$std->fechamentomovopfinanual->fechamentoano->quantarqtrans = 99999;
-
+$std->fechamentomovopfinanual->fechamentoano->quantarqtrans = 271;
+*/
 
 try {
     
