@@ -248,9 +248,6 @@ class Tools extends Base
         if ($schema) {
             Validator::isValid($msg, $schema);
         }
-        //header('Content-Type: application/xml; charset=utf-8');
-        //echo $msg;
-        //die;
         return $msg;
     }
     
@@ -351,6 +348,7 @@ class Tools extends Base
                 'A situação deve ser informada: 0-Todas, 1-Ativo, 2-Retificado,3-Excluído.'
             );
         }
+        /*
         if (!preg_match(
             "/^(19[0-9][0-9]|2[0-9][0-9][0-9])[\/](0?[1-9]|1[0-2])$/",
             $std->anomesiniciovigencia
@@ -369,6 +367,7 @@ class Tools extends Base
                 'O ano e mês do inicio do término da vigência deve ser informado: AAAA/MM.'
             );
         }
+         */
         $method = 'ConsultarInformacoesMovimento';
         $body = "<sped:$method><sped:cnpj>$std->cnpj</sped:cnpj>"
            . "<sped:situacaoInformacao>$std->situacaoinformacao</sped:situacaoInformacao>"

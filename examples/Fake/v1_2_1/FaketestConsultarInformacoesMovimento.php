@@ -39,8 +39,8 @@ try {
     $std = new stdClass();
     $std->cnpj = '999999999999999'; //CNPJ da empresa declarante (OBRIGATÒRIO)
     $std->situacaoinformacao = 0; //0-Todas,1-Ativo,2-Retificado,3-Excluído
-    $std->anomesiniciovigencia = '2017/01';
-    $std->anomesterminovigencia = '2017/12';
+    $std->anomesiniciovigencia = '201701';
+    $std->anomesterminovigencia = '201712';
     $std->tipomovimento = 1;//1-Previdência Privada 2-Operações Financeiras
     $std->tipoidentificacao = 1; //1-CPF,2-CNPJ,3-NIF PF,4-NIF PJ,
                                  //5-Passaporte,6-Número do PIS,
