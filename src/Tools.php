@@ -379,10 +379,14 @@ class Tools extends Base
             }
         }
         if (!empty($std->tipoidentificacao)) {
-            if (preg_match("/[1-7]{1}|99/", $std->tipoidentificacao)) {
-                $body .= "<sped:tipoIdentificacao>$std->tipoidentificacao</sped:tipoIdentificacao>";
-                $body .= "<sped:identificacao>$std->identificacao</sped:identificacao>";
+            if (!preg_match("/^[1-7]{1}|99$/", $std->tipoidentificacao)) {
+                throw ConsultException::wrongArgument(
+                    "O tipo de identificação deve ser numerico e deve estar entre 1 e 7 ou 99."
+                    . " [$std->tipoidentificacao] não atende os requisitos."
+                );
             }
+            $body .= "<sped:tipoIdentificacao>$std->tipoidentificacao</sped:tipoIdentificacao>";
+            $body .= "<sped:identificacao>$std->identificacao</sped:identificacao>";
         }
         $body .= "</sped:$method>";
         return $this->sendRequest($body, $method, $this->urls->consulta);
