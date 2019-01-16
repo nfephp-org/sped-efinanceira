@@ -1,4 +1,4 @@
-# SPED-EFINANCEIRA (versão 2.0 - layout 1.2.0)
+# SPED-EFINANCEIRA (versão 2.0 - layout 1.2.1)
 
 **API PHP para a integração de aplicativo com o projeto SPED eFinanceira da Receita Federal do Brasil**
 
