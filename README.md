@@ -1,7 +1,5 @@
 # SPED-EFINANCEIRA (versão 2.0 - layout 1.2.0)
 
-## BETHA TESTS
-
 **API PHP para a integração de aplicativo com o projeto SPED eFinanceira da Receita Federal do Brasil**
 
 *sped-efinanceira* é um framework que permite a integração de um aplicativo, com o serviço do projeto SPED da RFB denominado *eFinanceira*, com a construção dos eventos em xml e do envio dos lotes de eventos e consultas, através de requisições SOAP, sobre SSL usando certificado digital modelo A1 (PKCS#12), pertencentes a cadeia de certificação Brasileira.
@@ -52,7 +50,7 @@ Caso você encontre algum problema relativo a segurança, por favor envie um ema
 - Roberto L. Machado <linux.rlm@gmail.com>
 
 O desenvolvimento desse pacote somente foi possivel devido a contribuição e colaboração da 
-[ACTUARY Ltda](http://www.actuary.com.br/v2/informatica/index.php) 
+[ACTUARY Ltda](http://www.actuary.com.br/v3/) 
 
 ## Licenças
 

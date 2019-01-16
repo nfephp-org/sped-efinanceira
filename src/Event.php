@@ -29,6 +29,7 @@ class Event
         'evtexclusaoefinanceira' => Factories\EvtExclusaoeFinanceira::class,
         'evtfechamentoefinanceira' => Factories\EvtFechamentoeFinanceira::class,
         'evtmovopfin' => Factories\EvtMovOpFin::class,
+        'evtmovpp' => Factories\EvtMovPP::class,
         'evtmovopfinanual' => Factories\EvtMovOpFinAnual::class,
         'evtrerct' => Factories\EvtRERCT::class
     ];
@@ -46,6 +47,7 @@ class Event
         'f3010' => 'evtmovopfinanual',
         'f4000' => 'evtfechamentoefinanceira',
         'f5000' => 'evtexclusao',
+        'f6000' => 'evtmovpp',
         'f8000' => 'evtrerct',
         'f9000' => 'evtexclusaoefinanceira'
     ];
