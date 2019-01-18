@@ -73,10 +73,22 @@ $jsonSchema = '{
                         "minLength": 1,
                         "maxLength": 20
                     },
-                    "tpproduto": {
+                    "produto": {
                         "required": false,
-                        "type": ["string","null"],
-                        "pattern": "^[0-9]{2}$"
+                        "type": ["object","null"],
+                        "properties": {
+                            "tpproduto": {
+                                "required": true,
+                                "type": "string",
+                                "pattern": "^[0-9]{2}$"
+                            },
+                            "opcaotributacao": {
+                                "required": true,
+                                "type": "integer",
+                                "minumum": 1,
+                                "maximum": 2
+                            }
+                        }
                     },
                     "tpplano": {
                         "required": false,
@@ -242,7 +254,11 @@ $std->anomescaixa = '201712';
 $std->infoprevpriv[0] = new \stdClass();
 $std->infoprevpriv[0]->numproposta = '12';
 $std->infoprevpriv[0]->numprocesso = '22222';
-$std->infoprevpriv[0]->tpproduto = '01';
+
+$std->infoprevpriv[0]->produto = new \stdClass();
+$std->infoprevpriv[0]->produto->tpproduto = '01';
+$std->infoprevpriv[0]->produto->opcaotributacao = 1;
+
 $std->infoprevpriv[0]->tpplano = '02';
 $std->infoprevpriv[0]->vlrprincipal = 10111.11;
 $std->infoprevpriv[0]->vlrrendimentos = 1111.11;

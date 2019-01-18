@@ -109,12 +109,22 @@ class EvtMovPP extends Factory implements FactoryInterface
                 !empty($infp->numprocesso) ? $infp->numprocesso : null,
                 false
             );
-            $this->dom->addChild(
-                $infoPrevPriv,
-                "tpProduto",
-                !empty($infp->tpproduto) ? $infp->tpproduto : null,
-                false
-            );
+            if (!empty($infp->produto)) {
+                $prod = $this->dom->createElement("Produto");
+                $this->dom->addChild(
+                    $prod,
+                    "tpProduto",
+                    $infp->produto->tpproduto,
+                    true
+                );
+                $this->dom->addChild(
+                    $prod,
+                    "opcaoTributacao",
+                    $infp->produto->opcaotributacao,
+                    true
+                );
+                $infoPrevPriv->appendChild($prod);
+            }
             $this->dom->addChild(
                 $infoPrevPriv,
                 "tpPlano",

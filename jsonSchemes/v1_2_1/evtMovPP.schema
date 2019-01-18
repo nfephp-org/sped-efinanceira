@@ -60,10 +60,22 @@
                         "minLength": 1,
                         "maxLength": 20
                     },
-                    "tpproduto": {
+                    "produto": {
                         "required": false,
-                        "type": ["string","null"],
-                        "pattern": "^[0-9]{2}$"
+                        "type": ["object","null"],
+                        "properties": {
+                            "tpproduto": {
+                                "required": true,
+                                "type": "string",
+                                "pattern": "^[0-9]{2}$"
+                            },
+                            "opcaotributacao": {
+                                "required": true,
+                                "type": "integer",
+                                "minumum": 1,
+                                "maximum": 2
+                            }
+                        }
                     },
                     "tpplano": {
                         "required": false,
