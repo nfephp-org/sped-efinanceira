@@ -143,12 +143,20 @@ class Tools extends Base
             && $commonName != 'efinancentreposto.receita.fazenda.gov.br'
         ) {
             //O certificado do servidor fornecido não pertence ao commonName requerido
-            throw ProcessException::wrongArgument(2005, '');
+            throw ProcessException::wrongArgument(
+                2005,
+                " requerido [efinancentreposto.receita.fazenda.gov.br] != "
+                . "encontrado [$commonName] "
+            );
         } elseif ($this->tpAmb == 2
             && $commonName != 'preprod-efinancentreposto.receita.fazenda.gov.br'
         ) {
             //O certificado do servidor fornecido não pertence ao commonName requerido
-            throw ProcessException::wrongArgument(2005, '');
+            throw ProcessException::wrongArgument(
+                2005,
+                " requerido [preprod-efinancentreposto.receita.fazenda.gov.br] "
+                . "!= encontrado [$commonName] "
+            );
         }
         $this->der = $derdata;
     }
