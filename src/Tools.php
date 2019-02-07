@@ -137,8 +137,9 @@ class Tools extends Base
     {
         $crypto = new Crypto($derdata);
         $info = $crypto->certificateInfo();
-        $std = json_decode(json_encode($info['details']));
-        $commonName = $std->subject->commonName;
+        //$std = json_decode(json_encode($info['details']));
+        //$commonName = $std->subject->commonName;
+        $commonName = $info['details']['subject']['commonName'];
         if ($this->tpAmb == 1
             && $commonName != 'efinancentreposto.receita.fazenda.gov.br'
         ) {
