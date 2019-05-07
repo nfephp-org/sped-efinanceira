@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.eFinanceira.gov.br/schemas/evtMovPP/v1_2_1" targetNamespace="http://www.eFinanceira.gov.br/schemas/evtMovPP/v1_2_1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.eFinanceira.gov.br/schemas/evtMovPP/v1_2_2" targetNamespace="http://www.eFinanceira.gov.br/schemas/evtMovPP/v1_2_2" elementFormDefault="qualified" attributeFormDefault="unqualified">
   <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="../../Comum/xmldsig-core-schema.xsd"/>
   <xs:element name="eFinanceira">
     <xs:complexType>
@@ -39,7 +39,7 @@
                         </xs:annotation>
                         <xs:restriction base="xs:string">
                           <xs:minLength value="15"/>
-                          <xs:maxLength value="49" />
+                          <xs:maxLength value="49"/>
                           <xs:pattern value="[0-9]{1,18}[-][0-9]{2}[-][0-9]{3}[-][0-9]{4}[-][0-9]{1,18}"/>
                         </xs:restriction>
                       </xs:simpleType>
@@ -268,20 +268,20 @@
                                           </xs:annotation>
                                           <xs:restriction base="xs:string">
                                             <xs:minLength value="4"/>
-                                            <xs:maxLength value="19" />
+                                            <xs:maxLength value="19"/>
                                             <xs:pattern value="[0-9]{1,16}[,][0-9]{2}"/>
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
 
-                                      <xs:element name="vlrRendimentos" minOccurs="1" maxOccurs="1">
+                                      <xs:element name="vlrRendimentos" minOccurs="0" maxOccurs="1">
                                         <xs:simpleType>
                                           <xs:annotation>
                                             <xs:documentation>Valor dos rendimentos no início do movimento de previdência privada</xs:documentation>
                                           </xs:annotation>
                                           <xs:restriction base="xs:string">
                                             <xs:minLength value="4"/>
-                                            <xs:maxLength value="19" />
+                                            <xs:maxLength value="19"/>
                                             <xs:pattern value="[0-9]{1,16}[,][0-9]{2}"/>
                                           </xs:restriction>
                                         </xs:simpleType>
@@ -304,7 +304,7 @@
                                           </xs:annotation>
                                           <xs:restriction base="xs:string">
                                             <xs:minLength value="4"/>
-                                            <xs:maxLength value="19" />
+                                            <xs:maxLength value="19"/>
                                             <xs:pattern value="[0-9]{1,16}[,][0-9]{2}"/>
                                           </xs:restriction>
                                         </xs:simpleType>
@@ -317,7 +317,7 @@
                                           </xs:annotation>
                                           <xs:restriction base="xs:string">
                                             <xs:minLength value="4"/>
-                                            <xs:maxLength value="19" />
+                                            <xs:maxLength value="19"/>
                                             <xs:pattern value="[0-9]{1,16}[,][0-9]{2}"/>
                                           </xs:restriction>
                                         </xs:simpleType>
@@ -330,7 +330,7 @@
                                           </xs:annotation>
                                           <xs:restriction base="xs:string">
                                             <xs:minLength value="4"/>
-                                            <xs:maxLength value="19" />
+                                            <xs:maxLength value="19"/>
                                             <xs:pattern value="[0-9]{1,16}[,][0-9]{2}"/>
                                           </xs:restriction>
                                         </xs:simpleType>
@@ -343,13 +343,13 @@
                                           </xs:annotation>
                                           <xs:restriction base="xs:string">
                                             <xs:minLength value="4"/>
-                                            <xs:maxLength value="19" />
+                                            <xs:maxLength value="19"/>
                                             <xs:pattern value="[0-9]{1,16}[,][0-9]{2}"/>
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
 
-                                      <xs:element name="cnpj" minOccurs="1" maxOccurs="1">
+                                      <xs:element name="cnpj" minOccurs="0" maxOccurs="1">
                                         <xs:simpleType>
                                           <xs:annotation>
                                             <xs:documentation>CNPJ da Entidade Responsável pela Aplicação</xs:documentation>
@@ -379,7 +379,7 @@
                                           </xs:annotation>
                                           <xs:restriction base="xs:string">
                                             <xs:minLength value="4"/>
-                                            <xs:maxLength value="8" />
+                                            <xs:maxLength value="8"/>
                                             <xs:pattern value="[0-9]{1,5}[,][0-9]{2}"/>
                                           </xs:restriction>
                                         </xs:simpleType>
@@ -392,7 +392,7 @@
                                           </xs:annotation>
                                           <xs:restriction base="xs:string">
                                             <xs:minLength value="4"/>
-                                            <xs:maxLength value="5" />
+                                            <xs:maxLength value="5"/>
                                             <xs:pattern value="[0-9]{1,2}[,][0-9]{2}"/>
                                           </xs:restriction>
                                         </xs:simpleType>
@@ -405,20 +405,20 @@
                                           </xs:annotation>
                                           <xs:restriction base="xs:string">
                                             <xs:minLength value="4"/>
-                                            <xs:maxLength value="19" />
+                                            <xs:maxLength value="19"/>
                                             <xs:pattern value="[0-9]{1,16}[,][0-9]{2}"/>
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
 
-                                      <xs:element name="vlrResgateRendimentos" minOccurs="1" maxOccurs="1">
+                                      <xs:element name="vlrResgateRendimentos" minOccurs="0" maxOccurs="1">
                                         <xs:simpleType>
                                           <xs:annotation>
                                             <xs:documentation>Valor do Resgate dos rendimentos – Totalização no Mês Caixa, por Alíquota</xs:documentation>
                                           </xs:annotation>
                                           <xs:restriction base="xs:string">
                                             <xs:minLength value="4"/>
-                                            <xs:maxLength value="19" />
+                                            <xs:maxLength value="19"/>
                                             <xs:pattern value="[0-9]{1,16}[,][0-9]{2}"/>
                                           </xs:restriction>
                                         </xs:simpleType>
@@ -431,7 +431,7 @@
                                           </xs:annotation>
                                           <xs:restriction base="xs:string">
                                             <xs:minLength value="4"/>
-                                            <xs:maxLength value="19" />
+                                            <xs:maxLength value="19"/>
                                             <xs:pattern value="[0-9]{1,16}[,][0-9]{2}"/>
                                           </xs:restriction>
                                         </xs:simpleType>
@@ -502,7 +502,7 @@
                                           </xs:annotation>
                                           <xs:restriction base="xs:string">
                                             <xs:minLength value="4"/>
-                                            <xs:maxLength value="19" />
+                                            <xs:maxLength value="19"/>
                                             <xs:pattern value="[0-9]{1,16}[,][0-9]{2}"/>
                                           </xs:restriction>
                                         </xs:simpleType>
@@ -515,7 +515,7 @@
                                           </xs:annotation>
                                           <xs:restriction base="xs:string">
                                             <xs:minLength value="4"/>
-                                            <xs:maxLength value="19" />
+                                            <xs:maxLength value="19"/>
                                             <xs:pattern value="[0-9]{1,16}[,][0-9]{2}"/>
                                           </xs:restriction>
                                         </xs:simpleType>
@@ -528,7 +528,7 @@
                                           </xs:annotation>
                                           <xs:restriction base="xs:string">
                                             <xs:minLength value="4"/>
-                                            <xs:maxLength value="19" />
+                                            <xs:maxLength value="19"/>
                                             <xs:pattern value="[0-9]{1,16}[,][0-9]{2}"/>
                                           </xs:restriction>
                                         </xs:simpleType>
@@ -541,7 +541,7 @@
                                           </xs:annotation>
                                           <xs:restriction base="xs:string">
                                             <xs:minLength value="4"/>
-                                            <xs:maxLength value="19" />
+                                            <xs:maxLength value="19"/>
                                             <xs:pattern value="[0-9]{1,16}[,][0-9]{2}"/>
                                           </xs:restriction>
                                         </xs:simpleType>
@@ -554,7 +554,7 @@
                                           </xs:annotation>
                                           <xs:restriction base="xs:string">
                                             <xs:minLength value="4"/>
-                                            <xs:maxLength value="19" />
+                                            <xs:maxLength value="19"/>
                                             <xs:pattern value="[0-9]{1,16}[,][0-9]{2}"/>
                                           </xs:restriction>
                                         </xs:simpleType>
@@ -587,20 +587,20 @@
                                           </xs:annotation>
                                           <xs:restriction base="xs:string">
                                             <xs:minLength value="4"/>
-                                            <xs:maxLength value="19" />
+                                            <xs:maxLength value="19"/>
                                             <xs:pattern value="[0-9]{1,16}[,][0-9]{2}"/>
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
 
-                                      <xs:element name="vlrRendimentos" minOccurs="1" maxOccurs="1">
+                                      <xs:element name="vlrRendimentos" minOccurs="0" maxOccurs="1">
                                         <xs:simpleType>
                                           <xs:annotation>
                                             <xs:documentation>Valor final dos rendimentos de previdência privada no Mês Caixa</xs:documentation>
                                           </xs:annotation>
                                           <xs:restriction base="xs:string">
                                             <xs:minLength value="4"/>
-                                            <xs:maxLength value="19" />
+                                            <xs:maxLength value="19"/>
                                             <xs:pattern value="[0-9]{1,16}[,][0-9]{2}"/>
                                           </xs:restriction>
                                         </xs:simpleType>
@@ -630,8 +630,8 @@
               </xs:annotation>
               <xs:simpleType>
                 <xs:restriction base="xs:ID">
-                  <xs:minLength value="13" />
-                  <xs:maxLength value="20" />
+                  <xs:minLength value="13"/>
+                  <xs:maxLength value="20"/>
                 </xs:restriction>
               </xs:simpleType>
             </xs:attribute>     

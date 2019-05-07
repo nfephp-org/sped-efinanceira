@@ -9,7 +9,7 @@ use NFePHP\Common\Certificate;
 $config = [
     'tpAmb' => 2, //tipo de ambiente 1 - Produção; 2 - pre-produção
     'verAplic' => '43_0', //Versão do processo de emissão do evento. Informar a versão do aplicativo emissor do evento.
-    'eventoVersion' => '1_2_1', //versão do layout do evento
+    'eventoVersion' => '1_2_2', //versão do layout do evento
     'cnpjDeclarante' => '99999999999999'
 ];
 $configJson = json_encode($config, JSON_PRETTY_PRINT);
@@ -18,7 +18,7 @@ $std = new \stdClass();
 $std->sequencial = '1';
 $std->indretificacao = 3;
 $std->nrrecibo = '123456789012345678-12-123-1234-123456789012345678';
-$std->tpni = 2;
+$std->tpni = 1;
 $std->tpdeclarado = 'klsks';
 $std->nideclarado = 'ssss';
 $std->nomedeclarado = 'slkcskkslsklsklsk';
@@ -51,7 +51,7 @@ $std->infoprevpriv[0]->resg[0]->vlrresgaterendimentos = 1.11;
 $std->infoprevpriv[0]->resg[0]->vlrirrf = 14.54;
 
 $std->infoprevpriv[0]->benef[0] = new \stdClass();
-$std->infoprevpriv[0]->benef[0]->tpni = 2;
+$std->infoprevpriv[0]->benef[0]->tpni = 1;
 $std->infoprevpriv[0]->benef[0]->niparticipante = '45343434';
 $std->infoprevpriv[0]->benef[0]->codreceita = '3277';
 $std->infoprevpriv[0]->benef[0]->prazovigencia = 874;
@@ -78,7 +78,7 @@ try {
         $configJson,
         $std,
         $certificate,
-        '2017-08-03 10:37:00'
+        '2019-03-23 10:37:00'
     )->toXml();
     
     //$xml = Event::f3000($json, $std, $certificate)->toXML();
