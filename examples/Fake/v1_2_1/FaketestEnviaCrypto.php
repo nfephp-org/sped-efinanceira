@@ -93,8 +93,8 @@ try {
     $tools = new Tools($configJson, $certificate);
     
     //carrega o certificado da RECEITA usado na encriptação das mensagens
-    $preprod = file_get_contents('preprod-efinanc_web.cer');
-    $tools->setCertificateEFinanceira($preprod);
+    //$preprod = file_get_contents('preprod-efinanc_web.cer');
+    //$tools->setCertificateEFinanceira($preprod);
     
     //carrega a classe responsável pelo envio SOAP
     //nesse caso um envio falso
