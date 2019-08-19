@@ -127,7 +127,7 @@ $jsonSchema = '{
                                     "type": "number"
                                 },
                                 "cnpj": {
-                                    "required": true,
+                                    "required": false,
                                     "type": "string",
                                     "pattern": "^[0-9]{14}$"
                                 }

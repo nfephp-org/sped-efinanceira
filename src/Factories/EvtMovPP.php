@@ -179,7 +179,7 @@ class EvtMovPP extends Factory implements FactoryInterface
                         $aplic,
                         "cnpj",
                         $ap->cnpj,
-                        true
+                        false
                     );
                     $opPrevPriv->appendChild($aplic);
                 }
