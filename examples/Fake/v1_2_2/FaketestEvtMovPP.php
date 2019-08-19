@@ -34,7 +34,7 @@ $std->infoprevpriv[0]->produto->opcaotributacao = 1;
 
 $std->infoprevpriv[0]->tpplano = '02';
 $std->infoprevpriv[0]->vlrprincipal = 10111.11;
-$std->infoprevpriv[0]->vlrrendimentos = 1111.11;
+//$std->infoprevpriv[0]->vlrrendimentos = 1111.11;
 
 $std->infoprevpriv[0]->aplic[0] = new \stdClass();
 $std->infoprevpriv[0]->aplic[0]->vlrcontribuicao = 1111.11;
@@ -64,7 +64,7 @@ $std->infoprevpriv[0]->benef[0]->competenciapgto = '11';
 
 $std->infoprevpriv[0]->saldofinal= new \stdClass();
 $std->infoprevpriv[0]->saldofinal->vlrprincipal = 11457.59;
-$std->infoprevpriv[0]->saldofinal->vlrrendimentos = 2598.89;
+//$std->infoprevpriv[0]->saldofinal->vlrrendimentos = 2598.89;
 
 try {
     

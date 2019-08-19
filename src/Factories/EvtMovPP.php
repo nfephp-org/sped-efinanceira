@@ -143,8 +143,8 @@ class EvtMovPP extends Factory implements FactoryInterface
             $this->dom->addChild(
                 $saldoInicial,
                 "vlrRendimentos",
-                number_format($infp->vlrrendimentos, 2, ',', ''),
-                true
+                isset($infp->vlrrendimentos) ? number_format($infp->vlrrendimentos, 2, ',', '') : null,
+                false
             );
             $opPrevPriv->appendChild($saldoInicial);
             
@@ -297,8 +297,10 @@ class EvtMovPP extends Factory implements FactoryInterface
                 $this->dom->addChild(
                     $saldoFinal,
                     "vlrRendimentos",
-                    number_format($infp->saldofinal->vlrrendimentos, 2, ',', ''),
-                    true
+                    isset($infp->saldofinal->vlrrendimentos) ?
+                    number_format($infp->saldofinal->vlrrendimentos, 2, ',', '') :
+                    null,
+                    false
                 );
                 $opPrevPriv->appendChild($saldoFinal);
             }
