@@ -96,12 +96,12 @@ $jsonSchema = '{
                         "pattern": "^[0-9]{2}$"
                     },
                     "vlrprincipal": {
-                        "required": false,
-                        "type": ["number", "null"]
-                    },
-                    "vlrrendimentos": {
                         "required": true,
                         "type": "number"
+                    },
+                    "vlrrendimentos": {
+                        "required": false,
+                        "type": ["number", "null"]
                     },
                     "aplic": {
                         "required": false,
@@ -230,8 +230,8 @@ $jsonSchema = '{
                                 "type": "number"
                             },
                             "vlrrendimentos": {
-                                "required": true,
-                                "type": "number"
+                                "required": false,
+                                "type": ["number", "null"]
                             }
                         }
                     }
