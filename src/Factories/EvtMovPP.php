@@ -87,6 +87,12 @@ class EvtMovPP extends Factory implements FactoryInterface
             $this->std->nideclarado,
             true
         );
+        $this->dom->addChild(
+            $ideDeclarado,
+            "nomeDeclarado",
+            $this->std->nomedeclarado,
+            true
+        );
         $this->node->appendChild($ideDeclarado);
         
         $mesCaixa = $this->dom->createElement("mesCaixa");
