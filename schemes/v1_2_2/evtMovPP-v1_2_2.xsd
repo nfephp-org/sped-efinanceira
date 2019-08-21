@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.eFinanceira.gov.br/schemas/evtMovPP/v1_2_2" targetNamespace="http://www.eFinanceira.gov.br/schemas/evtMovPP/v1_2_2" elementFormDefault="qualified" attributeFormDefault="unqualified">
   <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="../../Comum/xmldsig-core-schema.xsd"/>
   <xs:element name="eFinanceira">
@@ -10,7 +10,6 @@
           </xs:annotation>
           <xs:complexType>
             <xs:sequence>
-              
               <xs:element name="ideEvento" minOccurs="1" maxOccurs="1">
                 <xs:annotation>
                   <xs:documentation>Identificação de Evento</xs:documentation>
@@ -86,7 +85,6 @@
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
-              
               <xs:element name="ideDeclarante" minOccurs="1" maxOccurs="1">
                 <xs:complexType>
                   <xs:annotation>
@@ -107,7 +105,6 @@
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
-              
               <xs:element name="ideDeclarado" minOccurs="1" maxOccurs="1">
                 <xs:complexType>
                   <xs:annotation>
@@ -154,7 +151,6 @@
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>            
-                         
               <xs:element name="mesCaixa" minOccurs="1" maxOccurs="1">
                 <xs:complexType>
                   <xs:annotation>
@@ -172,14 +168,12 @@
                         </xs:restriction>
                       </xs:simpleType>
                     </xs:element>
-
                     <xs:element name="infoPrevPriv" minOccurs="1" maxOccurs="unbounded">
                       <xs:complexType>
                         <xs:annotation>
                           <xs:documentation>Informações do produto de previdência privada</xs:documentation>
                         </xs:annotation>
                         <xs:sequence>
-
                           <xs:element name="numProposta" minOccurs="0" maxOccurs="1">
                             <xs:annotation>
                               <xs:documentation>Número da proposta</xs:documentation>
@@ -191,7 +185,6 @@
                               </xs:restriction>
                             </xs:simpleType>
                           </xs:element>
-
                           <xs:element name="numProcesso" minOccurs="0" maxOccurs="1">
                             <xs:annotation>
                               <xs:documentation>Número do processo</xs:documentation>
@@ -203,14 +196,12 @@
                               </xs:restriction>
                             </xs:simpleType>
                           </xs:element>
-
                           <xs:element name="Produto" minOccurs="0" maxOccurs="1">
                             <xs:complexType>
                               <xs:annotation>
                                 <xs:documentation>Informações do tipo de produto e da opção de tributação</xs:documentation>
                               </xs:annotation>
                               <xs:sequence>
-                                
                                 <xs:element name="tpProduto" minOccurs="1" maxOccurs="1">
                                   <xs:simpleType>
                                     <xs:annotation>
@@ -221,7 +212,6 @@
                                     </xs:restriction>
                                   </xs:simpleType>
                                 </xs:element>
-
                                 <xs:element name="opcaoTributacao" minOccurs="1" maxOccurs="1">
                                   <xs:simpleType>
                                     <xs:annotation>
@@ -232,11 +222,9 @@
                                     </xs:restriction>
                                   </xs:simpleType>
                                 </xs:element>
-
                               </xs:sequence>
                             </xs:complexType>
                           </xs:element>
-
                           <xs:element name="tpPlano" minOccurs="0" maxOccurs="1">
                             <xs:simpleType>
                               <xs:annotation>
@@ -247,14 +235,12 @@
                               </xs:restriction>
                             </xs:simpleType>
                           </xs:element>
-
                           <xs:element name="opPrevPriv" minOccurs="1" maxOccurs="1">
                             <xs:annotation>
                               <xs:documentation>Previdência Privada Aplicações e Resgates</xs:documentation>
                             </xs:annotation>
                             <xs:complexType>
                               <xs:sequence>
-
                                 <xs:element name="saldoInicial" minOccurs="1" maxOccurs="1">
                                   <xs:annotation>
                                     <xs:documentation>Informações a respeito do saldo inicial do movimento da previdência privada do declarante</xs:documentation>
@@ -273,7 +259,6 @@
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
-
                                       <xs:element name="vlrRendimentos" minOccurs="0" maxOccurs="1">
                                         <xs:simpleType>
                                           <xs:annotation>
@@ -289,14 +274,12 @@
                                     </xs:sequence>
                                   </xs:complexType>
                                 </xs:element>
-
                                 <xs:element name="aplic" minOccurs="0" maxOccurs="unbounded">
                                   <xs:annotation>
                                     <xs:documentation>Informações das aplicações em previdência privada do declarante</xs:documentation>
                                   </xs:annotation>
                                   <xs:complexType>
                                     <xs:sequence>
-
                                       <xs:element name="vlrContribuicao" minOccurs="1" maxOccurs="1">
                                         <xs:simpleType>
                                           <xs:annotation>
@@ -309,7 +292,6 @@
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
-
                                       <xs:element name="vlrCarregamento" minOccurs="1" maxOccurs="1">
                                         <xs:simpleType>
                                           <xs:annotation>
@@ -322,7 +304,6 @@
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
-
                                       <xs:element name="vlrPartPF" minOccurs="1" maxOccurs="1">
                                         <xs:simpleType>
                                           <xs:annotation>
@@ -335,7 +316,6 @@
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
-
                                       <xs:element name="vlrPartPJ" minOccurs="1" maxOccurs="1">
                                         <xs:simpleType>
                                           <xs:annotation>
@@ -348,7 +328,6 @@
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
-
                                       <xs:element name="cnpj" minOccurs="0" maxOccurs="1">
                                         <xs:simpleType>
                                           <xs:annotation>
@@ -360,18 +339,15 @@
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
-                                      
                                     </xs:sequence>
                                   </xs:complexType>
                                 </xs:element>
-
                                 <xs:element name="resg" minOccurs="0" maxOccurs="unbounded">
                                   <xs:annotation>
                                     <xs:documentation>Informações dos resgates em previdência privada do declarante</xs:documentation>
                                   </xs:annotation>
                                   <xs:complexType>
                                     <xs:sequence>
-
                                       <xs:element name="vlrAliquotaIRRF" minOccurs="1" maxOccurs="1">
                                         <xs:simpleType>
                                           <xs:annotation>
@@ -384,7 +360,6 @@
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
-
                                       <xs:element name="numAnosCarencia" minOccurs="1" maxOccurs="1">
                                         <xs:simpleType>
                                           <xs:annotation>
@@ -397,7 +372,6 @@
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
-
                                       <xs:element name="vlrResgatePrincipal" minOccurs="1" maxOccurs="1">
                                         <xs:simpleType>
                                           <xs:annotation>
@@ -410,7 +384,6 @@
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
-
                                       <xs:element name="vlrResgateRendimentos" minOccurs="0" maxOccurs="1">
                                         <xs:simpleType>
                                           <xs:annotation>
@@ -423,7 +396,6 @@
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
-
                                       <xs:element name="vlrIRRF" minOccurs="1" maxOccurs="1">
                                         <xs:simpleType>
                                           <xs:annotation>
@@ -436,11 +408,9 @@
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
-
                                     </xs:sequence>
                                   </xs:complexType>
                                 </xs:element>
-
                                 <xs:element name="benef" minOccurs="0" maxOccurs="unbounded">
                                   <xs:annotation>
                                     <xs:documentation>Informações dos benefícios de previdência privada do declarante</xs:documentation>
@@ -460,7 +430,6 @@
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
-
                                       <xs:element name="NIParticipante" minOccurs="1" maxOccurs="1">
                                         <xs:annotation>
                                           <xs:documentation>NI do titular responsavel pelo pagamento das contribuicoes PF do Plano. Pode não ser o declarado</xs:documentation>
@@ -472,7 +441,6 @@
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
-
                                       <xs:element name="CodReceita" minOccurs="1" maxOccurs="1">
                                         <xs:simpleType>
                                           <xs:annotation>
@@ -483,7 +451,6 @@
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
-
                                       <xs:element name="PrazoVigencia" minOccurs="1" maxOccurs="1">
                                         <xs:simpleType>
                                           <xs:annotation>
@@ -494,7 +461,6 @@
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
-
                                       <xs:element name="vlrMensalInicial" minOccurs="1" maxOccurs="1">
                                         <xs:simpleType>
                                           <xs:annotation>
@@ -507,7 +473,6 @@
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
-
                                       <xs:element name="vlrBruto" minOccurs="1" maxOccurs="1">
                                         <xs:simpleType>
                                           <xs:annotation>
@@ -520,7 +485,6 @@
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
-
                                       <xs:element name="vlrLiquido" minOccurs="1" maxOccurs="1">
                                         <xs:simpleType>
                                           <xs:annotation>
@@ -533,7 +497,6 @@
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
-
                                       <xs:element name="vlrIRRF" minOccurs="1" maxOccurs="1">
                                         <xs:simpleType>
                                           <xs:annotation>
@@ -546,7 +509,6 @@
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
-
                                       <xs:element name="vlrAliquotaIRRF" minOccurs="1" maxOccurs="1">
                                         <xs:simpleType>
                                           <xs:annotation>
@@ -559,7 +521,6 @@
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
-                                      
                                       <xs:element name="competenciaPgto" minOccurs="1" maxOccurs="1">
                                         <xs:simpleType>
                                           <xs:annotation>
@@ -573,7 +534,6 @@
                                     </xs:sequence>
                                   </xs:complexType>
                                 </xs:element>
-
                                 <xs:element name="saldoFinal" minOccurs="1" maxOccurs="1">
                                   <xs:annotation>
                                     <xs:documentation>Informações a respeito do saldo final do movimento da previdência privada do declarante</xs:documentation>
@@ -592,7 +552,6 @@
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
-
                                       <xs:element name="vlrRendimentos" minOccurs="0" maxOccurs="1">
                                         <xs:simpleType>
                                           <xs:annotation>
@@ -608,21 +567,15 @@
                                     </xs:sequence>
                                   </xs:complexType>
                                 </xs:element>
-                              
                               </xs:sequence>
                             </xs:complexType>
                           </xs:element>
-
-
-
                         </xs:sequence>
                       </xs:complexType>
                     </xs:element>
-                    
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
-            
             </xs:sequence>
             <xs:attribute name="id" use="required" >
               <xs:annotation>

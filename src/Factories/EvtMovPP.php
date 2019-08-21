@@ -87,6 +87,7 @@ class EvtMovPP extends Factory implements FactoryInterface
             $this->std->nideclarado,
             true
         );
+        $this->node->appendChild($ideDeclarado);
         
         $mesCaixa = $this->dom->createElement("mesCaixa");
         $this->dom->addChild(
@@ -309,6 +310,7 @@ class EvtMovPP extends Factory implements FactoryInterface
             
             $mesCaixa->appendChild($infoPrevPriv);
         }
+        
         $this->node->appendChild($mesCaixa);
         //finalização do xml
         $this->eFinanceira->appendChild($this->node);
