@@ -154,7 +154,7 @@ abstract class Factory
             __DIR__
             . "/../../schemes/$this->layoutStr/"
             . $this->evtName
-            . "-" . $this->layout
+            . "-v" . $this->layout
             . ".xsd"
         );
         //convert all data fields to lower case

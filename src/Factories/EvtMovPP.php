@@ -77,19 +77,13 @@ class EvtMovPP extends Factory implements FactoryInterface
         );
         $this->dom->addChild(
             $ideDeclarado,
-            "tpDeclarado",
-            !empty($this->std->tpdeclarado) ? $this->std->tpdeclarado : null,
-            false
-        );
-        $this->dom->addChild(
-            $ideDeclarado,
             "NIDeclarado",
             $this->std->nideclarado,
             true
         );
         $this->dom->addChild(
             $ideDeclarado,
-            "nomeDeclarado",
+            "NomeDeclarado",
             $this->std->nomedeclarado,
             true
         );
@@ -251,7 +245,7 @@ class EvtMovPP extends Factory implements FactoryInterface
                     );
                     $this->dom->addChild(
                         $benef,
-                        "prazovigencia",
+                        "PrazoVigencia",
                         $bn->prazovigencia,
                         true
                     );
