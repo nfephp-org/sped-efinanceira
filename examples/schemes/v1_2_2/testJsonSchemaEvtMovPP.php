@@ -47,7 +47,7 @@ $jsonSchema = '{
             "required": true,
             "type": "string",
             "minLength": 1,
-            "maxLength": 100
+            "maxLength": 90
         },
         "anomescaixa": {
             "required": true,
