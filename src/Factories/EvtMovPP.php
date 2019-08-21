@@ -10,6 +10,7 @@ use stdClass;
 
 class EvtMovPP extends Factory implements FactoryInterface
 {
+
     /**
      * Constructor
      * @param string $config
@@ -67,7 +68,7 @@ class EvtMovPP extends Factory implements FactoryInterface
             true
         );
         $this->node->insertBefore($ideEvento, $ideDeclarante);
-        
+
         $ideDeclarado = $this->dom->createElement("ideDeclarado");
         $this->dom->addChild(
             $ideDeclarado,
@@ -88,7 +89,7 @@ class EvtMovPP extends Factory implements FactoryInterface
             true
         );
         $this->node->appendChild($ideDeclarado);
-        
+
         $mesCaixa = $this->dom->createElement("mesCaixa");
         $this->dom->addChild(
             $mesCaixa,
@@ -132,7 +133,7 @@ class EvtMovPP extends Factory implements FactoryInterface
                 !empty($infp->tpplano) ? $infp->tpplano : null,
                 false
             );
-            
+
             $opPrevPriv = $this->dom->createElement("opPrevPriv");
             $saldoInicial = $this->dom->createElement("saldoInicial");
             $this->dom->addChild(
@@ -148,7 +149,7 @@ class EvtMovPP extends Factory implements FactoryInterface
                 false
             );
             $opPrevPriv->appendChild($saldoInicial);
-            
+
             if (!empty($infp->aplic)) {
                 foreach ($infp->aplic as $ap) {
                     $aplic = $this->dom->createElement("aplic");
@@ -221,7 +222,7 @@ class EvtMovPP extends Factory implements FactoryInterface
                     $opPrevPriv->appendChild($resg);
                 }
             }
-            
+
             if (!empty($infp->benef)) {
                 foreach ($infp->benef as $bn) {
                     $benef = $this->dom->createElement("benef");
@@ -287,30 +288,30 @@ class EvtMovPP extends Factory implements FactoryInterface
                     );
                     $opPrevPriv->appendChild($benef);
                 }
-                
-                $saldoFinal = $this->dom->createElement("saldoFinal");
-                $this->dom->addChild(
-                    $saldoFinal,
-                    "vlrPrincipal",
-                    number_format($infp->saldofinal->vlrprincipal, 2, ',', ''),
-                    true
-                );
-                $this->dom->addChild(
-                    $saldoFinal,
-                    "vlrRendimentos",
-                    isset($infp->saldofinal->vlrrendimentos) ?
+            }
+
+            $saldoFinal = $this->dom->createElement("saldoFinal");
+            $this->dom->addChild(
+                $saldoFinal,
+                "vlrPrincipal",
+                number_format($infp->saldofinal->vlrprincipal, 2, ',', ''),
+                true
+            );
+            $this->dom->addChild(
+                $saldoFinal,
+                "vlrRendimentos",
+                isset($infp->saldofinal->vlrrendimentos) ?
                     number_format($infp->saldofinal->vlrrendimentos, 2, ',', '') :
                     null,
-                    false
-                );
-                $opPrevPriv->appendChild($saldoFinal);
-            }
-            
+                false
+            );
+            $opPrevPriv->appendChild($saldoFinal);
+
             $infoPrevPriv->appendChild($opPrevPriv);
-            
+
             $mesCaixa->appendChild($infoPrevPriv);
         }
-        
+
         $this->node->appendChild($mesCaixa);
         //finalização do xml
         $this->eFinanceira->appendChild($this->node);
