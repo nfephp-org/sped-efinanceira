@@ -23,50 +23,55 @@ $std->nideclarado = 'ssss';
 $std->nomedeclarado = 'slkcskkslsklsklsk';
 $std->anomescaixa = '201712';
 
+//Obrigatório pelo menos um 
 $std->infoprevpriv[0] = new \stdClass();
-$std->infoprevpriv[0]->numproposta = '12';
-$std->infoprevpriv[0]->numprocesso = '22222';
-
+$std->infoprevpriv[0]->numproposta = '12'; //opcional
+$std->infoprevpriv[0]->numprocesso = '22222'; //opcional
+$std->infoprevpriv[0]->tpplano = '02'; //opcional
+$std->infoprevpriv[0]->vlrprincipal = 10111.11; //obrigatório
+$std->infoprevpriv[0]->vlrrendimentos = 1111.11; //opcional
+//
+//opcional <Produto>
 $std->infoprevpriv[0]->produto = new \stdClass();
-$std->infoprevpriv[0]->produto->tpproduto = '01';
-$std->infoprevpriv[0]->produto->opcaotributacao = 1;
+$std->infoprevpriv[0]->produto->tpproduto = '01'; //obrigatório
+$std->infoprevpriv[0]->produto->opcaotributacao = 1; //obrigatório
 
-$std->infoprevpriv[0]->tpplano = '02';
-$std->infoprevpriv[0]->vlrprincipal = 10111.11;
-$std->infoprevpriv[0]->vlrrendimentos = 1111.11;
-
+//opcional <Aplic>
 $std->infoprevpriv[0]->aplic[0] = new \stdClass();
-$std->infoprevpriv[0]->aplic[0]->vlrcontribuicao = 1111.11;
-$std->infoprevpriv[0]->aplic[0]->vlrcarregamento = 10000.00;
-$std->infoprevpriv[0]->aplic[0]->vlrpartpf = 5000.00;
-$std->infoprevpriv[0]->aplic[0]->vlrpartpj = 6000.00;
-$std->infoprevpriv[0]->aplic[0]->cnpj = '12345678901234';
+$std->infoprevpriv[0]->aplic[0]->vlrcontribuicao = 1111.11; //obrigatório
+$std->infoprevpriv[0]->aplic[0]->vlrcarregamento = 10000.00; //obrigatório
+$std->infoprevpriv[0]->aplic[0]->vlrpartpf = 5000.00; //obrigatório
+$std->infoprevpriv[0]->aplic[0]->vlrpartpj = 6000.00; //obrigatório
+$std->infoprevpriv[0]->aplic[0]->cnpj = '12345678901234'; //opcional
 
+//opcional <Resg>
 $std->infoprevpriv[0]->resg[0] = new \stdClass();
-$std->infoprevpriv[0]->resg[0]->vlraliquotairrf = 10.11;
-$std->infoprevpriv[0]->resg[0]->numanoscarencia = 8.15;
-$std->infoprevpriv[0]->resg[0]->vlrresgateprincipal = 11111.11;
-$std->infoprevpriv[0]->resg[0]->vlrresgaterendimentos = 1.11;
-$std->infoprevpriv[0]->resg[0]->vlrirrf = 14.54;
+$std->infoprevpriv[0]->resg[0]->vlraliquotairrf = 10.11; //obrigatório
+$std->infoprevpriv[0]->resg[0]->numanoscarencia = 8.15; //obrigatório
+$std->infoprevpriv[0]->resg[0]->vlrresgateprincipal = 11111.11; //obrigatório
+$std->infoprevpriv[0]->resg[0]->vlrresgaterendimentos = 1.11; //opcional
+$std->infoprevpriv[0]->resg[0]->vlrirrf = 14.54; //obrigatório
 
+//opcional <Benef>
 /*
 $std->infoprevpriv[0]->benef[0] = new \stdClass();
-$std->infoprevpriv[0]->benef[0]->tpni = 1;
-$std->infoprevpriv[0]->benef[0]->niparticipante = '45343434';
-$std->infoprevpriv[0]->benef[0]->codreceita = '3277';
-$std->infoprevpriv[0]->benef[0]->prazovigencia = 874;
-$std->infoprevpriv[0]->benef[0]->vlrmensalinicial = 2451.56;
-$std->infoprevpriv[0]->benef[0]->vlrbruto = 2875.54;
-$std->infoprevpriv[0]->benef[0]->vlrliquido = 1865.22;
-$std->infoprevpriv[0]->benef[0]->vlrirrf = 110.11;
-$std->infoprevpriv[0]->benef[0]->vlraliquotairrf = 12.01;
-$std->infoprevpriv[0]->benef[0]->competenciapgto = '11';
+$std->infoprevpriv[0]->benef[0]->tpni = 1; //obrigatório
+$std->infoprevpriv[0]->benef[0]->niparticipante = '45343434'; //obrigatório
+$std->infoprevpriv[0]->benef[0]->codreceita = '3277'; //obrigatório
+$std->infoprevpriv[0]->benef[0]->prazovigencia = 874; //obrigatório
+$std->infoprevpriv[0]->benef[0]->vlrmensalinicial = 2451.56; //obrigatório
+$std->infoprevpriv[0]->benef[0]->vlrbruto = 2875.54; //obrigatório
+$std->infoprevpriv[0]->benef[0]->vlrliquido = 1865.22; //obrigatório
+$std->infoprevpriv[0]->benef[0]->vlrirrf = 110.11; //obrigatório
+$std->infoprevpriv[0]->benef[0]->vlraliquotairrf = 12.01; //obrigatório
+$std->infoprevpriv[0]->benef[0]->competenciapgto = '11'; //obrigatório
 */
-$std->infoprevpriv[0]->saldofinal= new \stdClass();
-$std->infoprevpriv[0]->saldofinal->vlrprincipal = 11457.59;
-$std->infoprevpriv[0]->saldofinal->vlrrendimentos = 2598.89;
 
-//$std = json_decode('{"sequencial":"243","indretificacao":1,"tpni":1,"nideclarado":"61991350910","nomedeclarado":"ADAIR RECH","anomescaixa":"201901","infoprevpriv":[{"numproposta":"01006543","numprocesso":"1999005147","produto":{"tpproduto":"01","opcaotributacao":1},"tpplano":"99","vlrprincipal":21198.74,"aplic":[{"vlrcontribuicao":1024.32,"vlrcarregamento":0,"vlrpartpf":0,"vlrpartpj":0,"cnpj":"78133824000127"}],"saldofinal":{"vlrprincipal":22510.4}}]}');
+//obrigatório <SaldoFinal>
+$std->infoprevpriv[0]->saldofinal= new \stdClass();
+$std->infoprevpriv[0]->saldofinal->vlrprincipal = 11457.59; //obrigatório
+$std->infoprevpriv[0]->saldofinal->vlrrendimentos = 2598.89; //opcional
+
 
 try {
     
