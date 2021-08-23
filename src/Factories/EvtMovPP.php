@@ -289,7 +289,35 @@ class EvtMovPP extends Factory implements FactoryInterface
                     $opPrevPriv->appendChild($benef);
                 }
             }
-
+            if (!empty($infp->portabilidade)) {
+                $port = $infp->portabilidade;
+                $portabilidade = $this->dom->createElement("portabilidade");
+                $this->dom->addChild(
+                    $portabilidade,
+                    "indPortabilidade",
+                    $port->indportabilidade,
+                    true
+                );
+                $this->dom->addChild(
+                    $portabilidade,
+                    "CNPJ",
+                    $port->cnpj,
+                    true
+                );
+                $this->dom->addChild(
+                    $portabilidade,
+                    "CNPB_numProcesso",
+                    $port->cnpb_numprocesso,
+                    true
+                );
+                $this->dom->addChild(
+                    $portabilidade,
+                    "vlrPortabilidade",
+                    number_format($port->vlrportabilidade, 2, ',' , ''),
+                    true
+                );
+                $opPrevPriv->appendChild($portabilidade);
+            }
             $saldoFinal = $this->dom->createElement("saldoFinal");
             $this->dom->addChild(
                 $saldoFinal,
@@ -311,7 +339,6 @@ class EvtMovPP extends Factory implements FactoryInterface
 
             $mesCaixa->appendChild($infoPrevPriv);
         }
-
         $this->node->appendChild($mesCaixa);
         //finalização do xml
         $this->eFinanceira->appendChild($this->node);

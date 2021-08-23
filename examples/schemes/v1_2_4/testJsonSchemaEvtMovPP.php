@@ -1,4 +1,17 @@
-{
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 'On');
+require_once '../../../bootstrap.php';
+
+use JsonSchema\Constraints\Constraint;
+use JsonSchema\Constraints\Factory;
+use JsonSchema\SchemaStorage;
+use JsonSchema\Validator;
+
+$evento = 'evtMovPP';
+$version = '1_2_4';
+
+$jsonSchema = '{
     "title": "evtMovPP",
     "type": "object",
     "properties": {
@@ -209,6 +222,32 @@
                             }
                         }
                     },
+                    "portabilidade": {
+                        "required": false,
+                        "type": ["object","null"],
+                        "properties": {
+                            "indportabilidade": {
+                                "required": true,
+                                "type": "integer",
+                                "minimum": 1,
+                                "maxminum": 2
+                            },
+                            "cnpj": {
+                                "required": true,
+                                "type": "string",
+                                "pattern": "^[0-9]{14}$"
+                            },
+                            "cnpb_numprocesso": {
+                                "required": true,
+                                "type": "string",
+                                "pattern": "^[0-9]{1,20}$"
+                            },
+                            "vlrportabilidade": {
+                                "required": true,
+                                "type": "number"
+                            }
+                        }
+                    },
                     "saldofinal": {
                         "type": "object",
                         "properties": {
@@ -226,4 +265,101 @@
             }
         }
     }    
+}';
+
+$std = new \stdClass();
+$std->sequencial = '1';
+$std->indretificacao = 3; //Indicativo de Retificação: 1 - Original 2 - Retificador 3 - Retificador a Pedido
+$std->nrrecibo = '123456789012345678-12-123-1234-123456789012345678';
+$std->tpni = 1;
+$std->tpdeclarado = 'klsks';
+$std->nideclarado = 'ssss';
+$std->nomedeclarado = 'slkcskkslsklsklsk';
+$std->anomescaixa = '201712';
+
+$std->infoprevpriv[0] = new \stdClass();
+$std->infoprevpriv[0]->numproposta = '12';
+$std->infoprevpriv[0]->numprocesso = '22222';
+
+$std->infoprevpriv[0]->produto = new \stdClass();
+$std->infoprevpriv[0]->produto->tpproduto = '01';
+$std->infoprevpriv[0]->produto->opcaotributacao = 1; //Opção de tributação: 1 - Regime de tributação progressivo ou 2 - Regime de tributação regressivo
+
+$std->infoprevpriv[0]->tpplano = '02';
+$std->infoprevpriv[0]->vlrprincipal = 10111.11;
+$std->infoprevpriv[0]->vlrrendimentos = 1111.11;
+
+$std->infoprevpriv[0]->aplic[0] = new \stdClass();
+$std->infoprevpriv[0]->aplic[0]->vlrcontribuicao = 1111.11;
+$std->infoprevpriv[0]->aplic[0]->vlrcarregamento = 10000.00;
+$std->infoprevpriv[0]->aplic[0]->vlrpartpf = -1000.00;
+$std->infoprevpriv[0]->aplic[0]->vlrpartpj = 6000.00;
+$std->infoprevpriv[0]->aplic[0]->cnpj = '12345678901234';
+
+$std->infoprevpriv[0]->resg[0] = new \stdClass();
+$std->infoprevpriv[0]->resg[0]->vlraliquotairrf = 10.11;
+$std->infoprevpriv[0]->resg[0]->numanoscarencia = 8.15;
+$std->infoprevpriv[0]->resg[0]->vlrresgateprincipal = 11111.11;
+$std->infoprevpriv[0]->resg[0]->vlrresgaterendimentos = 1.11;
+$std->infoprevpriv[0]->resg[0]->vlrirrf = 14.54;
+
+$std->infoprevpriv[0]->benef[0] = new \stdClass();
+$std->infoprevpriv[0]->benef[0]->tpni = 1;
+$std->infoprevpriv[0]->benef[0]->niparticipante = '45343434';
+$std->infoprevpriv[0]->benef[0]->codreceita = '3277';
+$std->infoprevpriv[0]->benef[0]->prazovigencia = 874;
+$std->infoprevpriv[0]->benef[0]->vlrmensalinicial = 2451.56;
+$std->infoprevpriv[0]->benef[0]->vlrbruto = 2875.54;
+$std->infoprevpriv[0]->benef[0]->vlrliquido = 1865.22;
+$std->infoprevpriv[0]->benef[0]->vlrirrf = 110.11;
+$std->infoprevpriv[0]->benef[0]->vlraliquotairrf = 12.01;
+$std->infoprevpriv[0]->benef[0]->competenciapgto = '11';
+
+$std->infoprevpriv[0]->portabilidade = new \stdClass();
+$std->infoprevpriv[0]->portabilidade->indportabilidade = 1;
+$std->infoprevpriv[0]->portabilidade->cnpj = '12345678901234';
+$std->infoprevpriv[0]->portabilidade->cnpb_numprocesso = '12345678901234567890';
+$std->infoprevpriv[0]->portabilidade->vlrportabilidade = 20000; 
+
+$std->infoprevpriv[0]->saldofinal= new \stdClass();
+$std->infoprevpriv[0]->saldofinal->vlrprincipal = 11457.59;
+$std->infoprevpriv[0]->saldofinal->vlrrendimentos = 2598.89;
+
+
+// Schema must be decoded before it can be used for validation
+$jsonSchemaObject = json_decode($jsonSchema);
+if (empty($jsonSchemaObject)) {
+    echo "<h2>Erro de digitacão no schema ! Revise</h2>";
+    echo "<pre>";
+    print_r($jsonSchema);
+    echo "</pre>";
+    die();
 }
+// The SchemaStorage can resolve references, loading additional schemas from file as needed, etc.
+$schemaStorage = new SchemaStorage();
+
+// This does two things:
+// 1) Mutates $jsonSchemaObject to normalize the references (to file://mySchema#/definitions/integerData, etc)
+// 2) Tells $schemaStorage that references to file://mySchema... should be resolved by looking in $jsonSchemaObject
+$schemaStorage->addSchema('file://mySchema', $jsonSchemaObject);
+
+// Provide $schemaStorage to the Validator so that references can be resolved during validation
+$jsonValidator = new Validator(new Factory($schemaStorage));
+
+// Do validation (use isValid() and getErrors() to check the result)
+$jsonValidator->validate(
+    $std,
+    $jsonSchemaObject
+);
+
+if ($jsonValidator->isValid()) {
+    echo "The supplied JSON validates against the schema.<br/>";
+} else {
+    echo "JSON does not validate. Violations:<br/>";
+    foreach ($jsonValidator->getErrors() as $error) {
+        echo sprintf("[%s] %s<br/>", $error['property'], $error['message']);
+    }
+    die;
+}
+//salva se sucesso
+file_put_contents("../../../jsonSchemes/v$version/$evento.schema", $jsonSchema);
