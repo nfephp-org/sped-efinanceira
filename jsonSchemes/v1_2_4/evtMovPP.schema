@@ -209,6 +209,32 @@
                             }
                         }
                     },
+                    "portabilidade": {
+                        "required": false,
+                        "type": ["object","null"],
+                        "properties": {
+                            "indportabilidade": {
+                                "required": true,
+                                "type": "integer",
+                                "minimum": 1,
+                                "maxminum": 2
+                            },
+                            "cnpj": {
+                                "required": true,
+                                "type": "string",
+                                "pattern": "^[0-9]{14}$"
+                            },
+                            "cnpb_numprocesso": {
+                                "required": true,
+                                "type": "string",
+                                "pattern": "^[0-9]{1,20}$"
+                            },
+                            "vlrportabilidade": {
+                                "required": true,
+                                "type": "number"
+                            }
+                        }
+                    },
                     "saldofinal": {
                         "type": "object",
                         "properties": {
