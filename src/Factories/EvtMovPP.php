@@ -313,7 +313,7 @@ class EvtMovPP extends Factory implements FactoryInterface
                 $this->dom->addChild(
                     $portabilidade,
                     "vlrPortabilidade",
-                    number_format($port->vlrportabilidade, 2, ',' , ''),
+                    number_format($port->vlrportabilidade, 2, ',', ''),
                     true
                 );
                 $opPrevPriv->appendChild($portabilidade);
