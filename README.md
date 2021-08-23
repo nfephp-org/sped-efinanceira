@@ -1,8 +1,8 @@
-# SPED-EFINANCEIRA (versão 2.0 - layout 1.2.3) atualização 22/05/2020
+# SPED-EFINANCEIRA (versão 2.0 - layout 1.2.4) atualização 23/08/2021
 
 **API PHP para a integração de aplicativo com o projeto SPED eFinanceira da Receita Federal do Brasil**
 
-> NOTA: quando a receita fornece arquivos PEM ao inves de CER use, lembrando de deixar apenas o certificado e removendo o restante dos textos que existirem. 
+> NOTA: quando a receita fornece arquivos PEM ao inves de CER use, lembrando de deixar apenas o certificado e removendo o restante dos textos que existirem.
 ```
 openssl x509 -outform der -in pre_web.pem -out pre_web.cer
 ```
@@ -54,8 +54,8 @@ Caso você encontre algum problema relativo a segurança, por favor envie um ema
 
 - Roberto L. Machado <linux.rlm@gmail.com>
 
-O desenvolvimento desse pacote somente foi possivel devido a contribuição e colaboração da 
-[ACTUARY Ltda](http://www.actuary.com.br/v3/) 
+O desenvolvimento desse pacote somente foi possivel devido a contribuição e colaboração da
+[ACTUARY Ltda](http://www.actuary.com.br/v3/)
 
 ## Licenças
 
@@ -74,4 +74,3 @@ Este patote está diponibilizado sob LGPLv3 ou MIT License (MIT). Leia  [Arquivo
 [link-code-quality]: https://scrutinizer-ci.com/g/nfephp-org/sped-efinanceira
 [link-downloads]: https://packagist.org/packages/nfephp-org/sped-efinanceira
 [link-author]: https://github.com/nfephp-org
-
