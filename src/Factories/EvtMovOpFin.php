@@ -67,7 +67,7 @@ class EvtMovOpFin extends Factory implements FactoryInterface
             true
         );
         $this->node->insertBefore($ideEvento, $ideDeclarante);
-        
+
         $ideDeclarado = $this->dom->createElement("ideDeclarado");
         $this->dom->addChild(
             $ideDeclarado,
@@ -252,14 +252,14 @@ class EvtMovOpFin extends Factory implements FactoryInterface
                 $ideDeclarado->appendChild($NomeOutros);
             }
         }
-        
+
         $this->dom->addChild(
             $ideDeclarado,
             "DataNasc",
             !empty($this->std->datanasc) ? $this->std->datanasc : null,
             false
         );
-        
+
         if (!empty($this->std->infonascimento)) {
             $in = $this->std->infonascimento;
             $InfoNascimento = $this->dom->createElement("InfoNascimento");
@@ -316,7 +316,7 @@ class EvtMovOpFin extends Factory implements FactoryInterface
             true
         );
         $ideDeclarado->appendChild($PaisEndereco);
-        
+
         if (!empty($this->std->enderecooutros)) {
             foreach ($this->std->enderecooutros as $eo) {
                 $EnderecoOutros = $this->dom->createElement("EnderecoOutros");
@@ -487,7 +487,7 @@ class EvtMovOpFin extends Factory implements FactoryInterface
                     !empty($p->tpnome) ? $p->tpnome : null,
                     false
                 );
-                
+
                 if (!empty($p->nomeoutros)) {
                     foreach ($p->nomeoutros as $no) {
                         $NomeOutros = $this->dom->createElement("NomeOutros");
@@ -600,7 +600,7 @@ class EvtMovOpFin extends Factory implements FactoryInterface
                     true
                 );
                 $Proprietarios->appendChild($PaisEndereco);
-                
+
                 if (!empty($p->enderecooutros)) {
                     foreach ($p->enderecooutros as $eo) {
                         $EnderecoOutros = $this->dom->createElement("EnderecoOutros");
@@ -695,7 +695,7 @@ class EvtMovOpFin extends Factory implements FactoryInterface
                         $Proprietarios->appendChild($EnderecoOutros);
                     }
                 }
-                
+
                 if (!empty($p->paisresid)) {
                     foreach ($p->paisresid as $pr) {
                         $paisResid = $this->dom->createElement("paisResid");
@@ -720,7 +720,7 @@ class EvtMovOpFin extends Factory implements FactoryInterface
                         $Proprietarios->appendChild($PaisNacionalidade);
                     }
                 }
-                
+
                 if (!empty($p->infonascimento)) {
                     $in = $p->infonascimento;
                     $InfoNascimento = $this->dom->createElement("InfoNascimento");
@@ -757,7 +757,7 @@ class EvtMovOpFin extends Factory implements FactoryInterface
                     }
                     $Proprietarios->appendChild($InfoNascimento);
                 }
-                
+
                 foreach ($p->reportavel as $r) {
                     $Reportavel = $this->dom->createElement("Reportavel");
                     $this->dom->addChild(
@@ -772,7 +772,7 @@ class EvtMovOpFin extends Factory implements FactoryInterface
             }
         }
         $this->node->appendChild($ideDeclarado);
-        
+
         $mesCaixa = $this->dom->createElement("mesCaixa");
         $this->dom->addChild(
             $mesCaixa,
@@ -826,7 +826,7 @@ class EvtMovOpFin extends Factory implements FactoryInterface
                         $Conta->appendChild($MedJudic);
                     }
                 }
-                
+
                 if (!empty($c->infoconta)) {
                     $ic = $c->infoconta;
                     $infoConta = $this->dom->createElement("infoConta");
@@ -935,7 +935,7 @@ class EvtMovOpFin extends Factory implements FactoryInterface
                         );
                         $infoConta->appendChild($Fundo);
                     }
-                    
+
                     $BalancoConta = $this->dom->createElement("BalancoConta");
                     $this->dom->addChild(
                         $BalancoConta,
@@ -964,11 +964,11 @@ class EvtMovOpFin extends Factory implements FactoryInterface
                     $this->dom->addChild(
                         $BalancoConta,
                         "vlrUltDia",
-                        !empty($ic->vlrultdia) ? number_format($ic->vlrultdia, 2, ',', '') : null,
+                        isset($ic->vlrultdia) ? number_format($ic->vlrultdia, 2, ',', '') : null,
                         false
                     );
                     $infoConta->appendChild($BalancoConta);
-                    
+
                     foreach ($ic->pgtosacum as $pg) {
                         $PgtosAcum = $this->dom->createElement("PgtosAcum");
                         $this->dom->addChild(
@@ -990,7 +990,7 @@ class EvtMovOpFin extends Factory implements FactoryInterface
                 $movOpFin->appendChild($Conta);
             }
         }
-        
+
         if (!empty($this->std->cambio)) {
             $c = $this->std->cambio;
             $Cambio = $this->dom->createElement("Cambio");
@@ -1056,10 +1056,10 @@ class EvtMovOpFin extends Factory implements FactoryInterface
             }
             $movOpFin->appendChild($Cambio);
         }
-        
+
         $mesCaixa->appendChild($movOpFin);
         $this->node->appendChild($mesCaixa);
-                
+
         //finalização do xml
         $this->eFinanceira->appendChild($this->node);
         //$this->xml = $this->dom->saveXML($this->eFinanceira);
