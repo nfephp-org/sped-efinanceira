@@ -56,7 +56,9 @@
         "test": "phpunit",
         "phpcbf": "vendor/bin/phpcbf --standard=psr2 src/",
         "phpcs": "vendor/bin/phpcs --standard=psr2 src/",
-        "phpstan": "vendor/bin/phpstan analyse src/ --level 7"
+        "stan": "vendor/bin/phpstan analyse src/",
+        "stan80": "phpstan analyse src/ -c phpstan80.neon",
+        "stan81": "phpstan analyse src/ -c phpstan81.neon"
     },
     "extra": {
         "branch-alias": {
