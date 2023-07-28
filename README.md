@@ -5,6 +5,8 @@
 > NOTA: quando a receita fornece arquivos PEM ao inves de CER use, lembrando de deixar apenas o certificado e removendo o restante dos textos que existirem.
 ```
 openssl x509 -outform der -in pre_web.pem -out pre_web.cer
+openssl x509 -inform der -in prepro-efinanc_web.cer -out preprod-efinanc_web.pem
+
 ```
 
 *sped-efinanceira* é um framework que permite a integração de um aplicativo, com o serviço do projeto SPED da RFB denominado *eFinanceira*, com a construção dos eventos em xml e do envio dos lotes de eventos e consultas, através de requisições SOAP, sobre SSL usando certificado digital modelo A1 (PKCS#12), pertencentes a cadeia de certificação Brasileira.
