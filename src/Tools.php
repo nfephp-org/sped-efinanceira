@@ -27,7 +27,7 @@ class Tools extends Base
     const MODO_ZIP = 1;
     const MODO_CRYPTO = 2;
     const MODO_CRYPTOZIP = 3;
-    
+
     /**
      * @var array
      */
@@ -36,7 +36,7 @@ class Tools extends Base
      * @var stdClass
      */
     private $urls;
-    
+
     /**
      * Constructor
      * @param string $config
@@ -68,13 +68,13 @@ class Tools extends Base
                 . '/WsEFinanceira/WsConsulta.asmx';
         }
     }
-    
+
     /**
      * This method performs the desired query to the webservice
      * @param string $type indicate the query to be used
      * @param stdClass $std contain the parameters of this query
      * @return string xml webservice response
-     * @throws type
+     * @throws EventsException
      */
     public function consultar(string $type, stdClass $std):string
     {
@@ -85,7 +85,7 @@ class Tools extends Base
         }
         return $this->$type($std);
     }
-    
+
     /**
      * This method sends the events to the webservice
      * @param array $events
@@ -97,9 +97,6 @@ class Tools extends Base
     {
         //constructor do lote
         $body = $this->batchBuilder($events);
-        //header('Content-Type: application/xml; charset=utf-8');
-        //echo $body;
-        //die;
         $url = $this->urls->recepcao;
         $method = 'ReceberLoteEvento';
         if ($modo == self::MODO_ZIP) {
@@ -127,7 +124,46 @@ class Tools extends Base
         }
         return $this->sendRequest($body, $method, $url);
     }
-    
+
+    /**
+     * Este metodo permite o envio de apenas um EVENTO já renderizado em XML e assinado,
+     * pelo envio encriptado e zipado.
+     * Decorre da necessidade de envio de eventos com uma enorme carga de dados
+     * @param string $xml
+     * @return string
+     */
+    public function enviarEventoXmlCryptoZip(string $xml)
+    {
+        $layout = $this->versions['envioLoteEventos'];
+        $content = "<eFinanceira "
+            . "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" "
+            . "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
+            . "xmlns=\"http://www.eFinanceira.gov.br/schemas/envioLoteEventos/v$layout\">";
+        $lote = date('YmdHms');
+        $content .= "<loteEventos>"
+            . "<evento id=\"ID1\">"
+            . $xml
+            . "</evento>"
+            . "</loteEventos>"
+            . "</eFinanceira>";
+        $schema = $this->path
+            . 'schemes/v'
+            . $this->eventoVersion
+            . '/envioLoteEventos-v'
+            . $layout
+            . '.xsd';
+        if ($schema) {
+            Validator::isValid($content, $schema);
+        }
+        $url = $this->urls->crypto;
+        $method = 'ReceberLoteEventoCriptoGZip';
+        $zip = gzencode($content);
+        //encripta a mensagem compactada
+        $crypted = base64_encode($this->sendCripto($zip));
+        $body = "<sped:bufferXmlComLoteCriptografadoGZip>$crypted</sped:bufferXmlComLoteCriptografadoGZip>";
+        return $this->sendRequest($body, $method, $url);
+    }
+
     /**
      * Allow the registration of new certificates for encrypted messages
      * @param string $derdata certificate content in DER format (usual)
@@ -137,12 +173,12 @@ class Tools extends Base
         $crypto = new Crypto($derdata);
         $this->der = $derdata;
     }
-    
+
     /**
      * This method constructs the event batch
      * @param array $events
      * @return string
-     * @throws NFePHP\eFinanc\Exception\ProcessException
+     * @throws ProcessException
      */
     private function batchBuilder(array $events)
     {
@@ -190,12 +226,12 @@ class Tools extends Base
         }
         return $xml;
     }
-    
+
     /**
      * This method encrypts the event batch
      * @param string $body
      * @return string
-     * @throws NFePHP\eFincnac\Exception\ProcessException
+     * @throws ProcessException
      */
     public function sendCripto($body)
     {
@@ -208,7 +244,7 @@ class Tools extends Base
         $dt = new \DateTime();
         if ($resp['validTo'] < $dt) {
             //a validade do certificado expirou
-            throw Exception\ProcessException::wrongArgument(2004, '');
+            throw ProcessException::wrongArgument(2004, '');
         }
         $id = 1;
         $layout = $this->versions['envioLoteCriptografado'];
@@ -235,12 +271,12 @@ class Tools extends Base
         }
         return $msg;
     }
-    
+
     /**
      * This method consults "Informacoes Cadastrais"
      * @param stdClass $std
      * @return string
-     * @throws NFePHP\eFinanc\Exception\ConsultException
+     * @throws ConsultException
      */
     protected function consultarInformacoesCadastrais(stdClass $std):string
     {
@@ -258,7 +294,7 @@ class Tools extends Base
      * This method consults "Informacoes Intermediario"
      * @param stdClass $std
      * @return string
-     * @throws NFePHP\eFinanc\Exception\ConsultException
+     * @throws ConsultException
      */
     protected function consultarInformacoesIntermediario(stdClass $std):string
     {
@@ -302,12 +338,12 @@ class Tools extends Base
         $body .= "</sped:$method>";
         return $this->sendRequest($body, $method, $this->urls->consulta);
     }
-        
+
     /**
      * This method consults "Informacoes Movimento"
      * @param stdClass $std
      * @return string
-     * @throws NFePHP\eFinanc\Exception\ConsultException
+     * @throws ConsultException
      */
     protected function consultarInformacoesMovimento(stdClass $std):string
     {
@@ -381,7 +417,7 @@ class Tools extends Base
      * This method consults "Informacoes Patrocinado"
      * @param stdClass $std
      * @return string
-     * @throws NFePHP\eFinanc\Exception\ConsultException
+     * @throws ConsultException
      */
     protected function consultarInformacoesPatrocinado(stdClass $std):string
     {
@@ -425,7 +461,7 @@ class Tools extends Base
      * This method consults "Informacoes Rerct"
      * @param stdClass $std
      * @return string
-     * @throws NFePHP\eFinanc\Exception\ConsultException
+     * @throws ConsultException
      */
     protected function consultarInformacoesRerct(stdClass $std):string
     {
@@ -463,7 +499,7 @@ class Tools extends Base
         $method = 'ConsultarInformacoesRerct';
         $body = "<sped:$method><sped:idEventoRerct>$std->ideventorerct</sped:idEventoRerct>"
             . "<sped:situacaoInformacao>$std->situacaoinformacao</sped:situacaoInformacao>";
-        
+
         if (preg_match("/^([0-9]{1,18}[-][0-9]{2}[-][0-9]{3}[-][0-9]{4}[-][0-9]{1,18})$/", $std->numerorecibo)) {
             $body .= "<sped:numeroRecibo>$std->numerorecibo</sped:numeroRecibo>";
         }
@@ -487,7 +523,7 @@ class Tools extends Base
      * This method consults "Lista EFinanceira"
      * @param stdClass $std
      * @return string
-     * @throws NFePHP\eFinanc\Exception\ConsultException
+     * @throws ConsultException
      */
     protected function consultarListaEFinanceira(stdClass $std):string
     {
@@ -523,12 +559,12 @@ class Tools extends Base
         $body .= "</sped:$method>";
         return $this->sendRequest($body, $method, $this->urls->consulta);
     }
-    
+
     /**
      * Verify the availability of a digital certificate.
      * If available, place it where it is needed
      * @param FactoryInterface $evento
-     * @throws RuntimeException
+     * @return void
      */
     protected function checkCertificate(FactoryInterface $evento)
     {
