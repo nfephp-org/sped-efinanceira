@@ -109,7 +109,7 @@ class SoapCurl extends SoapBase implements SoapInterface
             //::soapFault($this->soaperror . " [$url]", $this->soaperror);
         }
         if ($httpcode != 200) {
-            throw SoapException::soapFault(
+            throw new SoapException(
                 " [$url] HTTP Error code: $httpcode - "
                 . $this->getFaultString($this->responseBody),
                 $httpcode
