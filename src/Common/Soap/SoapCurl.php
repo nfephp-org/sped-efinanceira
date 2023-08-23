@@ -85,6 +85,7 @@ class SoapCurl extends SoapBase implements SoapInterface
             }
             $response = curl_exec($oCurl);
             $this->soaperror = curl_error($oCurl);
+            $this->soaperrorno = (string) curl_errno($oCurl);
             $ainfo = curl_getinfo($oCurl);
             if (is_array($ainfo)) {
                 $this->soapinfo = $ainfo;
@@ -100,10 +101,12 @@ class SoapCurl extends SoapBase implements SoapInterface
                 $this->responseHead . "\n" . $this->responseBody
             );
         } catch (\Exception $e) {
-            throw SoapException::unableToLoadCurl($e->getMessage());
+            throw new SoapException('LIBCURL não localizada', 500);
+            //::unableToLoadCurl($e->getMessage(), 500);
         }
         if ($this->soaperror != '') {
-            throw SoapException::soapFault($this->soaperror . " [$url]", $this->soaperror);
+            throw new SoapException($this->soaperror . " [$url]", $this->soaperrorno);
+            //::soapFault($this->soaperror . " [$url]", $this->soaperror);
         }
         if ($httpcode != 200) {
             throw SoapException::soapFault(
