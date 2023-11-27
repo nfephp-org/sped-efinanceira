@@ -1,0 +1,1009 @@
+{
+    "title": "evtMovOpFinAnual",
+    "type": "object",
+    "properties": {
+        "sequencial": {
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9]{1,18}"
+        },
+        "indretificacao": {
+            "required": true,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 3
+        },
+        "nrrecibo": {
+            "required": false,
+            "type": ["string","null"],
+            "pattern": "^([0-9]{1,18}[-][0-9]{2}[-][0-9]{3}[-][0-9]{4}[-][0-9]{1,18})$"
+        },
+        "anocaixa": {
+            "required": true,
+            "type": "string",
+            "pattern": "^20([0-9][0-9])"
+        },
+        "semestre": {
+            "required": true,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2
+        },
+        "tpni": {
+            "required": true,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 99
+        },
+        "tpdeclarado": {
+            "required": false,
+            "type": ["string","null"],
+            "minLength": 1,
+            "maxLength": 8
+        },
+        "nideclarado": {
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 25
+        },
+        "nomedeclarado": {
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+        },
+        "tpnomedeclarado": {
+            "required": false,
+            "type": ["string","null"],
+            "minLength": 1,
+            "maxLength": 7
+        },
+        "enderecolivre": {
+            "required": false,
+            "type": ["string","null"],
+            "minLength": 1,
+            "maxLength": 200
+        },
+        "tpendereco": {
+            "required": false,
+            "type": ["string","null"],
+            "minLength": 1,
+            "maxLength": 7
+        },
+        "pais": {
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2
+        },
+        "datanasc": {
+            "required": false,
+            "type": ["string","null"],
+            "pattern": "^(19[0-9][0-9]|2[0-9][0-9][0-9])[-/](0?[1-9]|1[0-2])[-/](0?[1-9]|[12][0-9]|3[01])$"
+        },
+        "nif": {
+            "required": false,
+            "type": ["array","null"],
+            "minItems": 0,
+            "items": {
+                "type": "object",
+                "properties": {
+                    "numeronif": {
+                        "required": true,
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 25
+                    },
+                    "paisemissaonif": {
+                        "required": true,
+                        "type": "string",
+                        "minLength": 2,
+                        "maxLength": 2
+                    },
+                    "tpnif": {
+                        "required": false,
+                        "type": ["string","null"],
+                        "minLength": 1,
+                        "maxLength": 30
+                    }
+                }
+            }    
+        },
+        "nomeoutros": {
+            "required": false,
+            "type": ["array","null"],
+            "minItems": 0,
+            "items": {
+                "type": "object",
+                "properties": {
+                    "nomepf": {
+                        "required": false,
+                        "type": ["object","null"],
+                        "properties": {
+                            "tpnome": {
+                                "required": false,
+                                "type": ["string","null"],
+                                "minLength": 1,
+                                "maxLength": 7
+                            },
+                            "prectitulo": {
+                                "required": false,
+                                "type": ["string","null"],
+                                "minLength": 1,
+                                "maxLength": 20
+                            },
+                            "titulo": {
+                                "required": false,
+                                "type": ["string","null"],
+                                "minLength": 1,
+                                "maxLength": 20
+                            },
+                            "idgeracao": {
+                                "required": false,
+                                "type": ["string","null"],
+                                "minLength": 1,
+                                "maxLength": 10
+                            },
+                            "sufixo": {
+                                "required": false,
+                                "type": ["string","null"],
+                                "minLength": 1,
+                                "maxLength": 10
+                            },
+                            "gensufixo": {
+                                "required": false,
+                                "type": ["string","null"],
+                                "minLength": 1,
+                                "maxLength": 10
+                            },
+                            "primeironome": {
+                                "required": true,
+                                "type": "object",
+                                "properties": {
+                                    "tipo": {
+                                        "required": false,
+                                        "type": ["string","null"],
+                                        "minLength": 1,
+                                        "maxLength": 20
+                                    },
+                                    "nome": {
+                                        "required": true,
+                                        "type": "string",
+                                        "minLength": 1,
+                                        "maxLength": 20
+                                    }
+                                }
+                            },
+                            "meionome": {
+                                "required": false,
+                                "type": ["array","null"],
+                                "minItems": 0,
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "tipo": {
+                                            "required": false,
+                                            "type": ["string","null"],
+                                            "minLength": 1,
+                                            "maxLength": 20
+                                        },
+                                        "nome": {
+                                            "required": true,
+                                            "type": "string",
+                                            "minLength": 1,
+                                            "maxLength": 20
+                                        }
+                                    }
+                                }    
+                            },
+                            "prefixonome": {
+                                "required": false,
+                                "type": ["object","null"],
+                                "properties": {
+                                    "tipo": {
+                                        "required": false,
+                                        "type": ["string","null"],
+                                        "minLength": 1,
+                                        "maxLength": 20
+                                    },
+                                    "nome": {
+                                        "required": true,
+                                        "type": "string",
+                                        "minLength": 1,
+                                        "maxLength": 10
+                                    }
+                                }
+                            },
+                            "ultimonome": {
+                                "required": true,
+                                "type": "object",
+                                "properties": {
+                                    "tipo": {
+                                        "required": false,
+                                        "type": ["string","null"],
+                                        "minLength": 1,
+                                        "maxLength": 20
+                                    },
+                                    "nome": {
+                                        "required": true,
+                                        "type": "string",
+                                        "minLength": 1,
+                                        "maxLength": 20
+                                    }
+                                }
+                            }
+                        }
+                    },    
+                    "nomepj": {
+                        "required": false,
+                        "type": ["object","null"],
+                        "properties": {
+                            "tipo": {
+                                "required": false,
+                                "type": ["string","null"],
+                                "minLength": 1,
+                                "maxLength": 7
+                            },
+                            "nome": {
+                                "required": true,
+                                "type": "string",
+                                "minLength": 1,
+                                "maxLength": 100
+                            }
+                        }
+                    },
+                    "infonascimento": {
+                        "required": false,
+                        "type": ["object","null"],
+                        "properties": {
+                            "municipio": {
+                                "required": false,
+                                "type": ["string","null"],
+                                "minLength": 1,
+                                "maxLength": 60
+                            },
+                            "bairro": {
+                                "required": false,
+                                "type": ["string","null"],
+                                "minLength": 1,
+                                "maxLength": 40
+                            },
+                            "pais": {
+                                "required": false,
+                                "type": ["string","null"],
+                                "minLength": 2,
+                                "maxLength": 2
+                            },
+                            "antigonomepais": {
+                                "required": false,
+                                "type": ["string","null"],
+                                "minLength": 1,
+                                "maxLength": 40
+                            }
+                        }
+                    }                
+                }
+            }    
+        },
+        "enderecooutros": {
+            "required": false,
+            "type": ["array","null"],
+            "minItems": 0,
+            "items": {
+                "type": "object",
+                "properties": {
+                    "tpendereco": {
+                        "required": false,
+                        "type": ["string","null"],
+                        "minLength": 1,
+                        "maxLength": 7
+                    },
+                    "enderecolivre": {
+                        "required": false,
+                        "type": ["string","null"],
+                        "minLength": 1,
+                        "maxLength": 200
+                    },
+                    "enderecoestrutura": {
+                        "required": false,
+                        "type": ["object","null"],
+                        "properties": {
+                            "enderecolivre": {
+                                "required": false,
+                                "type": ["string","null"],
+                                "minLength": 1,
+                                "maxLength": 200
+                            },
+                            "cep": {
+                                "required": true,
+                                "type": "string",
+                                "minLength": 1,
+                                "maxLength": 12
+                            },
+                            "municipio": {
+                                "required": true,
+                                "type": "string",
+                                "minLength": 1,
+                                "maxLength": 60
+                            },
+                            "uf": {
+                                "required": true,
+                                "type": "string",
+                                "minLength": 1,
+                                "maxLength": 40
+                            },
+                            "pais": {
+                                "required": true,
+                                "type": "string",
+                                "minLength": 2,
+                                "maxLength": 2
+                            },
+                            "endereco": {
+                                "required": false,
+                                "type": ["object","null"],
+                                "properties": {
+                                    "logradouro": {
+                                        "required": false,
+                                        "type": ["string","null"],
+                                        "minLength": 1,
+                                        "maxLength": 60
+                                    },
+                                    "numero": {
+                                        "required": false,
+                                        "type": ["string","null"],
+                                        "minLength": 1,
+                                        "maxLength": 10
+                                    },
+                                    "complemento": {
+                                        "required": false,
+                                        "type": ["string","null"],
+                                        "minLength": 1,
+                                        "maxLength": 10
+                                    },
+                                    "andar": {
+                                        "required": false,
+                                        "type": ["string","null"],
+                                        "minLength": 1,
+                                        "maxLength": 10
+                                    },
+                                    "bairro": {
+                                        "required": false,
+                                        "type": ["string","null"],
+                                        "minLength": 1,
+                                        "maxLength": 40
+                                    },
+                                    "caixapostal": {
+                                        "required": false,
+                                        "type": ["string","null"],
+                                        "minLength": 1,
+                                        "maxLength": 12
+                                    }
+                                }
+                            }
+                        }
+                    }    
+                }
+            }
+        },
+        "paisresid": {
+            "required": false,
+            "type": ["array","null"],
+            "minItems": 0,
+            "items": {
+                "type": "object",
+                "properties": {
+                    "pais": {
+                        "required": true,
+                        "type": "string",
+                        "minLength": 2,
+                        "maxLength": 2
+                    }
+                }
+            }    
+        },
+        "paisnacionalidade": {
+            "required": false,
+            "type": ["array","null"],
+            "minItems": 0,
+            "items": {
+                "type": "object",
+                "properties": {
+                    "pais": {
+                        "required": true,
+                        "type": "string",
+                        "minLength": 2,
+                        "maxLength": 2
+                    }
+                }
+            }    
+        },
+        "proprietarios": {
+            "required": false,
+            "type": ["array","null"],
+            "minItems": 0,
+            "items": {
+                "type": "object",
+                "properties": {
+                    "tpni": {
+                        "required": true,
+                        "type": "integer",
+                        "minLength": 1,
+                        "maxLength": 5
+                    },
+                    "niproprietario": {
+                        "required": true,
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 25
+                    },
+                    "tpproprietario": {
+                        "required": false,
+                        "type": ["string","null"],
+                        "minLength": 1,
+                        "maxLength": 8
+                    },
+                    "nome": {
+                        "required": true,
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 100
+                    },
+                    "tpnome": {
+                        "required": false,
+                        "type": ["string","null"],
+                        "minLength": 1,
+                        "maxLength": 7
+                    },
+                    "enderecolivre": {
+                        "required": true,
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 200
+                    },
+                    "tpendereco": {
+                        "required": false,
+                        "type": ["string","null"],
+                        "minLength": 1,
+                        "maxLength": 7
+                    },
+                    "pais": {
+                        "required": true,
+                        "type": "string",
+                        "minLength": 2,
+                        "maxLength": 2
+                    },
+                    "datanasc": {
+                        "required": false,
+                        "type": ["string","null"],
+                        "pattern": "^(19[0-9][0-9]|2[0-9][0-9][0-9])[-/](0?[1-9]|1[0-2])[-/](0?[1-9]|[12][0-9]|3[01])$"
+                    },
+                    "nif": {
+                        "required": false,
+                        "type": ["array","null"],
+                        "minItems": 0,
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "numeronif": {
+                                    "required": true,
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "maxLength": 25
+                                },
+                                "paisemissaonif": {
+                                    "required": true,
+                                    "type": "string",
+                                    "minLength": 2,
+                                    "maxLength": 2
+                                }
+                            }
+                        }    
+                    },
+                    "nomeoutros": {
+                        "required": false,
+                        "type": ["array","null"],
+                        "minItems": 0,
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "nomepf": {
+                                    "required": false,
+                                    "type": ["object","null"],
+                                    "properties": {
+                                        "tpnome": {
+                                            "required": false,
+                                            "type": ["string","null"],
+                                            "minLength": 1,
+                                            "maxLength": 7
+                                        },
+                                        "prectitulo": {
+                                            "required": false,
+                                            "type": ["string","null"],
+                                            "minLength": 1,
+                                            "maxLength": 20
+                                        },
+                                        "titulo": {
+                                            "required": false,
+                                            "type": ["string","null"],
+                                            "minLength": 1,
+                                            "maxLength": 10
+                                        },
+                                        "idgeracao": {
+                                            "required": false,
+                                            "type": ["string","null"],
+                                            "minLength": 1,
+                                            "maxLength": 10
+                                        },
+                                        "sufixo": {
+                                            "required": false,
+                                            "type": ["string","null"],
+                                            "minLength": 1,
+                                            "maxLength": 10
+                                        },
+                                        "gensufixo": {
+                                            "required": false,
+                                            "type": ["string","null"],
+                                            "minLength": 1,
+                                            "maxLength": 10
+                                        },
+                                        "primeironome": {
+                                            "required": true,
+                                            "type": "object",
+                                            "properties": {
+                                                "tipo": {
+                                                    "required": false,
+                                                    "type": ["string","null"],
+                                                    "minLength": 1,
+                                                    "maxLength": 20
+                                                },
+                                                "nome": {
+                                                    "required": true,
+                                                    "type": "string",
+                                                    "minLength": 1,
+                                                    "maxLength": 20
+                                                }
+                                            }
+                                        },
+                                        "meionome": {
+                                            "required": false,
+                                            "type": ["array","null"],
+                                            "minItems": 0,
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "tipo": {
+                                                        "required": false,
+                                                        "type": ["string","null"],
+                                                        "minLength": 1,
+                                                        "maxLength": 20
+                                                    },
+                                                    "nome": {
+                                                        "required": true,
+                                                        "type": "string",
+                                                        "minLength": 1,
+                                                        "maxLength": 20
+                                                    }
+                                                }
+                                            }    
+                                        },
+                                        "prefixonome": {
+                                            "required": false,
+                                            "type": ["object","null"],
+                                            "properties": {
+                                                "tipo": {
+                                                    "required": false,
+                                                    "type": ["string","null"],
+                                                    "minLength": 1,
+                                                    "maxLength": 20
+                                                },
+                                                "nome": {
+                                                    "required": true,
+                                                    "type": "string",
+                                                    "minLength": 1,
+                                                    "maxLength": 10
+                                                }
+                                            }
+                                        },
+                                        "ultimonome": {
+                                            "required": true,
+                                            "type": "object",
+                                            "properties": {
+                                                "tipo": {
+                                                    "required": false,
+                                                    "type": ["string","null"],
+                                                    "minLength": 1,
+                                                    "maxLength": 20
+                                                },
+                                                "nome": {
+                                                    "required": true,
+                                                    "type": "string",
+                                                    "minLength": 1,
+                                                    "maxLength": 20
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }    
+                    },
+                    "enderecooutros": {
+                        "required": false,
+                        "type": ["array","null"],
+                        "minItems": 0,
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "tpendereco": {
+                                    "required": false,
+                                    "type": ["string","null"],
+                                    "minLength": 1,
+                                    "maxLength": 7
+                                },
+                                "enderecolivre": {
+                                    "required": false,
+                                    "type": ["string","null"],
+                                    "minLength": 3,
+                                    "maxLength": 200
+                                },
+                                "pais": {
+                                    "required": true,
+                                    "type": "string",
+                                    "minLength": 2,
+                                    "maxLength": 2
+                                },
+                                "enderecoestrutura": {
+                                    "required": false,
+                                    "type": ["object","null"],
+                                    "properties": {
+                                        "enderecolivre": {
+                                            "required": false,
+                                            "type": ["string","null"],
+                                            "minLength": 3,
+                                            "maxLength": 200
+                                        },
+                                        "cep": {
+                                            "required": true,
+                                            "type": "string",
+                                            "minLength": 1,
+                                            "maxLength": 12
+                                        },
+                                        "municipio": {
+                                            "required": true,
+                                            "type": "string",
+                                            "minLength": 1,
+                                            "maxLength": 60
+                                        },
+                                        "uf": {
+                                            "required": true,
+                                            "type": "string",
+                                            "minLength": 1,
+                                            "maxLength": 40
+                                        },
+                                        "endereco": {
+                                            "required": false,
+                                            "type": ["object","null"],
+                                            "properties": {
+                                                "logradouro": {
+                                                    "required": false,
+                                                    "type": ["string","null"],
+                                                    "minLength": 1,
+                                                    "maxLength": 60
+                                                },
+                                                "numero": {
+                                                    "required": false,
+                                                    "type": ["string","null"],
+                                                    "minLength": 1,
+                                                    "maxLength": 10
+                                                },
+                                                "complemento": {
+                                                    "required": false,
+                                                    "type": ["string","null"],
+                                                    "minLength": 1,
+                                                    "maxLength": 10
+                                                },
+                                                "andar": {
+                                                    "required": false,
+                                                    "type": ["string","null"],
+                                                    "minLength": 1,
+                                                    "maxLength": 10
+                                                },
+                                                "bairro": {
+                                                    "required": false,
+                                                    "type": ["string","null"],
+                                                    "minLength": 1,
+                                                    "maxLength": 40
+                                                },
+                                                "caixapostal": {
+                                                    "required": false,
+                                                    "type": ["string","null"],
+                                                    "minLength": 1,
+                                                    "maxLength": 12
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }    
+                    },
+                    "paisresid": {
+                        "required": false,
+                        "type": ["array","null"],
+                        "minItems": 0,
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "pais": {
+                                    "required": true,
+                                    "type": "string",
+                                    "minLength": 2,
+                                    "maxLength": 2
+                                }
+                            }
+                        }    
+                    },
+                    "paisnacionalidade": {
+                        "required": false,
+                        "type": ["array","null"],
+                        "minItems": 0,
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "pais": {
+                                    "required": true,
+                                    "type": "string",
+                                    "minLength": 2,
+                                    "maxLength": 2
+                                }
+                            }
+                        }    
+                    },
+                    "infonascimento": {
+                        "required": false,
+                        "type": ["object","null"],
+                        "properties": {
+                            "municipio": {
+                                "required": false,
+                                "type": ["string","null"],
+                                "minLength": 2,
+                                "maxLength": 60
+                            },
+                            "bairro": {
+                                "required": false,
+                                "type": ["string","null"],
+                                "minLength": 2,
+                                "maxLength": 40
+                            },
+                            "pais": {
+                                "required": false,
+                                "type": ["string","null"],
+                                "minLength": 2,
+                                "maxLength": 2
+                            },
+                            "antigonomepais": {
+                                "required": false,
+                                "type": ["string","null"],
+                                "minLength": 2,
+                                "maxLength": 40
+                            }
+                        }
+                    },
+                    "reportavel": {
+                        "required": true,
+                        "type": "array",
+                        "minItems": 1,
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "pais": {
+                                    "required": true,
+                                    "type": "string",
+                                    "minLength": 2,
+                                    "maxLength": 2
+                                }
+                            }
+                        }    
+                    }
+                }
+            }    
+        },
+        "anomescaixa": {
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9]{6}"
+        },
+        "conta": {
+            "required": false,
+            "type": ["array","null"],
+            "minItems": 0,
+            "items": {
+                "type": "object",
+                "properties": {
+                    "medjudic": {
+                        "required": false,
+                        "type": ["array","null"],
+                        "minItems": 0,
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "numprocjud": {
+                                    "required": true,
+                                    "type": "string",
+                                    "pattern": "^[0-9]{1,21}"
+                                },
+                                "vara": {
+                                    "required": true,
+                                    "type": "integer",
+                                    "minimum": 1,
+                                    "maximum": 99
+                                },
+                                "secjud": {
+                                    "required": true,
+                                    "type": "integer",
+                                    "minimum": 1,
+                                    "maximum": 99
+                                },
+                                "subsecjud": {
+                                    "required": true,
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "maxLength": 40
+                                },
+                                "dtconcessao": {
+                                    "required": true,
+                                    "type": "string",
+                                    "pattern": "^(19[0-9][0-9]|2[0-9][0-9][0-9])[-/](0?[1-9]|1[0-2])[-/](0?[1-9]|[12][0-9]|3[01])$"
+                                },
+                                "dtcassacao": {
+                                    "required": false,
+                                    "type": ["string","null"],
+                                    "pattern": "^(19[0-9][0-9]|2[0-9][0-9][0-9])[-/](0?[1-9]|1[0-2])[-/](0?[1-9]|[12][0-9]|3[01])$"
+                                }
+                            }
+                        }    
+                    },
+                    "infoconta": {
+                        "required": false,
+                        "type": ["object","null"],
+                        "properties": {
+                            "tpconta": {
+                                "required": true,
+                                "type": "string",
+                                "minLength": 1,
+                                "maxLength": 1
+                            },
+                            "subtpconta": {
+                                "required": true,
+                                "type": "string",
+                                "minLength": 1,
+                                "maxLength": 3
+                            },
+                            "tpnumconta": {
+                                "required": true,
+                                "type": "string",
+                                "minLength": 1,
+                                "maxLength": 10
+                            },
+                            "numconta": {
+                                "required": true,
+                                "type": "string",
+                                "minLength": 1,
+                                "maxLength": 50
+                            },
+                            "tprelacaodeclarado": {
+                                "required": true,
+                                "type": "integer",
+                                "minLength": 1,
+                                "maxLength": 5
+                            },
+                            "notitulares": {
+                                "required": false,
+                                "type": ["integer","null"],
+                                "minimum": 1,
+                                "maximum": 99
+                            },
+                            "dtencerramentoconta": {
+                                "required": false,
+                                "type": ["string","null"],
+                                "pattern": "^(19[0-9][0-9]|2[0-9][0-9][0-9])[-/](0?[1-9]|1[0-2])[-/](0?[1-9]|[12][0-9]|3[01])$"
+                            },
+                            "indinatividade": {
+                                "required": false,
+                                "type": ["integer","null"],
+                                "minimum": 1,
+                                "maximum": 1
+                            },
+                            "indndoc": {
+                                "required": false,
+                                "type": ["integer","null"],
+                                "minimum": 1,
+                                "maximum": 1
+                            },
+                            "vlrultdia": {
+                                "required": false,
+                                "type": ["number","null"]
+                            },
+                            "reportavel": {
+                                "required": true,
+                                "type": "array",
+                                "minItems": 1,
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "pais": {
+                                            "required": true,
+                                            "type": "string",
+                                            "minLength": 2,
+                                            "maxLength": 2
+                                        }
+                                    }
+                                }
+                            },
+                            "intermediario": {
+                                "required": false,
+                                "type": ["object","null"],
+                                "properties": {
+                                    "giin": {
+                                        "required": false,
+                                        "type": ["string","null"],
+                                        "pattern": "^([0-9A-NP-Z]{6}[.][0-9A-NP-Z]{5}[.](LE|SL|ME|BR|SF|SD|SS|SB|SP)[.][0-9]{3})$"
+                                    },
+                                    "tpni": {
+                                        "required": true,
+                                        "type": "integer",
+                                        "minimum": 1,
+                                        "maximum": 5
+                                    },
+                                    "niintermediario": {
+                                        "required": false,
+                                        "type": ["string","null"],
+                                        "minLength": 1,
+                                        "maxLength": 25
+                                    }
+                                }
+                            },
+                            "fundo": {
+                                "required": false,
+                                "type": ["object","null"],
+                                "properties": {
+                                    "giin": {
+                                        "required": false,
+                                        "type": ["string","null"],
+                                        "pattern": "^([0-9A-NP-Z]{6}[.][0-9A-NP-Z]{5}[.](LE|SL|ME|BR|SF|SD|SS|SB|SP)[.][0-9]{3})$"
+                                    },
+                                    "cnpj": {
+                                        "required": true,
+                                        "type": "string",
+                                        "pattern": "^[0-9]{14}"
+                                    }
+                                }
+                            },
+                            "pgtosacum": {
+                                "required": true,
+                                "type": "array",
+                                "minItems": 1,
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "tppgto": {
+                                            "required": true,
+                                            "type": "string",
+                                            "minLength": 1,
+                                            "maxLength": 10
+                                        },
+                                        "totpgtosacum": {
+                                            "required": true,
+                                            "type": "number"
+                                        }
+                                    }
+                                }    
+                            }
+                        }
+                    }
+                }
+            }    
+        }
+    }
+}
