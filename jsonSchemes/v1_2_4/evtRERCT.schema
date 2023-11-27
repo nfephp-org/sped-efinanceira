@@ -1,0 +1,165 @@
+{
+    "title": "evtRERCT",
+    "type": "object",
+    "properties": {
+        "sequencial": {
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9]{1,18}"
+        },
+        "indretificacao": {
+            "required": true,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 3
+        },
+        "nrrecibo": {
+            "required": false,
+            "type": ["string","null"],
+            "pattern": "^([0-9]{1,18}[-][0-9]{2}[-][0-9]{3}[-][0-9]{4}[-][0-9]{1,18})$"
+        },
+        "ideeventorerct": {
+            "required": true,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2
+        },
+        "idedeclarado": {
+            "required": true,
+            "type": "object",
+            "properties": {
+                "tpinscr": {
+                    "required": true,
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 2
+                },
+                "nrinscr": {
+                    "required": true,
+                    "type": "string",
+                    "pattern": "[0-9]{11,14}"
+                }
+            }
+        },
+        "rerct": {
+            "required": false,
+            "type": ["array","null"],
+            "minItems": 0,
+            "items": {
+                "type": "object",
+                "properties": {
+                    "nomebancoorigem": {
+                        "required": false,
+                        "type": ["string","null"],
+                        "minLength": 3,
+                        "maxLength": 100
+                    },
+                    "paisorigem": {
+                        "required": false,
+                        "type": ["string","null"],
+                        "minLength": 2,
+                        "maxLength": 2
+                    },
+                    "bicbancoorigem": {
+                        "required": false,
+                        "type": ["string","null"],
+                        "minLength": 11,
+                        "maxLength": 11
+                    },
+                    "infocontaexterior": {
+                        "required": false,
+                        "type": ["array","null"],
+                        "minItems": 0,
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "tpcontaexterior": {
+                                    "required": false,
+                                    "type": ["integer","null"],
+                                    "minimum": 1,
+                                    "maximum": 3
+                                },
+                                "numcontaexterior": {
+                                    "required": false,
+                                    "type": ["string","null"],
+                                    "minLength": 3,
+                                    "maxLength": 50
+                                },
+                                "vlrultdia": {
+                                    "required": false,
+                                    "type": ["number","null"]
+                                },
+                                "moeda": {
+                                    "required": false,
+                                    "type": ["string","null"],
+                                    "minLength": 3,
+                                    "maxLength": 3
+                                },
+                                "titular": {
+                                    "required": false,
+                                    "type": ["array","null"],
+                                    "minItems": 0,
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "nometitular": {
+                                                "required": false,
+                                                "type": ["string","null"],
+                                                "minLength": 3,
+                                                "maxLength": 100
+                                            },
+                                            "tpinscr": {
+                                                "required": false,
+                                                "type": ["integer","null"],
+                                                "minimum": 1,
+                                                "maximum": 2
+                                            },
+                                            "nrinscr": {
+                                                "required": false,
+                                                "type": ["string","null"],
+                                                "pattern": "[0-9]{11,14}"
+                                            },
+                                            "niftitular": {
+                                                "required": false,
+                                                "type": ["string","null"],
+                                                "minLength": 3,
+                                                "maxLength": 25
+                                            }
+                                        }
+                                    }    
+                                },
+                                "beneficiariofinal": {
+                                    "required": false,
+                                    "type": ["array","null"],
+                                    "minItems": 0,
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "nomebeneficiariofinal": {
+                                                "required": false,
+                                                "type": ["string","null"],
+                                                "minLength": 3,
+                                                "maxLength": 100
+                                            },
+                                            "cpfbeneficiariofinal": {
+                                                "required": false,
+                                                "type": ["string","null"],
+                                                "pattern": "[0-9]{11}"
+                                            },
+                                            "nifbeneficiariofinal": {
+                                                "required": false,
+                                                "type": ["string","null"],
+                                                "minLength": 1,
+                                                "maxLength": 25
+                                            }
+                                        }
+                                    }    
+                                }
+                            }
+                        }
+                    }
+                }
+            }    
+        }
+    }
+}

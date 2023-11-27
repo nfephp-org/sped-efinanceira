@@ -67,7 +67,7 @@ class EvtAberturaeFinanceira extends Factory implements FactoryInterface
             true
         );
         $this->node->insertBefore($ideEvento, $ideDeclarante);
-        
+
         $infoAbertura = $this->dom->createElement("infoAbertura");
         $this->dom->addChild(
             $infoAbertura,
@@ -82,7 +82,7 @@ class EvtAberturaeFinanceira extends Factory implements FactoryInterface
             true
         );
         $this->node->appendChild($infoAbertura);
-        
+
         if (!empty($this->std->aberturapp)) {
             $AberturaPP = $this->dom->createElement("AberturaPP");
             $pp = $this->std->aberturapp;
@@ -98,11 +98,17 @@ class EvtAberturaeFinanceira extends Factory implements FactoryInterface
             }
             $this->node->appendChild($AberturaPP);
         }
-        
+
         if (!empty($this->std->aberturamovopfin)) {
             $AberturaMovOpFin = $this->dom->createElement("AberturaMovOpFin");
             $rmf = $this->std->aberturamovopfin->responsavelrmf;
             $ResponsavelRMF = $this->dom->createElement("ResponsavelRMF");
+            $this->dom->addChild(
+                $ResponsavelRMF,
+                "CNPJ",
+                $rmf->cnpj ?? null,
+                false
+            );
             $this->dom->addChild(
                 $ResponsavelRMF,
                 "CPF",
@@ -280,7 +286,7 @@ class EvtAberturaeFinanceira extends Factory implements FactoryInterface
                 );
                 $AberturaMovOpFin->appendChild($RespeFin);
             }
-            
+
             $RepresLegal = $this->dom->createElement("RepresLegal");
             $rl = $this->std->aberturamovopfin->represlegal;
             $this->dom->addChild(
@@ -316,10 +322,10 @@ class EvtAberturaeFinanceira extends Factory implements FactoryInterface
             );
             $RepresLegal->appendChild($Telefone);
             $AberturaMovOpFin->appendChild($RepresLegal);
-            
+
             $this->node->appendChild($AberturaMovOpFin);
         }
-        
+
         //finalização do xml
         $this->eFinanceira->appendChild($this->node);
         //$this->xml = $this->dom->saveXML($this->eFinanceira);

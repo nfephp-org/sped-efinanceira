@@ -1,0 +1,16 @@
+{
+    "title": "evtExclusao",
+    "type": "object",
+    "properties": {
+        "sequencial": {
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9]{1,18}"
+        },
+        "nrreciboevento": {
+            "required": true,
+            "type": "string",
+            "pattern": "^([0-9]{1,18}[-][0-9]{2}[-][0-9]{3}[-][0-9]{4}[-][0-9]{1,18})$"
+        }
+    }
+}
