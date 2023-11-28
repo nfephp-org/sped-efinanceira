@@ -22,10 +22,10 @@ try {
     $content = file_get_contents('expired_certificate.pfx');
     $password = 'associacao';
     $certificate = Certificate::readPfx($content, $password);
-    
+
     //usar a classe Fake para não tentar enviar apenas ver o resultado da chamada
     $soap = new SoapFake();
-    //desativa a validação da validade do certificado 
+    //desativa a validação da validade do certificado
     //estamos usando um certificado vencido nesse teste
     $soap->disableCertValidation(true);
 
@@ -34,7 +34,7 @@ try {
     //carrega a classe responsável pelo envio SOAP
     //nesse caso um envio falso
     $tools->loadSoapClass($soap);
-    
+
     //executa a consulta
     $std = new stdClass();
     $std->cnpj = '999999999999999'; //CNPJ da empresa declarante
@@ -42,12 +42,12 @@ try {
                                   //4-Excluída
     $std->datainicio = '2017-01-12'; //??? formato ???
     $std->datafim = '2017-06-01'; //??? formato ???
-    
+
     $response = $tools->consultar('ConsultarListaEFinanceira', $std);
-    
+
     //retorna os dados que serão usados na conexão para conferência
     echo FakePretty::prettyPrint($response, null);
-    
+
 } catch (\Exception $e) {
     echo $e->getMessage();
 }

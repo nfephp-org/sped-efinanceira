@@ -4,7 +4,6 @@ ini_set('display_errors', 'On');
 require_once '../../../bootstrap.php';
 
 use NFePHP\Common\Certificate;
-use JsonSchema\Validator;
 use NFePHP\eFinanc\Event;
 use NFePHP\eFinanc\Tools;
 use NFePHP\eFinanc\Common\FakePretty;
@@ -31,6 +30,7 @@ $std->dtfim = '2017-05-31';
 
 $std->aberturamovopfin = new \stdClass();
 $std->aberturamovopfin->responsavelrmf = new \stdClass();
+$std->aberturamovopfin->responsavelrmf->cnpj = '12345678901234';
 $std->aberturamovopfin->responsavelrmf->cpf = '12345678901';
 $std->aberturamovopfin->responsavelrmf->nome = 'lkslsklsklskslksl';
 $std->aberturamovopfin->responsavelrmf->setor = 'lkslsklsk';
