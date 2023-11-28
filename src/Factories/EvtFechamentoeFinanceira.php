@@ -67,7 +67,7 @@ class EvtFechamentoeFinanceira extends Factory implements FactoryInterface
             true
         );
         $this->node->insertBefore($ideEvento, $ideDeclarante);
-        
+
         $infoFechamento = $this->dom->createElement("infoFechamento");
         $this->dom->addChild(
             $infoFechamento,
@@ -140,7 +140,7 @@ class EvtFechamentoeFinanceira extends Factory implements FactoryInterface
                 );
                 $FechamentoMovOpFin->appendChild($EntDecExterior);
             }
-            
+
             if (!empty($opfin->entpatdecexterior)) {
                 foreach ($opfin->entpatdecexterior as $ex) {
                     $EntPatDecExterior = $this->dom->createElement("EntPatDecExterior");
@@ -162,12 +162,24 @@ class EvtFechamentoeFinanceira extends Factory implements FactoryInterface
                         $ex->contasareportar,
                         true
                     );
+                    $this->dom->addChild(
+                        $EntPatDecExterior,
+                        "inCadPatrocinadoEncerrado",
+                        !empty($ex->incadpatrocinadoencerrado) ? $ex->incadpatrocinadoencerrado : null,
+                        false
+                    );
+                    $this->dom->addChild(
+                        $EntPatDecExterior,
+                        "inGIINEncerrado",
+                        !empty($ex->ingiinencerrado) ? $ex->ingiinencerrado : null,
+                        false
+                    );
                     $FechamentoMovOpFin->appendChild($EntPatDecExterior);
                 }
             }
             $this->node->appendChild($FechamentoMovOpFin);
         }
-        
+
         if (!empty($this->std->fechamentomovopfinanual)) {
             $f = $this->std->fechamentomovopfinanual->fechamentoano;
             $fechaAno = $this->dom->createElement("FechamentoMovOpFinAnual");
@@ -187,7 +199,7 @@ class EvtFechamentoeFinanceira extends Factory implements FactoryInterface
             $fechaAno->appendChild($fAno);
             $this->node->appendChild($fechaAno);
         }
-        
+
         //finalização do xml
         $this->eFinanceira->appendChild($this->node);
         //$this->xml = $this->dom->saveXML($this->eFinanceira);

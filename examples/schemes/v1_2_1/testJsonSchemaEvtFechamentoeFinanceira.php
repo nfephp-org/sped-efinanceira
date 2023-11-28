@@ -72,7 +72,7 @@ $jsonSchema = '{
                         }
                     }
                 }
-            }    
+            }
         },
         "fechamentomovopfin": {
             "required": false,
@@ -133,9 +133,21 @@ $jsonSchema = '{
                                 "type": "integer",
                                 "minimum": 0,
                                 "maximum": 1
+                            },
+                            "incadpatrocinadoencerrado":{
+                                "required": false,
+                                "type": ["integer","null"],
+                                "minimum": 0,
+                                "maximum": 1
+                            },
+                            "ingiinencerrado": {
+                                "required": false,
+                                "type": ["integer","null"],
+                                "minimum": 0,
+                                "maximum": 1
                             }
                         }
-                    }    
+                    }
                 }
             }
         },
@@ -157,11 +169,11 @@ $jsonSchema = '{
                             "type": "integer",
                             "minimum": 1,
                             "maximum": 999999999
-                        }    
+                        }
                     }
-                }    
+                }
             }
-        }    
+        }
     }
 }';
 

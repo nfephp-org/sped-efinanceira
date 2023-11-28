@@ -54,30 +54,29 @@ $std->fechamentomovopfin->fechamentomes[5] = new \stdClass();
 $std->fechamentomovopfin->fechamentomes[5]->anomescaixa = '201712';
 $std->fechamentomovopfin->fechamentomes[5]->quantarqtrans = 58;
 
-/*
 $std->fechamentomovopfin->entdecexterior = new \stdClass();
 $std->fechamentomovopfin->entdecexterior->contasareportar = 0;
-*/
-/*
+
 $std->fechamentomovopfin->entpatdecexterior[0] = new \stdClass();
 $std->fechamentomovopfin->entpatdecexterior[0]->giin = '12ASDA.12345.LE.123';
 $std->fechamentomovopfin->entpatdecexterior[0]->cnpj = '12345678901234';
 $std->fechamentomovopfin->entpatdecexterior[0]->contasareportar = 0;
-*/
-/*
+$std->fechamentomovopfin->entpatdecexterior[0]->incadpatrocinadoencerrado = 1; //permitidos 1 ou 0 ou null
+$std->fechamentomovopfin->entpatdecexterior[0]->ingiinencerrado = 1; //permitidos 1 ou 0 ou null
+
 $std->fechamentomovopfinanual = new \stdClass();
 $std->fechamentomovopfinanual->fechamentoano = new \stdClass();
 $std->fechamentomovopfinanual->fechamentoano->anocaixa = '2017';
 $std->fechamentomovopfinanual->fechamentoano->quantarqtrans = 271;
-*/
+
 
 try {
-    
+
    //carrega a classe responsavel por lidar com os certificados
     $content     = file_get_contents('expired_certificate.pfx');
     $password    = 'associacao';
     $certificate = Certificate::readPfx($content, $password);
-    
+
     //cria o evento e retorna o XML assinado
     $xml = Event::evtFechamentoeFinanceira(
         $configJson,
@@ -85,13 +84,13 @@ try {
         $certificate,
         '2017-08-03 10:37:00'
     )->toXml();
-    
+
     //$xml = Event::f4000($json, $std, $certificate)->toXML();
     //$json = Event::evtFechamentoeFinanceira($configjson, $std, $certificate)->toJson();
-    
+
     header('Content-type: text/xml; charset=UTF-8');
     echo $xml;
-    
+
 } catch (\Exception $e) {
     echo $e->getMessage();
 }
