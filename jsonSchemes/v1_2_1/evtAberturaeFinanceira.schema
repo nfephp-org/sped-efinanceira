@@ -58,11 +58,6 @@
                     "required": true,
                     "type": "object",
                     "properties": {
-                        "cnpj": {
-                            "required": true,
-                            "type": "string",
-                            "pattern": "^[0-9]{11}"
-                        },
                         "cpf": {
                             "required": true,
                             "type": "string",
