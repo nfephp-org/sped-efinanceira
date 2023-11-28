@@ -27,6 +27,7 @@ $std->aberturapp->tpempresa[0]->tpprevpriv = 'X';
 
 $std->aberturamovopfin = new \stdClass();
 $std->aberturamovopfin->responsavelrmf = new \stdClass();
+//$std->aberturamovopfin->responsavelrmf->cnpj = '12345678901234';
 $std->aberturamovopfin->responsavelrmf->cpf = '12345678901';
 $std->aberturamovopfin->responsavelrmf->nome = 'lkslsklsklskslksl';
 $std->aberturamovopfin->responsavelrmf->setor = 'lkslsklsk';
@@ -72,12 +73,12 @@ $std->aberturamovopfin->represlegal->telefone->numero = '5555555';
 $std->aberturamovopfin->represlegal->telefone->ramal = '123';
 
 try {
-    
+
    //carrega a classe responsavel por lidar com os certificados
     $content     = file_get_contents('expired_certificate.pfx');
     $password    = 'associacao';
     $certificate = Certificate::readPfx($content, $password);
-    
+
     //cria o evento e retorna o XML assinado
     $xml = Event::evtAberturaeFinanceira(
         $configJson,
@@ -85,13 +86,13 @@ try {
         $certificate,
         '2017-08-03 10:37:00'
     )->toXml();
-    
+
     //$xml = Event::f1000($json, $std, $certificate)->toXML();
     //$json = Event::evtAberturaeFinanceira($configjson, $std, $certificate)->toJson();
-    
+
     header('Content-type: text/xml; charset=UTF-8');
     echo $xml;
-    
+
 } catch (\Exception $e) {
     echo $e->getMessage();
 }
