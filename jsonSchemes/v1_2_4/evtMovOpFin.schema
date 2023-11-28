@@ -97,7 +97,7 @@
                         "maxLength": 30
                     }
                 }
-            }    
+            }
         },
         "nomeoutros": {
             "required": false,
@@ -130,15 +130,35 @@
                             },
                             "idgeracao": {
                                 "required": false,
-                                "type": ["string","null"],
-                                "minLength": 1,
-                                "maxLength": 10
+                                "type": ["array","null"],
+                                "minItems": 0,
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "desc": {
+                                            "required": false,
+                                            "type": ["string","null"],
+                                            "minLength": 1,
+                                            "maxLength": 10
+                                        }
+                                    }
+                                }
                             },
                             "sufixo": {
                                 "required": false,
-                                "type": ["string","null"],
-                                "minLength": 1,
-                                "maxLength": 10
+                                "type": ["array","null"],
+                                "minItems": 0,
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "desc": {
+                                            "required": false,
+                                            "type": ["string","null"],
+                                            "minLength": 1,
+                                            "maxLength": 10
+                                        }
+                                    }
+                                }
                             },
                             "gensufixo": {
                                 "required": false,
@@ -184,7 +204,7 @@
                                             "maxLength": 20
                                         }
                                     }
-                                }    
+                                }
                             },
                             "prefixonome": {
                                 "required": false,
@@ -223,7 +243,7 @@
                                 }
                             }
                         }
-                    },    
+                    },
                     "nomepj": {
                         "required": false,
                         "type": ["object","null"],
@@ -271,9 +291,9 @@
                                 "maxLength": 40
                             }
                         }
-                    }                
+                    }
                 }
-            }    
+            }
         },
         "enderecooutros": {
             "required": false,
@@ -371,7 +391,7 @@
                                 }
                             }
                         }
-                    }    
+                    }
                 }
             }
         },
@@ -389,7 +409,7 @@
                         "maxLength": 2
                     }
                 }
-            }    
+            }
         },
         "paisnacionalidade": {
             "required": false,
@@ -405,7 +425,7 @@
                         "maxLength": 2
                     }
                 }
-            }    
+            }
         },
         "proprietarios": {
             "required": false,
@@ -487,7 +507,7 @@
                                     "maxLength": 2
                                 }
                             }
-                        }    
+                        }
                     },
                     "nomeoutros": {
                         "required": false,
@@ -520,15 +540,35 @@
                                         },
                                         "idgeracao": {
                                             "required": false,
-                                            "type": ["string","null"],
-                                            "minLength": 1,
-                                            "maxLength": 10
+                                            "type": ["array","null"],
+                                            "minItems": 0,
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "desc": {
+                                                        "required": false,
+                                                        "type": ["string","null"],
+                                                        "minLength": 1,
+                                                        "maxLength": 10
+                                                    }
+                                                }
+                                            }
                                         },
                                         "sufixo": {
                                             "required": false,
-                                            "type": ["string","null"],
-                                            "minLength": 1,
-                                            "maxLength": 10
+                                            "type": ["array","null"],
+                                            "minItems": 0,
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "desc": {
+                                                        "required": false,
+                                                        "type": ["string","null"],
+                                                        "minLength": 1,
+                                                        "maxLength": 10
+                                                    }
+                                                }
+                                            }
                                         },
                                         "gensufixo": {
                                             "required": false,
@@ -574,7 +614,7 @@
                                                         "maxLength": 20
                                                     }
                                                 }
-                                            }    
+                                            }
                                         },
                                         "prefixonome": {
                                             "required": false,
@@ -615,7 +655,7 @@
                                     }
                                 }
                             }
-                        }    
+                        }
                     },
                     "enderecooutros": {
                         "required": false,
@@ -715,7 +755,7 @@
                                     }
                                 }
                             }
-                        }    
+                        }
                     },
                     "paisresid": {
                         "required": false,
@@ -731,7 +771,7 @@
                                     "maxLength": 2
                                 }
                             }
-                        }    
+                        }
                     },
                     "paisnacionalidade": {
                         "required": false,
@@ -747,7 +787,7 @@
                                     "maxLength": 2
                                 }
                             }
-                        }    
+                        }
                     },
                     "infonascimento": {
                         "required": false,
@@ -793,10 +833,10 @@
                                     "maxLength": 2
                                 }
                             }
-                        }    
+                        }
                     }
                 }
-            }    
+            }
         },
         "anomescaixa": {
             "required": true,
@@ -851,7 +891,7 @@
                                     "pattern": "^(19[0-9][0-9]|2[0-9][0-9][0-9])[-/](0?[1-9]|1[0-2])[-/](0?[1-9]|[12][0-9]|3[01])$"
                                 }
                             }
-                        }    
+                        }
                     },
                     "infoconta": {
                         "required": false,
@@ -886,6 +926,12 @@
                                 "type": "integer",
                                 "minLength": 1,
                                 "maxLength": 5
+                            },
+                            "moeda": {
+                                "required": false,
+                                "type": ["string","null"],
+                                "minLength": 3,
+                                "maxLength": 3
                             },
                             "notitulares": {
                                 "required": false,
@@ -1003,12 +1049,12 @@
                                             "type": "number"
                                         }
                                     }
-                                }    
+                                }
                             }
                         }
                     }
                 }
-            }    
+            }
         },
         "cambio": {
             "required": false,

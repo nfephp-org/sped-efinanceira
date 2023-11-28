@@ -212,18 +212,26 @@ class EvtMovOpFin extends Factory implements FactoryInterface
                         true
                     );
                     $NomePF->appendChild($UltimoNome);
-                    $this->dom->addChild(
-                        $NomePF,
-                        "IdGeracao",
-                        !empty($npf->idgeracao) ? $npf->idgeracao : null,
-                        false
-                    );
-                    $this->dom->addChild(
-                        $NomePF,
-                        "Sufixo",
-                        !empty($npf->sufixo) ? $npf->sufixo : null,
-                        false
-                    );
+                    if (!empty($npf->idgeracao)) {
+                        foreach ($npf->idgeracao as $ger) {
+                            $this->dom->addChild(
+                                $NomePF,
+                                "IdGeracao",
+                                !empty($ger->desc) ? $ger->desc : null,
+                                false
+                            );
+                        }
+                    }
+                    if (!empty($npf->sufixo)) {
+                        foreach ($npf->sufixo as $sul) {
+                            $this->dom->addChild(
+                                $NomePF,
+                                "Sufixo",
+                                !empty($sul->desc) ? $sul->desc : null,
+                                false
+                            );
+                        }
+                    }
                     $this->dom->addChild(
                         $NomePF,
                         "GenSufixo",
@@ -576,6 +584,32 @@ class EvtMovOpFin extends Factory implements FactoryInterface
                             true
                         );
                         $NomePF->appendChild($UltimoNome);
+                        if (!empty($npf->idgeracao)) {
+                            foreach ($npf->idgeracao as $ger) {
+                                $this->dom->addChild(
+                                    $NomePF,
+                                    "IdGeracao",
+                                    !empty($ger->desc) ? $ger->desc : null,
+                                    false
+                                );
+                            }
+                        }
+                        if (!empty($npf->sufixo)) {
+                            foreach ($npf->sufixo as $sul) {
+                                $this->dom->addChild(
+                                    $NomePF,
+                                    "Sufixo",
+                                    !empty($sul->desc) ? $sul->desc : null,
+                                    false
+                                );
+                            }
+                        }
+                        $this->dom->addChild(
+                            $NomePF,
+                            "GenSufixo",
+                            !empty($npf->gensufixo) ? $npf->gensufixo : null,
+                            false
+                        );
                         $NomeOutros->appendChild($NomePF);
                         $Proprietarios->appendChild($NomeOutros);
                     }
@@ -870,7 +904,12 @@ class EvtMovOpFin extends Factory implements FactoryInterface
                         $ic->tprelacaodeclarado,
                         true
                     );
-
+                    $this->dom->addChild(
+                        $infoConta,
+                        "moeda",
+                        $ic->moeda ?? null,
+                        false
+                    );
                     if (!empty($ic->intermediario)) {
                         $i = $ic->intermediario;
                         $Intermediario = $this->dom->createElement("Intermediario");

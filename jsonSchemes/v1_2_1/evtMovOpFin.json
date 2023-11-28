@@ -927,12 +927,6 @@
                                 "minLength": 1,
                                 "maxLength": 5
                             },
-                            "moeda": {
-                                "required": false,
-                                "type": ["string","null"],
-                                "minLength": 3,
-                                "maxLength": 3
-                            },
                             "notitulares": {
                                 "required": false,
                                 "type": ["integer","null"],
