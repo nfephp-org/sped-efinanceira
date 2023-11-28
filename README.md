@@ -1,4 +1,4 @@
-# SPED-EFINANCEIRA (versão 2.0 - layout 1.2.4) atualização 23/08/2021
+# SPED-EFINANCEIRA (versão 2.0 - layout 1.2.4) atualização 28/11/2023
 
 **API PHP para a integração de aplicativo com o projeto SPED eFinanceira da Receita Federal do Brasil**
 
