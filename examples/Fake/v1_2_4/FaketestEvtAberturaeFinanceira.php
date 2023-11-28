@@ -27,7 +27,7 @@ $std->aberturapp->tpempresa[0]->tpprevpriv = 'X';
 
 $std->aberturamovopfin = new \stdClass();
 $std->aberturamovopfin->responsavelrmf = new \stdClass();
-//$std->aberturamovopfin->responsavelrmf->cnpj = '12345678901234';
+$std->aberturamovopfin->responsavelrmf->cnpj = '12345678901234';
 $std->aberturamovopfin->responsavelrmf->cpf = '12345678901';
 $std->aberturamovopfin->responsavelrmf->nome = 'lkslsklsklskslksl';
 $std->aberturamovopfin->responsavelrmf->setor = 'lkslsklsk';
