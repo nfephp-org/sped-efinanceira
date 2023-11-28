@@ -23,12 +23,16 @@ $std->semestre = 2;
 $std->tpni = 2;
 $std->tpdeclarado = 'klsks';
 $std->nideclarado = 'ssss';
+
 $std->nomedeclarado = 'slkcskkslsklsklsk';
 $std->tpnomedeclarado = 'slsklsk';
+
 $std->enderecolivre = 'ssklsklskslks';
 $std->tpendereco = 'ssk';
 $std->pais = 'BR';
 $std->datanasc = '2017-01-01';
+
+$std->anomescaixa = '201712';//??
 
 $std->nif[0] = new \stdClass();
 $std->nif[0]->numeronif = 'skjskjskjs';
@@ -40,21 +44,28 @@ $std->nomeoutros[0]->nomepf = new \stdClass();
 $std->nomeoutros[0]->nomepf->tpnome = 'slsklsk';
 $std->nomeoutros[0]->nomepf->prectitulo = 'sss';
 $std->nomeoutros[0]->nomepf->titulo = 'slsklsk';
+
 $std->nomeoutros[0]->nomepf->idgeracao = 'sss';
+
 $std->nomeoutros[0]->nomepf->sufixo = 'sss';
 $std->nomeoutros[0]->nomepf->gensufixo = 'sss';
+
 $std->nomeoutros[0]->nomepf->primeironome = new \stdClass();
 $std->nomeoutros[0]->nomepf->primeironome->tipo = 'lsklsk';
 $std->nomeoutros[0]->nomepf->primeironome->nome = 'lkdlkdlkd';
+
 $std->nomeoutros[0]->nomepf->meionome[0] = new \stdClass();
 $std->nomeoutros[0]->nomepf->meionome[0]->tipo = 'lkslk';
 $std->nomeoutros[0]->nomepf->meionome[0]->nome = 'flkfk';
+
 $std->nomeoutros[0]->nomepf->prefixonome = new \stdClass();
 $std->nomeoutros[0]->nomepf->prefixonome->tipo = 'dldkk';
 $std->nomeoutros[0]->nomepf->prefixonome->nome = 'flklf';
+
 $std->nomeoutros[0]->nomepf->ultimonome = new \stdClass();
 $std->nomeoutros[0]->nomepf->ultimonome->tipo = 'dddlk';
 $std->nomeoutros[0]->nomepf->ultimonome->nome = 'flfkflkf';
+
 $std->nomeoutros[0]->nomepj = new \stdClass();
 $std->nomeoutros[0]->nomepj->tpnome = 'dkddkld';
 $std->nomeoutros[0]->nomepj->nome = 'ddcldcllc';
@@ -165,8 +176,9 @@ $std->proprietarios[0]->infonascimento->antigonomepais = 'kjskjskj';
 $std->proprietarios[0]->reportavel[0] = new \stdClass();
 $std->proprietarios[0]->reportavel[0]->pais = 'BR';
 
-$std->anomescaixa = '201712';
 
+$std->anocaixa = '2017';
+$std->semestre = 2; //1 ou 2
 $std->conta[0] = new \stdClass();
 
 $std->conta[0]->medjudic[0] = new \stdClass();
@@ -183,6 +195,7 @@ $std->conta[0]->infoconta->subtpconta = 'asa';
 $std->conta[0]->infoconta->tpnumconta = 'assss';
 $std->conta[0]->infoconta->numconta = 'aasssdddd';
 $std->conta[0]->infoconta->tprelacaodeclarado = 1;
+$std->conta[0]->infoconta->moeda = 'USD';
 $std->conta[0]->infoconta->notitulares = 5;
 $std->conta[0]->infoconta->dtencerramentoconta = '2017-12-12';
 $std->conta[0]->infoconta->indinatividade = 1;
@@ -205,13 +218,14 @@ $std->conta[0]->infoconta->pgtosacum[0] = new \stdClass();
 $std->conta[0]->infoconta->pgtosacum[0]->tppgto = 'ksksksk';
 $std->conta[0]->infoconta->pgtosacum[0]->totpgtosacum = 154568978.99;
 
+
 try {
-    
+
    //carrega a classe responsavel por lidar com os certificados
     $content     = file_get_contents('expired_certificate.pfx');
     $password    = 'associacao';
     $certificate = Certificate::readPfx($content, $password);
-    
+
     //cria o evento e retorna o XML assinado
     $xml = Event::evtMovOpFinAnual(
         $configJson,
@@ -220,13 +234,13 @@ try {
         '2017-08-03 10:37:00',
         '1_2_1'
     )->toXml();
-    
+
     //$xml = Event::f3001($json, $std, $certificate)->toXML();
     //$json = Event::evtMovOpFinAnual($configjson, $std, $certificate)->toJson();
-    
+
     header('Content-type: text/xml; charset=UTF-8');
     echo $xml;
-    
+
 } catch (\Exception $e) {
     echo $e->getMessage();
 }
