@@ -14,6 +14,7 @@ namespace NFePHP\eFinanc;
  */
 use stdClass;
 use NFePHP\Common\Validator;
+use NFePHP\Common\Certificate;
 use NFePHP\eFinanc\Common\Tools as Base;
 use NFePHP\eFinanc\Common\Crypto;
 use NFePHP\eFinanc\Common\FactoryInterface;
@@ -40,7 +41,7 @@ class Tools extends Base
     /**
      * Constructor
      * @param string $config
-     * @param \NFePHP\Common\Certificate $certificate
+     * @param Certificate $certificate
      */
     public function __construct(
         string $config,
@@ -325,7 +326,7 @@ class Tools extends Base
         }
         $method = 'ConsultarInformacoesIntermediario';
         $body = "<sped:$method><sped:cnpj>$std->cnpj</sped:cnpj>";
-        if (!empty($ginn)) {
+        if (!empty($std->ginn)) {
             $body .= "<sped:GINN>$std->giin</sped:GINN>";
         } elseif (!empty($std->numeroidentificacao)) {
             $body .= "<sped:TipoNI>$std->tiponi</sped:TipoNI>"

@@ -16,8 +16,6 @@ use stdClass;
 use NFePHP\Common\Certificate;
 use NFePHP\eFinanc\Common\Soap\SoapCurl;
 use NFePHP\eFinanc\Common\Soap\SoapInterface;
-use NFePHP\eFinanc\Common\Layouts;
-use DateTime;
 
 class Tools
 {
@@ -83,7 +81,7 @@ class Tools
      */
     public function __construct(
         string $config,
-        \NFePHP\Common\Certificate $certificate
+        Certificate $certificate
     ) {
         //set properties from config
         $stdConf = json_decode($config);
@@ -93,9 +91,7 @@ class Tools
         $this->date = new \DateTime();
         $this->cnpjDeclarante = $stdConf->cnpjDeclarante;
         $this->certificate = $certificate;
-        $this->path = realpath(
-            __DIR__ . '/../../'
-        ).'/';
+        $this->path = dirname(__DIR__, 2) . '/' .'/';
         $lay = new Layouts($config);
         $this->versions = $lay->versions;
         //loads the encryption certificates distributed in the package
@@ -104,7 +100,7 @@ class Tools
             $this->der = file_get_contents($this->path.'storage'.DIRECTORY_SEPARATOR.'efinanc_web.cer');
         }
     }
-    
+
     /**
      * Load Soap Class
      * @param SoapInterface $soap
@@ -113,7 +109,7 @@ class Tools
     {
         $this->soap = $soap;
     }
-    
+
     /**
      * Returns a string not subject to repetition indicating
      * the year, month, day, hour, minute, and second
@@ -125,7 +121,7 @@ class Tools
     {
         return date('YmdHis');
     }
-    
+
     /**
      * This method communicates with the webservice by sending the
      * pre-mounted message to the designated URL
@@ -150,7 +146,7 @@ class Tools
             . $body
             . "</soapenv:Body>"
             . "</soapenv:Envelope>";
-        
+
         $msgSize = strlen($request);
         $parameters = [
             "Content-Type: text/xml;charset=UTF-8",
@@ -167,7 +163,7 @@ class Tools
         );
         return $this->response;
     }
-    
+
     /**
      * Includes missing or unsupported properties in stdClass
      * @param stdClass $std

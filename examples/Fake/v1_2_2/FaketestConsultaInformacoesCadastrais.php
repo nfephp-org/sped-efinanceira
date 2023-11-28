@@ -23,10 +23,10 @@ try {
     $content = file_get_contents('expired_certificate.pfx');
     $password = 'associacao';
     $certificate = Certificate::readPfx($content, $password);
-    
+
     //usar a classe Fake para não tentar enviar apenas ver o resultado da chamada
     $soap = new SoapFake();
-    //desativa a validação da validade do certificado 
+    //desativa a validação da validade do certificado
     //estamos usando um certificado vencido nesse teste
     $soap->disableCertValidation(true);
 
@@ -35,19 +35,19 @@ try {
     //carrega a classe responsável pelo envio SOAP
     //nesse caso um envio falso
     $tools->loadSoapClass($soap);
-    
+
     //executa a consulta
     $std = new stdClass();
     $std->cnpj = '999999999999999'; //CNPJ da empresa declarante
     $response = $tools->consultar('ConsultarInformacoesCadastrais', $std);
-    
+
     //voce pode usar a classe Standarize para converter o xml da resposta em um stdClass
     //$rstd = new Standardize($response);
-    
-    
+
+
     //retorna os dados que serão usados na conexão para conferência
     echo FakePretty::prettyPrint($response, '');
-    
+
 } catch (\Exception $e) {
     echo $e->getMessage();
 }

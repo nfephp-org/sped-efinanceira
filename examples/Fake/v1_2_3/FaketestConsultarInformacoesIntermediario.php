@@ -4,7 +4,6 @@ ini_set('display_errors', 'On');
 require_once '../../../bootstrap.php';
 
 use NFePHP\Common\Certificate;
-use NFePHP\eFinanc\Event;
 use NFePHP\eFinanc\Tools;
 use NFePHP\eFinanc\Common\FakePretty;
 use NFePHP\eFinanc\Common\Soap\SoapFake;
@@ -22,10 +21,10 @@ try {
     $content = file_get_contents('expired_certificate.pfx');
     $password = 'associacao';
     $certificate = Certificate::readPfx($content, $password);
-    
+
     //usar a classe Fake para não tentar enviar apenas ver o resultado da chamada
     $soap = new SoapFake();
-    //desativa a validação da validade do certificado 
+    //desativa a validação da validade do certificado
     //estamos usando um certificado vencido nesse teste
     $soap->disableCertValidation(true);
 
@@ -34,7 +33,7 @@ try {
     //carrega a classe responsável pelo envio SOAP
     //nesse caso um envio falso
     $tools->loadSoapClass($soap);
-    
+
     //executa a consulta
     $std = new stdClass();
     $std->cnpj = '999999999999999'; //CNPJ da empresa declarante (obrigatório)
@@ -42,10 +41,10 @@ try {
     $std->tiponi = '1'; //(OPCIONAL) 1=CPF 2=CNPJ 3=NIF Pessoa Física (Número de Identificação Fiscal Pessoa Física) 4=NIF Pessoa Jurídica (Número de Identificação Fiscal Pessoa Jurídica)
     $std->numeroidentificacao = '12345678901'; //(OPCIONAL) numero indicado no tipo
     $response = $tools->consultar('ConsultarInformacoesIntermediario', $std);
-    
+
     //retorna os dados que serão usados na conexão para conferência
     echo FakePretty::prettyPrint($response, null);
-    
+
 } catch (\Exception $e) {
     echo $e->getMessage();
 }

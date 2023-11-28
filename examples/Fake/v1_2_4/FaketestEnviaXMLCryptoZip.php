@@ -4,8 +4,6 @@ ini_set('display_errors', 'On');
 require_once '../../../bootstrap.php';
 
 use NFePHP\Common\Certificate;
-use JsonSchema\Validator;
-use NFePHP\eFinanc\Event;
 use NFePHP\eFinanc\Tools;
 use NFePHP\eFinanc\Common\FakePretty;
 use NFePHP\eFinanc\Common\Soap\SoapFake;
