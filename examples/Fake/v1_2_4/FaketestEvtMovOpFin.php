@@ -14,6 +14,7 @@ $config = [
 ];
 $configJson = json_encode($config, JSON_PRETTY_PRINT);
 
+
 $std = new \stdClass();
 $std->sequencial = '1';
 $std->indretificacao = 3;
@@ -27,6 +28,7 @@ $std->enderecolivre = 'ssklsklskslks';
 $std->tpendereco = 'ssk';
 $std->pais = 'BR';
 $std->datanasc = '2017-01-01';
+$std->anomescaixa = '201712';
 
 $std->nif[0] = new \stdClass();
 $std->nif[0]->numeronif = 'skjskjskjs';
@@ -38,8 +40,10 @@ $std->nomeoutros[0]->nomepf = new \stdClass();
 $std->nomeoutros[0]->nomepf->tpnome = 'slsklsk';
 $std->nomeoutros[0]->nomepf->prectitulo = 'sss';
 $std->nomeoutros[0]->nomepf->titulo = 'slsklsk';
-$std->nomeoutros[0]->nomepf->idgeracao = 'sss';
-$std->nomeoutros[0]->nomepf->sufixo = 'sss';
+$std->nomeoutros[0]->nomepf->idgeracao[0] = new \stdClass();
+$std->nomeoutros[0]->nomepf->idgeracao[0]->desc = 'III';
+$std->nomeoutros[0]->nomepf->sufixo[0] = new \stdClass();
+$std->nomeoutros[0]->nomepf->sufixo[0]->desc = 'slkjsk';
 $std->nomeoutros[0]->nomepf->gensufixo = 'sss';
 $std->nomeoutros[0]->nomepf->primeironome = new \stdClass();
 $std->nomeoutros[0]->nomepf->primeironome->tipo = 'lsklsk';
@@ -109,8 +113,10 @@ $std->proprietarios[0]->nomeoutros[0]->nomepf = new \stdClass();
 $std->proprietarios[0]->nomeoutros[0]->nomepf->tpnome = 'ksksk';
 $std->proprietarios[0]->nomeoutros[0]->nomepf->prectitulo = 'iuwiuw';
 $std->proprietarios[0]->nomeoutros[0]->nomepf->titulo = 'wwkklwk';
-$std->proprietarios[0]->nomeoutros[0]->nomepf->idgeracao = 'kkdkd';
-$std->proprietarios[0]->nomeoutros[0]->nomepf->sufixo = 'kjdkdk';
+$std->proprietarios[0]->nomeoutros[0]->nomepf->idgeracao[0] = new \stdClass();
+$std->proprietarios[0]->nomeoutros[0]->nomepf->idgeracao[0]->desc = 'kkdkd';
+$std->proprietarios[0]->nomeoutros[0]->nomepf->sufixo[0] = new \stdClass();
+$std->proprietarios[0]->nomeoutros[0]->nomepf->sufixo[0]->desc = 'kjdkdk';
 $std->proprietarios[0]->nomeoutros[0]->nomepf->gensufixo = 'jdjdjd';
 
 $std->proprietarios[0]->nomeoutros[0]->nomepf->primeironome = new \stdClass();
@@ -128,6 +134,7 @@ $std->proprietarios[0]->nomeoutros[0]->nomepf->prefixonome->nome = 'sksksksk';
 $std->proprietarios[0]->nomeoutros[0]->nomepf->ultimonome = new \stdClass();
 $std->proprietarios[0]->nomeoutros[0]->nomepf->ultimonome->tipo = 'ssss';
 $std->proprietarios[0]->nomeoutros[0]->nomepf->ultimonome->nome = 'ksksksk';
+
 
 $std->proprietarios[0]->enderecooutros[0] = new \stdClass();
 $std->proprietarios[0]->enderecooutros[0]->tpendereco = 'skjskj';
@@ -163,7 +170,7 @@ $std->proprietarios[0]->infonascimento->antigonomepais = 'kjskjskj';
 $std->proprietarios[0]->reportavel[0] = new \stdClass();
 $std->proprietarios[0]->reportavel[0]->pais = 'BR';
 
-$std->anomescaixa = '201712';
+
 
 $std->conta[0] = new \stdClass();
 
@@ -181,6 +188,7 @@ $std->conta[0]->infoconta->subtpconta = 'asa';
 $std->conta[0]->infoconta->tpnumconta = 'assss';
 $std->conta[0]->infoconta->numconta = 'aasssdddd';
 $std->conta[0]->infoconta->tprelacaodeclarado = 1;
+$std->conta[0]->infoconta->moeda = 'USD';
 $std->conta[0]->infoconta->notitulares = 5;
 $std->conta[0]->infoconta->dtencerramentoconta = '2017-12-12';
 $std->conta[0]->infoconta->indinatividade = 1;
@@ -220,13 +228,14 @@ $std->cambio->medjudic[0]->subsecjud = '12 skjskjskj';
 $std->cambio->medjudic[0]->dtconcessao = '2017-12-01';
 $std->cambio->medjudic[0]->dtcassacao = '2017-10-31';
 
+
 try {
-    
+
    //carrega a classe responsavel por lidar com os certificados
     $content     = file_get_contents('expired_certificate.pfx');
     $password    = 'associacao';
     $certificate = Certificate::readPfx($content, $password);
-    
+
     //cria o evento e retorna o XML assinado
     $xml = Event::evtMovOpFin(
         $configJson,
@@ -234,13 +243,13 @@ try {
         $certificate,
         '2017-08-03 10:37:00'
     )->toXml();
-    
+
     //$xml = Event::f3000($json, $std, $certificate)->toXML();
     //$json = Event::evtMovOpFin($configjson, $std, $certificate)->toJson();
-    
+
     header('Content-type: text/xml; charset=UTF-8');
     echo $xml;
-    
+
 } catch (\Exception $e) {
     echo $e->getMessage();
 }
