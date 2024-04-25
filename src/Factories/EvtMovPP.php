@@ -4,7 +4,6 @@ namespace NFePHP\eFinanc\Factories;
 
 use NFePHP\eFinanc\Common\Factory;
 use NFePHP\eFinanc\Common\FactoryInterface;
-use NFePHP\eFinanc\Common\FactoryId;
 use NFePHP\Common\Certificate;
 use stdClass;
 
@@ -123,17 +122,44 @@ class EvtMovPP extends Factory implements FactoryInterface
                     $prod,
                     "opcaoTributacao",
                     $infp->produto->opcaotributacao,
-                    true
+                    false
                 );
                 $infoPrevPriv->appendChild($prod);
             }
-            $this->dom->addChild(
-                $infoPrevPriv,
-                "tpPlano",
-                !empty($infp->tpplano) ? $infp->tpplano : null,
-                false
-            );
 
+            if (!empty($infp->plano)) {
+                $plano = $this->dom->createElement("Plano");
+                $this->dom->addChild(
+                    $plano,
+                    "tpPlano",
+                    !empty($infp->plano->tpplano) ? $infp->plano->tpplano : null,
+                    false
+                );
+
+                $this->dom->addChild(
+                    $plano,
+                    "planoFechado",
+                    $infp->plano->planofechado,
+                    true
+                );
+
+                $this->dom->addChild(
+                    $plano,
+                    "cnpjPlano",
+                    !empty($infp->plano->cnpjplano) ? $infp->plano->cnpjplano : null,
+                    false
+                );
+
+                $this->dom->addChild(
+                    $plano,
+                    "tpPlanoFechado",
+                    !empty($infp->plano->tpplanofechado) ? $infp->plano->tpplanofechado : null,
+                    false
+                );
+
+                $infoPrevPriv->appendChild($plano);
+            }
+            
             $opPrevPriv = $this->dom->createElement("opPrevPriv");
             $saldoInicial = $this->dom->createElement("saldoInicial");
             $this->dom->addChild(
