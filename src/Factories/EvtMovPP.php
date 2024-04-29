@@ -165,13 +165,13 @@ class EvtMovPP extends Factory implements FactoryInterface
             $this->dom->addChild(
                 $saldoInicial,
                 "vlrPrincipal",
-                number_format($infp->vlrprincipal, 2, ',', ''),
+                number_format($infp->saldoinicial->vlrprincipal, 2, ',', ''),
                 true
             );
             $this->dom->addChild(
                 $saldoInicial,
                 "vlrRendimentos",
-                isset($infp->vlrrendimentos) ? number_format($infp->vlrrendimentos, 2, ',', '') : null,
+                isset($infp->saldoinicial->vlrrendimentos) ? number_format($infp->saldoinicial->vlrrendimentos, 2, ',', '') : null,
                 false
             );
             $opPrevPriv->appendChild($saldoInicial);

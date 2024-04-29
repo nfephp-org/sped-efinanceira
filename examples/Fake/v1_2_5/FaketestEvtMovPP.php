@@ -42,6 +42,12 @@ $std->infoprevpriv[0]->plano->planofechado = 1; // obrigatório
 $std->infoprevpriv[0]->plano->cnpjplano = '12345678912345'; // Obrigatório se planofechado = 1
 $std->infoprevpriv[0]->plano->tpplanofechado = 1; // obrigatório se planofechado = 1
 
+
+//obrigatório <SaldoInicial>
+$std->infoprevpriv[0]->saldoinicial= new \stdClass();
+$std->infoprevpriv[0]->saldoinicial->vlrprincipal = 11457.59; //obrigatório
+$std->infoprevpriv[0]->saldoinicial->vlrrendimentos = 2598.89; //opcional
+
 //opcional <Aplic>
 $std->infoprevpriv[0]->aplic[0] = new \stdClass();
 $std->infoprevpriv[0]->aplic[0]->vlrcontribuicao = 1111.11; //obrigatório
