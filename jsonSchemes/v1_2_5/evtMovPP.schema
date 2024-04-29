@@ -105,13 +105,18 @@
                             }
                         }
                     },
-                    "vlrprincipal": {
-                        "required": true,
-                        "type": "number"
-                    },
-                    "vlrrendimentos": {
-                        "required": false,
-                        "type": ["number", "null"]
+                    "saldoinicial": {
+                        "type": "object",
+                        "properties": {
+                            "vlrprincipal": {
+                                "required": true,
+                                "type": "number"
+                            },
+                            "vlrrendimentos": {
+                                "required": false,
+                                "type": ["number", "null"]
+                            }
+                        }
                     },
                     "aplic": {
                         "required": false,
