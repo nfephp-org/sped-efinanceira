@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.eFinanceira.gov.br/schemas/evtMovPP/v1_2_5" targetNamespace="http://www.eFinanceira.gov.br/schemas/evtMovPP/v1_2_5" elementFormDefault="qualified" attributeFormDefault="unqualified">
-  <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="../../Comum/xmldsig-core-schema.xsd"/>
+  <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd"/>
   <xs:element name="eFinanceira">
     <xs:complexType>
       <xs:sequence>
@@ -292,7 +292,7 @@
                                     </xs:restriction>
                                   </xs:simpleType>
                                 </xs:element>
-                                
+
                               </xs:sequence>
                             </xs:complexType>
                           </xs:element>
@@ -622,7 +622,7 @@
                                     </xs:sequence>
                                   </xs:complexType>
                                 </xs:element>
-                                
+
                                 <xs:element name="portabilidade" minOccurs="0" maxOccurs="unbounded">
                                   <xs:annotation>
                                     <xs:documentation>Informações de Portabilidade</xs:documentation>
@@ -681,11 +681,11 @@
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
-                                      
+
                                     </xs:sequence>
                                   </xs:complexType>
                                 </xs:element>
-                                
+
                                 <xs:element name="saldoFinal" minOccurs="1" maxOccurs="1">
                                   <xs:annotation>
                                     <xs:documentation>Informações a respeito do saldo final do movimento da previdência privada do declarante</xs:documentation>
