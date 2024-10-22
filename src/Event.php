@@ -31,9 +31,12 @@ class Event
         'evtmovopfin' => Factories\EvtMovOpFin::class,
         'evtmovpp' => Factories\EvtMovPP::class,
         'evtmovopfinanual' => Factories\EvtMovOpFinAnual::class,
-        'evtrerct' => Factories\EvtRERCT::class
+        'evtrerct' => Factories\EvtRERCT::class,
+        'evtrepasseabertura' => Factories\EvtRepasseAbertura::class,
+        'evtrepassefechamento' => Factories\EvtRepasseFechamento::class,
+        'evtrepassemovivento' => Factories\EvtRepasseMovimento::class,
     ];
-    
+
     /**
      * Relationship between the code of the event and its respective name
      * @var array
@@ -49,9 +52,12 @@ class Event
         'f5000' => 'evtexclusao',
         'f6000' => 'evtmovpp',
         'f8000' => 'evtrerct',
-        'f9000' => 'evtexclusaoefinanceira'
+        'f9000' => 'evtexclusaoefinanceira',
+        'f1012' => 'evtrepasseabertura',
+        'f1013' => 'evtrepassemovimento',
+        'f1014' => 'evtrepassefechamento'
     ];
-    
+
     /**
      * Call classes to build XML EFDReinf Event
      * @param string $name
@@ -75,7 +81,7 @@ class Event
             throw EventsException::wrongArgument(1000, $name);
         }
         $className = self::$available[$realname];
-        
+
         if (empty($arguments[0])) {
             throw EventsException::wrongArgument(1001);
         }

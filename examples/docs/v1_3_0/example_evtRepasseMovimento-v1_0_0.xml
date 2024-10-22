@@ -1,0 +1,32 @@
+<eFinanceira xmlns="http://www.eFinanceira.gov.br/schemas/evtRepasseMovimento/v1_0_0">
+  <evtRepasseMovimento id="stringstringstringst">
+    <ideEvento>
+      <indRetificacao>6</indRetificacao>
+      <!--Optional:-->
+      <nrRecibo>stringstringstringstring</nrRecibo>
+      <tpAmb>6</tpAmb>
+      <aplicEmi>6</aplicEmi>
+      <verAplic>string</verAplic>
+      <anoMesCaixa>string</anoMesCaixa>
+    </ideEvento>
+    <ideDeclarante>
+      <cnpjDeclarante>string</cnpjDeclarante>
+    </ideDeclarante>
+    <ideDeclarado>
+      <tpNI>6</tpNI>
+      <NIDeclarado>string</NIDeclarado>
+    </ideDeclarado>
+    <vinculo>
+      <dtIniVinculo>2008-09-28</dtIniVinculo>
+      <indVinculoEncerrado>6</indVinculoEncerrado>
+    </vinculo>
+    <repasses>
+      <vlrTotalRepasse>string</vlrTotalRepasse>
+      <vlrAcumuladoRepasse>string</vlrAcumuladoRepasse>
+      <vlrComissaoRetida>string</vlrComissaoRetida>
+      <vlrAcumuladoComissao>string</vlrAcumuladoComissao>
+    </repasses>
+  </evtRepasseMovimento>
+  <Signature xmlns:xd="http://www.w3.org/2000/09/xmldsig#">
+  </Signature>
+</eFinanceira>
