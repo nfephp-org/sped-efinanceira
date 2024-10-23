@@ -1,0 +1,80 @@
+<eFinanceira xmlns="http://www.eFinanceira.gov.br/schemas/evtCadDeclarante/v1_3_0">
+  <evtCadDeclarante id="stringstringstringst">
+    <ideEvento>
+      <indRetificacao>6</indRetificacao>
+      <!--Optional:-->
+      <nrRecibo>stringstringstringstring</nrRecibo>
+      <tpAmb>6</tpAmb>
+      <aplicEmi>6</aplicEmi>
+      <verAplic>string</verAplic>
+    </ideEvento>
+    <ideDeclarante>
+      <cnpjDeclarante>string</cnpjDeclarante>
+    </ideDeclarante>
+    <infoCadastro>
+      <!--Optional:-->
+      <GIIN>string</GIIN>
+      <!--Optional:-->
+      <CategoriaDeclarante>string</CategoriaDeclarante>
+      <!--0 to 3 repetitions:-->
+      <infoTpInstPgto>
+        <tpInstPgto>6</tpInstPgto>
+      </infoTpInstPgto>
+      <!--Zero or more repetitions:-->
+      <NIF>
+        <NumeroNIF>string</NumeroNIF>
+        <PaisEmissao>st</PaisEmissao>
+        <!--Optional:-->
+        <tpNIF>string</tpNIF>
+      </NIF>
+      <nome>string</nome>
+      <!--Optional:-->
+      <tpNome>string</tpNome>
+      <enderecoLivre>string</enderecoLivre>
+      <!--Optional:-->
+      <tpEndereco>string</tpEndereco>
+      <municipio>7</municipio>
+      <UF>st</UF>
+      <CEP>string</CEP>
+      <Pais>st</Pais>
+      <!--1 or more repetitions:-->
+      <paisResid>
+        <Pais>st</Pais>
+      </paisResid>
+      <!--Zero or more repetitions:-->
+      <EnderecoOutros>
+        <!--Optional:-->
+        <tpEndereco>string</tpEndereco>
+        <!--You have a CHOICE of the next 2 items at this level-->
+        <!--Optional:-->
+        <EnderecoLivre>string</EnderecoLivre>
+        <!--Optional:-->
+        <EnderecoEstrutura>
+          <!--Optional:-->
+          <EnderecoLivre>string</EnderecoLivre>
+          <!--Optional:-->
+          <Endereco>
+            <!--Optional:-->
+            <Logradouro>string</Logradouro>
+            <!--Optional:-->
+            <Numero>string</Numero>
+            <!--Optional:-->
+            <Complemento>string</Complemento>
+            <!--Optional:-->
+            <Andar>string</Andar>
+            <!--Optional:-->
+            <Bairro>string</Bairro>
+            <!--Optional:-->
+            <CaixaPostal>string</CaixaPostal>
+          </Endereco>
+          <CEP>string</CEP>
+          <Municipio>string</Municipio>
+          <UF>string</UF>
+        </EnderecoEstrutura>
+        <Pais>st</Pais>
+      </EnderecoOutros>
+    </infoCadastro>
+  </evtCadDeclarante>
+  <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+  </Signature>
+</eFinanceira>

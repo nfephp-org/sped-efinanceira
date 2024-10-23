@@ -1,0 +1,30 @@
+<eFinanceira xmlns="http://www.eFinanceira.gov.br/schemas/evtRepasseFechamento/v1_0_0">
+  <evtRepasseFechamento id="stringstringstringst">
+    <ideEvento>
+      <indRetificacao>7</indRetificacao>
+      <!--Optional:-->
+      <nrRecibo>stringstringstringstring</nrRecibo>
+      <tpAmb>7</tpAmb>
+      <aplicEmi>7</aplicEmi>
+      <verAplic>string</verAplic>
+    </ideEvento>
+    <ideDeclarante>
+      <cnpjDeclarante>string</cnpjDeclarante>
+    </ideDeclarante>
+    <!--Optional:-->
+    <ideRespInf>
+      <nmResp>string</nmResp>
+      <cpfResp>string</cpfResp>
+      <!--Optional:-->
+      <telefone>string</telefone>
+      <!--Optional:-->
+      <email>string</email>
+    </ideRespInf>
+    <infoFech>
+      <dtInicio>2008-09-28</dtInicio>
+      <dtFim>2014-09-18</dtFim>
+    </infoFech>
+  </evtRepasseFechamento>
+  <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+  </Signature>
+</eFinanceira>

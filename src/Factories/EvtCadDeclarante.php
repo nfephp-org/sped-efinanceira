@@ -67,7 +67,7 @@ class EvtCadDeclarante extends Factory implements FactoryInterface
             true
         );
         $this->node->insertBefore($ideEvento, $ideDeclarante);
-        
+
         $infoCadastro = $this->dom->createElement("infoCadastro");
         $info = $this->std->infocadastro;
         $this->dom->addChild(
@@ -82,6 +82,21 @@ class EvtCadDeclarante extends Factory implements FactoryInterface
             isset($info->categoriadeclarante) ? $info->categoriadeclarante : null,
             false
         );
+
+        //v1_3_0
+        if (!empty($info->infotpinstpgto)) {
+            foreach ($info->infotpinstpgto as $itppag) {
+                $inftppag = $this->dom->createElement("infoTpInstPgto");
+                $this->dom->addChild(
+                    $inftppag,
+                    "tpInstPgto",
+                    $itppag->tpinstpgto,
+                    true
+                );
+                $infoCadastro->appendChild($inftppag);
+            }
+        }
+
         if (!empty($info->nif)) {
             foreach ($info->nif as $n) {
                 $NIF = $this->dom->createElement("NIF");

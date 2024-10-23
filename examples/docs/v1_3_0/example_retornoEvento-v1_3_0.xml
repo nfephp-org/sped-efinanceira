@@ -1,0 +1,37 @@
+<eFinanceira xmlns="http://www.eFinanceira.gov.br/schemas/retornoEvento/v1_3_0">
+  <retornoEvento id="string">
+    <identificacaoEmpresaDeclarante>
+      <cnpjEmpresaDeclarante>string</cnpjEmpresaDeclarante>
+    </identificacaoEmpresaDeclarante>
+    <dadosRecepcaoEvento>
+      <dhRecepcao>2008-09-28T22:49:45</dhRecepcao>
+      <dhProcessamento>2014-09-18T20:18:33</dhProcessamento>
+      <tipoEvento>str</tipoEvento>
+      <idEvento>string</idEvento>
+      <hash>string</hash>
+      <!--Optional:-->
+      <nrRecibo>stringstringstringstring</nrRecibo>
+    </dadosRecepcaoEvento>
+    <status>
+      <cdRetorno>string</cdRetorno>
+      <descRetorno>string</descRetorno>
+      <!--Optional:-->
+      <dadosRegistroOcorrenciaEvento>
+        <!--1 or more repetitions:-->
+        <ocorrencias>
+          <tipo>100</tipo>
+          <!--Optional:-->
+          <localizacaoErroAviso>string</localizacaoErroAviso>
+          <codigo>string</codigo>
+          <descricao>string</descricao>
+        </ocorrencias>
+      </dadosRegistroOcorrenciaEvento>
+    </status>
+    <!--Optional:-->
+    <dadosReciboEntrega>
+      <numeroRecibo>stringstringstringstring</numeroRecibo>
+    </dadosReciboEntrega>
+  </retornoEvento>
+  <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+  </Signature>
+</eFinanceira>

@@ -75,6 +75,11 @@ class Tools
      */
     protected $versions;
     /**
+     * @var stdClass
+     */
+    protected $config;
+
+    /**
      * Constructor
      * @param string $config
      * @param Certificate $certificate
@@ -85,6 +90,7 @@ class Tools
     ) {
         //set properties from config
         $stdConf = json_decode($config);
+        $this->config = $stdConf;
         $this->tpAmb = $stdConf->tpAmb;
         $this->verAplic = $stdConf->verAplic;
         $this->eventoVersion = $stdConf->eventoVersion;

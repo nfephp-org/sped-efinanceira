@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.eFinanceira.gov.br/schemas/evtRepasseMovimento/v1_0_0" targetNamespace="http://www.eFinanceira.gov.br/schemas/evtRepasseMovimento/v1_0_0" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd"/>
+  <xs:element name="eFinanceira">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="evtRepasseMovimento">
+          <xs:annotation>
+            <xs:documentation>Evento de Movimento de Repasse de Instrumentos de Pagamento</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ideEvento" minOccurs="1" maxOccurs="1">
+                <xs:annotation>
+                  <xs:documentation>Informações de identificação do evento</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="indRetificacao" minOccurs="1" maxOccurs="1">
+                      <xs:simpleType>
+                        <xs:annotation>
+                          <xs:documentation>
+                            Identifica se o arquivo que está sendo enviado corresponde a um evento original ou a um evento de retificação:
+                            1 - para arquivo original
+                            2 - para arquivo de retificação
+                          </xs:documentation>
+                        </xs:annotation>
+                        <xs:restriction base="xs:unsignedByte">
+                          <xs:pattern value="[1|2]"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="nrRecibo" minOccurs="0" maxOccurs="1">
+                      <xs:simpleType>
+                        <xs:annotation>
+                          <xs:documentation>Informar o número do recibo do arquivo a ser retificado</xs:documentation>
+                        </xs:annotation>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="15"/>
+                          <xs:maxLength value="49" />
+                          <xs:pattern value="[0-9]{1,18}[-][0-9]{2}[-][0-9]{3}[-][0-9]{4}[-][0-9]{1,18}"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="tpAmb" minOccurs="1" maxOccurs="1">
+                      <xs:simpleType>
+                        <xs:annotation>
+                          <xs:documentation>
+                            Identificação do ambiente:
+                            1 - Produção
+                            2 - Homologação
+                          </xs:documentation>
+                        </xs:annotation>
+                        <xs:restriction base="xs:unsignedByte">
+                          <xs:pattern value="[1|2]"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="aplicEmi" minOccurs="1" maxOccurs="1">
+                      <xs:simpleType>
+                        <xs:annotation>
+                          <xs:documentation>
+                            Processo de emissão do evento:
+                            1- Emissão com aplicativo da empresa
+                            2- Outros
+                          </xs:documentation>
+                        </xs:annotation>
+                        <xs:restriction base="xs:unsignedByte">
+                          <xs:pattern value="[1|2]"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="verAplic" minOccurs="1" maxOccurs="1">
+                      <xs:simpleType>
+                        <xs:annotation>
+                          <xs:documentation>Informar a versão do aplicativo emissor do evento</xs:documentation>
+                        </xs:annotation>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="1"/>
+                          <xs:maxLength value="20"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="anoMesCaixa" minOccurs="1" maxOccurs="1">
+                      <xs:annotation>
+                        <xs:documentation>Informar o ano/mês caixa que está sendo reportado, no formato AAAAMM</xs:documentation>
+                      </xs:annotation>
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:length value="6"/>
+                          <xs:pattern value="20([0-9][0-9])(0[1-9]|1[0-2])"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="ideDeclarante" minOccurs="1" maxOccurs="1">
+                <xs:complexType>
+                  <xs:annotation>
+                    <xs:documentation>Informações de identificação do declarante</xs:documentation>
+                  </xs:annotation>
+                  <xs:sequence>
+                    <xs:element name="cnpjDeclarante" minOccurs="1" maxOccurs="1">
+                      <xs:annotation>
+                        <xs:documentation>Informar o número do CNPJ declarante</xs:documentation>
+                      </xs:annotation>
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="1"/>
+                          <xs:maxLength value="14"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="ideDeclarado" minOccurs="1" maxOccurs="1">
+                <xs:complexType>
+                  <xs:annotation>
+                    <xs:documentation>Informações de identificação do declarado</xs:documentation>
+                  </xs:annotation>
+                  <xs:sequence>
+                    <xs:element name="tpNI" minOccurs="1" maxOccurs="1">
+                      <xs:annotation>
+                        <xs:documentation>
+                          Informar o código correspondente ao tipo de inscrição do declarado
+                          1 - CNPJ;
+                          2 - CPF.
+                        </xs:documentation>
+                      </xs:annotation>
+                      <xs:simpleType>
+                        <xs:restriction base="xs:unsignedByte">
+                          <xs:pattern value="[1;2]"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="NIDeclarado" minOccurs="1" maxOccurs="1">
+                      <xs:annotation>
+                        <xs:documentation>Informar o número de inscrição do declarado de acordo com o tipo de inscrição indicado no campo {tpNI}</xs:documentation>
+                      </xs:annotation>
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="1"/>
+                          <xs:maxLength value="14"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="vinculo" minOccurs="1" maxOccurs="1">
+                <xs:complexType>
+                  <xs:annotation>
+                    <xs:documentation>Informações sobre o vínculo</xs:documentation>
+                  </xs:annotation>
+                  <xs:sequence>
+                    <xs:element name="dtIniVinculo" minOccurs="1" maxOccurs="1">
+                      <xs:annotation>
+                        <xs:documentation>Data de início do Vínculo, no formato AAAA-MM-DD</xs:documentation>
+                      </xs:annotation>
+                      <xs:simpleType>
+                        <xs:restriction base="xs:date">
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="indVinculoEncerrado" minOccurs="1" maxOccurs="1">
+                      <xs:simpleType>
+                        <xs:annotation>
+                          <xs:documentation>
+                            Vinculo encerrado:
+                            0 - Não
+                            1 - Sim
+                          </xs:documentation>
+                        </xs:annotation>
+                        <xs:restriction base="xs:unsignedByte">
+                          <xs:pattern value="[0|1]"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="repasses" minOccurs="1" maxOccurs="1">
+                <xs:complexType>
+                  <xs:annotation>
+                    <xs:documentation>Valor dos repasses efetuados aos estabelecimentos credenciados</xs:documentation>
+                  </xs:annotation>
+                  <xs:sequence>
+                    <xs:element name="vlrTotalRepasse" minOccurs="1" maxOccurs="1">
+                      <xs:annotation>
+                        <xs:documentation>Valor total repassado em qualquer modalidade de pagamento</xs:documentation>
+                      </xs:annotation>
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="4"/>
+                          <xs:maxLength value="15"/>
+                          <xs:pattern value="[0-9]{1,12}[,][0-9]{2}"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="vlrAcumuladoRepasse" minOccurs="1" maxOccurs="1">
+                      <xs:annotation>
+                        <xs:documentation>Valor total acumulado anualmente até o mês Caixa repassado em qualquer modalidade de pagamento</xs:documentation>
+                      </xs:annotation>
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="4"/>
+                          <xs:maxLength value="15"/>
+                          <xs:pattern value="[0-9]{1,12}[,][0-9]{2}"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="vlrComissaoRetida" minOccurs="1" maxOccurs="1">
+                      <xs:annotation>
+                        <xs:documentation>Valor da comissão retida pela empresa</xs:documentation>
+                      </xs:annotation>
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="4"/>
+                          <xs:maxLength value="15"/>
+                          <xs:pattern value="[0-9]{1,12}[,][0-9]{2}"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="vlrAcumuladoComissao" minOccurs="1" maxOccurs="1">
+                      <xs:annotation>
+                        <xs:documentation>Valor do total acumulado anualmente da comissão retida até o mês Caixa</xs:documentation>
+                      </xs:annotation>
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="4"/>
+                          <xs:maxLength value="15"/>
+                          <xs:pattern value="[0-9]{1,12}[,][0-9]{2}"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="id" use="required" >
+              <xs:annotation>
+                <xs:documentation>Identificador que representa unicamente o evento no sistema para a mesma entidade e mesmo tipo</xs:documentation>
+              </xs:annotation>
+              <xs:simpleType>
+                <xs:restriction base="xs:ID">
+                  <xs:minLength value="13" />
+                  <xs:maxLength value="20" />
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:attribute>
+          </xs:complexType>
+        </xs:element>
+        <xs:element ref="ds:Signature"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
