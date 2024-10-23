@@ -32,8 +32,10 @@
         "ext-openssl": "*",
         "ext-simplexml": "*",
         "ext-xml": "*",
+        "ext-zlib": "*",
         "nfephp-org/sped-common" : "^5.0",
         "justinrainbow/json-schema": "^5.2"
+
     },
     "require-dev": {
 	"squizlabs/php_codesniffer": "^3.6",

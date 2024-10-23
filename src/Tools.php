@@ -37,6 +37,10 @@ class Tools extends Base
      * @var stdClass
      */
     private $urls;
+    /**
+     * @var stdClass
+     */
+    private $urlsRest;
 
     /**
      * Constructor
@@ -68,6 +72,17 @@ class Tools extends Base
             $this->urls->consulta = 'https://efinanc.receita.fazenda.gov.br'
                 . '/WsEFinanceira/WsConsulta.asmx';
         }
+        $this->urlsRest = new \stdClass();
+        $this->urlsRest->crypto = 'https://pre-efinanceira.receita.fazenda.gov.br/recepcao/lotes/cripto';
+        $this->urlsRest->cryptogz = 'https://pre-efinanceira.receita.fazenda.gov.br/recepcao/lotes/criptoGzip';
+        $this->urlsRest->consultalote  = 'https://pre-efinanceira.receita.fazenda.gov.br/consulta/lotes/';
+        $this->urlsRest->consulta = 'https://pre-efinanceira.receita.fazenda.gov.br/consulta/';
+        if ($this->tpAmb == 1) {
+            $this->urlsRest->crypto = 'https://efinanceira.receita.fazenda.gov.br/recepcao/lotes/cripto';
+            $this->urlsRest->cryptogz = 'https://efinanceira.receita.fazenda.gov.br/recepcao/lotes/criptoGzip';
+            $this->urlsRest->consultalote  = 'https://efinanceira.receita.fazenda.gov.br/consulta/lotes/';
+            $this->urlsRest->consulta = 'https://efinanceira.receita.fazenda.gov.br/consulta/';
+        }
     }
 
     /**
@@ -85,6 +100,149 @@ class Tools extends Base
             throw EventsException::wrongArgument(1000, $type);
         }
         return $this->$type($std);
+    }
+
+    /**
+     * Solicita uma consulta ao novo serviço REST
+     * será necessária uma segunda chamada usando buscarDadosRest($type, $protocolo) passando o tipo e o protocolo
+     * para receber os dados pois tod o processamento será assincono
+     * @param string $type
+     * @param array|null $filtro
+     * @return string
+     * @throws \Exception
+     */
+    public function consultarRest(string $type, array $filtro = null):string
+    {
+        $consultas = [
+            'informacoes-cadastrais',
+            'lista-efinanceira-movimento',
+            'lista-efinanceira-repasse',
+            'informacoes-mov-op-fin',
+            'informacoes-mov-op-fin-anual',
+            'informacoes-mov-pp',
+            'informacoes-mov-repasse',
+            'informacoes-intermediario',
+            'informacoes-patrocinado',
+        ];
+        $type = strtolower($type);
+        if (!in_array($type, $consultas)) {
+            //esta consulta não foi localizada
+            throw new \Exception("A consulta {$type} não está na relação atual. Veja a documentação.", 404);
+        }
+        $url = "{$this->urlsRest->consulta}{$type}";
+
+        $message = "cnpj={$this->config->cnpjDeclarante}";
+        foreach($filtro as $key => $value) {
+            $message .= "&{$key}={$value}";
+        }
+        return $message;
+        //sendRest($url, $message) //se tem message é um POST
+    }
+
+    /**
+     * Busca os dados solicitados pela consulta realizada anteriormente
+     * esté metodo é necessário pois o sistema agora é totalmente assincrono
+     * @param string $type
+     * @param string $protocolo
+     * @return string
+     * @throws \Exception
+     */
+    public function buscarDadosConsultaRest(string $type, string $protocolo): string
+    {
+        $consultas = [
+            'informacoes-cadastrais',
+            'lista-efinanceira-movimento',
+            'lista-efinanceira-repasse',
+            'informacoes-mov-op-fin',
+            'informacoes-mov-op-fin-anual',
+            'informacoes-mov-pp',
+            'informacoes-mov-repasse',
+            'informacoes-intermediario',
+            'informacoes-patrocinado',
+        ];
+        $type = strtolower($type);
+        if (!in_array($type, $consultas)) {
+            //esta consulta não foi localizada
+            throw new \Exception("A consulta {$type} não está na relação atual. Veja a documentação.", 404);
+        }
+        $url = "{$this->urlsRest->consulta}{$type}/{$protocolo}";
+        return $url;
+        //sendRest($url) //se não tem message é um GET
+    }
+
+    /**
+     * Enviar eventos com Rest
+     * @param array $events
+     * @param $modo
+     * @return string
+     */
+    public function enviarLoteRest(array $events, $modo = self::MODO_CRYPTOZIP): string
+    {
+        $content = $this->batchBuilder($events);
+        if ($modo == self::MODO_CRYPTOZIP) {
+            //envia criptogzip
+            $url = $this->urlsRest->cryptogz;
+            $content = gzencode($content);
+        } else {
+            //envia cripto
+            $url = $this->urlsRest->crypto;
+        }
+        $message = base64_encode($this->sendCripto($content));
+        return '';
+        //sendRest($url, $message)
+    }
+
+    /**
+     * @param string $xml
+     * @return string
+     */
+    public function enviarEventoRest(string $xml, $modo = self::MODO_CRYPTOZIP): string
+    {
+        $layout = $this->versions['envioLoteEventos'];
+        $content = "<eFinanceira "
+            . "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" "
+            . "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
+            . "xmlns=\"http://www.eFinanceira.gov.br/schemas/envioLoteEventos/v$layout\">";
+        $lote = date('YmdHms');
+        $content .= "<loteEventos>"
+            . "<evento id=\"ID1\">"
+            . $xml
+            . "</evento>"
+            . "</loteEventos>"
+            . "</eFinanceira>";
+        $schema = $this->path
+            . 'schemes/v'
+            . $this->eventoVersion
+            . '/envioLoteEventos-v'
+            . $layout
+            . '.xsd';
+        if ($schema) {
+            Validator::isValid($content, $schema);
+        }
+        if ($modo == self::MODO_CRYPTOZIP) {
+            //envia criptogzip
+            $content = gzencode($content);
+        } else {
+            //envia cripto
+            $url = $this->urlsRest->crypto;
+        }
+        //encripta a mensagem compactada
+        $message = base64_encode($this->sendCripto($content));
+        return '';
+    }
+
+    /**
+     * Consulta o Lote pelo protocolo de recebimento
+     * para saber se o mesmo foi processado
+     * @param $protocolo
+     * @return string
+     */
+    public function consultaLote($protocolo): string
+    {
+        $url = "{$this->urlsRest->consultaLote}{$protocolo}";
+
+        //sendRest($url)
+        return '';
     }
 
     /**
