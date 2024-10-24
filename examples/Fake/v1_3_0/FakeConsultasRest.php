@@ -7,8 +7,8 @@ use NFePHP\Common\Certificate;
 use NFePHP\eFinanc\Event;
 use NFePHP\eFinanc\Tools;
 use NFePHP\eFinanc\Common\Standardize;
-use NFePHP\eFinanc\Common\FakePretty;
-use NFePHP\eFinanc\Common\Soap\SoapFake;
+use NFePHP\eFinanc\Common\FakePrettyRest;
+use NFePHP\eFinanc\Common\Rest\RestFake;
 
 $config = [
     'tpAmb' => 2, //tipo de ambiente 1 - Produção; 2 - pre-produção
@@ -24,9 +24,12 @@ try {
     $password = 'associacao';
     $certificate = Certificate::readPfx($content, $password);
 
+    $rest = new RestFake($certificate);
+    $rest->disableCertValidation(true);
 
     //instancia a classe responsável pela comunicação
     $tools = new Tools($configJson, $certificate);
+    $tools->loadRestClass($rest);
 
     //informacoes-cadastrais
     //$resp = $tools->consultarRest('informacoes-cadastrais');
@@ -163,9 +166,9 @@ try {
         'cnpjPatrocinado' => '12345678901234', //opcional
         'giinPatrocinado' => '1234567890123456789' //opcional
     ];
-    $resp = $tools->consultarRest('informacoes-patrocinado', $filtro);
+    $response = $tools->consultarRest('informacoes-patrocinado', $filtro);
 
-    echo $resp;
+    echo FakePrettyRest::prettyPrint($response);
 
 } catch (\Exception $e) {
     echo $e->getMessage();

@@ -159,7 +159,7 @@ class EvtMovPP extends Factory implements FactoryInterface
 
                 $infoPrevPriv->appendChild($plano);
             }
-            
+
             $opPrevPriv = $this->dom->createElement("opPrevPriv");
             $saldoInicial = $this->dom->createElement("saldoInicial");
             $this->dom->addChild(
@@ -171,7 +171,9 @@ class EvtMovPP extends Factory implements FactoryInterface
             $this->dom->addChild(
                 $saldoInicial,
                 "vlrRendimentos",
-                isset($infp->saldoinicial->vlrrendimentos) ? number_format($infp->saldoinicial->vlrrendimentos, 2, ',', '') : null,
+                isset($infp->saldoinicial->vlrrendimentos)
+                    ? number_format($infp->saldoinicial->vlrrendimentos, 2, ',', '')
+                    : null,
                 false
             );
             $opPrevPriv->appendChild($saldoInicial);
