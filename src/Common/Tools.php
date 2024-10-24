@@ -12,6 +12,9 @@ namespace NFePHP\eFinanc\Common;
  * @author    Roberto L. Machado <linux.rlm at gmail dot com>
  * @link      http://github.com/nfephp-org/sped-efinanceira for the canonical source repository
  */
+
+use NFePHP\eFinanc\Common\Rest\RestCurl;
+use NFePHP\eFinanc\Common\Rest\RestInterface;
 use stdClass;
 use NFePHP\Common\Certificate;
 use NFePHP\eFinanc\Common\Soap\SoapCurl;
@@ -67,6 +70,10 @@ class Tools
      */
     protected $soap;
     /**
+     * @var RestInterface
+     */
+    protected $rest;
+    /**
      * @var \DateTime
      */
     protected $date;
@@ -114,6 +121,15 @@ class Tools
     public function loadSoapClass(SoapInterface $soap)
     {
         $this->soap = $soap;
+    }
+
+    /**
+     * @param RestInterface $rest
+     * @return void
+     */
+    public function loadRestClass(RestInterface $rest)
+    {
+        $this->rest = $rest;
     }
 
     /**
@@ -168,6 +184,21 @@ class Tools
             $parameters
         );
         return $this->response;
+    }
+
+    /**
+     * Envia mensagens para o webservice Resful assincrono
+     * @param string $url
+     * @param string $operation
+     * @param string|null $message
+     * @return string
+     */
+    public function sendRest(string $url, string $operation, string $message = null): string
+    {
+        if (empty($this->rest)) {
+            $this->rest = new RestCurl($this->certificate);
+        }
+        return $this->rest->send($url, $operation, $message);
     }
 
     /**

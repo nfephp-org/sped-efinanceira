@@ -127,16 +127,16 @@ class Tools extends Base
         $type = strtolower($type);
         if (!in_array($type, $consultas)) {
             //esta consulta não foi localizada
-            throw new \Exception("A consulta {$type} não está na relação atual. Veja a documentação.", 404);
+            throw new \Exception("A consulta {$type} não consta da relação atual. Veja a documentação.", 404);
         }
         $url = "{$this->urlsRest->consulta}{$type}";
 
         $message = "cnpj={$this->config->cnpjDeclarante}";
-        foreach($filtro as $key => $value) {
+        foreach ($filtro as $key => $value) {
             $message .= "&{$key}={$value}";
         }
-        return $message;
-        //sendRest($url, $message) //se tem message é um POST
+        $operation = 'consultas';
+        return $this->sendRest($url, $operation, $message);
     }
 
     /**
@@ -163,11 +163,11 @@ class Tools extends Base
         $type = strtolower($type);
         if (!in_array($type, $consultas)) {
             //esta consulta não foi localizada
-            throw new \Exception("A consulta {$type} não está na relação atual. Veja a documentação.", 404);
+            throw new \Exception("A consulta {$type} não consta da relação atual. Veja a documentação.", 404);
         }
         $url = "{$this->urlsRest->consulta}{$type}/{$protocolo}";
-        return $url;
-        //sendRest($url) //se não tem message é um GET
+        $operation = 'buscardados';
+        return $this->sendRest($url, $operation);
     }
 
     /**
@@ -188,15 +188,15 @@ class Tools extends Base
             $url = $this->urlsRest->crypto;
         }
         $message = base64_encode($this->sendCripto($content));
-        return '';
-        //sendRest($url, $message)
+        $operation = 'enviarlote';
+        return $this->sendRest($url, $operation, $message);
     }
 
     /**
      * @param string $xml
      * @return string
      */
-    public function enviarEventoRest(string $xml, $modo = self::MODO_CRYPTOZIP): string
+    public function enviarEventoXmlRest(string $xml, $modo = self::MODO_CRYPTOZIP): string
     {
         $layout = $this->versions['envioLoteEventos'];
         $content = "<eFinanceira "
@@ -228,7 +228,8 @@ class Tools extends Base
         }
         //encripta a mensagem compactada
         $message = base64_encode($this->sendCripto($content));
-        return '';
+        $operation = 'enviareventoxml';
+        return $this->sendRest($url, $operation, $message);
     }
 
     /**
@@ -240,9 +241,8 @@ class Tools extends Base
     public function consultaLote($protocolo): string
     {
         $url = "{$this->urlsRest->consultaLote}{$protocolo}";
-
-        //sendRest($url)
-        return '';
+        $operation = 'consultarlote';
+        return $this->sendRest($url, $operation);
     }
 
     /**
