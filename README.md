@@ -26,6 +26,34 @@ Este pacote visa fornecer os meios para gerar, assinar e anviar os dados relativ
 
 Este pacote faz parte da API NFePHP e atende aos parâmetros das PSR2 e PSR4, bem como é desenvolvida para de adequar as versões ATIVAS do PHP.
 
+## Operação ASSINCRONA
+
+### Swagger Recepção
+https://pre-efinanceira.receita.fazenda.gov.br/recepcao/swagger/index.html
+
+### Swagger Consultas
+https://pre-efinanceira.receita.fazenda.gov.br/consulta/swagger/index.html
+
+## Para usar os métodos assincronos use os métodos com rest no nome
+
+
+```php
+function enviarLoteRest(array $events, $modo = self::MODO_CRYPTOZIP): string
+public function enviarEventoXmlRest(string $xml, $modo = self::MODO_CRYPTOZIP): string
+```
+```php
+public function consultarRest(string $type, array $filtro = null):string
+```
+
+```php
+public function buscarDadosConsultaRest(string $type, string $protocolo): string
+```
+
+```php
+ublic function consultaLote($protocolo): string
+```
+
+
 ## Contribuindo
 
 Este é um projeto totalmente *OpenSource*, para usa-lo e modifica-lo você não paga absolutamente nada. Porém para continuarmos a mante-lo é necessário qua alguma contribuição seja feita, seja auxiliando na codificação, na documentação ou na realização de testes e identificação de falhas e BUGs.
