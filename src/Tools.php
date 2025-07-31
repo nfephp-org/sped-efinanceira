@@ -373,7 +373,8 @@ class Tools extends Base
         $lote = date('YmdHms');
         $xml .= "<loteEventos>";
         if ($this->asynchronousMode) {
-            $layout = $this->versions['envioLoteEventosAssincrono'];;
+            $layout = $this->versions['envioLoteEventosAssincrono'];
+            ;
             $xml = "<eFinanceira "
                 . "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" "
                 . "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
