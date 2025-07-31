@@ -85,6 +85,10 @@ class Tools
      * @var stdClass
      */
     protected $config;
+    /**
+     * @var bool
+     */
+    protected $asynchronousMode = false;
 
     /**
      * Constructor
@@ -133,6 +137,16 @@ class Tools
     }
 
     /**
+     * Set the send operation by asynchronous mode
+     * @param bool $flag
+     * @return void
+     */
+    public function setAsynchronousMode(bool $flag = false)
+    {
+        $this->asynchronousMode = $flag;
+    }
+
+    /**
      * Returns a string not subject to repetition indicating
      * the year, month, day, hour, minute, and second
      * This return is used to name the log files of the
@@ -152,7 +166,7 @@ class Tools
      * @param string $url
      * @return string
      */
-    protected function sendRequest($body, $method, $url)
+    protected function sendRequest(string $body, string $method, string $url): string
     {
         if (!is_object($this->soap)) {
             $this->soap = new SoapCurl($this->certificate);
@@ -207,7 +221,7 @@ class Tools
      * @param array $possible
      * @return stdClass
      */
-    protected function equilizeParameters(stdClass $std, $possible)
+    protected function equilizeParameters(stdClass $std, array $possible): stdClass
     {
         $arr = get_object_vars($std);
         foreach ($possible as $key) {

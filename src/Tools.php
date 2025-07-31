@@ -77,11 +77,15 @@ class Tools extends Base
         $this->urlsRest->cryptogz = 'https://pre-efinanceira.receita.fazenda.gov.br/recepcao/lotes/criptoGzip';
         $this->urlsRest->consultalote  = 'https://pre-efinanceira.receita.fazenda.gov.br/consulta/lotes/';
         $this->urlsRest->consulta = 'https://pre-efinanceira.receita.fazenda.gov.br/consulta/';
+        $this->urls->assinc_cripto = 'https://pre-efinenceira.receita.fazenda.gov.br/recepcao/lotes/cripto';
+        $this->urls->assinc_criptoGzip = 'https://pre-efinanceira.receita.fazenda.gov.br/recepcao/lotes/criptoGzip';
         if ($this->tpAmb == 1) {
             $this->urlsRest->crypto = 'https://efinanceira.receita.fazenda.gov.br/recepcao/lotes/cripto';
             $this->urlsRest->cryptogz = 'https://efinanceira.receita.fazenda.gov.br/recepcao/lotes/criptoGzip';
             $this->urlsRest->consultalote  = 'https://efinanceira.receita.fazenda.gov.br/consulta/lotes/';
             $this->urlsRest->consulta = 'https://efinanceira.receita.fazenda.gov.br/consulta/';
+            $this->urlsRest->assinc_cripto = 'https://efinanceira.receita.fazenda.gov.br/recepcao/lotes/cripto';
+            $this->urlsRest->assinc_criptoGzip = 'https://efinanceira.receita.fazenda.gov.br/recepcao/lotes/criptoGzip';
         }
     }
 
@@ -182,10 +186,16 @@ class Tools extends Base
         if ($modo == self::MODO_CRYPTOZIP) {
             //envia criptogzip
             $url = $this->urlsRest->cryptogz;
+            if ($this->asynchronousMode) {
+                $url = $this->urlsRest->assinc_cryptogz;
+            }
             $content = gzencode($content);
         } else {
             //envia cripto
             $url = $this->urlsRest->crypto;
+            if ($this->asynchronousMode) {
+                $url = $this->urlsRest->assinc_crypto;
+            }
         }
         $message = base64_encode($this->sendCripto($content));
         $operation = 'enviarlote';
@@ -362,6 +372,16 @@ class Tools extends Base
         $iCount = 0;
         $lote = date('YmdHms');
         $xml .= "<loteEventos>";
+        if ($this->asynchronousMode) {
+            $layout = $this->versions['envioLoteEventosAssincrono'];;
+            $xml = "<eFinanceira "
+                . "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" "
+                . "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
+                . "xmlns=\"http://www.eFinanceira.gov.br/schemas/envioLoteEventosAssincrono/v$layout\">";
+            $xml .= "<loteEventosAssincrono>"
+                . "<cnpjDeclarante>string</cnpjDeclarante>"
+                . "<eventos>";
+        }
         foreach ($events as $evt) {
             if (!is_a($evt, '\NFePHP\eFinanc\Common\FactoryInterface')) {
                 throw ProcessException::wrongArgument(2002, '');
@@ -372,14 +392,24 @@ class Tools extends Base
             $xml .= "</evento>";
             $iCount++;
         }
-        $xml .= "</loteEventos>";
-        $xml .= "</eFinanceira>";
-        $schema = $this->path
-            . 'schemes/v'
-            . $this->eventoVersion
-            . '/envioLoteEventos-v'
-            . $layout
-            . '.xsd';
+        if ($this->asynchronousMode) {
+            $xml .= "</eventos></loteEventosAssincrono></eFinanceira>";
+            $schema = $this->path
+                . 'schemes/v'
+                . $this->eventoVersion
+                . '/envioLoteEventosAssincrono-v'
+                . $layout
+                . '.xsd';
+        } else {
+            $xml .= "</loteEventos>";
+            $xml .= "</eFinanceira>";
+            $schema = $this->path
+                . 'schemes/v'
+                . $this->eventoVersion
+                . '/envioLoteEventos-v'
+                . $layout
+                . '.xsd';
+        }
         if ($schema) {
             Validator::isValid($xml, $schema);
         }

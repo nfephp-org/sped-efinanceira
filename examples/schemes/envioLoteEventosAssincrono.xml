@@ -1,0 +1,11 @@
+<v1:eFinanceira xmlns:v1="http://www.eFinanceira.gov.br/schemas/envioLoteEventosAssincrono/v1_0_0">
+  <v1:loteEventosAssincrono>
+    <v1:cnpjDeclarante>string</v1:cnpjDeclarante>
+    <v1:eventos>
+      <v1:evento id="string">
+        <!--You may enter ANY elements at this point-->
+        <AnyElement/>
+      </v1:evento>
+    </v1:eventos>
+  </v1:loteEventosAssincrono>
+</v1:eFinanceira>

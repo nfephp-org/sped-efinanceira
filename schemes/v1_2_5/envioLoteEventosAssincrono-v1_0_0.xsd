@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema version="1.0.0"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://www.eFinanceira.gov.br/schemas/envioLoteEventosAssincrono/v1_0_0"
+           targetNamespace="http://www.eFinanceira.gov.br/schemas/envioLoteEventosAssincrono/v1_0_0"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+
+  <xs:element name="eFinanceira">
+    <xs:annotation>
+      <xs:documentation>Elemento raiz.</xs:documentation>
+    </xs:annotation>
+
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="loteEventosAssincrono">
+          <xs:annotation>
+            <xs:documentation>Lote de eventos assíncrono.</xs:documentation>
+          </xs:annotation>
+
+          <xs:complexType>
+            <xs:sequence>
+
+              <xs:element name="cnpjDeclarante" minOccurs="1" maxOccurs="1">
+                <xs:annotation>
+                  <xs:documentation>CNPJ da Entidade Declarante.</xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:maxLength value="14"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+
+              <xs:element name="eventos">
+                <xs:annotation>
+                  <xs:documentation>Contém a relação de eventos que compõe o lote.</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:sequence maxOccurs="50">
+                    <xs:element name="evento" type="TArquivoeFinanceira" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+
+  <xs:complexType name="TArquivoeFinanceira">
+    <xs:annotation>
+      <xs:documentation>
+        Define os dados de um evento da e-Financeira.
+      </xs:documentation>
+    </xs:annotation>
+
+    <xs:sequence>
+      <xs:any processContents="skip">
+        <xs:annotation>
+          <xs:documentation>Contém o xml do evento.</xs:documentation>
+        </xs:annotation>
+      </xs:any>
+    </xs:sequence>
+
+    <xs:attribute name="id" use="required" type="xs:ID">
+      <xs:annotation>
+        <xs:documentation>
+          Contém a chave de acesso do evento.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+</xs:schema>
