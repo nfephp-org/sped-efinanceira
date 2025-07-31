@@ -22,7 +22,9 @@ final class RestCurl extends RestBase
     {
         $response = '';
         try {
-            $parameters = [];
+            $parameters = [
+                'Accept: application/xml'
+            ];
             $this->saveTemporarilyKeyFiles();
             $oCurl = curl_init();
             $this->setCurlProxy($oCurl);
@@ -48,13 +50,15 @@ final class RestCurl extends RestBase
             }
             curl_setopt($oCurl, CURLOPT_RETURNTRANSFER, true);
             if (! empty($message)) {
+                $parameters = array_merge(['Content-Type: application/xml'], $parameters);
                 curl_setopt($oCurl, CURLOPT_POST, true);
                 curl_setopt($oCurl, CURLOPT_POSTFIELDS, $message);
-                curl_setopt($oCurl, CURLOPT_HTTPHEADER, $parameters);
+                //curl_setopt($oCurl, CURLOPT_HTTPHEADER, $parameters);
             } else {
                 //curl_setopt($oCurl, CURLOPT_POST, false);
                 curl_setopt($oCurl, CURLOPT_CUSTOMREQUEST, "GET");
             }
+            curl_setopt($oCurl, CURLOPT_HTTPHEADER, $parameters);
             $response = curl_exec($oCurl);
             $this->resterror = curl_error($oCurl);
             $this->resterrorno = (int) curl_errno($oCurl);
@@ -73,8 +77,20 @@ final class RestCurl extends RestBase
         if ($this->resterror != '') {
             throw new SoapException($this->resterror . " [$url]", $this->resterrorno);
         }
-        if ($httpcode != 200) {
-            throw new SoapException(" [$url] HTTP Error code: $httpcode -  {$this->responseBody}", $httpcode);
+        if ($httpcode != 200 || $httpcode != 201) {
+            $err = [
+                405 => 'Método HTTP incorreto. Use o método POST para enviar lotes.',
+                413 => 'Tamanho da mensagem é maior que o permitido.',
+                415 => 'Media type não é application/xml, ou o conteúdo do body informado não é um XML.',
+                422 => 'Lote não foi recebido pois possui inconsistências. No body é retornado o XML com as ocorrências a serem resolvidas pela instituição declarante.',
+                429 => 'Excesso de conexões em sequência. Aguarde alguns minutos e tente novamente.',
+                495 => 'Certificado não aceito na conexão à API. Verifique se o certificado está expirado ou revogado.',
+                496 => 'Certificado não foi informado na conexão à API.',
+                500 => 'Erro interno na e-Financeira. XML retornado com código de erro para acionamento.',
+                503 => 'Serviço indisponível momentaneamente. Aguarde alguns minutos e tente novamente.'
+            ];
+            $msg = $err[$httpcode] ?? 'Erro desconhecido';
+            throw new SoapException(" [$url] HTTP Error {$msg} CODE: $httpcode -  {$this->responseBody}", $httpcode);
         }
         return $this->responseBody;
     }
