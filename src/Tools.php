@@ -77,15 +77,11 @@ class Tools extends Base
         $this->urlsRest->cryptogz = 'https://pre-efinanceira.receita.fazenda.gov.br/recepcao/lotes/criptoGzip';
         $this->urlsRest->consultalote  = 'https://pre-efinanceira.receita.fazenda.gov.br/consulta/lotes/';
         $this->urlsRest->consulta = 'https://pre-efinanceira.receita.fazenda.gov.br/consulta/';
-        $this->urls->assinc_cripto = 'https://pre-efinenceira.receita.fazenda.gov.br/recepcao/lotes/cripto';
-        $this->urls->assinc_criptoGzip = 'https://pre-efinanceira.receita.fazenda.gov.br/recepcao/lotes/criptoGzip';
         if ($this->tpAmb == 1) {
             $this->urlsRest->crypto = 'https://efinanceira.receita.fazenda.gov.br/recepcao/lotes/cripto';
             $this->urlsRest->cryptogz = 'https://efinanceira.receita.fazenda.gov.br/recepcao/lotes/criptoGzip';
             $this->urlsRest->consultalote  = 'https://efinanceira.receita.fazenda.gov.br/consulta/lotes/';
             $this->urlsRest->consulta = 'https://efinanceira.receita.fazenda.gov.br/consulta/';
-            $this->urlsRest->assinc_cripto = 'https://efinanceira.receita.fazenda.gov.br/recepcao/lotes/cripto';
-            $this->urlsRest->assinc_criptoGzip = 'https://efinanceira.receita.fazenda.gov.br/recepcao/lotes/criptoGzip';
         }
     }
 
@@ -186,18 +182,13 @@ class Tools extends Base
         if ($modo == self::MODO_CRYPTOZIP) {
             //envia criptogzip
             $url = $this->urlsRest->cryptogz;
-            if ($this->asynchronousMode) {
-                $url = $this->urlsRest->assinc_cryptogz;
-            }
             $content = gzencode($content);
         } else {
             //envia cripto
             $url = $this->urlsRest->crypto;
-            if ($this->asynchronousMode) {
-                $url = $this->urlsRest->assinc_crypto;
-            }
         }
-        $message = base64_encode($this->sendCripto($content));
+        //$message = base64_encode($this->sendCripto($content));
+        $message = $this->sendCripto($content);
         $operation = 'enviarlote';
         return $this->sendRest($url, $operation, $message);
     }
@@ -232,12 +223,14 @@ class Tools extends Base
         if ($modo == self::MODO_CRYPTOZIP) {
             //envia criptogzip
             $content = gzencode($content);
+            $url = $this->urlsRest->cryptogz;
         } else {
             //envia cripto
             $url = $this->urlsRest->crypto;
         }
         //encripta a mensagem compactada
-        $message = base64_encode($this->sendCripto($content));
+        //$message = base64_encode($this->sendCripto($content));
+        $message = $this->sendCripto($content);
         $operation = 'enviareventoxml';
         return $this->sendRest($url, $operation, $message);
     }

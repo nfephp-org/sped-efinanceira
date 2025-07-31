@@ -52,7 +52,8 @@ final class RestCurl extends RestBase
                 curl_setopt($oCurl, CURLOPT_POSTFIELDS, $message);
                 curl_setopt($oCurl, CURLOPT_HTTPHEADER, $parameters);
             } else {
-                curl_setopt($oCurl, CURLOPT_POST, false);
+                //curl_setopt($oCurl, CURLOPT_POST, false);
+                curl_setopt($oCurl, CURLOPT_CUSTOMREQUEST, "GET");
             }
             $response = curl_exec($oCurl);
             $this->resterror = curl_error($oCurl);
