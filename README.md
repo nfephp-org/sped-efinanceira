@@ -39,18 +39,19 @@ https://pre-efinanceira.receita.fazenda.gov.br/consulta/swagger/index.html
 
 ```php
 function enviarLoteRest(array $events, $modo = self::MODO_CRYPTOZIP): string
-public function enviarEventoXmlRest(string $xml, $modo = self::MODO_CRYPTOZIP): string
+
+function enviarEventoXmlRest(string $xml, $modo = self::MODO_CRYPTOZIP): string
 ```
 ```php
-public function consultarRest(string $type, array $filtro = null):string
+function consultarRest(string $type, array $filtro = null):string
 ```
 
 ```php
-public function buscarDadosConsultaRest(string $type, string $protocolo): string
+function buscarDadosConsultaRest(string $type, string $protocolo): string
 ```
 
 ```php
-ublic function consultaLote($protocolo): string
+function consultaLote($protocolo): string
 ```
 
 
