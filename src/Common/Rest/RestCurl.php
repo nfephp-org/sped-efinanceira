@@ -57,6 +57,9 @@ final class RestCurl extends RestBase
             } else {
                 //curl_setopt($oCurl, CURLOPT_POST, false);
                 curl_setopt($oCurl, CURLOPT_CUSTOMREQUEST, "GET");
+                if ($operation == 'limparpreprod') {
+                    curl_setopt($oCurl, CURLOPT_CUSTOMREQUEST, "DELETE");
+                }
             }
             curl_setopt($oCurl, CURLOPT_HTTPHEADER, $parameters);
             $response = curl_exec($oCurl);

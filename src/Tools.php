@@ -77,11 +77,13 @@ class Tools extends Base
         $this->urlsRest->cryptogz = 'https://pre-efinanceira.receita.fazenda.gov.br/recepcao/lotes/criptoGzip';
         $this->urlsRest->consultalote  = 'https://pre-efinanceira.receita.fazenda.gov.br/consulta/lotes/';
         $this->urlsRest->consulta = 'https://pre-efinanceira.receita.fazenda.gov.br/consulta/';
+        $this->urlsRest->limparpreprod = 'https://pre-efinanceira.receita.fazenda.gov.br/recepcao/limpezaDadosTesteProducaoRestrita';
         if ($this->tpAmb == 1) {
             $this->urlsRest->crypto = 'https://efinanceira.receita.fazenda.gov.br/recepcao/lotes/cripto';
             $this->urlsRest->cryptogz = 'https://efinanceira.receita.fazenda.gov.br/recepcao/lotes/criptoGzip';
             $this->urlsRest->consultalote  = 'https://efinanceira.receita.fazenda.gov.br/consulta/lotes/';
             $this->urlsRest->consulta = 'https://efinanceira.receita.fazenda.gov.br/consulta/';
+            $this->urlsRest->limparpreprod = ''; //não existe em produção
         }
     }
 
@@ -191,6 +193,16 @@ class Tools extends Base
         $message = $this->sendCripto($content);
         $operation = 'enviarlote';
         return $this->sendRest($url, $operation, $message);
+    }
+
+    public function limparPreprodRest()
+    {
+        if ($this->tpAmb == '1') {
+            return;
+        }
+        $url = $this->urlsRest->limparPreprod . '?cnpjDeclarante=' . $this->config->cnpjDeclarante;;
+        $operation = 'limparpreprod';
+        return $this->sendRest($url, $operation);
     }
 
     /**
