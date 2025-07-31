@@ -1,0 +1,63 @@
+<v1:eFinanceira xmlns:v1="http://www.eFinanceira.gov.br/schemas/retornoLoteEventosAssincrono/v1_0_0" xmlns:xd="http://www.w3.org/2000/09/xmldsig#">
+  <v1:retornoLoteEventosAssincrono id="string">
+    <v1:cnpjDeclarante>string</v1:cnpjDeclarante>
+    <v1:status>
+      <v1:cdResposta>3</v1:cdResposta>
+      <v1:descResposta>string</v1:descResposta>
+      <!--Optional:-->
+      <v1:ocorrencias>
+        <!--1 or more repetitions:-->
+        <v1:ocorrencia>
+          <v1:codigo>string</v1:codigo>
+          <v1:descricao>string</v1:descricao>
+          <v1:tipo>6</v1:tipo>
+          <!--Optional:-->
+          <v1:localizacao>string</v1:localizacao>
+        </v1:ocorrencia>
+      </v1:ocorrencias>
+    </v1:status>
+    <!--Optional:-->
+    <v1:dadosRecepcaoLote>
+      <v1:dhRecepcao>2008-09-28T22:49:45</v1:dhRecepcao>
+      <v1:versaoAplicativoRecepcao>string</v1:versaoAplicativoRecepcao>
+      <v1:protocoloEnvio>string</v1:protocoloEnvio>
+    </v1:dadosRecepcaoLote>
+    <!--Optional:-->
+    <v1:dadosProcessamentoLote>
+      <v1:dhProcessamento>2014-09-18T20:18:33</v1:dhProcessamento>
+      <!--Optional:-->
+      <v1:versaoAplicativoProcessamentoLote>string</v1:versaoAplicativoProcessamentoLote>
+    </v1:dadosProcessamentoLote>
+    <!--Optional:-->
+    <v1:retornoEventos>
+      <v1:evento id="string">
+        <!--You may enter ANY elements at this point-->
+        <AnyElement/>
+      </v1:evento>
+    </v1:retornoEventos>
+  </v1:retornoLoteEventosAssincrono>
+  <xd:Signature Id="string">
+    <xd:SignedInfo Id="string">
+      <xd:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+      <xd:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
+      <xd:Reference Id="string" URI="http://www.corp.org/temperat/per" Type="http://www.test.com/regemque/nimborum">
+        <xd:Transforms>
+          <xd:Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315">
+            <xd:XPath>string</xd:XPath>
+          </xd:Transform>
+          <xd:Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315">
+            <xd:XPath>string</xd:XPath>
+          </xd:Transform>
+        </xd:Transforms>
+        <xd:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+        <xd:DigestValue>ZmVyYW50</xd:DigestValue>
+      </xd:Reference>
+    </xd:SignedInfo>
+    <xd:SignatureValue Id="string">cHJvZnVuZHVt</xd:SignatureValue>
+    <xd:KeyInfo Id="string">
+      <xd:X509Data>
+        <xd:X509Certificate>c2NlcHRyYQ==</xd:X509Certificate>
+      </xd:X509Data>
+    </xd:KeyInfo>
+  </xd:Signature>
+</v1:eFinanceira>
