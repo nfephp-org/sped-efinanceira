@@ -189,10 +189,12 @@ class Tools extends Base
             //envia cripto
             $url = $this->urlsRest->crypto;
         }
+
         //$message = base64_encode($this->sendCripto($content));
         $message = $this->sendCripto($content);
         $operation = 'enviarlote';
-        return $this->sendRest($url, $operation, $message);
+        return $content;
+        //return $this->sendRest($url, $operation, $message);
     }
 
     public function limparPreprodRest()
@@ -385,7 +387,7 @@ class Tools extends Base
                 . "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
                 . "xmlns=\"http://www.eFinanceira.gov.br/schemas/envioLoteEventosAssincrono/v$layout\">";
             $xml .= "<loteEventosAssincrono>"
-                . "<cnpjDeclarante>string</cnpjDeclarante>"
+                . "<cnpjDeclarante>{$this->config->cnpjDeclarante}</cnpjDeclarante>"
                 . "<eventos>";
         }
         foreach ($events as $evt) {

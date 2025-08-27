@@ -9,7 +9,7 @@ use NFePHP\Common\Certificate;
 $config = [
     'tpAmb' => 2, //tipo de ambiente 1 - Produção; 2 - pre-produção
     'verAplic' => '43_0', //Versão do processo de emissão do evento. Informar a versão do aplicativo emissor do evento.
-    'eventoVersion' => '1_2_4', //versão do layout do evento
+    'eventoVersion' => '1_3_0', //versão do layout do evento
     'cnpjDeclarante' => '99999999999999'
 ];
 $configJson = json_encode($config, JSON_PRETTY_PRINT);
