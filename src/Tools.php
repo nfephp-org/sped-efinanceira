@@ -180,6 +180,7 @@ class Tools extends Base
      */
     public function enviarLoteRest(array $events, $modo = self::MODO_CRYPTOZIP): string
     {
+        $this->asynchronousMode = true;
         $content = $this->batchBuilder($events);
         if ($modo == self::MODO_CRYPTOZIP) {
             //envia criptogzip
@@ -193,8 +194,7 @@ class Tools extends Base
         //$message = base64_encode($this->sendCripto($content));
         $message = $this->sendCripto($content);
         $operation = 'enviarlote';
-        return $content;
-        //return $this->sendRest($url, $operation, $message);
+        return $this->sendRest($url, $operation, $message);
     }
 
     public function limparPreprodRest()
@@ -213,22 +213,26 @@ class Tools extends Base
      */
     public function enviarEventoXmlRest(string $xml, $modo = self::MODO_CRYPTOZIP): string
     {
-        $layout = $this->versions['envioLoteEventos'];
+        $this->asynchronousMode = true;
+        $layout = $this->versions['envioLoteEventosAssincrono'];
         $content = "<eFinanceira "
             . "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" "
             . "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
-            . "xmlns=\"http://www.eFinanceira.gov.br/schemas/envioLoteEventos/v$layout\">";
+            . "xmlns=\"http://www.eFinanceira.gov.br/schemas/envioLoteEventosAssincrono/v$layout\">";
         $lote = date('YmdHms');
-        $content .= "<loteEventos>"
+        $content .= "<loteEventosAssincrono>"
+            . "<cnpjDeclarante>{$this->config->cnpjDeclarante}</cnpjDeclarante>"
+            . "<eventos>"
             . "<evento id=\"ID1\">"
             . $xml
             . "</evento>"
-            . "</loteEventos>"
+            . "</eventos>"
+            . "</loteEventosAssincrono>"
             . "</eFinanceira>";
         $schema = $this->path
             . 'schemes/v'
             . $this->eventoVersion
-            . '/envioLoteEventos-v'
+            . '/envioLoteEventosAssincrono-v'
             . $layout
             . '.xsd';
         if ($schema) {
@@ -243,7 +247,6 @@ class Tools extends Base
             $url = $this->urlsRest->crypto;
         }
         //encripta a mensagem compactada
-        //$message = base64_encode($this->sendCripto($content));
         $message = $this->sendCripto($content);
         $operation = 'enviareventoxml';
         return $this->sendRest($url, $operation, $message);
