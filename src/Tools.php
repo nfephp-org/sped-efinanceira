@@ -77,11 +77,13 @@ class Tools extends Base
         $this->urlsRest->cryptogz = 'https://pre-efinanceira.receita.fazenda.gov.br/recepcao/lotes/criptoGzip';
         $this->urlsRest->consultalote  = 'https://pre-efinanceira.receita.fazenda.gov.br/consulta/lotes/';
         $this->urlsRest->consulta = 'https://pre-efinanceira.receita.fazenda.gov.br/consulta/';
+        $this->urlsRest->limparpreprod = 'https://pre-efinanceira.receita.fazenda.gov.br/recepcao/limpezaDadosTesteProducaoRestrita';
         if ($this->tpAmb == 1) {
             $this->urlsRest->crypto = 'https://efinanceira.receita.fazenda.gov.br/recepcao/lotes/cripto';
             $this->urlsRest->cryptogz = 'https://efinanceira.receita.fazenda.gov.br/recepcao/lotes/criptoGzip';
             $this->urlsRest->consultalote  = 'https://efinanceira.receita.fazenda.gov.br/consulta/lotes/';
             $this->urlsRest->consulta = 'https://efinanceira.receita.fazenda.gov.br/consulta/';
+            $this->urlsRest->limparpreprod = ''; //não existe em produção
         }
     }
 
@@ -178,6 +180,7 @@ class Tools extends Base
      */
     public function enviarLoteRest(array $events, $modo = self::MODO_CRYPTOZIP): string
     {
+        $this->asynchronousMode = true;
         $content = $this->batchBuilder($events);
         if ($modo == self::MODO_CRYPTOZIP) {
             //envia criptogzip
@@ -187,10 +190,21 @@ class Tools extends Base
             //envia cripto
             $url = $this->urlsRest->crypto;
         }
+
         //$message = base64_encode($this->sendCripto($content));
         $message = $this->sendCripto($content);
         $operation = 'enviarlote';
         return $this->sendRest($url, $operation, $message);
+    }
+
+    public function limparPreprodRest()
+    {
+        if ($this->tpAmb == '1') {
+            return;
+        }
+        $url = $this->urlsRest->limparPreprod . '?cnpjDeclarante=' . $this->config->cnpjDeclarante;;
+        $operation = 'limparpreprod';
+        return $this->sendRest($url, $operation);
     }
 
     /**
@@ -199,22 +213,26 @@ class Tools extends Base
      */
     public function enviarEventoXmlRest(string $xml, $modo = self::MODO_CRYPTOZIP): string
     {
-        $layout = $this->versions['envioLoteEventos'];
+        $this->asynchronousMode = true;
+        $layout = $this->versions['envioLoteEventosAssincrono'];
         $content = "<eFinanceira "
             . "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" "
             . "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
-            . "xmlns=\"http://www.eFinanceira.gov.br/schemas/envioLoteEventos/v$layout\">";
+            . "xmlns=\"http://www.eFinanceira.gov.br/schemas/envioLoteEventosAssincrono/v$layout\">";
         $lote = date('YmdHms');
-        $content .= "<loteEventos>"
+        $content .= "<loteEventosAssincrono>"
+            . "<cnpjDeclarante>{$this->config->cnpjDeclarante}</cnpjDeclarante>"
+            . "<eventos>"
             . "<evento id=\"ID1\">"
             . $xml
             . "</evento>"
-            . "</loteEventos>"
+            . "</eventos>"
+            . "</loteEventosAssincrono>"
             . "</eFinanceira>";
         $schema = $this->path
             . 'schemes/v'
             . $this->eventoVersion
-            . '/envioLoteEventos-v'
+            . '/envioLoteEventosAssincrono-v'
             . $layout
             . '.xsd';
         if ($schema) {
@@ -229,7 +247,6 @@ class Tools extends Base
             $url = $this->urlsRest->crypto;
         }
         //encripta a mensagem compactada
-        //$message = base64_encode($this->sendCripto($content));
         $message = $this->sendCripto($content);
         $operation = 'enviareventoxml';
         return $this->sendRest($url, $operation, $message);
@@ -373,7 +390,7 @@ class Tools extends Base
                 . "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
                 . "xmlns=\"http://www.eFinanceira.gov.br/schemas/envioLoteEventosAssincrono/v$layout\">";
             $xml .= "<loteEventosAssincrono>"
-                . "<cnpjDeclarante>string</cnpjDeclarante>"
+                . "<cnpjDeclarante>{$this->config->cnpjDeclarante}</cnpjDeclarante>"
                 . "<eventos>";
         }
         foreach ($events as $evt) {

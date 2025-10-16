@@ -49,7 +49,7 @@ final class RestCurl extends RestBase
                 curl_setopt($oCurl, CURLOPT_KEYPASSWD, $this->temppass);
             }
             curl_setopt($oCurl, CURLOPT_RETURNTRANSFER, true);
-            if (! empty($message)) {
+            if (!empty($message)) {
                 $parameters = array_merge(['Content-Type: application/xml'], $parameters);
                 curl_setopt($oCurl, CURLOPT_POST, true);
                 curl_setopt($oCurl, CURLOPT_POSTFIELDS, $message);
@@ -57,6 +57,9 @@ final class RestCurl extends RestBase
             } else {
                 //curl_setopt($oCurl, CURLOPT_POST, false);
                 curl_setopt($oCurl, CURLOPT_CUSTOMREQUEST, "GET");
+                if ($operation == 'limparpreprod') {
+                    curl_setopt($oCurl, CURLOPT_CUSTOMREQUEST, "DELETE");
+                }
             }
             curl_setopt($oCurl, CURLOPT_HTTPHEADER, $parameters);
             $response = curl_exec($oCurl);
