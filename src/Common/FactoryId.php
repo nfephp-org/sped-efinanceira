@@ -21,11 +21,12 @@ class FactoryId
      * @param int $sequential
      * @return string
      */
-    public static function build($sequential)
+    public static function build(int $sequential = 1): string
     {
         if (empty($sequential)) {
             $sequential = 1;
         }
-        return "ID".str_pad($sequential, 18, '0', STR_PAD_LEFT);
+        // @phpstan-ignore-next-line
+        return "ID" . str_pad($sequential, 18, '0', STR_PAD_LEFT);
     }
 }

@@ -134,7 +134,7 @@ abstract class SoapBase implements SoapInterface
      */
     public $soaperror;
     /**
-     * @var string
+     * @var int
      */
     public $soaperrorno;
     /**
@@ -336,42 +336,6 @@ abstract class SoapBase implements SoapInterface
     );
 
     /**
-     * Mount soap envelope
-     * @param string $request
-     * @param array $namespaces
-     * @param \SoapHeader $header
-     * @return string
-     */
-    protected function makeEnvelopeSoap(
-        $request,
-        $namespaces,
-        $soapver = SOAP_1_2,
-        $header = null
-    ) {
-        $prefix = $this->prefixes[$soapver];
-        $envelope = "<$prefix:Envelope";
-        foreach ($namespaces as $key => $value) {
-            $envelope .= " $key=\"$value\"";
-        }
-        $envelope .= ">";
-        $soapheader = "<$prefix:Header/>";
-        if (!empty($header)) {
-            $ns = !empty($header->namespace) ? $header->namespace : '';
-            $name = $header->name;
-            $soapheader = "<$prefix:Header>";
-            $soapheader .= "<$name xmlns=\"$ns\">";
-            foreach ($header->data as $key => $value) {
-                $soapheader .= "<$key>$value</$key>";
-            }
-            $soapheader .= "</$name></$prefix:Header>";
-        }
-        $envelope .= $soapheader;
-        $envelope .= "<$prefix:Body>$request</$prefix:Body>"
-            . "</$prefix:Envelope>";
-        return $envelope;
-    }
-
-    /**
      * Temporarily saves the certificate keys for use cURL or SoapClient
      */
     public function saveTemporarilyKeyFiles()
@@ -455,7 +419,8 @@ abstract class SoapBase implements SoapInterface
             $cnpj = $this->certificate->getCnpj();
         }
         $this->debugdir = $cnpj() . '/debug/';
-        $now = \DateTime::createFromFormat('U.u', microtime(true));
+        $time = microtime(true);
+        $now = \DateTime::createFromFormat('U.u', sprintf('%.6f', $time));
         $time = substr($now->format("ymdHisu"), 0, 16);
         try {
             $this->filesystem->put(

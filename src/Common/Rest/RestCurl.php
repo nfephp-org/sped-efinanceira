@@ -26,52 +26,49 @@ final class RestCurl extends RestBase
                 'Accept: application/xml'
             ];
             $this->saveTemporarilyKeyFiles();
-            $oCurl = curl_init();
-            $this->setCurlProxy($oCurl);
-            curl_setopt($oCurl, CURLOPT_URL, $url);
-            curl_setopt($oCurl, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
-            curl_setopt($oCurl, CURLOPT_CONNECTTIMEOUT, $this->timeout);
-            curl_setopt($oCurl, CURLOPT_TIMEOUT, $this->timeout + 20);
-            curl_setopt($oCurl, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
-            curl_setopt($oCurl, CURLOPT_HEADER, 1);
-            curl_setopt($oCurl, CURLOPT_SSL_VERIFYHOST, 0);
-            curl_setopt($oCurl, CURLOPT_SSL_VERIFYPEER, 0);
-            if (!$this->disablesec) {
-                curl_setopt($oCurl, CURLOPT_SSL_VERIFYHOST, 2);
-                if (is_file($this->casefaz ?? '')) {
-                    curl_setopt($oCurl, CURLOPT_CAINFO, $this->casefaz);
-                }
+            $handle = curl_init();
+            if ($handle !== false) {
+                throw new SoapException('Erro ao inicializar o cURL', 500);
             }
-            curl_setopt($oCurl, CURLOPT_SSLVERSION, $this->sslprotocol);
-            curl_setopt($oCurl, CURLOPT_SSLCERT, $this->tempdir . $this->certfile);
-            curl_setopt($oCurl, CURLOPT_SSLKEY, $this->tempdir . $this->prifile);
+            $this->setCurlProxy($handle);
+            curl_setopt($handle, CURLOPT_URL, $url);
+            curl_setopt($handle, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
+            curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, $this->timeout);
+            curl_setopt($handle, CURLOPT_TIMEOUT, $this->timeout + 20);
+            curl_setopt($handle, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+            curl_setopt($handle, CURLOPT_HEADER, 1);
+            curl_setopt($handle, CURLOPT_SSL_VERIFYHOST, 0);
+            curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, 0);
+            curl_setopt($handle, CURLOPT_SSLVERSION, $this->sslprotocol);
+            curl_setopt($handle, CURLOPT_SSLCERT, $this->tempdir . $this->certfile);
+            curl_setopt($handle, CURLOPT_SSLKEY, $this->tempdir . $this->prifile);
             if (!empty($this->temppass)) {
-                curl_setopt($oCurl, CURLOPT_KEYPASSWD, $this->temppass);
+                curl_setopt($handle, CURLOPT_KEYPASSWD, $this->temppass);
             }
-            curl_setopt($oCurl, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
             if (!empty($message)) {
                 $parameters = array_merge(['Content-Type: application/xml'], $parameters);
-                curl_setopt($oCurl, CURLOPT_POST, true);
-                curl_setopt($oCurl, CURLOPT_POSTFIELDS, $message);
-                //curl_setopt($oCurl, CURLOPT_HTTPHEADER, $parameters);
+                curl_setopt($handle, CURLOPT_POST, true);
+                curl_setopt($handle, CURLOPT_POSTFIELDS, $message);
+                //curl_setopt($handle, CURLOPT_HTTPHEADER, $parameters);
             } else {
-                //curl_setopt($oCurl, CURLOPT_POST, false);
-                curl_setopt($oCurl, CURLOPT_CUSTOMREQUEST, "GET");
+                //curl_setopt($handle, CURLOPT_POST, false);
+                curl_setopt($handle, CURLOPT_CUSTOMREQUEST, "GET");
                 if ($operation == 'limparpreprod') {
-                    curl_setopt($oCurl, CURLOPT_CUSTOMREQUEST, "DELETE");
+                    curl_setopt($handle, CURLOPT_CUSTOMREQUEST, "DELETE");
                 }
             }
-            curl_setopt($oCurl, CURLOPT_HTTPHEADER, $parameters);
-            $response = curl_exec($oCurl);
-            $this->resterror = curl_error($oCurl);
-            $this->resterrorno = (int) curl_errno($oCurl);
-            $ainfo = curl_getinfo($oCurl);
+            curl_setopt($handle, CURLOPT_HTTPHEADER, $parameters);
+            $response = curl_exec($handle);
+            $this->resterror = curl_error($handle);
+            $this->resterrorno = (int) curl_errno($handle);
+            $ainfo = curl_getinfo($handle);
             if (is_array($ainfo)) {
                 $this->restinfo = $ainfo;
             }
-            $headsize = curl_getinfo($oCurl, CURLINFO_HEADER_SIZE);
-            $httpcode = curl_getinfo($oCurl, CURLINFO_HTTP_CODE);
-            curl_close($oCurl);
+            $headsize = curl_getinfo($handle, CURLINFO_HEADER_SIZE);
+            $httpcode = (int) curl_getinfo($handle, CURLINFO_HTTP_CODE);
+            curl_close($handle);
             $this->responseHead = trim(substr($response, 0, $headsize));
             $this->responseBody = trim(substr($response, $headsize));
         } catch (\Exception $e) {
@@ -80,12 +77,13 @@ final class RestCurl extends RestBase
         if ($this->resterror != '') {
             throw new SoapException($this->resterror . " [$url]", $this->resterrorno);
         }
-        if ($httpcode != 200 || $httpcode != 201) {
+        if ($httpcode !== 200 && $httpcode !== 201) {
             $err = [
                 405 => 'Método HTTP incorreto. Use o método POST para enviar lotes.',
                 413 => 'Tamanho da mensagem é maior que o permitido.',
                 415 => 'Media type não é application/xml, ou o conteúdo do body informado não é um XML.',
-                422 => 'Lote não foi recebido pois possui inconsistências. No body é retornado o XML com as ocorrências a serem resolvidas pela instituição declarante.',
+                422 => 'Lote não foi recebido pois possui inconsistências. No body é retornado o XML com as ocorrências'
+                    . ' a serem resolvidas pela instituição declarante.',
                 429 => 'Excesso de conexões em sequência. Aguarde alguns minutos e tente novamente.',
                 495 => 'Certificado não aceito na conexão à API. Verifique se o certificado está expirado ou revogado.',
                 496 => 'Certificado não foi informado na conexão à API.',
@@ -93,25 +91,30 @@ final class RestCurl extends RestBase
                 503 => 'Serviço indisponível momentaneamente. Aguarde alguns minutos e tente novamente.'
             ];
             $msg = $err[$httpcode] ?? 'Erro desconhecido';
-            throw new SoapException(" [$url] HTTP Error {$msg} CODE: $httpcode -  {$this->responseBody}", $httpcode);
+            throw new SoapException(
+                " [$url] HTTPError {$msg} HTTPCode: $httpcode -  {$this->responseBody}",
+                $httpcode
+            );
         }
-        return $this->responseBody;
+        return !empty($this->responseBody)
+            ? $this->responseBody
+            : "HTTPCode: $httpcode - Operação realizada com sucesso.";
     }
 
     /**
      * Set proxy into cURL parameters
-     * @param resource $oCurl
+     * @param \CurlHandle $handle
      * @return void
      */
-    private function setCurlProxy(&$oCurl)
+    private function setCurlProxy(&$handle)
     {
         if ($this->proxyIP != '') {
-            curl_setopt($oCurl, CURLOPT_HTTPPROXYTUNNEL, 1);
-            curl_setopt($oCurl, CURLOPT_PROXYTYPE, CURLPROXY_HTTP);
-            curl_setopt($oCurl, CURLOPT_PROXY, $this->proxyIP.':'.$this->proxyPort);
+            curl_setopt($handle, CURLOPT_HTTPPROXYTUNNEL, 1);
+            curl_setopt($handle, CURLOPT_PROXYTYPE, CURLPROXY_HTTP);
+            curl_setopt($handle, CURLOPT_PROXY, $this->proxyIP.':'.$this->proxyPort);
             if ($this->proxyUser != '') {
-                curl_setopt($oCurl, CURLOPT_PROXYUSERPWD, $this->proxyUser.':'.$this->proxyPass);
-                curl_setopt($oCurl, CURLOPT_PROXYAUTH, CURLAUTH_BASIC);
+                curl_setopt($handle, CURLOPT_PROXYUSERPWD, $this->proxyUser.':'.$this->proxyPass);
+                curl_setopt($handle, CURLOPT_PROXYAUTH, CURLAUTH_BASIC);
             }
         }
     }

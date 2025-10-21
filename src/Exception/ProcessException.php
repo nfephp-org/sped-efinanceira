@@ -26,13 +26,13 @@ class ProcessException extends \InvalidArgumentException implements ExceptionInt
         2005 => "O certificado do servidor fornecido não pertence ao commonName requerido. {{msg}}",
         2999 => ""
     ];
-    
+
     public static function wrongArgument($code, $msg = '')
     {
         $msg = self::replaceMsg(self::$list[$code], $msg);
-        return new static($msg);
+        return new self($msg, $code);
     }
-    
+
     private static function replaceMsg($input, $msg)
     {
         return str_replace('{{msg}}', $msg, $input);

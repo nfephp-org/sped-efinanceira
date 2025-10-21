@@ -18,7 +18,7 @@ class Schemes
      * @var string
      */
     private $lastschemes;
-    
+
     /**
      * Constructor
      * Find last version scheme folder
@@ -39,7 +39,7 @@ class Schemes
             }
         }
     }
-    
+
     /**
      * Return last scheme folder
      * @return string
@@ -47,15 +47,5 @@ class Schemes
     public function last()
     {
         return $this->lastschemes;
-    }
-    
-    /**
-     * Return last scheme folder
-     * @return string
-     */
-    public static function getLast()
-    {
-        $sch = new static();
-        return $sch->last();
     }
 }

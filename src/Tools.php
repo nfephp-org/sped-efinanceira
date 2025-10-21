@@ -77,7 +77,8 @@ class Tools extends Base
         $this->urlsRest->cryptogz = 'https://pre-efinanceira.receita.fazenda.gov.br/recepcao/lotes/criptoGzip';
         $this->urlsRest->consultalote  = 'https://pre-efinanceira.receita.fazenda.gov.br/consulta/lotes/';
         $this->urlsRest->consulta = 'https://pre-efinanceira.receita.fazenda.gov.br/consulta/';
-        $this->urlsRest->limparpreprod = 'https://pre-efinanceira.receita.fazenda.gov.br/recepcao/limpezaDadosTesteProducaoRestrita';
+        $this->urlsRest->limparpreprod = 'https://pre-efinanceira.receita.fazenda.gov.br/recepcao/"
+        . "limpezaDadosTesteProducaoRestrita';
         if ($this->tpAmb == 1) {
             $this->urlsRest->crypto = 'https://efinanceira.receita.fazenda.gov.br/recepcao/lotes/cripto';
             $this->urlsRest->cryptogz = 'https://efinanceira.receita.fazenda.gov.br/recepcao/lotes/criptoGzip';
@@ -129,7 +130,8 @@ class Tools extends Base
         $type = strtolower($type);
         if (!in_array($type, $consultas)) {
             //esta consulta não foi localizada
-            throw new \Exception("A consulta {$type} não consta da relação atual. Veja a documentação.", 404);
+            throw new \Exception("A consulta {$type} não consta da relação atual. "
+                . "Veja a documentação.", 404);
         }
         $url = "{$this->urlsRest->consulta}{$type}";
 
@@ -165,7 +167,8 @@ class Tools extends Base
         $type = strtolower($type);
         if (!in_array($type, $consultas)) {
             //esta consulta não foi localizada
-            throw new \Exception("A consulta {$type} não consta da relação atual. Veja a documentação.", 404);
+            throw new \Exception("A consulta {$type} não consta da relação atual. "
+                . "Veja a documentação.", 404);
         }
         $url = "{$this->urlsRest->consulta}{$type}/{$protocolo}";
         $operation = 'buscardados';
@@ -197,12 +200,15 @@ class Tools extends Base
         return $this->sendRest($url, $operation, $message);
     }
 
+    /**
+     * @return string|void
+     */
     public function limparPreprodRest()
     {
         if ($this->tpAmb == '1') {
             return;
         }
-        $url = $this->urlsRest->limparPreprod . '?cnpjDeclarante=' . $this->config->cnpjDeclarante;;
+        $url = $this->urlsRest->limparpreprod . '?cnpjDeclarante=' . $this->config->cnpjDeclarante;
         $operation = 'limparpreprod';
         return $this->sendRest($url, $operation);
     }
@@ -229,13 +235,14 @@ class Tools extends Base
             . "</eventos>"
             . "</loteEventosAssincrono>"
             . "</eFinanceira>";
+
         $schema = $this->path
             . 'schemes/v'
             . $this->eventoVersion
             . '/envioLoteEventosAssincrono-v'
             . $layout
             . '.xsd';
-        if ($schema) {
+        if (is_file($schema)) {
             Validator::isValid($content, $schema);
         }
         if ($modo == self::MODO_CRYPTOZIP) {
@@ -331,7 +338,7 @@ class Tools extends Base
             . '/envioLoteEventos-v'
             . $layout
             . '.xsd';
-        if ($schema) {
+        if (is_file($schema)) {
             Validator::isValid($content, $schema);
         }
         $url = $this->urls->crypto;
@@ -421,7 +428,7 @@ class Tools extends Base
                 . $layout
                 . '.xsd';
         }
-        if ($schema) {
+        if (is_file($schema)) {
             Validator::isValid($xml, $schema);
         }
         return $xml;
@@ -466,7 +473,7 @@ class Tools extends Base
             . '/envioLoteCriptografado-v'
             . $layout
             . '.xsd';
-        if ($schema) {
+        if (is_file($schema)) {
             Validator::isValid($msg, $schema);
         }
         return $msg;
