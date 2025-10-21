@@ -1,2 +1,6 @@
 parameters:
 	ignoreErrors:
+        -
+           message: 'Parameter #1 $string of function str_pad expects string, int<min, -1>|int<1, max> given.'
+           count: 1
+           path: src/Common/FactoryId.php

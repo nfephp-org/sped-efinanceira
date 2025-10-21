@@ -57,6 +57,9 @@ class SoapCurl extends SoapBase implements SoapInterface
         try {
             $this->saveTemporarilyKeyFiles();
             $oCurl = curl_init();
+            if ($oCurl === false) {
+                throw new SoapException('Erro ao inicializar o cURL', 500);
+            }
             $this->setCurlProxy($oCurl);
             curl_setopt($oCurl, CURLOPT_URL, $url);
             curl_setopt($oCurl, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
@@ -68,9 +71,6 @@ class SoapCurl extends SoapBase implements SoapInterface
             curl_setopt($oCurl, CURLOPT_SSL_VERIFYPEER, 0);
             if (!$this->disablesec) {
                 curl_setopt($oCurl, CURLOPT_SSL_VERIFYHOST, 2);
-                if (is_file($this->casefaz ?? '')) {
-                    curl_setopt($oCurl, CURLOPT_CAINFO, $this->casefaz);
-                }
             }
             curl_setopt($oCurl, CURLOPT_SSLVERSION, $this->soapprotocol);
             curl_setopt($oCurl, CURLOPT_SSLCERT, $this->tempdir . $this->certfile);
@@ -86,7 +86,7 @@ class SoapCurl extends SoapBase implements SoapInterface
             }
             $response = curl_exec($oCurl);
             $this->soaperror = curl_error($oCurl);
-            $this->soaperrorno = (string) curl_errno($oCurl);
+            $this->soaperrorno = curl_errno($oCurl);
             $ainfo = curl_getinfo($oCurl);
             if (is_array($ainfo)) {
                 $this->soapinfo = $ainfo;
@@ -103,9 +103,8 @@ class SoapCurl extends SoapBase implements SoapInterface
             );
         } catch (\Exception $e) {
             throw new SoapException('LIBCURL não localizada', 500);
-            //::unableToLoadCurl($e->getMessage(), 500);
         }
-        if ($this->soaperror != '') {
+        if (!empty($this->soaperror)) {
             throw new SoapException($this->soaperror . " [$url]", $this->soaperrorno);
             //::soapFault($this->soaperror . " [$url]", $this->soaperror);
         }
@@ -158,7 +157,7 @@ class SoapCurl extends SoapBase implements SoapInterface
 
     /**
      * Set proxy into cURL parameters
-     * @param resource $oCurl
+     * @param \CurlHandle $oCurl
      */
     private function setCurlProxy(&$oCurl)
     {

@@ -24,13 +24,13 @@ class EventsException extends \InvalidArgumentException implements ExceptionInte
         1004 => "JSON does not validate. Violations:\n{{msg}}",
         1005 => ""
     ];
-    
+
     public static function wrongArgument($code, $msg = '')
     {
         $msg = self::replaceMsg(self::$list[$code], $msg);
-        return new static($msg);
+        return new self($msg, $code);
     }
-    
+
     private static function replaceMsg($input, $msg)
     {
         return str_replace('{{msg}}', $msg, $input);

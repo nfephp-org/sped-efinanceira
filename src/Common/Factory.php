@@ -84,10 +84,9 @@ abstract class Factory
      */
     public $evtid;
     /**
-     *
-     * @var \NFePHP\Common\DOMImproved
+     * @var Dom|null
      */
-    public $dom;
+    public $dom = null;
     /**
      * @var string
      */
@@ -108,6 +107,7 @@ abstract class Factory
      * @var array
      */
     protected $versions;
+
     /**
      * Constructor
      * @param string $config
@@ -141,7 +141,7 @@ abstract class Factory
         $this->evtName = $params->evtName;
         $this->evtAlias = $params->evtAlias;
         $this->layout = $this->versions[$this->evtName];
-        if (empty($std) || !is_object($std)) {
+        if (!is_object($std)) {
             throw EventsException::wrongArgument(1003, '');
         }
         $this->jsonschema = realpath(
@@ -247,7 +247,7 @@ abstract class Factory
             $this->node->appendChild($ideDeclarante);
         }
     }
-    
+
     /**
      * Returns alias of event
      * @return string
@@ -256,7 +256,7 @@ abstract class Factory
     {
         return $this->evtAlias;
     }
-    
+
     /**
      * Returns the Certificate::class
      * @return Certificate|null
@@ -265,7 +265,7 @@ abstract class Factory
     {
         return $this->certificate;
     }
-    
+
     /**
      * Insert Certificate::class
      * @param Certificate $certificate
@@ -274,7 +274,7 @@ abstract class Factory
     {
         $this->certificate = $certificate;
     }
-    
+
     /**
      * Recover calculate ID
      * @return string

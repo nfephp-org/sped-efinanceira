@@ -24,6 +24,9 @@ final class RestFake extends RestBase
     public function send(string $url, string $operation, string $message = null): string
     {
         $method = 'GET';
+        if ($operation == 'limparpreprod') {
+            $method = 'DELETE';
+        }
         if (!empty($message)) {
             $method = 'POST';
         }

@@ -63,7 +63,6 @@ class Event
      * @param string $name
      * @param array $arguments [config, std, certificate, $date]
      * @return object
-     * @throws NFePHP\eFinanc\Exception\EventsException
      */
     public static function __callStatic($name, $arguments)
     {
