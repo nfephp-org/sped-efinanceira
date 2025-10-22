@@ -54,36 +54,44 @@ class Tools extends Base
         parent::__construct($config, $certificate);
         $this->available = get_class_methods($this);
         $this->urls = new \stdClass();
-        $this->urls->recepcao = 'https://preprod-efinanc.receita.fazenda.gov.br'
-            . '/WsEFinanceira/WsRecepcao.asmx';
-        $this->urls->compact = 'https://preprod-efinanc.receita.fazenda.gov.br'
-            . '/WsEFinanceira/WsRecepcao.asmx';
-        $this->urls->crypto = 'https://preprod-efinanc.receita.fazenda.gov.br'
-            . '/WsEFinanceiraCripto/WsRecepcaoCripto.asmx';
-        $this->urls->consulta = 'https://preprod-efinanc.receita.fazenda.gov.br'
-            . '/WsEFinanceira/WsConsulta.asmx';
+        $this->urls->recepcao =
+            'https://preprod-efinanc.receita.fazenda.gov.br/WsEFinanceira/WsRecepcao.asmx';
+        $this->urls->compact =
+            'https://preprod-efinanc.receita.fazenda.gov.br/WsEFinanceira/WsRecepcao.asmx';
+        $this->urls->crypto =
+            'https://preprod-efinanc.receita.fazenda.gov.br/WsEFinanceiraCripto/WsRecepcaoCripto.asmx';
+        $this->urls->consulta =
+            'https://preprod-efinanc.receita.fazenda.gov.br/WsEFinanceira/WsConsulta.asmx';
         if ($this->tpAmb == 1) {
-            $this->urls->recepcao = 'https://efinanc.receita.fazenda.gov.br'
-                . '/WsEFinanceira/WsRecepcao.asmx';
-            $this->urls->compact = 'https://efinanc.receita.fazenda.gov.br'
-                . '/WsEFinanceira/WsRecepcao.asmx';
-            $this->urls->crypto = 'https://efinanc.receita.fazenda.gov.br'
-                . '/WsEFinanceiraCripto/WsRecepcaoCripto.asmx';
-            $this->urls->consulta = 'https://efinanc.receita.fazenda.gov.br'
-                . '/WsEFinanceira/WsConsulta.asmx';
+            $this->urls->recepcao =
+                'https://efinanc.receita.fazenda.gov.br/WsEFinanceira/WsRecepcao.asmx';
+            $this->urls->compact =
+                'https://efinanc.receita.fazenda.gov.br/WsEFinanceira/WsRecepcao.asmx';
+            $this->urls->crypto =
+                'https://efinanc.receita.fazenda.gov.br/WsEFinanceiraCripto/WsRecepcaoCripto.asmx';
+            $this->urls->consulta =
+                'https://efinanc.receita.fazenda.gov.br/WsEFinanceira/WsConsulta.asmx';
         }
         $this->urlsRest = new \stdClass();
-        $this->urlsRest->crypto = 'https://pre-efinanceira.receita.fazenda.gov.br/recepcao/lotes/cripto';
-        $this->urlsRest->cryptogz = 'https://pre-efinanceira.receita.fazenda.gov.br/recepcao/lotes/criptoGzip';
-        $this->urlsRest->consultalote  = 'https://pre-efinanceira.receita.fazenda.gov.br/consulta/lotes/';
-        $this->urlsRest->consulta = 'https://pre-efinanceira.receita.fazenda.gov.br/consulta/';
-        $this->urlsRest->limparpreprod = 'https://pre-efinanceira.receita.fazenda.gov.br/recepcao/"
-        . "limpezaDadosTesteProducaoRestrita';
+        $this->urlsRest->crypto =
+            'https://pre-efinanceira.receita.fazenda.gov.br/recepcao/lotes/cripto';
+        $this->urlsRest->cryptogz =
+            'https://pre-efinanceira.receita.fazenda.gov.br/recepcao/lotes/criptoGzip';
+        $this->urlsRest->consultalote =
+            'https://pre-efinanceira.receita.fazenda.gov.br/consulta/lotes/';
+        $this->urlsRest->consulta =
+            'https://pre-efinanceira.receita.fazenda.gov.br/consulta/';
+        $this->urlsRest->limparpreprod =
+            'https://pre-efinanceira.receita.fazenda.gov.br/recepcao/limpezaDadosTesteProducaoRestrita';
         if ($this->tpAmb == 1) {
-            $this->urlsRest->crypto = 'https://efinanceira.receita.fazenda.gov.br/recepcao/lotes/cripto';
-            $this->urlsRest->cryptogz = 'https://efinanceira.receita.fazenda.gov.br/recepcao/lotes/criptoGzip';
-            $this->urlsRest->consultalote  = 'https://efinanceira.receita.fazenda.gov.br/consulta/lotes/';
-            $this->urlsRest->consulta = 'https://efinanceira.receita.fazenda.gov.br/consulta/';
+            $this->urlsRest->crypto =
+                'https://efinanceira.receita.fazenda.gov.br/recepcao/lotes/cripto';
+            $this->urlsRest->cryptogz =
+                'https://efinanceira.receita.fazenda.gov.br/recepcao/lotes/criptoGzip';
+            $this->urlsRest->consultalote  =
+                'https://efinanceira.receita.fazenda.gov.br/consulta/lotes/';
+            $this->urlsRest->consulta =
+                'https://efinanceira.receita.fazenda.gov.br/consulta/';
             $this->urlsRest->limparpreprod = ''; //não existe em produção
         }
     }
