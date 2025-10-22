@@ -27,10 +27,6 @@ final class RestCurl extends RestBase
             ];
             $this->saveTemporarilyKeyFiles();
             $handle = curl_init();
-            if ($handle !== false) {
-                throw new SoapException('Erro ao inicializar o cURL', 500);
-            }
-            $this->setCurlProxy($handle);
             curl_setopt($handle, CURLOPT_URL, $url);
             curl_setopt($handle, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
             curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, $this->timeout);
