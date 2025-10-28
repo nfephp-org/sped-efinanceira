@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.eFinanceira.gov.br/schemas/evtCadDeclarante/v1_3_0" targetNamespace="http://www.eFinanceira.gov.br/schemas/evtCadDeclarante/v1_3_0" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.eFinanceira.gov.br/schemas/evtCadDeclarante/v1_2_0" targetNamespace="http://www.eFinanceira.gov.br/schemas/evtCadDeclarante/v1_2_0" elementFormDefault="qualified" attributeFormDefault="unqualified">
   <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd"/>
   <xs:element name="eFinanceira">
     <xs:complexType>
@@ -26,7 +26,7 @@
                             3 - Retificador a Pedido
                           </xs:documentation>
                         </xs:annotation>
-                        <xs:restriction base="xs:unsignedByte">
+                        <xs:restriction base="xs:unsignedInt">
                           <xs:pattern value="[1|2|3]"/>
                         </xs:restriction>
                       </xs:simpleType>
@@ -52,7 +52,7 @@
                             2 - Homologação
                           </xs:documentation>
                         </xs:annotation>
-                        <xs:restriction base="xs:unsignedByte">
+                        <xs:restriction base="xs:unsignedInt">
                           <xs:pattern value="[1|2]"/>
                         </xs:restriction>
                       </xs:simpleType>
@@ -65,7 +65,7 @@
                             1- Emissão com aplicativo da empresa
                           </xs:documentation>
                         </xs:annotation>
-                        <xs:restriction base="xs:unsignedByte">
+                        <xs:restriction base="xs:unsignedInt">
                           <xs:pattern value="[1|2]"/>
                         </xs:restriction>
                       </xs:simpleType>
@@ -131,29 +131,6 @@
                           <xs:maxLength value="8"/>
                         </xs:restriction>
                       </xs:simpleType>
-                    </xs:element>
-                    <xs:element name="infoTpInstPgto" minOccurs="0" maxOccurs="3">
-                      <xs:annotation>
-                        <xs:documentation>Informações do tipos de instituições de pagamento operados pelo declarante</xs:documentation>
-                      </xs:annotation>
-                      <xs:complexType>
-                        <xs:sequence>
-                          <xs:element name="tpInstPgto" minOccurs="1" maxOccurs="1">
-                            <xs:simpleType>
-                              <xs:annotation>
-                                <xs:documentation>
-                                  1 - Emissor de Instrumento de Pagamento Pos- Pago: Entidade que gerencia contas de pagamento do tipo pós-pagas, na qual os recursos são depositados pelo declarado para pagamento de débitos já assumidos.
-                                  2 - Credenciador: Instituição de pagamento que credencia a aceitação de instrumento de pagamento.
-                                  3 - Sub-credenciador: O participante do arranjo de pagamento que habilita usuário final recebedor para a aceitação de instrumento de pagamento
-                                </xs:documentation>
-                              </xs:annotation>
-                              <xs:restriction base="xs:unsignedByte">
-                                <xs:pattern value="[1|2|3]"/>
-                              </xs:restriction>
-                            </xs:simpleType>
-                          </xs:element>
-                        </xs:sequence>
-                      </xs:complexType>
                     </xs:element>
                     <xs:element name="NIF" minOccurs="0" maxOccurs="unbounded">
                       <xs:annotation>
@@ -333,7 +310,7 @@
                                 </xs:restriction>
                               </xs:simpleType>
                             </xs:element>
-                            <xs:element name="EnderecoEstrutura" minOccurs="0" maxOccurs="1">
+                            <xs:element name="EnderecoEstrutura" minOccurs="0" maxOccurs="unbounded">
                               <xs:annotation>
                                 <xs:documentation>Endereço na forma estruturada</xs:documentation>
                               </xs:annotation>

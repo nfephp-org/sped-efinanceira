@@ -96,22 +96,4 @@ final class RestCurl extends RestBase
             ? $this->responseBody
             : "HTTPCode: $httpcode - Operação realizada com sucesso.";
     }
-
-    /**
-     * Set proxy into cURL parameters
-     * @param \CurlHandle $handle
-     * @return void
-     */
-    private function setCurlProxy(&$handle)
-    {
-        if ($this->proxyIP != '') {
-            curl_setopt($handle, CURLOPT_HTTPPROXYTUNNEL, 1);
-            curl_setopt($handle, CURLOPT_PROXYTYPE, CURLPROXY_HTTP);
-            curl_setopt($handle, CURLOPT_PROXY, $this->proxyIP.':'.$this->proxyPort);
-            if ($this->proxyUser != '') {
-                curl_setopt($handle, CURLOPT_PROXYUSERPWD, $this->proxyUser.':'.$this->proxyPass);
-                curl_setopt($handle, CURLOPT_PROXYAUTH, CURLAUTH_BASIC);
-            }
-        }
-    }
 }
