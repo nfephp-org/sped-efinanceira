@@ -275,7 +275,7 @@ class Tools extends Base
      */
     public function consultaLote($protocolo): string
     {
-        $url = "{$this->urlsRest->consultaLote}{$protocolo}";
+        $url = "{$this->urlsRest->consultalote}{$protocolo}";
         $operation = 'consultarlote';
         return $this->sendRest($url, $operation);
     }
@@ -391,9 +391,9 @@ class Tools extends Base
         }
         $layout = $this->versions['envioLoteEventos'];
         $xml = "<eFinanceira "
-                . "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" "
-                . "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
-                . "xmlns=\"http://www.eFinanceira.gov.br/schemas/envioLoteEventos/v$layout\">";
+            . "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" "
+            . "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
+            . "xmlns=\"http://www.eFinanceira.gov.br/schemas/envioLoteEventos/v$layout\">";
         $iCount = 0;
         $lote = date('YmdHms');
         $xml .= "<loteEventos>";
@@ -532,7 +532,7 @@ class Tools extends Base
         }
         if (!empty($std->giin)) {
             if (preg_match("/^([0-9A-NP-Z]{6}[.][0-9A-NP-Z]{5}[.](LE|SL|ME|BR|"
-                    . "SF|SD|SS|SB|SP)[.][0-9]{3})$/", $std->giin)) {
+                . "SF|SD|SS|SB|SP)[.][0-9]{3})$/", $std->giin)) {
                 throw ConsultException::wrongArgument(
                     'Este GIIN passado não atende a estrutura estabelecida.'
                 );
@@ -544,7 +544,7 @@ class Tools extends Base
             $body .= "<sped:GINN>$std->giin</sped:GINN>";
         } elseif (!empty($std->numeroidentificacao)) {
             $body .= "<sped:TipoNI>$std->tiponi</sped:TipoNI>"
-            . "<sped:NumeroIdentificacao>$std->numeroidentificacao</sped:NumeroIdentificacao>";
+                . "<sped:NumeroIdentificacao>$std->numeroidentificacao</sped:NumeroIdentificacao>";
         } else {
             throw ConsultException::wrongArgument(
                 'Deve ser indicado algum documento do Intermediario.'
@@ -578,7 +578,7 @@ class Tools extends Base
             );
         }
         if (!is_numeric($std->situacaoinformacao)
-                || !($std->situacaoinformacao >=0 && $std->situacaoinformacao<=3)
+            || !($std->situacaoinformacao >=0 && $std->situacaoinformacao<=3)
         ) {
             throw ConsultException::wrongArgument(
                 'A situação deve ser informada: 0-Todas, 1-Ativo, 2-Retificado,3-Excluído.'
@@ -606,9 +606,9 @@ class Tools extends Base
          */
         $method = 'ConsultarInformacoesMovimento';
         $body = "<sped:$method><sped:cnpj>$std->cnpj</sped:cnpj>"
-           . "<sped:situacaoInformacao>$std->situacaoinformacao</sped:situacaoInformacao>"
-           . "<sped:anoMesInicioVigencia>$std->anomesiniciovigencia</sped:anoMesInicioVigencia>"
-           . "<sped:anoMesTerminoVigencia>$std->anomesterminovigencia</sped:anoMesTerminoVigencia>";
+            . "<sped:situacaoInformacao>$std->situacaoinformacao</sped:situacaoInformacao>"
+            . "<sped:anoMesInicioVigencia>$std->anomesiniciovigencia</sped:anoMesInicioVigencia>"
+            . "<sped:anoMesTerminoVigencia>$std->anomesterminovigencia</sped:anoMesTerminoVigencia>";
         if (!empty($std->tipomovimento)) {
             if (preg_match("/[1-2]{1}/", $std->tipomovimento)) {
                 $body .= "<sped:tipoMovimento>$std->tipomovimento</sped:tipoMovimento>";
@@ -654,7 +654,7 @@ class Tools extends Base
         }
         if (!empty($std->giin)) {
             if (!preg_match("/^([0-9A-NP-Z]{6}[.][0-9A-NP-Z]{5}[.](LE|SL|ME|BR|SF"
-                    . "|SD|SS|SB|SP)[.][0-9]{3})$/", $std->giin)) {
+                . "|SD|SS|SB|SP)[.][0-9]{3})$/", $std->giin)) {
                 throw ConsultException::wrongArgument(
                     'Este GIIN passado não atende a estrutura estabelecida.'
                 );
@@ -698,14 +698,14 @@ class Tools extends Base
             );
         }
         if (!is_numeric($std->ideventorerct)
-                || !($std->ideventorerct == 1 || $std->ideventorerct == 2)
+            || !($std->ideventorerct == 1 || $std->ideventorerct == 2)
         ) {
             throw ConsultException::wrongArgument(
                 'A Identificação do Evento RERCT deve ser informada.'
             );
         }
         if (!is_numeric($std->situacaoinformacao)
-                || !($std->situacaoinformacao >=0 && $std->situacaoinformacao<=3)
+            || !($std->situacaoinformacao >=0 && $std->situacaoinformacao<=3)
         ) {
             throw ConsultException::wrongArgument(
                 'A situação deve ser informada: 0-Todas, 1-Ativo, 2-Retificado,3-Excluído.'
@@ -755,11 +755,11 @@ class Tools extends Base
             );
         }
         if (!is_numeric($std->situacaoefinanceira)
-                || !($std->situacaoefinanceira >=0 && $std->situacaoefinanceira<=4)
+            || !($std->situacaoefinanceira >=0 && $std->situacaoefinanceira<=4)
         ) {
             throw ConsultException::wrongArgument(
                 'A situação deve ser informada: 0-Todas,1-Em Andamento,2-Ativa,'
-                    . '3-Retificada,4-Excluída.'
+                . '3-Retificada,4-Excluída.'
             );
         }
         $method = 'ConsultarListaEFinanceira';
