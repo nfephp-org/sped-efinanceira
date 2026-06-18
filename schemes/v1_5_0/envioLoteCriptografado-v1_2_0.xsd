@@ -1,0 +1,23 @@
+<xs:schema 
+  xmlns="http://www.eFinanceira.gov.br/schemas/envioLoteCriptografado/v1_2_0"
+  targetNamespace="http://www.eFinanceira.gov.br/schemas/envioLoteCriptografado/v1_2_0" 
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  attributeFormDefault="unqualified" 
+  elementFormDefault="qualified">
+  <xs:element name="eFinanceira">
+    <xs:complexType>
+      <xs:sequence minOccurs="1" maxOccurs="1">
+        <xs:element name="loteCriptografado">
+          <xs:complexType>
+            <xs:sequence minOccurs="1" maxOccurs="1">
+              <xs:element type="xs:string" name="id"/>
+              <xs:element type="xs:string" name="idCertificado"/>
+              <xs:element type="xs:string" name="chave"/>
+              <xs:element type="xs:string" name="lote"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
