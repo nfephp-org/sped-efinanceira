@@ -228,7 +228,7 @@ abstract class RestBase implements RestInterface
 
     /**
      * Set timeout for communication
-     * @param int $timesecs
+     * @param int $secs
      * @return int
      */
     public function timeout(int $secs = 20): int

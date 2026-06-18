@@ -87,49 +87,37 @@ class EvtFechamentoeFinanceira extends Factory implements FactoryInterface
             $this->std->sitespecial,
             true
         );
+        //campo novo 1.3.0
+        $this->dom->addChild(
+            $infoFechamento,
+            "nadaADeclarar",
+            $this->std->nadaadeclarar ?? null,
+            false
+        );
         $this->node->insertBefore($infoFechamento);
 
         if (!empty($this->std->fechamentopp)) {
             $fpp = $this->std->fechamentopp;
             $FechamentoPP = $this->dom->createElement("FechamentoPP");
-            foreach ($fpp->fechamentomes as $fm) {
-                $FechamentoMes = $this->dom->createElement("FechamentoMes");
-                $this->dom->addChild(
-                    $FechamentoMes,
-                    "anoMesCaixa",
-                    $fm->anomescaixa,
-                    true
-                );
-                $this->dom->addChild(
-                    $FechamentoMes,
-                    "quantArqTrans",
-                    $fm->quantarqtrans,
-                    true
-                );
-                $FechamentoPP->appendChild($FechamentoMes);
-            }
+            $this->dom->addChild(
+                $FechamentoPP,
+                "FechamentoPP",
+                $fpp->movimento,
+                true
+            );
             $this->node->appendChild($FechamentoPP);
         }
 
         if (!empty($this->std->fechamentomovopfin)) {
             $opfin = $this->std->fechamentomovopfin;
             $FechamentoMovOpFin = $this->dom->createElement("FechamentoMovOpFin");
-            foreach ($opfin->fechamentomes as $fm) {
-                $FechamentoMes = $this->dom->createElement("FechamentoMes");
-                $this->dom->addChild(
-                    $FechamentoMes,
-                    "anoMesCaixa",
-                    $fm->anomescaixa,
-                    true
-                );
-                $this->dom->addChild(
-                    $FechamentoMes,
-                    "quantArqTrans",
-                    $fm->quantarqtrans,
-                    true
-                );
-                $FechamentoMovOpFin->appendChild($FechamentoMes);
-            }
+            $this->dom->addChild(
+                $FechamentoMovOpFin,
+                "FechamentoMovOpFin",
+                $opfin->movimento,
+                true
+            );
+
             if (!empty($opfin->entdecexterior)) {
                 $EntDecExterior = $this->dom->createElement("EntDecExterior");
                 $this->dom->addChild(
@@ -140,7 +128,6 @@ class EvtFechamentoeFinanceira extends Factory implements FactoryInterface
                 );
                 $FechamentoMovOpFin->appendChild($EntDecExterior);
             }
-
             if (!empty($opfin->entpatdecexterior)) {
                 foreach ($opfin->entpatdecexterior as $ex) {
                     $EntPatDecExterior = $this->dom->createElement("EntPatDecExterior");
@@ -181,25 +168,16 @@ class EvtFechamentoeFinanceira extends Factory implements FactoryInterface
         }
 
         if (!empty($this->std->fechamentomovopfinanual)) {
-            $f = $this->std->fechamentomovopfinanual->fechamentoano;
+            $f = $this->std->fechamentomovopfinanual;
             $fechaAno = $this->dom->createElement("FechamentoMovOpFinAnual");
-            $fAno = $this->dom->createElement("FechamentoAno");
             $this->dom->addChild(
-                $fAno,
-                "anoCaixa",
-                $f->anocaixa,
+                $fechaAno,
+                "FechamentoMovOpFinAnual",
+                $f->movimento,
                 true
             );
-            $this->dom->addChild(
-                $fAno,
-                "quantArqTrans",
-                $f->quantarqtrans,
-                true
-            );
-            $fechaAno->appendChild($fAno);
             $this->node->appendChild($fechaAno);
         }
-
         //finalização do xml
         $this->eFinanceira->appendChild($this->node);
         //$this->xml = $this->dom->saveXML($this->eFinanceira);

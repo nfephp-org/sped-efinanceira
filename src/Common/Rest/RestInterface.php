@@ -44,11 +44,9 @@ interface RestInterface
 
     /**
      * Send soap message
-     * @param string $operation
      * @param string $url
-     * @param string $action
-     * @param string $envelope
-     * @param array $parameters
+     * @param string $operation
+     * @param string $message
      */
-    public function send(string $url, string $operation, string $message = null): string;
+    public function send(string $url, string $operation, string $message = ''): string;
 }

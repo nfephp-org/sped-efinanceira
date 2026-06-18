@@ -70,9 +70,9 @@ class Tools
      */
     protected $soap;
     /**
-     * @var RestInterface
+     * @var RestInterface|null
      */
-    protected $rest;
+    protected $rest = null;
     /**
      * @var \DateTime
      */

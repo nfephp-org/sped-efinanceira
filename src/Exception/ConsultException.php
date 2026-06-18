@@ -18,6 +18,6 @@ class ConsultException extends \InvalidArgumentException implements ExceptionInt
 {
     public static function wrongArgument($msg = '')
     {
-        return new static($msg);
+        return new self($msg, 1001);
     }
 }

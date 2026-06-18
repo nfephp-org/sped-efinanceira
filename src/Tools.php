@@ -54,34 +54,45 @@ class Tools extends Base
         parent::__construct($config, $certificate);
         $this->available = get_class_methods($this);
         $this->urls = new \stdClass();
-        $this->urls->recepcao = 'https://preprod-efinanc.receita.fazenda.gov.br'
-            . '/WsEFinanceira/WsRecepcao.asmx';
-        $this->urls->compact = 'https://preprod-efinanc.receita.fazenda.gov.br'
-            . '/WsEFinanceira/WsRecepcao.asmx';
-        $this->urls->crypto = 'https://preprod-efinanc.receita.fazenda.gov.br'
-            . '/WsEFinanceiraCripto/WsRecepcaoCripto.asmx';
-        $this->urls->consulta = 'https://preprod-efinanc.receita.fazenda.gov.br'
-            . '/WsEFinanceira/WsConsulta.asmx';
+        $this->urls->recepcao =
+            'https://preprod-efinanc.receita.fazenda.gov.br/WsEFinanceira/WsRecepcao.asmx';
+        $this->urls->compact =
+            'https://preprod-efinanc.receita.fazenda.gov.br/WsEFinanceira/WsRecepcao.asmx';
+        $this->urls->crypto =
+            'https://preprod-efinanc.receita.fazenda.gov.br/WsEFinanceiraCripto/WsRecepcaoCripto.asmx';
+        $this->urls->consulta =
+            'https://preprod-efinanc.receita.fazenda.gov.br/WsEFinanceira/WsConsulta.asmx';
         if ($this->tpAmb == 1) {
-            $this->urls->recepcao = 'https://efinanc.receita.fazenda.gov.br'
-                . '/WsEFinanceira/WsRecepcao.asmx';
-            $this->urls->compact = 'https://efinanc.receita.fazenda.gov.br'
-                . '/WsEFinanceira/WsRecepcao.asmx';
-            $this->urls->crypto = 'https://efinanc.receita.fazenda.gov.br'
-                . '/WsEFinanceiraCripto/WsRecepcaoCripto.asmx';
-            $this->urls->consulta = 'https://efinanc.receita.fazenda.gov.br'
-                . '/WsEFinanceira/WsConsulta.asmx';
+            $this->urls->recepcao =
+                'https://efinanc.receita.fazenda.gov.br/WsEFinanceira/WsRecepcao.asmx';
+            $this->urls->compact =
+                'https://efinanc.receita.fazenda.gov.br/WsEFinanceira/WsRecepcao.asmx';
+            $this->urls->crypto =
+                'https://efinanc.receita.fazenda.gov.br/WsEFinanceiraCripto/WsRecepcaoCripto.asmx';
+            $this->urls->consulta =
+                'https://efinanc.receita.fazenda.gov.br/WsEFinanceira/WsConsulta.asmx';
         }
         $this->urlsRest = new \stdClass();
-        $this->urlsRest->crypto = 'https://pre-efinanceira.receita.fazenda.gov.br/recepcao/lotes/cripto';
-        $this->urlsRest->cryptogz = 'https://pre-efinanceira.receita.fazenda.gov.br/recepcao/lotes/criptoGzip';
-        $this->urlsRest->consultalote  = 'https://pre-efinanceira.receita.fazenda.gov.br/consulta/lotes/';
-        $this->urlsRest->consulta = 'https://pre-efinanceira.receita.fazenda.gov.br/consulta/';
+        $this->urlsRest->crypto =
+            'https://pre-efinanceira.receita.fazenda.gov.br/recepcao/lotes/cripto';
+        $this->urlsRest->cryptogz =
+            'https://pre-efinanceira.receita.fazenda.gov.br/recepcao/lotes/criptoGzip';
+        $this->urlsRest->consultalote =
+            'https://pre-efinanceira.receita.fazenda.gov.br/consulta/lotes/';
+        $this->urlsRest->consulta =
+            'https://pre-efinanceira.receita.fazenda.gov.br/consulta/';
+        $this->urlsRest->limparpreprod =
+            'https://pre-efinanceira.receita.fazenda.gov.br/recepcao/limpezaDadosTesteProducaoRestrita';
         if ($this->tpAmb == 1) {
-            $this->urlsRest->crypto = 'https://efinanceira.receita.fazenda.gov.br/recepcao/lotes/cripto';
-            $this->urlsRest->cryptogz = 'https://efinanceira.receita.fazenda.gov.br/recepcao/lotes/criptoGzip';
-            $this->urlsRest->consultalote  = 'https://efinanceira.receita.fazenda.gov.br/consulta/lotes/';
-            $this->urlsRest->consulta = 'https://efinanceira.receita.fazenda.gov.br/consulta/';
+            $this->urlsRest->crypto =
+                'https://efinanceira.receita.fazenda.gov.br/recepcao/lotes/cripto';
+            $this->urlsRest->cryptogz =
+                'https://efinanceira.receita.fazenda.gov.br/recepcao/lotes/criptoGzip';
+            $this->urlsRest->consultalote  =
+                'https://efinanceira.receita.fazenda.gov.br/consulta/lotes/';
+            $this->urlsRest->consulta =
+                'https://efinanceira.receita.fazenda.gov.br/consulta/';
+            $this->urlsRest->limparpreprod = ''; //não existe em produção
         }
     }
 
@@ -127,7 +138,8 @@ class Tools extends Base
         $type = strtolower($type);
         if (!in_array($type, $consultas)) {
             //esta consulta não foi localizada
-            throw new \Exception("A consulta {$type} não consta da relação atual. Veja a documentação.", 404);
+            throw new \Exception("A consulta {$type} não consta da relação atual. "
+                . "Veja a documentação.", 404);
         }
         $url = "{$this->urlsRest->consulta}{$type}";
 
@@ -163,7 +175,8 @@ class Tools extends Base
         $type = strtolower($type);
         if (!in_array($type, $consultas)) {
             //esta consulta não foi localizada
-            throw new \Exception("A consulta {$type} não consta da relação atual. Veja a documentação.", 404);
+            throw new \Exception("A consulta {$type} não consta da relação atual. "
+                . "Veja a documentação.", 404);
         }
         $url = "{$this->urlsRest->consulta}{$type}/{$protocolo}";
         $operation = 'buscardados';
@@ -178,6 +191,7 @@ class Tools extends Base
      */
     public function enviarLoteRest(array $events, $modo = self::MODO_CRYPTOZIP): string
     {
+        $this->asynchronousMode = true;
         $content = $this->batchBuilder($events);
         if ($modo == self::MODO_CRYPTOZIP) {
             //envia criptogzip
@@ -187,10 +201,24 @@ class Tools extends Base
             //envia cripto
             $url = $this->urlsRest->crypto;
         }
+
         //$message = base64_encode($this->sendCripto($content));
         $message = $this->sendCripto($content);
         $operation = 'enviarlote';
         return $this->sendRest($url, $operation, $message);
+    }
+
+    /**
+     * @return string|void
+     */
+    public function limparPreprodRest()
+    {
+        if ($this->tpAmb == '1') {
+            return;
+        }
+        $url = $this->urlsRest->limparpreprod . '?cnpjDeclarante=' . $this->config->cnpjDeclarante;
+        $operation = 'limparpreprod';
+        return $this->sendRest($url, $operation);
     }
 
     /**
@@ -199,25 +227,30 @@ class Tools extends Base
      */
     public function enviarEventoXmlRest(string $xml, $modo = self::MODO_CRYPTOZIP): string
     {
-        $layout = $this->versions['envioLoteEventos'];
+        $this->asynchronousMode = true;
+        $layout = $this->versions['envioLoteEventosAssincrono'];
         $content = "<eFinanceira "
             . "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" "
             . "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
-            . "xmlns=\"http://www.eFinanceira.gov.br/schemas/envioLoteEventos/v$layout\">";
+            . "xmlns=\"http://www.eFinanceira.gov.br/schemas/envioLoteEventosAssincrono/v$layout\">";
         $lote = date('YmdHms');
-        $content .= "<loteEventos>"
+        $content .= "<loteEventosAssincrono>"
+            . "<cnpjDeclarante>{$this->config->cnpjDeclarante}</cnpjDeclarante>"
+            . "<eventos>"
             . "<evento id=\"ID1\">"
             . $xml
             . "</evento>"
-            . "</loteEventos>"
+            . "</eventos>"
+            . "</loteEventosAssincrono>"
             . "</eFinanceira>";
+
         $schema = $this->path
             . 'schemes/v'
             . $this->eventoVersion
-            . '/envioLoteEventos-v'
+            . '/envioLoteEventosAssincrono-v'
             . $layout
             . '.xsd';
-        if ($schema) {
+        if (is_file($schema)) {
             Validator::isValid($content, $schema);
         }
         if ($modo == self::MODO_CRYPTOZIP) {
@@ -229,7 +262,6 @@ class Tools extends Base
             $url = $this->urlsRest->crypto;
         }
         //encripta a mensagem compactada
-        //$message = base64_encode($this->sendCripto($content));
         $message = $this->sendCripto($content);
         $operation = 'enviareventoxml';
         return $this->sendRest($url, $operation, $message);
@@ -243,7 +275,7 @@ class Tools extends Base
      */
     public function consultaLote($protocolo): string
     {
-        $url = "{$this->urlsRest->consultaLote}{$protocolo}";
+        $url = "{$this->urlsRest->consultalote}{$protocolo}";
         $operation = 'consultarlote';
         return $this->sendRest($url, $operation);
     }
@@ -314,7 +346,7 @@ class Tools extends Base
             . '/envioLoteEventos-v'
             . $layout
             . '.xsd';
-        if ($schema) {
+        if (is_file($schema)) {
             Validator::isValid($content, $schema);
         }
         $url = $this->urls->crypto;
@@ -359,9 +391,9 @@ class Tools extends Base
         }
         $layout = $this->versions['envioLoteEventos'];
         $xml = "<eFinanceira "
-                . "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" "
-                . "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
-                . "xmlns=\"http://www.eFinanceira.gov.br/schemas/envioLoteEventos/v$layout\">";
+            . "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" "
+            . "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
+            . "xmlns=\"http://www.eFinanceira.gov.br/schemas/envioLoteEventos/v$layout\">";
         $iCount = 0;
         $lote = date('YmdHms');
         $xml .= "<loteEventos>";
@@ -373,7 +405,7 @@ class Tools extends Base
                 . "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
                 . "xmlns=\"http://www.eFinanceira.gov.br/schemas/envioLoteEventosAssincrono/v$layout\">";
             $xml .= "<loteEventosAssincrono>"
-                . "<cnpjDeclarante>string</cnpjDeclarante>"
+                . "<cnpjDeclarante>{$this->config->cnpjDeclarante}</cnpjDeclarante>"
                 . "<eventos>";
         }
         foreach ($events as $evt) {
@@ -404,7 +436,7 @@ class Tools extends Base
                 . $layout
                 . '.xsd';
         }
-        if ($schema) {
+        if (is_file($schema)) {
             Validator::isValid($xml, $schema);
         }
         return $xml;
@@ -449,7 +481,7 @@ class Tools extends Base
             . '/envioLoteCriptografado-v'
             . $layout
             . '.xsd';
-        if ($schema) {
+        if (is_file($schema)) {
             Validator::isValid($msg, $schema);
         }
         return $msg;
@@ -500,7 +532,7 @@ class Tools extends Base
         }
         if (!empty($std->giin)) {
             if (preg_match("/^([0-9A-NP-Z]{6}[.][0-9A-NP-Z]{5}[.](LE|SL|ME|BR|"
-                    . "SF|SD|SS|SB|SP)[.][0-9]{3})$/", $std->giin)) {
+                . "SF|SD|SS|SB|SP)[.][0-9]{3})$/", $std->giin)) {
                 throw ConsultException::wrongArgument(
                     'Este GIIN passado não atende a estrutura estabelecida.'
                 );
@@ -512,7 +544,7 @@ class Tools extends Base
             $body .= "<sped:GINN>$std->giin</sped:GINN>";
         } elseif (!empty($std->numeroidentificacao)) {
             $body .= "<sped:TipoNI>$std->tiponi</sped:TipoNI>"
-            . "<sped:NumeroIdentificacao>$std->numeroidentificacao</sped:NumeroIdentificacao>";
+                . "<sped:NumeroIdentificacao>$std->numeroidentificacao</sped:NumeroIdentificacao>";
         } else {
             throw ConsultException::wrongArgument(
                 'Deve ser indicado algum documento do Intermediario.'
@@ -546,7 +578,7 @@ class Tools extends Base
             );
         }
         if (!is_numeric($std->situacaoinformacao)
-                || !($std->situacaoinformacao >=0 && $std->situacaoinformacao<=3)
+            || !($std->situacaoinformacao >=0 && $std->situacaoinformacao<=3)
         ) {
             throw ConsultException::wrongArgument(
                 'A situação deve ser informada: 0-Todas, 1-Ativo, 2-Retificado,3-Excluído.'
@@ -574,9 +606,9 @@ class Tools extends Base
          */
         $method = 'ConsultarInformacoesMovimento';
         $body = "<sped:$method><sped:cnpj>$std->cnpj</sped:cnpj>"
-           . "<sped:situacaoInformacao>$std->situacaoinformacao</sped:situacaoInformacao>"
-           . "<sped:anoMesInicioVigencia>$std->anomesiniciovigencia</sped:anoMesInicioVigencia>"
-           . "<sped:anoMesTerminoVigencia>$std->anomesterminovigencia</sped:anoMesTerminoVigencia>";
+            . "<sped:situacaoInformacao>$std->situacaoinformacao</sped:situacaoInformacao>"
+            . "<sped:anoMesInicioVigencia>$std->anomesiniciovigencia</sped:anoMesInicioVigencia>"
+            . "<sped:anoMesTerminoVigencia>$std->anomesterminovigencia</sped:anoMesTerminoVigencia>";
         if (!empty($std->tipomovimento)) {
             if (preg_match("/[1-2]{1}/", $std->tipomovimento)) {
                 $body .= "<sped:tipoMovimento>$std->tipomovimento</sped:tipoMovimento>";
@@ -622,7 +654,7 @@ class Tools extends Base
         }
         if (!empty($std->giin)) {
             if (!preg_match("/^([0-9A-NP-Z]{6}[.][0-9A-NP-Z]{5}[.](LE|SL|ME|BR|SF"
-                    . "|SD|SS|SB|SP)[.][0-9]{3})$/", $std->giin)) {
+                . "|SD|SS|SB|SP)[.][0-9]{3})$/", $std->giin)) {
                 throw ConsultException::wrongArgument(
                     'Este GIIN passado não atende a estrutura estabelecida.'
                 );
@@ -666,14 +698,14 @@ class Tools extends Base
             );
         }
         if (!is_numeric($std->ideventorerct)
-                || !($std->ideventorerct == 1 || $std->ideventorerct == 2)
+            || !($std->ideventorerct == 1 || $std->ideventorerct == 2)
         ) {
             throw ConsultException::wrongArgument(
                 'A Identificação do Evento RERCT deve ser informada.'
             );
         }
         if (!is_numeric($std->situacaoinformacao)
-                || !($std->situacaoinformacao >=0 && $std->situacaoinformacao<=3)
+            || !($std->situacaoinformacao >=0 && $std->situacaoinformacao<=3)
         ) {
             throw ConsultException::wrongArgument(
                 'A situação deve ser informada: 0-Todas, 1-Ativo, 2-Retificado,3-Excluído.'
@@ -723,11 +755,11 @@ class Tools extends Base
             );
         }
         if (!is_numeric($std->situacaoefinanceira)
-                || !($std->situacaoefinanceira >=0 && $std->situacaoefinanceira<=4)
+            || !($std->situacaoefinanceira >=0 && $std->situacaoefinanceira<=4)
         ) {
             throw ConsultException::wrongArgument(
                 'A situação deve ser informada: 0-Todas,1-Em Andamento,2-Ativa,'
-                    . '3-Retificada,4-Excluída.'
+                . '3-Retificada,4-Excluída.'
             );
         }
         $method = 'ConsultarListaEFinanceira';

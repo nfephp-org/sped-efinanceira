@@ -10,7 +10,7 @@ use stdClass;
 
 class EvtRERCT extends Factory implements FactoryInterface
 {
-        /**
+    /**
      * Constructor
      * @param string $config
      * @param stdClass $std
@@ -73,24 +73,24 @@ class EvtRERCT extends Factory implements FactoryInterface
             true
         );
         $this->node->insertBefore($ideEvento, $ideDeclarante);
-        
+        $nrinscr = $this->std->idedeclarado->nrinscr;
         $ideDeclarado = $this->dom->createElement("ideDeclarado");
         $cpfCnpjDeclarado = $this->dom->createElement("cpfCnpjDeclarado");
         $this->dom->addChild(
             $cpfCnpjDeclarado,
             "tpInscr",
-            $this->std->idedeclarado->tpinscr,
+            $this->std->idedeclarado->tpinscr, // @phpstan-ignore variable.undefined
             true
         );
         $this->dom->addChild(
             $cpfCnpjDeclarado,
             "nrInscr",
-            $this->std->idedeclarado->nrinscr,
+            $this->std->idedeclarado->nrinscr,  // @phpstan-ignore variable.undefined
             true
         );
         $ideDeclarado->appendChild($cpfCnpjDeclarado);
         $this->node->appendChild($ideDeclarado);
-        
+
         if (!empty($this->std->rerct)) {
             foreach ($this->std->rerct as $r) {
                 $RERCT = $this->dom->createElement("RERCT");
@@ -116,26 +116,30 @@ class EvtRERCT extends Factory implements FactoryInterface
                     foreach ($r->infocontaexterior as $ce) {
                         $infoContaExterior = $this->dom->createElement("infoContaExterior");
                         if (!empty($ce->titular)) {
-                            foreach ($ce->titular as $t) {
+                            foreach ($ce->titular as $tit) {
                                 $titular = $this->dom->createElement("titular");
+                                /* @phpstan-ignore variable.undefined */
                                 $this->dom->addChild(
                                     $titular,
                                     "nomeTitular",
-                                    !empty($t->nometitular) ? $t->nometitular : null,
+                                    !empty($tit->nometitular) ? $tit->nometitular : null,
                                     false
                                 );
-                                if (!empty($t->tpinsc) && !empty($t->nrinsc)) {
+                                /* @phpstan-ignore variable.undefined */
+                                if (!empty($tit->tpinsc) && !empty($tit->nrinsc)) {
                                     $cpfCnpjTitular = $this->dom->createElement("cpfCnpjTitular");
+                                    $tpinscr = $tit->tpinscr ?? '';
+                                    $nrinscr = $tit->nrinscr ?? '';
                                     $this->dom->addChild(
                                         $cpfCnpjTitular,
                                         "tpInscr",
-                                        $t->tpinscr,
+                                        $tpinscr,
                                         true
                                     );
                                     $this->dom->addChild(
                                         $cpfCnpjTitular,
                                         "nrInsc",
-                                        $t->nrinscr,
+                                        $nrinscr,
                                         true
                                     );
                                     $titular->appendChild($cpfCnpjTitular);
@@ -143,37 +147,36 @@ class EvtRERCT extends Factory implements FactoryInterface
                                 $this->dom->addChild(
                                     $titular,
                                     "NIFTitular",
-                                    !empty($t->niftitular) ? $t->niftitular : null,
+                                    !empty($tit->niftitular) ? $tit->niftitular : null,
                                     false
                                 );
                                 $infoContaExterior->appendChild($titular);
                             }
                         }
                         if (!empty($ce->beneficiariofinal)) {
-                            foreach ($ce->beneficiariofinal as $t) {
+                            foreach ($ce->beneficiariofinal as $tfin) {
                                 $beneficiariofinal = $this->dom->createElement("beneficiarioFinal");
                                 $this->dom->addChild(
                                     $beneficiariofinal,
                                     "nomeBeneficiarioFinal",
-                                    !empty($t->nomebeneficiariofinal) ? $t->nomebeneficiariofinal : null,
+                                    !empty($tfin->nomebeneficiariofinal) ? $tfin->nomebeneficiariofinal : null,
                                     false
                                 );
                                 $this->dom->addChild(
                                     $beneficiariofinal,
                                     "cpfBeneficiarioFinal",
-                                    !empty($t->cpfbeneficiariofinal) ? $t->cpfbeneficiariofinal : null,
+                                    !empty($tfin->cpfbeneficiariofinal) ? $tfin->cpfbeneficiariofinal : null,
                                     false
                                 );
                                 $this->dom->addChild(
                                     $beneficiariofinal,
                                     "NIFBeneficiarioFinal",
-                                    !empty($t->nifbeneficiariofinal) ? $t->nifbeneficiariofinal : null,
+                                    !empty($tfin->nifbeneficiariofinal) ? $tfin->nifbeneficiariofinal : null,
                                     false
                                 );
                                 $infoContaExterior->appendChild($beneficiariofinal);
                             }
                         }
-                        
                         $this->dom->addChild(
                             $infoContaExterior,
                             "tpContaExterior",

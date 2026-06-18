@@ -12,7 +12,7 @@ use NFePHP\eFinanc\Common\Soap\SoapFake;
 $config = [
     'tpAmb' => 2, //tipo de ambiente 1 - Produção; 2 - pre-produção
     'verAplic' => '0_1_2', //Versão do processo de emissão do evento. Informar a versão do aplicativo emissor do evento.
-    'eventoVersion' => '1_2_4', //versão do layout do evento
+    'eventoVersion' => '1_3_0', //versão do layout do evento
     'cnpjDeclarante' => '99999999999999'
 ];
 $configJson = json_encode($config, JSON_PRETTY_PRINT);
@@ -100,12 +100,14 @@ try {
     //carrega a classe responsável pelo envio SOAP
     //nesse caso um envio falso
     $tools->loadSoapClass($soap);
-
+    $tools->setAsynchronousMode(true);
     //executa o envio
-    $response = $tools->enviar([$evento], $tools::MODO_CRYPTO);
+    $response = $tools->enviarLoteRest([$evento], $tools::MODO_CRYPTO);
 
+    header('Content-Type: application/xml');
+    echo $response;
     //retorna os dados que serão usados na conexão para conferência
-    echo FakePretty::prettyPrint($response, '');
+    //echo FakePretty::prettyPrint($response, '');
 
 } catch (\Exception $e) {
     echo $e->getMessage();

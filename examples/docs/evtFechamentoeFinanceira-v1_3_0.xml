@@ -1,0 +1,73 @@
+<eFinanceira xmlns:v1="http://www.eFinanceira.gov.br/schemas/evtFechamentoeFinanceira/v1_3_0" xmlns:xd="http://www.w3.org/2000/09/xmldsig#">
+  <evtFechamentoeFinanceira id="stringstringstringst">
+    <ideEvento>
+      <indRetificacao>7</indRetificacao>
+      <!--Optional:-->
+      <nrRecibo>stringstringstringstring</nrRecibo>
+      <tpAmb>7</tpAmb>
+      <aplicEmi>7</aplicEmi>
+      <verAplic>string</verAplic>
+    </ideEvento>
+    <ideDeclarante>
+      <cnpjDeclarante>stringstring</cnpjDeclarante>
+    </ideDeclarante>
+    <infoFechamento>
+      <dtInicio>2008-09-28</dtInicio>
+      <dtFim>2014-09-18</dtFim>
+      <sitEspecial>7</sitEspecial>
+      <!--Optional:-->
+      <nadaADeclarar>6</nadaADeclarar>
+    </infoFechamento>
+    <!--Optional:-->
+    <FechamentoPP>
+      <FechamentoPP>6</FechamentoPP>
+    </FechamentoPP>
+    <!--Optional:-->
+    <FechamentoMovOpFin>
+      <FechamentoMovOpFin>6</FechamentoMovOpFin>
+      <!--Optional:-->
+      <EntDecExterior>
+        <ContasAReportar>6</ContasAReportar>
+      </EntDecExterior>
+      <!--Zero or more repetitions:-->
+      <EntPatDecExterior>
+        <GIIN>string</GIIN>
+        <CNPJ>stringstring</CNPJ>
+        <!--Optional:-->
+        <ContasAReportar>6</ContasAReportar>
+        <!--Optional:-->
+        <inCadPatrocinadoEncerrado>6</inCadPatrocinadoEncerrado>
+        <!--Optional:-->
+        <inGIINEncerrado>6</inGIINEncerrado>
+      </EntPatDecExterior>
+    </FechamentoMovOpFin>
+    <!--Optional:-->
+    <FechamentoMovOpFinAnual>
+      <FechamentoMovOpFinAnual>6</FechamentoMovOpFinAnual>
+    </FechamentoMovOpFinAnual>
+  </evtFechamentoeFinanceira>
+  <xd:Signature Id="string">
+    <xd:SignedInfo Id="string">
+      <xd:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+      <xd:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
+      <xd:Reference Id="string" URI="http://www.corp.org/temperat/per" Type="http://www.test.com/regemque/nimborum">
+        <xd:Transforms>
+          <xd:Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315">
+            <xd:XPath>string</xd:XPath>
+          </xd:Transform>
+          <xd:Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315">
+            <xd:XPath>string</xd:XPath>
+          </xd:Transform>
+        </xd:Transforms>
+        <xd:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+        <xd:DigestValue>ZmVyYW50</xd:DigestValue>
+      </xd:Reference>
+    </xd:SignedInfo>
+    <xd:SignatureValue Id="string">cHJvZnVuZHVt</xd:SignatureValue>
+    <xd:KeyInfo Id="string">
+      <xd:X509Data>
+        <xd:X509Certificate>c2NlcHRyYQ==</xd:X509Certificate>
+      </xd:X509Data>
+    </xd:KeyInfo>
+  </xd:Signature>
+</eFinanceira>

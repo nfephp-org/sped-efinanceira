@@ -1077,19 +1077,19 @@ class EvtMovOpFin extends Factory implements FactoryInterface
                 $this->dom->addChild(
                     $Cambio,
                     "totCompras",
-                    number_format($c->totcompras, 2, ',', ''),
+                    number_format($c->totcompras ?? 0, 2, ',', ''),
                     true
                 );
                 $this->dom->addChild(
                     $Cambio,
                     "totVendas",
-                    number_format($c->totvendas, 2, ',', ''),
+                    number_format($c->totvendas ?? 0, 2, ',', ''),
                     true
                 );
                 $this->dom->addChild(
                     $Cambio,
                     "totTransferencias",
-                    number_format($c->tottransferencias, 2, ',', ''),
+                    number_format($c->tottransferencias ?? 0, 2, ',', ''),
                     true
                 );
             }
