@@ -5,7 +5,7 @@
 			targetNamespace="http://www.eFinanceira.gov.br/schemas/evtMovOpFinAnual/v1_5_0"
 			elementFormDefault="qualified"
 			attributeFormDefault="unqualified">
-  <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="../../Comum/xmldsig-core-schema.xsd"/>
+  <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd"/>
   <xs:element name="eFinanceira">
     <xs:complexType>
       <xs:sequence>
