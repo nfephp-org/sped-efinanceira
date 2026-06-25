@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.eFinanceira.gov.br/schemas/evtAberturaeFinanceira/v1_5_0" targetNamespace="http://www.eFinanceira.gov.br/schemas/evtAberturaeFinanceira/v1_5_0" elementFormDefault="qualified" attributeFormDefault="unqualified">
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.eFinanceira.gov.br/schemas/evtAberturaeFinanceira/v1_2_1" targetNamespace="http://www.eFinanceira.gov.br/schemas/evtAberturaeFinanceira/v1_2_1" elementFormDefault="qualified" attributeFormDefault="unqualified">
   <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd"/>
   <xs:element name="eFinanceira">
     <xs:complexType>
@@ -12,7 +12,7 @@
             <xs:sequence>
               <xs:element name="ideEvento" minOccurs="1" maxOccurs="1">
                 <xs:annotation>
-                  <xs:documentation>Identificação do Evento</xs:documentation>
+                  <xs:documentation>Identificação de Evento</xs:documentation>
                 </xs:annotation>
                 <xs:complexType>
                   <xs:sequence>
@@ -21,13 +21,13 @@
                         <xs:annotation>
                           <xs:documentation>
                             Indicativo de Retificação:
-                            1 - para arquivo original
-                            2 - para arquivo de retificação espontânea
+                            1 - Original
+                            2 - Retificador
+                            3 - Retificador a Pedido
                           </xs:documentation>
                         </xs:annotation>
-                        <xs:restriction base="xs:unsignedByte">
-                          <xs:enumeration value="1"/>
-                          <xs:enumeration value="2"/>
+                        <xs:restriction base="xs:unsignedInt">
+                          <xs:pattern value="[1|2]"/>
                         </xs:restriction>
                       </xs:simpleType>
                     </xs:element>
@@ -38,7 +38,7 @@
                         </xs:annotation>
                         <xs:restriction base="xs:string">
                           <xs:minLength value="15"/>
-                          <xs:maxLength value="49"/>
+                          <xs:maxLength value="49" />
                           <xs:pattern value="[0-9]{1,18}[-][0-9]{2}[-][0-9]{3}[-][0-9]{4}[-][0-9]{1,18}"/>
                         </xs:restriction>
                       </xs:simpleType>
@@ -48,13 +48,12 @@
                         <xs:annotation>
                           <xs:documentation>
                             Identificação do ambiente:
-                            1 - produção;
-                            2 - homologação.
+                            1 - Produção
+                            2 - Homologação
                           </xs:documentation>
                         </xs:annotation>
-                        <xs:restriction base="xs:unsignedByte">
-                          <xs:enumeration value="1"/>
-                          <xs:enumeration value="2"/>
+                        <xs:restriction base="xs:unsignedInt">
+                          <xs:pattern value="[1|2]"/>
                         </xs:restriction>
                       </xs:simpleType>
                     </xs:element>
@@ -63,13 +62,11 @@
                         <xs:annotation>
                           <xs:documentation>
                             Processo de emissão do evento:
-                            1 - emissão com aplicativo da empresa;
-                            2 - outros.
+                            1- Emissão com aplicativo da empresa
                           </xs:documentation>
                         </xs:annotation>
-                        <xs:restriction base="xs:unsignedByte">
-                          <xs:enumeration value="1"/>
-                          <xs:enumeration value="2"/>
+                        <xs:restriction base="xs:unsignedInt">
+                          <xs:pattern value="[1|2]"/>
                         </xs:restriction>
                       </xs:simpleType>
                     </xs:element>
@@ -99,7 +96,8 @@
                       </xs:annotation>
                       <xs:simpleType>
                         <xs:restriction base="xs:string">
-                          <xs:pattern value="[0-9A-Z]{14}"/>
+                          <xs:minLength value="1"/>
+                          <xs:maxLength value="14"/>
                         </xs:restriction>
                       </xs:simpleType>
                     </xs:element>
@@ -114,7 +112,7 @@
                   <xs:sequence>
                     <xs:element name="dtInicio" minOccurs="1" maxOccurs="1">
                       <xs:annotation>
-                        <xs:documentation>Data Inicial. Formato: AAAA-MM-DD</xs:documentation>
+                        <xs:documentation>Data Inicial</xs:documentation>
                       </xs:annotation>
                       <xs:simpleType>
                         <xs:restriction base="xs:date">
@@ -123,7 +121,7 @@
                     </xs:element>
                     <xs:element name="dtFim" minOccurs="1" maxOccurs="1">
                       <xs:annotation>
-                        <xs:documentation>Data Final. Formato: AAAA-MM-DD</xs:documentation>
+                        <xs:documentation>Data Final</xs:documentation>
                       </xs:annotation>
                       <xs:simpleType>
                         <xs:restriction base="xs:date">
@@ -174,16 +172,17 @@
                           <xs:documentation>Informações do Responsável pela RMF</xs:documentation>
                         </xs:annotation>
                         <xs:sequence>
-                          <xs:element name="CNPJ" minOccurs="1" maxOccurs="1">
-                            <xs:annotation>
-                              <xs:documentation>CNPJ da entidade responsável pela RMF</xs:documentation>
-                            </xs:annotation>
-                            <xs:simpleType>
-                              <xs:restriction base="xs:string">
-                                <xs:pattern value="[0-9A-Z]{14}"/>
-                              </xs:restriction>
-                            </xs:simpleType>
-                          </xs:element>
+						  <xs:element name="CNPJ" minOccurs="1" maxOccurs="1">
+							<xs:annotation>
+							   <xs:documentation>CNPJ da entidade responsável pela RMF</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+							       <xs:minLength value="1"/>
+								   <xs:maxLength value="14"/>
+								</xs:restriction>
+							</xs:simpleType>
+						  </xs:element>
                           <xs:element name="CPF" minOccurs="1" maxOccurs="1">
                             <xs:annotation>
                               <xs:documentation>CPF</xs:documentation>

@@ -83,6 +83,12 @@ class EvtMovOpFin extends Factory implements FactoryInterface
         );
         $this->dom->addChild(
             $ideDeclarado,
+            "tpPartSocietaria",
+            $this->std->tppartsocietaria,
+            false
+        );
+        $this->dom->addChild(
+            $ideDeclarado,
             "NIDeclarado",
             $this->std->nideclarado,
             true
@@ -111,6 +117,12 @@ class EvtMovOpFin extends Factory implements FactoryInterface
                 $ideDeclarado->appendChild($NIF);
             }
         }
+        $this->dom->addChild(
+            $ideDeclarado,
+            "inDeclaracaoPropriaCRS",
+            $this->std->inddeclaracaopropriacrs,
+            true
+        );
         $this->dom->addChild(
             $ideDeclarado,
             "NomeDeclarado",
@@ -260,14 +272,12 @@ class EvtMovOpFin extends Factory implements FactoryInterface
                 $ideDeclarado->appendChild($NomeOutros);
             }
         }
-
         $this->dom->addChild(
             $ideDeclarado,
             "DataNasc",
             !empty($this->std->datanasc) ? $this->std->datanasc : null,
             false
         );
-
         if (!empty($this->std->infonascimento)) {
             $in = $this->std->infonascimento;
             $InfoNascimento = $this->dom->createElement("InfoNascimento");
@@ -304,92 +314,60 @@ class EvtMovOpFin extends Factory implements FactoryInterface
             }
             $ideDeclarado->appendChild($InfoNascimento);
         }
-        $this->dom->addChild(
-            $ideDeclarado,
-            "EnderecoLivre",
-            !empty($this->std->enderecolivre) ? $this->std->enderecolivre : null,
-            false
-        );
-        $this->dom->addChild(
-            $ideDeclarado,
-            "tpEndereco",
-            !empty($this->std->tpendereco) ? $this->std->tpendereco : null,
-            false
-        );
-        $PaisEndereco = $this->dom->createElement("PaisEndereco");
-        $this->dom->addChild(
-            $PaisEndereco,
-            "Pais",
-            $this->std->pais,
-            true
-        );
-        $ideDeclarado->appendChild($PaisEndereco);
-
-        if (!empty($this->std->enderecooutros)) {
-            foreach ($this->std->enderecooutros as $eo) {
-                $EnderecoOutros = $this->dom->createElement("EnderecoOutros");
+        if (!empty($this->std->endereco)) {
+            foreach ($this->std->endereco as $end) {
+                $Endereco = $this->dom->createElement("Endereco");
                 $this->dom->addChild(
-                    $EnderecoOutros,
+                    $Endereco,
                     "tpEndereco",
-                    !empty($eo->tpendereco) ? $eo->tpendereco : null,
+                    !empty($end->tpendereco) ? $end->tpendereco : null,
                     false
                 );
                 $this->dom->addChild(
-                    $EnderecoOutros,
+                    $Endereco,
                     "EnderecoLivre",
-                    !empty($eo->enderecolivre) ? $eo->enderecolivre : null,
+                    !empty($end->enderecolivre) ? $end->enderecolivre : null,
                     false
                 );
-                if (!empty($eo->enderecoestrutura) && empty($eo->enderecolivre)) {
-                    $ee = $eo->enderecoestrutura;
+                if (!empty($end->enderecoestrutura) && empty($end->enderecolivre)) {
+                    $ee = $end->enderecoestrutura;
                     $EnderecoEstrutura = $this->dom->createElement("EnderecoEstrutura");
                     $this->dom->addChild(
                         $EnderecoEstrutura,
-                        "EnderecoLivre",
-                        !empty($ee->enderecolivre) ? $ee->enderecolivre : null,
+                        "Logradouro",
+                        !empty($ee->logradouro) ? $ee->logradouro : null,
                         false
                     );
-                    if (!empty($ee->endereco)) {
-                        $end = $ee->endereco;
-                        $Endereco = $this->dom->createElement("Endereco");
-                        $this->dom->addChild(
-                            $Endereco,
-                            "Logradouro",
-                            !empty($end->logradouro) ? $end->logradouro : null,
-                            false
-                        );
-                        $this->dom->addChild(
-                            $Endereco,
-                            "Numero",
-                            !empty($end->numero) ? $end->numero : null,
-                            false
-                        );
-                        $this->dom->addChild(
-                            $Endereco,
-                            "Complemento",
-                            !empty($end->complemento) ? $end->complemento : null,
-                            false
-                        );
-                        $this->dom->addChild(
-                            $Endereco,
-                            "Andar",
-                            !empty($end->andar) ? $end->andar : null,
-                            false
-                        );
-                        $this->dom->addChild(
-                            $Endereco,
-                            "Bairro",
-                            !empty($end->bairro) ? $end->bairro : null,
-                            false
-                        );
-                        $this->dom->addChild(
-                            $Endereco,
-                            "CaixaPostal",
-                            !empty($end->caixapostal) ? $end->caixapostal : null,
-                            false
-                        );
-                        $EnderecoEstrutura->appendChild($Endereco);
-                    }
+                    $this->dom->addChild(
+                        $EnderecoEstrutura,
+                        "Numero",
+                        !empty($ee->numero) ? $ee->numero : null,
+                        false
+                    );
+                    $this->dom->addChild(
+                        $EnderecoEstrutura,
+                        "Complemento",
+                        !empty($ee->complemento) ? $ee->complemento : null,
+                        false
+                    );
+                    $this->dom->addChild(
+                        $EnderecoEstrutura,
+                        "Andar",
+                        !empty($ee->andar) ? $ee->andar : null,
+                        false
+                    );
+                    $this->dom->addChild(
+                        $EnderecoEstrutura,
+                        "Bairro",
+                        !empty($ee->bairro) ? $ee->bairro : null,
+                        false
+                    );
+                    $this->dom->addChild(
+                        $EnderecoEstrutura,
+                        "CaixaPostal",
+                        !empty($ee->caixapostal) ? $ee->caixapostal : null,
+                        false
+                    );
                     $this->dom->addChild(
                         $EnderecoEstrutura,
                         "CEP",
@@ -408,17 +386,17 @@ class EvtMovOpFin extends Factory implements FactoryInterface
                         $ee->uf,
                         true
                     );
-                    $EnderecoOutros->appendChild($EnderecoEstrutura);
+
+                    $Endereco->appendChild($EnderecoEstrutura);
                 }
                 $this->dom->addChild(
-                    $EnderecoOutros,
+                    $Endereco,
                     "Pais",
-                    $eo->pais,
+                    $end->pais,
                     true
                 );
-
-                $ideDeclarado->appendChild($EnderecoOutros);
-            }
+                $ideDeclarado->appendChild($Endereco);
+            }                   
         }
         if (!empty($this->std->paisresid)) {
             foreach ($this->std->paisresid as $pr) {
@@ -897,6 +875,30 @@ class EvtMovOpFin extends Factory implements FactoryInterface
                         "numConta",
                         $ic->numconta,
                         true
+                    );
+                    $this->dom->addChild(
+                        $infoConta,
+                        "dtAberturaConta",
+                        $ic->dtaberturaconta,
+                        true
+                    );
+                    $this->dom->addChild(
+                        $infoConta,
+                        "formaAberturaConta",
+                        $ic->formaaberturaconta,
+                        true
+                    );
+                    $this->dom->addChild(
+                        $infoConta,
+                        "celularAberturaConta",
+                        $ic->celularaberturaconta,
+                        false
+                    );
+                    $this->dom->addChild(
+                        $infoConta,
+                        "MACAddressAberturaConta",
+                        $ic->macaddressaberturaconta,
+                        false
                     );
                     $this->dom->addChild(
                         $infoConta,
