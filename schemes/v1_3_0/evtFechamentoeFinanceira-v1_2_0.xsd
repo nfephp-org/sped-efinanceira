@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.eFinanceira.gov.br/schemas/evtFechamentoeFinanceira/v1_3_0" targetNamespace="http://www.eFinanceira.gov.br/schemas/evtFechamentoeFinanceira/v1_3_0" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.eFinanceira.gov.br/schemas/evtFechamentoeFinanceira/v1_2_0" targetNamespace="http://www.eFinanceira.gov.br/schemas/evtFechamentoeFinanceira/v1_2_0" elementFormDefault="qualified" attributeFormDefault="unqualified">
   <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd"/>
   <xs:element name="eFinanceira">
     <xs:complexType>
@@ -21,12 +21,13 @@
                         <xs:annotation>
                           <xs:documentation>
                             Indicativo de Retificação:
-                            1 - Original
-                            2 - Retificador
+                            1 - para arquivo original;
+                            2 - para arquivo de retificação.
                           </xs:documentation>
                         </xs:annotation>
-                        <xs:restriction base="xs:unsignedInt">
-                          <xs:pattern value="[1|2]"/>
+                        <xs:restriction base="xs:unsignedByte">
+                          <xs:enumeration value="1"/>
+                          <xs:enumeration value="2"/>
                         </xs:restriction>
                       </xs:simpleType>
                     </xs:element>
@@ -37,7 +38,7 @@
                         </xs:annotation>
                         <xs:restriction base="xs:string">
                           <xs:minLength value="15"/>
-                          <xs:maxLength value="49" />
+                          <xs:maxLength value="49"/>
                           <xs:pattern value="[0-9]{1,18}[-][0-9]{2}[-][0-9]{3}[-][0-9]{4}[-][0-9]{1,18}"/>
                         </xs:restriction>
                       </xs:simpleType>
@@ -47,12 +48,13 @@
                         <xs:annotation>
                           <xs:documentation>
                             Identificação do ambiente:
-                            1 - Produção
-                            2 - Homologação
+                            1 - produção;
+                            2 - homologação.
                           </xs:documentation>
                         </xs:annotation>
-                        <xs:restriction base="xs:unsignedInt">
-                          <xs:pattern value="[1|2]"/>
+                        <xs:restriction base="xs:unsignedByte">
+                          <xs:enumeration value="1"/>
+                          <xs:enumeration value="2"/>
                         </xs:restriction>
                       </xs:simpleType>
                     </xs:element>
@@ -61,12 +63,13 @@
                         <xs:annotation>
                           <xs:documentation>
                             Processo de emissão do evento:
-                            1- Emissão com aplicativo da empresa
-                            2 - Outros
+                            1 - emissão com aplicativo da empresa;
+                            2 - outros.
                           </xs:documentation>
                         </xs:annotation>
-                        <xs:restriction base="xs:unsignedInt">
-                          <xs:pattern value="[1|2]"/>
+                        <xs:restriction base="xs:unsignedByte">
+                          <xs:enumeration value="1"/>
+                          <xs:enumeration value="2"/>
                         </xs:restriction>
                       </xs:simpleType>
                     </xs:element>
@@ -87,20 +90,19 @@
               <xs:element name="ideDeclarante" minOccurs="1" maxOccurs="1">
                 <xs:complexType>
                   <xs:annotation>
-                    <xs:documentation>Informações de identificação da Entidade Declarante</xs:documentation>
+                    <xs:documentation>Informações de identificação da entidade declarante</xs:documentation>
                   </xs:annotation>
                   <xs:sequence>
                     <xs:element name="cnpjDeclarante" minOccurs="1" maxOccurs="1">
                       <xs:annotation>
-                        <xs:documentation>CNPJ da Entidade Declarante</xs:documentation>
+                        <xs:documentation>CNPJ da entidade declarante</xs:documentation>
                       </xs:annotation>
                       <xs:simpleType>
                         <xs:restriction base="xs:string">
-                          <xs:minLength value="8"/>
-                          <xs:maxLength value="14"/>
+                          <xs:pattern value="[0-9A-Z]{14}"/>
                         </xs:restriction>
                       </xs:simpleType>
-                    </xs:element>                    
+                    </xs:element>
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
@@ -115,8 +117,7 @@
                         <xs:documentation>Data Inicial no formato AAAA-MM-DD</xs:documentation>
                       </xs:annotation>
                       <xs:simpleType>
-                        <xs:restriction base="xs:date">
-                        </xs:restriction>
+                        <xs:restriction base="xs:date"/>
                       </xs:simpleType>
                     </xs:element>
                     <xs:element name="dtFim" minOccurs="1" maxOccurs="1">
@@ -124,24 +125,27 @@
                         <xs:documentation>Data Final no formato AAAA-MM-DD</xs:documentation>
                       </xs:annotation>
                       <xs:simpleType>
-                        <xs:restriction base="xs:date">
-                        </xs:restriction>
+                        <xs:restriction base="xs:date"/>
                       </xs:simpleType>
                     </xs:element>
                     <xs:element name="sitEspecial" minOccurs="1" maxOccurs="1">
                       <xs:annotation>
                         <xs:documentation>
-                          Indicador de Situação Especial
-                          0 - Não se aplica
-                          1 - Extinção
-                          2 - Fusão
-                          3 - Incorporação/Incorporada
-                          5 - Cisão Total
+                          Indicador de situação especial:
+                          0 - não se aplica;
+                          1 - extinção;
+                          2 - fusão;
+                          3 - incorporação/incorporada;
+                          5 - cisão total.
                         </xs:documentation>
                       </xs:annotation>
                       <xs:simpleType>
-                        <xs:restriction base="xs:unsignedInt">                          
-                          <xs:pattern value="[0|1|2|3|5]"/>
+                        <xs:restriction base="xs:unsignedByte">
+                          <xs:enumeration value="0"/>
+                          <xs:enumeration value="1"/>
+                          <xs:enumeration value="2"/>
+                          <xs:enumeration value="3"/>
+                          <xs:enumeration value="5"/>
                         </xs:restriction>
                       </xs:simpleType>
                     </xs:element>
@@ -149,13 +153,12 @@
                       <xs:annotation>
                         <xs:documentation>
                           Indicador de nada a declarar no período:
-                          1 - nada a declarar no período
+                          1 - nada a declarar no período.
                         </xs:documentation>
                       </xs:annotation>
                       <xs:simpleType>
                         <xs:restriction base="xs:unsignedByte">
-                          <xs:totalDigits value="1"/>
-                          <xs:pattern value="1"/>
+                          <xs:enumeration value="1"/>
                         </xs:restriction>
                       </xs:simpleType>
                     </xs:element>
@@ -168,18 +171,18 @@
                     <xs:documentation>Informações do Fechamento referentes a Previdência Privada</xs:documentation>
                   </xs:annotation>
                   <xs:sequence>
-                    <xs:element name="FechamentoPP" minOccurs="1" maxOccurs="1">
+                    <xs:element name="FechamentoPP" minOccurs="0" maxOccurs="1">
                       <xs:annotation>
                         <xs:documentation>
                           Indicador de Fechamento da Previdência Privada, com ou sem movimento no período:
-                          0 - e-Financeira sem movimento de Previdência Privada no período
-                          1 - e-Financeira com movimento de Previdência Privada no período
+                          0 - e-Financeira sem movimento de Previdência Privada no período;
+                          1 - e-Financeira com movimento de Previdência Privada no período.
                         </xs:documentation>
                       </xs:annotation>
                       <xs:simpleType>
                         <xs:restriction base="xs:unsignedByte">
-                          <xs:totalDigits value="1"/>
-                          <xs:pattern value="[0|1]"/>
+                          <xs:enumeration value="0"/>
+                          <xs:enumeration value="1"/>
                         </xs:restriction>
                       </xs:simpleType>
                     </xs:element>
@@ -192,42 +195,46 @@
                     <xs:documentation>Informações do Fechamento referentes a Operações Financeiras</xs:documentation>
                   </xs:annotation>
                   <xs:sequence>
-                    <xs:element name="FechamentoMovOpFin" minOccurs="1" maxOccurs="1">
+                    <xs:element name="FechamentoMovOpFin" minOccurs="0" maxOccurs="1">
                       <xs:annotation>
                         <xs:documentation>
                           Indicador de Fechamento de Operação Financeira, com ou sem movimento no período:
-                          0 - e-Financeira sem movimento de Operação Financeira no período
-                          1 - e-Financeira com movimento de Operação Financeira no período
+                          0 - e-Financeira sem movimento de Operação Financeira no período;
+                          1 - e-Financeira com movimento de Operação Financeira no período.
                         </xs:documentation>
                       </xs:annotation>
                       <xs:simpleType>
                         <xs:restriction base="xs:unsignedByte">
-                          <xs:totalDigits value="1"/>
-                          <xs:pattern value="[0|1]"/>
+                          <xs:enumeration value="0"/>
+                          <xs:enumeration value="1"/>
                         </xs:restriction>
                       </xs:simpleType>
                     </xs:element>
-                    <xs:element name="EntDecExterior" minOccurs="0" maxOccurs="1">
-                      <xs:complexType>
+                    <xs:element name="ContasAReportarCRS" minOccurs="0" maxOccurs="1">
+                      <xs:simpleType>
                         <xs:annotation>
-                          <xs:documentation>Indicativo de inexistência de contas a reportar por parte da entidade no conceito de declarante no FATCA</xs:documentation>
+                          <xs:documentation>
+                            Não existem contas a reportar por parte da entidade no conceito de declarante no CRS:
+                            0 - Não.
+                          </xs:documentation>
                         </xs:annotation>
-                        <xs:sequence>
-                          <xs:element name="ContasAReportar" minOccurs="1" maxOccurs="1">
-                            <xs:simpleType>
-                              <xs:annotation>
-                                <xs:documentation>
-                                  0-Não
-                                </xs:documentation>
-                              </xs:annotation>
-                              <xs:restriction base="xs:unsignedByte">
-                                <xs:totalDigits value="1"/>
-                                <xs:pattern value="[0]"/>
-                              </xs:restriction>
-                            </xs:simpleType>
-                          </xs:element>
-                        </xs:sequence>
-                      </xs:complexType>
+                        <xs:restriction base="xs:unsignedByte">
+                          <xs:enumeration value="0"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="ContasAReportarFATCA" minOccurs="0" maxOccurs="1">
+                      <xs:simpleType>
+                        <xs:annotation>
+                          <xs:documentation>
+                            Não existem contas a reportar por parte da entidade no conceito de declarante no FATCA:
+                            0 - Não.
+                          </xs:documentation>
+                        </xs:annotation>
+                        <xs:restriction base="xs:unsignedByte">
+                          <xs:enumeration value="0"/>
+                        </xs:restriction>
+                      </xs:simpleType>
                     </xs:element>
                     <xs:element name="EntPatDecExterior" minOccurs="0" maxOccurs="unbounded">
                       <xs:complexType>
@@ -237,7 +244,7 @@
                         <xs:sequence>
                           <xs:element name="GIIN" minOccurs="1" maxOccurs="1">
                             <xs:annotation>
-                              <xs:documentation>GIIN</xs:documentation>
+                              <xs:documentation>GIIN (Global Intermediary Identification Number)</xs:documentation>
                             </xs:annotation>
                             <xs:simpleType>
                               <xs:restriction base="xs:string">
@@ -248,7 +255,7 @@
                           </xs:element>
                           <xs:element name="CNPJ" minOccurs="1" maxOccurs="1">
                             <xs:annotation>
-                              <xs:documentation>CNPJ</xs:documentation>
+                              <xs:documentation>CNPJ referente a entidade patrocinada</xs:documentation>
                             </xs:annotation>
                             <xs:simpleType>
                               <xs:restriction base="xs:string">
@@ -257,39 +264,45 @@
                               </xs:restriction>
                             </xs:simpleType>
                           </xs:element>
-                          <xs:element name="ContasAReportar" minOccurs="0" maxOccurs="1">
+                          <xs:element name="ContasAReportarFATCA" minOccurs="0" maxOccurs="1">
                             <xs:annotation>
-                              <xs:documentation>Não existem contas a reportar por parte da entidade no conceito de declarante no FATCA</xs:documentation>
+                              <xs:documentation>
+                                Não existem contas a reportar por parte da entidade no conceito de declarante no FATCA:
+                                0 - Não.
+                              </xs:documentation>
                             </xs:annotation>
                             <xs:simpleType>
                               <xs:restriction base="xs:unsignedByte">
-                                <xs:totalDigits value="1"/>
-                                <xs:pattern value="[0]"/>
+                                <xs:enumeration value="0"/>
                               </xs:restriction>
                             </xs:simpleType>
                           </xs:element>
-            						  <xs:element name="inCadPatrocinadoEncerrado" minOccurs="0" maxOccurs="1">
-            							  <xs:annotation>
-            								  <xs:documentation>O fundo foi encerrado e não serão enviadas contas para este fundo</xs:documentation>
-            						  	  </xs:annotation>
-            							  <xs:simpleType>
-            								  <xs:restriction base="xs:unsignedByte">
-            								      <xs:totalDigits value="1"/>
-            									  <xs:pattern value="[1]"/>
-            								  </xs:restriction>
-            							  </xs:simpleType>
-            						  </xs:element>
-            						  <xs:element name="inGIINEncerrado" minOccurs="0" maxOccurs="1">
-            							  <xs:annotation>
-            							      <xs:documentation>O GIIN foi encerrado no IRS</xs:documentation>
-            							  </xs:annotation>
-            							  <xs:simpleType>
-            								  <xs:restriction base="xs:unsignedByte">
-            									  <xs:totalDigits value="1"/>
-            								      <xs:pattern value="[1]"/>
-            								  </xs:restriction>
-            							  </xs:simpleType>
-            						  </xs:element>							
+                          <xs:element name="inCadPatrocinadoEncerrado" minOccurs="0" maxOccurs="1">
+                            <xs:annotation>
+                              <xs:documentation>
+                                O fundo foi encerrado e não serão enviadas contas para este fundo:
+                                1 - sim.
+                              </xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:unsignedByte">
+                                <xs:enumeration value="1"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="inGIINEncerrado" minOccurs="0" maxOccurs="1">
+                            <xs:annotation>
+                              <xs:documentation>
+                                O GIIN foi encerrado no IRS:
+                                1 - sim.
+                              </xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:unsignedByte">
+                                <xs:enumeration value="1"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
                         </xs:sequence>
                       </xs:complexType>
                     </xs:element>
@@ -302,18 +315,18 @@
                     <xs:documentation>Informações do Fechamento referentes a Operações Financeiras Anual</xs:documentation>
                   </xs:annotation>
                   <xs:sequence>
-                    <xs:element name="FechamentoMovOpFinAnual" minOccurs="1" maxOccurs="1">
+                    <xs:element name="FechamentoMovOpFinAnual" minOccurs="0" maxOccurs="1">
                       <xs:annotation>
                         <xs:documentation>
                           Indicador de Fechamento de Operação Financeira Anual, com ou sem movimento no período:
-                          0 - e-Financeira sem movimento de Operação Financeira Anual no período
-                          1 - e-Financeira com movimento de Operação Financeira Anual no período
+                          0 - e-Financeira sem movimento de Operação Financeira Anual no período;
+                          1 - e-Financeira com movimento de Operação Financeira Anual no período.
                         </xs:documentation>
                       </xs:annotation>
                       <xs:simpleType>
                         <xs:restriction base="xs:unsignedByte">
-                          <xs:totalDigits value="1"/>
-                          <xs:pattern value="[0|1]"/>
+                          <xs:enumeration value="0"/>
+                          <xs:enumeration value="1"/>
                         </xs:restriction>
                       </xs:simpleType>
                     </xs:element>
@@ -321,14 +334,14 @@
                 </xs:complexType>
               </xs:element>
             </xs:sequence>
-            <xs:attribute name="id" use="required" >
+            <xs:attribute name="id" use="required">
               <xs:annotation>
                 <xs:documentation>Identificador que representa unicamente o evento no sistema para a mesma empresa e tipo de evento.</xs:documentation>
               </xs:annotation>
               <xs:simpleType>
                 <xs:restriction base="xs:ID">
-                  <xs:minLength value="13" />
-                  <xs:maxLength value="20" />
+                  <xs:minLength value="13"/>
+                  <xs:maxLength value="20"/>
                 </xs:restriction>
               </xs:simpleType>
             </xs:attribute>
