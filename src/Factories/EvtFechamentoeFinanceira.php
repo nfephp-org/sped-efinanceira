@@ -117,7 +117,22 @@ class EvtFechamentoeFinanceira extends Factory implements FactoryInterface
                 $opfin->movimento,
                 true
             );
-
+            if(!empty($opfin->contasareportarcrs)) {
+               $this->dom->addChild(
+                   $FechamentoMovOpFin,
+                   "ContasAReportarCRS",
+                   $opfin->contasareportarcrs,
+                   true
+               );
+            }
+            if(!empty($opfin->contasareportarfatca)) {
+               $this->dom->addChild(
+                   $FechamentoMovOpFin,
+                   "ContasAReportarFATCA",
+                   $opfin->contasareportarfatca,
+                   true
+               );
+            }
             if (!empty($opfin->entdecexterior)) {
                 $EntDecExterior = $this->dom->createElement("EntDecExterior");
                 $this->dom->addChild(
